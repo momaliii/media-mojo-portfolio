@@ -37,6 +37,18 @@ export const caseStudies: CaseStudy[] = [
     description: "Increased e-commerce sales for a fashion retailer through optimized Meta campaigns, achieving 8.2x ROAS and generating over $129,000 in revenue from a single campaign."
   },
   {
+    title: "E-commerce Revenue Growth on Cosmetics",
+    category: "e-commerce",
+    image: "bg-gradient-to-br from-pink-500/80 to-red-400/80",
+    client: "Beauty Brand",
+    metrics: [
+      { label: "ROAS", value: "6.7x" },
+      { label: "Revenue", value: "$245K+" },
+      { label: "AOV", value: "+32%" }
+    ],
+    description: "Transformed an underperforming cosmetics brand with strategic paid media optimization, achieving 6.7x ROAS and increasing average order value by 32%."
+  },
+  {
     title: "B2B Lead Generation",
     category: "b2b",
     image: "bg-gradient-to-br from-media-blue/90 to-media-oceanblue/90",
@@ -47,18 +59,6 @@ export const caseStudies: CaseStudy[] = [
       { label: "CAC", value: "-28%" }
     ],
     description: "Implemented an account-based marketing approach with targeted LinkedIn and Google campaigns, reducing cost per qualified lead by 42%."
-  },
-  {
-    title: "App Install Campaign",
-    category: "apps",
-    image: "bg-gradient-to-br from-media-orange/80 to-yellow-400/80",
-    client: "Fitness App",
-    metrics: [
-      { label: "CPI", value: "$1.24" },
-      { label: "Installs", value: "125K" },
-      { label: "Retention", value: "+32%" }
-    ],
-    description: "Executed a multi-channel mobile app campaign that delivered 125K installs with a 32% improvement in 30-day user retention."
   },
   {
     title: "Brand Awareness Campaign",
