@@ -13,30 +13,11 @@ import { Eye, Lock, ShieldCheck } from "lucide-react";
 import { caseStudies } from "@/data/caseStudies";
 
 const AdScreenshotsGallery: React.FC = () => {
-  // Prepare all screenshots with their industry info
-  const allScreenshots = caseStudies.flatMap(study => {
-    const screenshots = [];
-    
-    if (study.screenshot) {
-      screenshots.push({
-        url: study.screenshot,
-        industry: study.industry || study.category,
-        client: study.client
-      });
-    }
-    
-    if (study.additionalScreenshots) {
-      study.additionalScreenshots.forEach(screenshot => {
-        screenshots.push({
-          url: screenshot,
-          industry: study.industry || study.category,
-          client: study.client
-        });
-      });
-    }
-    
-    return screenshots;
-  }).filter(item => item.url);
+  // Prepare all screenshots with their industry info (without actual URLs)
+  const allScreenshots = caseStudies.map(study => ({
+    industry: study.industry || study.category,
+    client: study.client
+  }));
 
   // Prevent right-clicking for download
   const handleContextMenu = (e: React.MouseEvent) => {
@@ -74,20 +55,10 @@ const AdScreenshotsGallery: React.FC = () => {
                           onContextMenu={handleContextMenu}
                           style={{ userSelect: 'none' }}
                         >
-                          {/* Image with watermark */}
-                          <img 
-                            src={screenshot.url} 
-                            alt={`${screenshot.industry} Ad Example`}
-                            className="w-full h-full object-cover opacity-95"
-                            draggable="false"
-                            style={{ 
-                              pointerEvents: 'none',
-                              userSelect: 'none',
-                              MozUserSelect: 'none',
-                              WebkitUserSelect: 'none',
-                              msUserSelect: 'none'
-                            }}
-                          />
+                          {/* Placeholder area for new images */}
+                          <div className="w-full h-full flex items-center justify-center bg-gray-200">
+                            <p className="text-gray-500 font-medium">Image placeholder</p>
+                          </div>
                           
                           {/* Diagonal watermark */}
                           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
