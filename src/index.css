@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,7 +14,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 260 76% 74%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -35,19 +36,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -97,5 +91,94 @@
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
+
+  h1, h2, h3, h4 {
+    @apply font-bold tracking-tight;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-media-purple to-media-oceanblue;
+  }
+}
+
+/* Custom animation classes */
+.animate-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animate-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animate-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animate-delay-400 {
+  animation-delay: 400ms;
+}
+
+.animate-delay-500 {
+  animation-delay: 500ms;
+}
+
+/* Stats animation */
+.stat-value {
+  counter-reset: count 0;
+  animation: count-up 2s forwards;
+}
+
+@keyframes count-up {
+  0% {
+    counter-increment: count 0;
+  }
+  100% {
+    counter-increment: count var(--target);
+  }
+}
+
+.stat-value::after {
+  content: counter(count);
+}
+
+/* Hero section animations */
+.hero-grid-item {
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fade-in-up 0.7s forwards;
+}
+
+.hero-grid-item:nth-child(1) { animation-delay: 100ms; }
+.hero-grid-item:nth-child(2) { animation-delay: 200ms; }
+.hero-grid-item:nth-child(3) { animation-delay: 300ms; }
+.hero-grid-item:nth-child(4) { animation-delay: 400ms; }
+.hero-grid-item:nth-child(5) { animation-delay: 500ms; }
+.hero-grid-item:nth-child(6) { animation-delay: 600ms; }
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover effect for service cards */
+.service-card {
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }

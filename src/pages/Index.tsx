@@ -1,12 +1,59 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useEffect } from "react";
+import Navigation from "@/components/Navigation";
+import Hero from "@/components/Hero";
+import About from "@/components/About";
+import Services from "@/components/Services";
+import Portfolio from "@/components/Portfolio";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 
 const Index = () => {
+  useEffect(() => {
+    // Update document title
+    document.title = "Media Mojo Portfolio";
+    
+    // Add animation to elements when they enter viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-fade-in-up");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      }
+    );
+
+    // Observe all elements with animate-on-scroll class
+    document.querySelectorAll(".opacity-0").forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => {
+      // Clean up
+      document.querySelectorAll(".opacity-0").forEach((el) => {
+        observer.unobserve(el);
+      });
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-white">
+      <Navigation />
+      <main>
+        <Hero />
+        <About />
+        <Services />
+        <Portfolio />
+        <Contact />
+      </main>
+      <Footer />
     </div>
   );
 };
