@@ -135,9 +135,9 @@ export const caseStudies: CaseStudy[] = [
     image: "bg-gradient-to-br from-blue-500/80 to-indigo-400/80",
     client: "International NGO",
     metrics: [
-      { label: "Total Spend", value: "$36.7K" },
+      { label: "Total Spend", value: "$250K+" },
       { label: "Engagement", value: "3.54%" },
-      { label: "Reach", value: "4.45M+" }
+      { label: "Reach", value: "15.47M+" }
     ],
     description: "Created and managed LinkedIn campaign series for non-profit organizations across Saudi Arabia and Middle Eastern countries, driving engagement and fundraising through targeted outreach.",
     industry: "Non-Profit",
