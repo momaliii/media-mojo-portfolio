@@ -140,40 +140,101 @@ const Services = () => {
   return (
     <section id="services" className="section-padding bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="container mx-auto px-4 md:px-6">
-        {/* Expert Media Buying Solutions Section */}
-        <div className="max-w-4xl mx-auto text-center mb-12">
-          <span className="inline-block py-1 px-3 rounded-full bg-media-purple/10 text-media-purple font-medium text-sm mb-4">
-            My Services
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Expert <span className="text-[#55AAED]">Media Buying</span> Solutions
-          </h2>
-          <p className="text-gray-600 max-w-3xl mx-auto mb-12">
-            Specialized services designed to maximize your advertising effectiveness and deliver 
-            measurable business results across multiple platforms and markets.
-          </p>
+        {/* Expert Media Buying Solutions Section - Updated Layout */}
+        <div className="max-w-6xl mx-auto mb-20">
+          <div className="text-center mb-10">
+            <span className="inline-block py-1 px-3 rounded-full bg-media-purple/10 text-media-purple font-medium text-sm mb-4">
+              My Expertise
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Expert <span className="text-[#55AAED]">Media Buying</span> Solutions
+            </h2>
+            <p className="text-gray-600 max-w-3xl mx-auto">
+              Specialized services designed to maximize your advertising effectiveness and deliver 
+              measurable business results across multiple platforms and markets.
+            </p>
+          </div>
 
-          {/* Expert services grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
-            {expertServices.map((service, index) => (
-              <div 
-                key={`expert-${index}`} 
-                className="border border-gray-200 rounded-lg shadow-sm bg-white overflow-hidden hover:shadow-md transition-shadow"
-              >
-                <div className="p-6">
-                  <div className={`${service.color} w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto`}>
-                    {service.icon}
+          {/* Expert services in a new layout */}
+          <div className="relative">
+            {/* Background decorative element */}
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-blue-50 rounded-3xl -z-10"></div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6 md:p-10">
+              {/* Left side: featured large card */}
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all hover:-translate-y-1 hover:shadow-xl">
+                <div className="flex flex-col h-full">
+                  <div className="bg-gradient-to-r from-[#8B5CF6] to-[#0EA5E9] p-5">
+                    <div className="flex justify-between items-center">
+                      <h3 className="text-2xl font-bold text-white">Strategic Media Buying</h3>
+                      <MonitorSmartphone className="w-10 h-10 text-white opacity-75" />
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-                  <p className="text-gray-600 text-sm">{service.description}</p>
-                </div>
-                <div className="px-6 pb-4">
-                  <button className="text-media-purple hover:underline text-sm flex items-center">
-                    Learn more <span className="ml-1">→</span>
-                  </button>
+                  <div className="p-6 flex-grow">
+                    <ul className="space-y-3">
+                      <li className="flex items-start">
+                        <span className="bg-green-100 rounded-full p-1 mr-2 mt-0.5">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                        </span>
+                        <span className="text-gray-700">Comprehensive multi-platform campaigns</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="bg-green-100 rounded-full p-1 mr-2 mt-0.5">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                        </span>
+                        <span className="text-gray-700">Data-driven optimization strategies</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="bg-green-100 rounded-full p-1 mr-2 mt-0.5">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                        </span>
+                        <span className="text-gray-700">Expert budget management and allocation</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="bg-green-100 rounded-full p-1 mr-2 mt-0.5">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                        </span>
+                        <span className="text-gray-700">Global market reach and localization</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="p-6 pt-0">
+                    <button className="text-[#8B5CF6] hover:underline text-sm font-medium flex items-center">
+                      Learn more about our approach <span className="ml-1">→</span>
+                    </button>
+                  </div>
                 </div>
               </div>
-            ))}
+              
+              {/* Right side: Grid of smaller cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {expertServices.slice(1, 5).map((service, index) => (
+                  <div 
+                    key={`expert-mini-${index}`} 
+                    className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                  >
+                    <div className={`${service.color} h-2 w-full`}></div>
+                    <div className="p-5">
+                      <div className="flex items-center mb-3">
+                        <div className={`${service.color} w-10 h-10 rounded-lg flex items-center justify-center mr-3`}>
+                          {service.icon}
+                        </div>
+                        <h3 className="font-bold">{service.title}</h3>
+                      </div>
+                      <p className="text-gray-600 text-sm">{service.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
