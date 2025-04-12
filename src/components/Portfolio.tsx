@@ -20,11 +20,11 @@ const Portfolio = () => {
       image: "bg-gradient-to-br from-media-purple/80 to-media-pink/80",
       client: "Fashion Retailer",
       metrics: [
-        { label: "ROAS", value: "4.8x" },
-        { label: "CPA", value: "-32%" },
-        { label: "Revenue", value: "+67%" }
+        { label: "ROAS", value: "8.2x" },
+        { label: "Revenue", value: "$129K+" },
+        { label: "Conversion", value: "+145%" }
       ],
-      description: "Developed a cross-channel media strategy that increased ROAS by 4.8x while scaling monthly ad spend from $50K to $200K."
+      description: "Increased e-commerce sales for a fashion retailer through optimized Meta campaigns, achieving 8.2x ROAS and generating over $129,000 in revenue from a single campaign."
     },
     {
       title: "B2B Lead Generation",
