@@ -10,6 +10,7 @@ import {
   Award,
   LayoutGrid
 } from "lucide-react";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const About = () => {
   const stats = [
@@ -72,6 +73,20 @@ const About = () => {
         {/* About Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div className="space-y-6 opacity-0 animate-fade-in-up animate-delay-200">
+            <div className="flex items-center gap-4 mb-6">
+              <Avatar className="h-16 w-16 border-2 border-media-purple/20">
+                {/* Replace this with your uploaded photo URL */}
+                <AvatarImage src="/your-photo.jpg" alt="Mohamed Ali" />
+                <AvatarFallback className="text-xl font-bold text-media-purple bg-media-purple/10">
+                  MA
+                </AvatarFallback>
+              </Avatar>
+              <div>
+                <h3 className="text-2xl font-semibold">Mohamed Ali</h3>
+                <p className="text-media-purple">Senior Media Buyer</p>
+              </div>
+            </div>
+            
             <h3 className="text-2xl font-semibold">My Approach</h3>
             <p className="text-gray-600">
               I combine deep analytical expertise with creative thinking to craft media buying strategies that maximize ROI and deliver measurable business results across diverse industries in over 10 countries.
