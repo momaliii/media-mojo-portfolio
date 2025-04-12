@@ -1,8 +1,8 @@
 
 import React from "react";
 import { Card } from "@/components/ui/card";
-import { Client } from "@/data/clientsData";
 import { motion } from "framer-motion";
+import { Client } from "@/data/clientsData";
 
 type ClientCardProps = {
   client: Client;
