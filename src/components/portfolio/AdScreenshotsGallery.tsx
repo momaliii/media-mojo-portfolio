@@ -82,12 +82,10 @@ const AdScreenshotsGallery: React.FC = () => {
                             draggable="false"
                             style={{ 
                               pointerEvents: 'none',
-                              WebkitUserDrag: 'none',
-                              userDrag: 'none',
+                              userSelect: 'none',
                               MozUserSelect: 'none',
                               WebkitUserSelect: 'none',
-                              msUserSelect: 'none',
-                              userSelect: 'none'
+                              msUserSelect: 'none'
                             }}
                           />
                           
