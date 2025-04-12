@@ -20,7 +20,7 @@ const Platforms = () => {
     {
       icon: <ShoppingCart className="w-8 h-8 text-white" />,
       title: "Easyorder",
-      description: "Streamlined B2B ordering platform for direct sales and inventory management.",
+      description: "Modern B2B ordering platform for creating high-converting sales and inventory management.",
       color: "bg-[#FF5722]"
     },
     {
@@ -32,7 +32,7 @@ const Platforms = () => {
   ];
 
   return (
-    <section id="platforms" className="section-padding">
+    <section id="platforms" className="section-padding bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
           <span className="inline-block py-1 px-3 rounded-full bg-media-purple/10 text-media-purple font-medium text-sm mb-4">
@@ -46,19 +46,22 @@ const Platforms = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {platforms.map((platform, index) => (
             <Card 
               key={index} 
-              className="platform-card border border-gray-200 overflow-hidden opacity-0 animate-fade-in-up"
+              className="platform-card border-none shadow-lg hover:shadow-xl transition-all overflow-hidden opacity-0 animate-fade-in-up group hover:-translate-y-2 duration-300"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <CardContent className="p-6">
-                <div className={`w-14 h-14 rounded-lg ${platform.color} flex items-center justify-center mb-5`}>
-                  {platform.icon}
+              <CardContent className="p-0">
+                <div className={`${platform.color} h-3 w-full`}></div>
+                <div className="p-6">
+                  <div className={`w-16 h-16 rounded-full ${platform.color} flex items-center justify-center mb-5 transform group-hover:scale-110 transition-transform duration-300`}>
+                    {platform.icon}
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">{platform.title}</h3>
+                  <p className="text-gray-600">{platform.description}</p>
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{platform.title}</h3>
-                <p className="text-gray-600">{platform.description}</p>
               </CardContent>
             </Card>
           ))}
