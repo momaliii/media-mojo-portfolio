@@ -11,6 +11,7 @@ export interface CaseStudy {
   category: string;
   image: string;
   screenshot?: string;
+  additionalScreenshots?: string[];
   client: string;
   metrics: CaseStudyMetric[];
   description: string;
@@ -22,7 +23,11 @@ export const caseStudies: CaseStudy[] = [
     title: "E-commerce Revenue Growth",
     category: "e-commerce",
     image: "bg-gradient-to-br from-media-purple/80 to-media-pink/80",
-    screenshot: "/lovable-uploads/097d6b1dd-bd01-420f-857d-b18eae7dbd5d.png",
+    screenshot: "/lovable-uploads/97d6b1dd-bd01-420f-857d-b18eae7dbd5d.png",
+    additionalScreenshots: [
+      "/lovable-uploads/04a87b8a-bf75-42bd-be94-6ae0391bac19.png",
+      "/lovable-uploads/d18578fe-5e88-4f36-820d-b2a718472bd7.png"
+    ],
     client: "Fashion Retailer",
     metrics: [
       { label: "ROAS", value: "8.2x" },

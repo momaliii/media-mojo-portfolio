@@ -1,8 +1,8 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ChevronRight, ChevronLeft } from "lucide-react";
 import { CaseStudy } from "@/data/caseStudies";
 
 interface CaseStudyCardProps {
@@ -11,6 +11,14 @@ interface CaseStudyCardProps {
 }
 
 const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
+  // State for image carousel
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // All images including main screenshot and additional screenshots
+  const allImages = study.screenshot 
+    ? [study.screenshot, ...(study.additionalScreenshots || [])]
+    : [];
+
   // Helper function to get pretty category name
   const getCategoryName = (category: string): string => {
     switch (category) {
@@ -24,15 +32,25 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
     }
   };
 
+  const handlePrevImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImageIndex(prev => (prev === 0 ? allImages.length - 1 : prev - 1));
+  };
+
+  const handleNextImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImageIndex(prev => (prev === allImages.length - 1 ? 0 : prev + 1));
+  };
+
   return (
     <Card 
       className="overflow-hidden cursor-pointer border border-gray-200 hover:shadow-lg transition-all opacity-0 animate-fade-in-up"
       style={{ animationDelay: `${index * 100}ms` }}
     >
-      {study.screenshot ? (
+      {allImages.length > 0 ? (
         <div className="h-48 relative overflow-hidden">
           <img 
-            src={study.screenshot} 
+            src={allImages[currentImageIndex]} 
             alt={study.title} 
             className="w-full h-full object-cover"
           />
@@ -41,6 +59,30 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
               CASE STUDY
             </span>
           </div>
+          {allImages.length > 1 && (
+            <>
+              <button 
+                onClick={handlePrevImage}
+                className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-1 hover:bg-black/70"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button 
+                onClick={handleNextImage}
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-1 hover:bg-black/70"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-1">
+                {allImages.map((_, i) => (
+                  <span 
+                    key={i} 
+                    className={`block h-1.5 w-1.5 rounded-full ${i === currentImageIndex ? 'bg-white' : 'bg-white/50'}`}
+                  />
+                ))}
+              </div>
+            </>
+          )}
           <div className="absolute bottom-4 left-4">
             <Badge className="bg-white/90 text-gray-800 hover:bg-white/90">
               {getCategoryName(study.category)}
