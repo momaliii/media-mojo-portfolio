@@ -53,6 +53,13 @@ export const adCampaignScreenshots: AdScreenshot[] = [
     details: "EGP 443K+ | 689 Orders | 1.07% CR"
   },
   {
+    url: "/lovable-uploads/65acfa16-3fd7-4a1a-b657-5d664bc7bd16.png",
+    industry: "E-commerce",
+    client: "Arabic E-commerce Platform",
+    platform: "Analytics",
+    details: "EGP 3.66M Revenue | 110.79K Visits"
+  },
+  {
     url: "/lovable-uploads/e4ec0de3-17ba-4f2f-924d-68ea4a22a583.png",
     industry: "Travel",
     client: "Qatar Airways - $54.4K Campaign"

@@ -22,7 +22,7 @@ const AdGalleryHeader: React.FC = () => {
         <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-4 rounded-lg inline-flex items-center gap-2 border border-green-100">
           <LineChart className="text-[#34A853]" size={20} />
           <span className="font-medium text-gray-700">
-            Real campaign analytics with +443K EGP in revenue
+            Real campaign analytics with +3.66M EGP in revenue
           </span>
         </div>
       </div>
