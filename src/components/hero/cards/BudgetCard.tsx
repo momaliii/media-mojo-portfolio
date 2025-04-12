@@ -12,7 +12,7 @@ const BudgetCard = () => {
       <div className="mt-4 space-y-1">
         <div className="w-full flex justify-between text-xs">
           <span>Facebook</span>
-          <span className="font-semibold">$42K</span>
+          <span className="font-semibold">$1.2M</span>
         </div>
         <div className="w-full h-1 bg-gray-100 rounded-full">
           <div className="h-1 bg-media-purple rounded-full" style={{width: '60%'}}></div>
@@ -37,6 +37,13 @@ const BudgetCard = () => {
         </div>
         <div className="w-full h-1 bg-gray-100 rounded-full">
           <div className="h-1 bg-media-pink rounded-full" style={{width: '22%'}}></div>
+        </div>
+        <div className="w-full flex justify-between text-xs mt-2">
+          <span>Twitter</span>
+          <span className="font-semibold">$12K</span>
+        </div>
+        <div className="w-full h-1 bg-gray-100 rounded-full">
+          <div className="h-1 bg-media-blue rounded-full" style={{width: '18%'}}></div>
         </div>
       </div>
     </div>
