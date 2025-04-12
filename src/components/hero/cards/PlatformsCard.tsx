@@ -1,0 +1,30 @@
+
+import React from "react";
+import { Target } from "lucide-react";
+
+const PlatformsCard = () => {
+  return (
+    <div className="hero-grid-item col-span-1 row-span-1 bg-media-blue/20 shadow-lg rounded-xl p-4">
+      <div className="flex justify-between items-center">
+        <span className="text-sm font-medium text-gray-500">Platforms</span>
+        <Target size={18} className="text-media-oceanblue" />
+      </div>
+      <div className="mt-4 space-y-2">
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-media-oceanblue"></div>
+          <p className="text-xs">Meta Ads</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-media-purple"></div>
+          <p className="text-xs">Google Ads</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-media-pink"></div>
+          <p className="text-xs">TikTok & Snapchat</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PlatformsCard;
