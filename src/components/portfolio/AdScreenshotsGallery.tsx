@@ -69,6 +69,27 @@ const AdScreenshotsGallery: React.FC = () => {
       url: "/lovable-uploads/c231d3ec-eed2-424d-bd7c-95aa7879f8e7.png",
       industry: "Travel",
       client: "Seasonal Travel Campaigns"
+    },
+    // Add the new F&B Industry in Saudi Arabia screenshots
+    {
+      url: "/lovable-uploads/46ec591e-912f-44bb-8a0b-ead1a8921beb.png",
+      industry: "F&B",
+      client: "Saudi Restaurant - $10.7K Campaign"
+    },
+    {
+      url: "/lovable-uploads/b44109e4-19fc-4d1a-89e0-9374e494ab0d.png",
+      industry: "F&B",
+      client: "Saudi F&B - 36K Impressions"
+    },
+    {
+      url: "/lovable-uploads/5804f258-db97-4d23-b780-67b64f60d4cd.png",
+      industry: "F&B",
+      client: "Saudi Restaurant Chain - $1.4K Campaign"
+    },
+    {
+      url: "/lovable-uploads/19e88bed-b62d-4d8a-9686-d0f95c5873c7.png",
+      industry: "F&B",
+      client: "Saudi F&B - ROI Optimization"
     }
   ];
 
