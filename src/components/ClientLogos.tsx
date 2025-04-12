@@ -19,6 +19,8 @@ const ClientLogos = () => {
   const [selectedIndustry, setSelectedIndustry] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [filteredClients, setFilteredClients] = useState(clientsData);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [viewMode, setViewMode] = useState<"grid" | "compact">("grid");
   const clientsPerPage = 12;
   
   // Get unique industries for filter
@@ -26,17 +28,27 @@ const ClientLogos = () => {
     new Set(clientsData.map((client) => client.industry))
   ).sort();
 
-  // Filter clients based on selected industry
+  // Filter clients based on selected industry and search query
   useEffect(() => {
-    if (selectedIndustry === "all") {
-      setFilteredClients(clientsData);
-    } else {
-      setFilteredClients(
-        clientsData.filter((client) => client.industry === selectedIndustry)
+    let filtered = clientsData;
+    
+    // Filter by industry
+    if (selectedIndustry !== "all") {
+      filtered = filtered.filter((client) => client.industry === selectedIndustry);
+    }
+    
+    // Filter by search query
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase().trim();
+      filtered = filtered.filter((client) => 
+        client.name.toLowerCase().includes(query) || 
+        client.industry.toLowerCase().includes(query)
       );
     }
+    
+    setFilteredClients(filtered);
     setCurrentPage(1); // Reset to first page when filter changes
-  }, [selectedIndustry]);
+  }, [selectedIndustry, searchQuery]);
 
   // Calculate pagination
   const indexOfLastClient = currentPage * clientsPerPage;
@@ -129,9 +141,17 @@ const ClientLogos = () => {
           industries={uniqueIndustries}
           selectedIndustry={selectedIndustry}
           onIndustryChange={setSelectedIndustry}
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          viewMode={viewMode}
+          onViewModeChange={setViewMode}
         />
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 md:gap-6">
+        <div className={`${
+          viewMode === "grid" 
+            ? "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6" 
+            : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+        } gap-4 md:gap-6`}>
           {currentClients.map((client, index) => (
             <ClientCard key={index} client={client} />
           ))}
