@@ -24,6 +24,20 @@ const BudgetCard = () => {
         <div className="w-full h-1 bg-gray-100 rounded-full">
           <div className="h-1 bg-media-orange rounded-full" style={{width: '40%'}}></div>
         </div>
+        <div className="w-full flex justify-between text-xs mt-2">
+          <span>LinkedIn</span>
+          <span className="font-semibold">$38K</span>
+        </div>
+        <div className="w-full h-1 bg-gray-100 rounded-full">
+          <div className="h-1 bg-media-oceanblue rounded-full" style={{width: '55%'}}></div>
+        </div>
+        <div className="w-full flex justify-between text-xs mt-2">
+          <span>Snapchat</span>
+          <span className="font-semibold">$15K</span>
+        </div>
+        <div className="w-full h-1 bg-gray-100 rounded-full">
+          <div className="h-1 bg-media-pink rounded-full" style={{width: '22%'}}></div>
+        </div>
       </div>
     </div>
   );
