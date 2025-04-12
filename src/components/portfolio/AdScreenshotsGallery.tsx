@@ -44,6 +44,11 @@ const AdScreenshotsGallery: React.FC = () => {
       url: "/lovable-uploads/c8259e43-59cb-4ab5-a015-c4bd4f607f1f.png",
       industry: "Cosmetics",
       client: "Sunblock Products"
+    },
+    {
+      url: "/lovable-uploads/b9ffe7b8-a319-4b45-aece-468ae716143f.png",
+      industry: "Cosmetics",
+      client: "EGP7.76M Revenue Campaign"
     }
   ];
 
