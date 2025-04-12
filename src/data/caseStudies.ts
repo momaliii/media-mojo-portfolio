@@ -23,18 +23,13 @@ export const caseStudies: CaseStudy[] = [
     title: "E-commerce Revenue Growth",
     category: "e-commerce",
     image: "bg-gradient-to-br from-media-purple/80 to-media-pink/80",
-    screenshot: "/lovable-uploads/97d6b1dd-bd01-420f-857d-b18eae7dbd5d.png",
-    additionalScreenshots: [
-      "/lovable-uploads/04a87b8a-bf75-42bd-be94-6ae0391bac19.png",
-      "/lovable-uploads/d18578fe-5e88-4f36-820d-b2a718472bd7.png"
-    ],
     client: "Fashion Retailer",
     metrics: [
-      { label: "ROAS", value: "8.2x" },
+      { label: "ROAS", value: "5.2x" },
       { label: "Revenue", value: "$129K+" },
       { label: "Conversion", value: "+145%" }
     ],
-    description: "Increased e-commerce sales for a fashion retailer through optimized Meta campaigns, achieving 8.2x ROAS and generating over $129,000 in revenue from a single campaign."
+    description: "Increased e-commerce sales for a fashion retailer through optimized Meta campaigns, achieving 5.2x ROAS and generating over $129,000 in revenue from a single campaign."
   },
   {
     title: "E-commerce Revenue Growth on Cosmetics",
