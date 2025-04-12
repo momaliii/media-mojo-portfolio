@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Linkedin } from "lucide-react";
+import { Linkedin, LineChart } from "lucide-react";
 
 const AdGalleryHeader: React.FC = () => {
   return (
@@ -11,11 +11,20 @@ const AdGalleryHeader: React.FC = () => {
         Each screenshot demonstrates our approach to creating engaging, high-converting ads.
       </p>
       
-      <div className="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg inline-flex items-center gap-2 border border-blue-100">
-        <Linkedin className="text-[#0A66C2]" size={20} />
-        <span className="font-medium text-gray-700">
-          Now featuring LinkedIn campaigns for non-profit organizations in Saudi Arabia and across the Middle East
-        </span>
+      <div className="flex flex-wrap justify-center gap-4 mt-6">
+        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg inline-flex items-center gap-2 border border-blue-100">
+          <Linkedin className="text-[#0A66C2]" size={20} />
+          <span className="font-medium text-gray-700">
+            LinkedIn campaigns for non-profit organizations across the Middle East
+          </span>
+        </div>
+        
+        <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-4 rounded-lg inline-flex items-center gap-2 border border-green-100">
+          <LineChart className="text-[#34A853]" size={20} />
+          <span className="font-medium text-gray-700">
+            Real campaign analytics with +443K EGP in revenue
+          </span>
+        </div>
       </div>
     </div>
   );

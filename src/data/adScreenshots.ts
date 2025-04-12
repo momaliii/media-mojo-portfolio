@@ -4,7 +4,7 @@ export interface AdScreenshot {
   url: string;
   industry: string;
   client: string;
-  platform?: "LinkedIn" | "Facebook" | "Instagram";
+  platform?: "LinkedIn" | "Facebook" | "Instagram" | "Analytics";
   details?: string;
 }
 
@@ -44,6 +44,13 @@ export const adCampaignScreenshots: AdScreenshot[] = [
     url: "/lovable-uploads/b9ffe7b8-a319-4b45-aece-468ae716143f.png",
     industry: "Cosmetics",
     client: "EGP7.76M Revenue Campaign"
+  },
+  {
+    url: "/lovable-uploads/8ba80354-1cbc-448a-9175-c56949f83d71.png",
+    industry: "E-commerce",
+    client: "Egyptian Retailer",
+    platform: "Analytics",
+    details: "EGP 443K+ | 689 Orders | 1.07% CR"
   },
   {
     url: "/lovable-uploads/e4ec0de3-17ba-4f2f-924d-68ea4a22a583.png",
