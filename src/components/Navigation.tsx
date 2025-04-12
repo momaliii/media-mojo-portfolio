@@ -48,9 +48,15 @@ const Navigation = () => {
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {/* Animated Logo */}
           <div className="text-xl md:text-2xl font-bold">
-            <span className="gradient-text">Media Mojo</span>
+            <div className="relative">
+              <span className="inline-block animate-slide-in-right overflow-hidden whitespace-nowrap">
+                <span className="gradient-text">Mohamed</span>
+                <span className="animate-pulse ml-1 text-media-purple">Ali</span>
+              </span>
+              <span className="animate-fade-in absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-media-purple to-blue-500"></span>
+            </div>
           </div>
 
           {/* Desktop Navigation */}
