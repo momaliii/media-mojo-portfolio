@@ -127,5 +127,24 @@ export const caseStudies: CaseStudy[] = [
       "/lovable-uploads/674d2167-6a40-4f1c-92ef-12fca8456a21.png",
       "/lovable-uploads/f57ede24-91e3-4267-acf6-a7492dae4b16.png"
     ]
+  },
+  // Add new case study for non-profit LinkedIn campaigns
+  {
+    title: "Non-Profit Awareness & Fundraising",
+    category: "non-profit",
+    image: "bg-gradient-to-br from-blue-500/80 to-indigo-400/80",
+    client: "International NGO",
+    metrics: [
+      { label: "Total Spend", value: "$36.7K" },
+      { label: "Engagement", value: "3.54%" },
+      { label: "Reach", value: "4.45M+" }
+    ],
+    description: "Created and managed LinkedIn campaign series for non-profit organizations across Saudi Arabia and Middle Eastern countries, driving engagement and fundraising through targeted outreach.",
+    industry: "Non-Profit",
+    screenshot: "/lovable-uploads/a11917a6-704a-4ada-ba26-40899ba98b37.png",
+    additionalScreenshots: [
+      "/lovable-uploads/d07ff1b1-0451-4b63-9122-a1547f3ab4eb.png",
+      "/lovable-uploads/ea7c2b4d-8851-4c25-b5e6-7f33a0471af4.png"
+    ]
   }
 ];

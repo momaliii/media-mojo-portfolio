@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from "react";
 import { 
   Carousel, 
@@ -9,7 +8,7 @@ import {
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Eye, Lock, ShieldCheck } from "lucide-react";
+import { Eye, Lock, ShieldCheck, Linkedin, Globe, HandHeart } from "lucide-react";
 import { caseStudies } from "@/data/caseStudies";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
@@ -72,7 +71,6 @@ const AdScreenshotsGallery: React.FC = () => {
       industry: "Travel",
       client: "Seasonal Travel Campaigns"
     },
-    // Add the new F&B Industry in Saudi Arabia screenshots
     {
       url: "/lovable-uploads/46ec591e-912f-44bb-8a0b-ead1a8921beb.png",
       industry: "F&B",
@@ -92,6 +90,27 @@ const AdScreenshotsGallery: React.FC = () => {
       url: "/lovable-uploads/19e88bed-b62d-4d8a-9686-d0f95c5873c7.png",
       industry: "F&B",
       client: "Saudi F&B - ROI Optimization"
+    },
+    {
+      url: "/lovable-uploads/a11917a6-704a-4ada-ba26-40899ba98b37.png",
+      industry: "Non-Profit",
+      client: "Saudi NGO Campaign",
+      platform: "LinkedIn",
+      details: "$36.7K Total Spend"
+    },
+    {
+      url: "/lovable-uploads/d07ff1b1-0451-4b63-9122-a1547f3ab4eb.png",
+      industry: "Non-Profit",
+      client: "Global Outreach - Turkey",
+      platform: "LinkedIn",
+      details: "$1.6K Spent | 0.49% CTR"
+    },
+    {
+      url: "/lovable-uploads/ea7c2b4d-8851-4c25-b5e6-7f33a0471af4.png",
+      industry: "Non-Profit",
+      client: "Middle East Engagement",
+      platform: "LinkedIn",
+      details: "3.54% CTR | $0.32 CPC"
     }
   ];
 
@@ -125,9 +144,16 @@ const AdScreenshotsGallery: React.FC = () => {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Ad Campaign Showcase</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Browse our portfolio of successful ad campaigns across various industries.
+            Browse our portfolio of successful ad campaigns across various industries and platforms.
             Each screenshot demonstrates our approach to creating engaging, high-converting ads.
           </p>
+          
+          <div className="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg inline-flex items-center gap-2 border border-blue-100">
+            <Linkedin className="text-[#0A66C2]" size={20} />
+            <span className="font-medium text-gray-700">
+              Now featuring LinkedIn campaigns for non-profit organizations in Saudi Arabia and across the Middle East
+            </span>
+          </div>
         </div>
 
         <div className="relative">
@@ -159,7 +185,6 @@ const AdScreenshotsGallery: React.FC = () => {
                           onContextMenu={handleContextMenu}
                           style={{ userSelect: 'none' }}
                         >
-                          {/* Facebook Ads Manager screenshot */}
                           <img 
                             src={screenshot.url} 
                             alt={`${screenshot.industry} Ad Campaign`}
@@ -174,7 +199,6 @@ const AdScreenshotsGallery: React.FC = () => {
                             }}
                           />
                           
-                          {/* Diagonal watermark */}
                           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                             <div 
                               className="bg-black bg-opacity-20 px-4 py-2 transform rotate-[-25deg] text-white text-sm md:text-md font-bold tracking-wider w-full text-center"
@@ -184,24 +208,37 @@ const AdScreenshotsGallery: React.FC = () => {
                             </div>
                           </div>
                           
-                          {/* Protection indicators */}
                           <div className="absolute top-2 right-2 bg-black bg-opacity-50 text-white rounded-full p-1">
                             <Lock size={16} />
                           </div>
 
-                          {/* Industry badge */}
                           <div className="absolute bottom-4 left-4 transform transition-transform duration-300 hover:translate-x-1">
-                            <Badge className="bg-white/90 text-gray-800 hover:bg-white/80">
+                            <Badge className="bg-white/90 text-gray-800 hover:bg-white/80 flex items-center gap-1">
+                              {screenshot.industry === "Non-Profit" && <HandHeart className="w-3 h-3" />}
                               {screenshot.industry}
                             </Badge>
                           </div>
                           
-                          {/* Client info */}
+                          {screenshot.platform === "LinkedIn" && (
+                            <div className="absolute top-2 left-2 bg-[#0A66C2] text-white rounded-md px-2 py-1 text-xs flex items-center">
+                              <Linkedin size={14} className="mr-1" />
+                              LinkedIn
+                            </div>
+                          )}
+                          
                           <div className="absolute bottom-4 right-4 transform transition-transform duration-300 hover:-translate-x-1">
                             <Badge variant="outline" className="bg-black/50 text-white border-none">
                               {screenshot.client}
                             </Badge>
                           </div>
+                          
+                          {screenshot.details && (
+                            <div className="absolute bottom-12 right-4">
+                              <Badge variant="outline" className="bg-blue-500/70 text-white border-none">
+                                {screenshot.details}
+                              </Badge>
+                            </div>
+                          )}
                         </div>
                       </CardContent>
                     </Card>
@@ -213,10 +250,14 @@ const AdScreenshotsGallery: React.FC = () => {
             <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2" />
           </Carousel>
           
-          {/* Protection message */}
           <div className="flex items-center justify-center text-sm text-gray-500 mt-4">
             <ShieldCheck className="w-4 h-4 mr-2" />
             <span>Images are protected and cannot be downloaded</span>
+          </div>
+          
+          <div className="mt-8 flex items-center justify-center gap-2">
+            <Globe className="w-5 h-5 text-media-oceanblue" />
+            <span className="text-sm text-gray-600">Campaigns spanning Saudi Arabia, Turkey, Pakistan, Tunisia, and Oman</span>
           </div>
         </div>
       </div>
