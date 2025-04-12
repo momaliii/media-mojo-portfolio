@@ -49,6 +49,26 @@ const AdScreenshotsGallery: React.FC = () => {
       url: "/lovable-uploads/b9ffe7b8-a319-4b45-aece-468ae716143f.png",
       industry: "Cosmetics",
       client: "EGP7.76M Revenue Campaign"
+    },
+    {
+      url: "/lovable-uploads/e4ec0de3-17ba-4f2f-924d-68ea4a22a583.png",
+      industry: "Travel",
+      client: "Qatar Airways - $54.4K Campaign"
+    },
+    {
+      url: "/lovable-uploads/5f84f179-a69a-4009-93ba-78dd559a2d50.png",
+      industry: "Travel",
+      client: "Dinner Cruise Promotions"
+    },
+    {
+      url: "/lovable-uploads/dd8439eb-83f8-4dc7-b4a8-40039aa7ba3c.png",
+      industry: "Travel",
+      client: "Doha Experience Tours"
+    },
+    {
+      url: "/lovable-uploads/c231d3ec-eed2-424d-bd7c-95aa7879f8e7.png",
+      industry: "Travel",
+      client: "Seasonal Travel Campaigns"
     }
   ];
 
