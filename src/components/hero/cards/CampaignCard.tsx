@@ -20,7 +20,7 @@ const CampaignCard = () => {
         </div>
         <div className="flex justify-between items-center">
           <span className="text-sm">Conv. Rate</span>
-          <span className="text-sm font-medium">5.2%</span>
+          <span className="text-sm font-medium">8.5%</span>
         </div>
       </div>
     </div>
