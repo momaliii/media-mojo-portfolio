@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
@@ -75,8 +74,7 @@ const About = () => {
           <div className="space-y-6 opacity-0 animate-fade-in-up animate-delay-200">
             <div className="flex items-center gap-4 mb-6">
               <Avatar className="h-16 w-16 border-2 border-media-purple/20">
-                {/* Replace this with your uploaded photo URL */}
-                <AvatarImage src="/your-photo.jpg" alt="Mohamed Ali" />
+                <AvatarImage src="/lovable-uploads/900c6176-4030-4244-a97a-62a4c235d53f.png" alt="Mohamed Ali" />
                 <AvatarFallback className="text-xl font-bold text-media-purple bg-media-purple/10">
                   MA
                 </AvatarFallback>

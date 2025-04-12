@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import HeroStats from "./HeroStats";
@@ -9,8 +8,7 @@ const HeroContent = () => {
     <div className="space-y-6 md:space-y-8 opacity-0 animate-fade-in-up">
       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-4">
         <Avatar className="h-24 w-24 border-2 border-media-purple/20">
-          {/* Replace this with your uploaded photo URL */}
-          <AvatarImage src="/your-photo.jpg" alt="Mohamed Ali" />
+          <AvatarImage src="/lovable-uploads/900c6176-4030-4244-a97a-62a4c235d53f.png" alt="Mohamed Ali" />
           <AvatarFallback className="text-2xl font-bold text-media-purple bg-media-purple/10">
             MA
           </AvatarFallback>
