@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
@@ -30,7 +31,7 @@ const About = () => {
     },
     { 
       icon: <Award className="text-media-pink" />, 
-      value: "45K+", 
+      value: "90K+", 
       label: "Orders Generated" 
     },
   ];
