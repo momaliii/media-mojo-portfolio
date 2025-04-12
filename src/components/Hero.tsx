@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { 
   TrendingUp, 
@@ -24,10 +24,10 @@ const Hero = () => {
                 Senior Media Buyer
               </span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-                Turning <span className="gradient-text">Clicks</span> Into <span className="gradient-text">Customers</span>
+                Mohamed <span className="gradient-text">Ali</span>
               </h1>
               <p className="mt-6 text-lg text-gray-600 md:pr-10">
-                Strategic media buying and campaign optimization to maximize your ROI and drive measurable business results.
+                Senior Media Buyer with 5+ years of experience optimizing campaigns across Meta, LinkedIn, TikTok, Snapchat, Twitter, and Google Ads. Delivering measurable results and exceptional ROI.
               </p>
             </div>
             
@@ -51,15 +51,15 @@ const Hero = () => {
             <div className="pt-6 grid grid-cols-2 md:grid-cols-3 gap-4">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-media-purple"></div>
-                <p className="text-sm text-gray-600">7+ Years Experience</p>
+                <p className="text-sm text-gray-600">5+ Years Experience</p>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-media-oceanblue"></div>
-                <p className="text-sm text-gray-600">50+ Campaigns</p>
+                <p className="text-sm text-gray-600">10+ Countries Served</p>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-media-orange"></div>
-                <p className="text-sm text-gray-600">$10M+ Media Spend</p>
+                <p className="text-sm text-gray-600">8x+ ROAS Achieved</p>
               </div>
             </div>
           </div>
@@ -74,15 +74,15 @@ const Hero = () => {
                 </div>
                 <div className="mt-2">
                   <div className="w-full h-2 bg-gray-100 rounded-full">
-                    <div className="h-2 bg-green-500 rounded-full animate-pulse-slow" style={{width: '78%'}}></div>
+                    <div className="h-2 bg-green-500 rounded-full animate-pulse-slow" style={{width: '88%'}}></div>
                   </div>
                   <div className="mt-1 flex justify-between text-xs">
                     <span>0%</span>
-                    <span className="font-semibold">78%</span>
+                    <span className="font-semibold">88%</span>
                     <span>100%</span>
                   </div>
                 </div>
-                <p className="text-sm mt-2 font-medium">ROAS 4.2x</p>
+                <p className="text-sm mt-2 font-medium">ROAS 8x+</p>
               </div>
               
               <div className="hero-grid-item col-span-1 row-span-1 bg-media-purple text-white shadow-lg rounded-xl p-4 flex flex-col">
@@ -91,11 +91,11 @@ const Hero = () => {
                   <MousePointerClick size={18} />
                 </div>
                 <div className="flex-1 flex items-center justify-center">
-                  <span className="text-3xl font-bold">$1.42</span>
+                  <span className="text-3xl font-bold">$1.18</span>
                 </div>
                 <div className="text-xs text-white/70">
                   <span className="inline-flex items-center">
-                    <span>↓ 18% vs. benchmark</span>
+                    <span>↓ 24% vs. benchmark</span>
                   </span>
                 </div>
               </div>
@@ -131,36 +131,36 @@ const Hero = () => {
                 <div className="flex-1 flex flex-col justify-center">
                   <div className="flex justify-between items-center">
                     <span className="text-sm">Impressions</span>
-                    <span className="text-sm font-medium">8.4M</span>
+                    <span className="text-sm font-medium">10.5M</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-sm">CTR</span>
-                    <span className="text-sm font-medium">3.2%</span>
+                    <span className="text-sm font-medium">3.8%</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-sm">Conv. Rate</span>
-                    <span className="text-sm font-medium">4.8%</span>
+                    <span className="text-sm font-medium">5.2%</span>
                   </div>
                 </div>
               </div>
               
               <div className="hero-grid-item col-span-1 row-span-1 bg-media-blue/20 shadow-lg rounded-xl p-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-gray-500">Targeting</span>
+                  <span className="text-sm font-medium text-gray-500">Platforms</span>
                   <Target size={18} className="text-media-oceanblue" />
                 </div>
                 <div className="mt-4 space-y-2">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-media-oceanblue"></div>
-                    <p className="text-xs">Demographic</p>
+                    <p className="text-xs">Meta Ads</p>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-media-purple"></div>
-                    <p className="text-xs">Behavioral</p>
+                    <p className="text-xs">Google Ads</p>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-media-pink"></div>
-                    <p className="text-xs">Interest-based</p>
+                    <p className="text-xs">TikTok & Snapchat</p>
                   </div>
                 </div>
               </div>
@@ -176,28 +176,28 @@ const Hero = () => {
                       <div className="w-2 h-2 rounded-full bg-white"></div>
                       <span className="text-xs">Paid Social</span>
                     </div>
-                    <span className="text-xs">42%</span>
+                    <span className="text-xs">45%</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-media-blue"></div>
                       <span className="text-xs">Search</span>
                     </div>
-                    <span className="text-xs">28%</span>
+                    <span className="text-xs">30%</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-media-pink"></div>
                       <span className="text-xs">Display</span>
                     </div>
-                    <span className="text-xs">18%</span>
+                    <span className="text-xs">15%</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-media-peach"></div>
                       <span className="text-xs">Video</span>
                     </div>
-                    <span className="text-xs">12%</span>
+                    <span className="text-xs">10%</span>
                   </div>
                 </div>
               </div>

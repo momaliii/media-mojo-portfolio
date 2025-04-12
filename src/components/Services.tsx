@@ -8,45 +8,48 @@ import {
   Target, 
   LineChart, 
   Users, 
-  ArrowRight
+  ArrowRight,
+  PieChart,
+  Award,
+  Globe
 } from "lucide-react";
 
 const Services = () => {
   const services = [
     {
       icon: <MonitorSmartphone className="w-8 h-8 text-white" />,
-      title: "Paid Social Media",
-      description: "Strategic campaigns across Facebook, Instagram, LinkedIn, TikTok, and other platforms to reach and engage your target audience.",
+      title: "Social Media Marketing",
+      description: "Strategic campaigns across Facebook, Instagram, LinkedIn, TikTok, Snapchat, and Twitter to reach and engage your target audience.",
       color: "bg-media-purple"
     },
     {
       icon: <Search className="w-8 h-8 text-white" />,
       title: "Search Engine Marketing",
-      description: "Data-driven PPC campaigns on Google and Bing to capture high-intent traffic and drive conversions.",
+      description: "Data-driven PPC campaigns on Google Ads to capture high-intent traffic and drive conversions with optimal ROI.",
       color: "bg-media-oceanblue"
     },
     {
       icon: <BarChart className="w-8 h-8 text-white" />,
-      title: "Programmatic Display",
-      description: "Advanced audience targeting and real-time bidding strategies to deliver your message across premium websites.",
-      color: "bg-media-orange"
-    },
-    {
-      icon: <LineChart className="w-8 h-8 text-white" />,
       title: "Performance Analysis",
-      description: "In-depth campaign tracking and reporting with actionable insights to continuously improve results.",
-      color: "bg-media-vibrantpurple"
+      description: "In-depth campaign tracking and reporting using Google Data Studio, Microsoft Clarity, and Google Analytics with actionable insights.",
+      color: "bg-media-orange"
     },
     {
       icon: <Target className="w-8 h-8 text-white" />,
       title: "Audience Strategy",
-      description: "Developing precise targeting strategies based on demographics, interests, behaviors, and custom audiences.",
+      description: "Developing precise targeting strategies based on demographics, interests, behaviors, and custom audiences for optimal campaign performance.",
+      color: "bg-media-vibrantpurple"
+    },
+    {
+      icon: <PieChart className="w-8 h-8 text-white" />,
+      title: "Budget Optimization",
+      description: "Strategic allocation and management of media budgets ranging from $15K to $35K+ to maximize ROI and business results.",
       color: "bg-media-pink"
     },
     {
-      icon: <Users className="w-8 h-8 text-white" />,
-      title: "Media Planning",
-      description: "Comprehensive planning across all digital channels to maximize your campaign effectiveness and ROI.",
+      icon: <Globe className="w-8 h-8 text-white" />,
+      title: "Global Campaign Management",
+      description: "Expertise in managing campaigns across 10+ countries including Saudi Arabia, Egypt, Kuwait, Qatar, Turkey, China, UK, and the U.S.",
       color: "bg-gradient-to-r from-media-purple to-media-oceanblue"
     }
   ];
@@ -62,7 +65,7 @@ const Services = () => {
             Expert <span className="gradient-text">Media Buying</span> Solutions
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Specialized services designed to maximize your advertising effectiveness and deliver measurable business results.
+            Specialized services designed to maximize your advertising effectiveness and deliver measurable business results across multiple platforms and markets.
           </p>
         </div>
 

@@ -11,7 +11,7 @@ import Footer from "@/components/Footer";
 const Index = () => {
   useEffect(() => {
     // Update document title
-    document.title = "Media Mojo Portfolio";
+    document.title = "Mohamed Ali | Senior Media Buyer";
     
     // Add animation to elements when they enter viewport
     const observer = new IntersectionObserver(

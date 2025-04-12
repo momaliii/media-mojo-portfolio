@@ -5,30 +5,33 @@ import {
   BarChart3, 
   Target, 
   TrendingUp, 
-  Users
+  Users,
+  Globe,
+  Award,
+  LayoutGrid
 } from "lucide-react";
 
 const About = () => {
   const stats = [
     { 
       icon: <BarChart3 className="text-media-purple" />, 
-      value: "7", 
+      value: "5+", 
       label: "Years Experience" 
     },
     { 
-      icon: <Target className="text-media-oceanblue" />, 
-      value: "120", 
-      label: "Campaigns Managed" 
+      icon: <Globe className="text-media-oceanblue" />, 
+      value: "10+", 
+      label: "Countries Served" 
     },
     { 
-      icon: <TrendingUp className="text-media-orange" />, 
-      value: "18", 
-      label: "Industries Served" 
+      icon: <LayoutGrid className="text-media-orange" />, 
+      value: "6+", 
+      label: "Platforms Mastered" 
     },
     { 
-      icon: <Users className="text-media-pink" />, 
-      value: "30", 
-      label: "Million Impressions" 
+      icon: <Award className="text-media-pink" />, 
+      value: "45K+", 
+      label: "Orders Generated" 
     },
   ];
 
@@ -43,7 +46,7 @@ const About = () => {
             Delivering <span className="gradient-text">Data-Driven</span> Media Buying Excellence
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            As a senior media buyer with over 7 years of experience, I specialize in creating and optimizing digital advertising campaigns that deliver measurable results and exceptional ROI.
+            Senior Media Buyer with over 5 years of experience optimizing paid media campaigns across platforms like Meta, LinkedIn, TikTok, Snapchat, Twitter, and Google Ads, driving growth and engagement across diverse industries.
           </p>
         </div>
 
@@ -59,7 +62,7 @@ const About = () => {
                 <div className="mx-auto w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-sm mb-4">
                   {stat.icon}
                 </div>
-                <h3 className="text-3xl font-bold mb-1">{stat.value}+</h3>
+                <h3 className="text-3xl font-bold mb-1">{stat.value}</h3>
                 <p className="text-gray-500 text-sm">{stat.label}</p>
               </CardContent>
             </Card>
@@ -71,7 +74,7 @@ const About = () => {
           <div className="space-y-6 opacity-0 animate-fade-in-up animate-delay-200">
             <h3 className="text-2xl font-semibold">My Approach</h3>
             <p className="text-gray-600">
-              I combine deep analytical expertise with creative thinking to craft media buying strategies that not only reach the right audience but convert them into customers.
+              I combine deep analytical expertise with creative thinking to craft media buying strategies that maximize ROI and deliver measurable business results across diverse industries in over 10 countries.
             </p>
             
             <div className="space-y-4">
@@ -80,8 +83,8 @@ const About = () => {
                   <span className="text-media-purple font-semibold text-sm">1</span>
                 </div>
                 <div>
-                  <h4 className="font-medium mb-1">Data-First Strategy</h4>
-                  <p className="text-gray-600 text-sm">Using advanced analytics to guide every decision and optimize campaign performance.</p>
+                  <h4 className="font-medium mb-1">Strategic Campaign Management</h4>
+                  <p className="text-gray-600 text-sm">Expertise in SEM, PPC, and social media advertising across Meta, LinkedIn, TikTok, Snapchat, Twitter, and Google Ads.</p>
                 </div>
               </div>
               
@@ -90,8 +93,8 @@ const About = () => {
                   <span className="text-media-oceanblue font-semibold text-sm">2</span>
                 </div>
                 <div>
-                  <h4 className="font-medium mb-1">Cross-Channel Integration</h4>
-                  <p className="text-gray-600 text-sm">Seamlessly blending paid search, social, display, and video for holistic campaigns.</p>
+                  <h4 className="font-medium mb-1">Performance Optimization</h4>
+                  <p className="text-gray-600 text-sm">Advanced targeting strategies and funnel optimization leading to improved conversion rates and ROAS of 8x+.</p>
                 </div>
               </div>
               
@@ -100,8 +103,8 @@ const About = () => {
                   <span className="text-media-orange font-semibold text-sm">3</span>
                 </div>
                 <div>
-                  <h4 className="font-medium mb-1">Continuous Optimization</h4>
-                  <p className="text-gray-600 text-sm">Constantly testing and refining campaigns to maximize ROI and performance.</p>
+                  <h4 className="font-medium mb-1">Global Experience</h4>
+                  <p className="text-gray-600 text-sm">Successfully managed campaigns in Saudi Arabia, Egypt, Kuwait, Qatar, Turkey, China, UK, and the U.S. among others.</p>
                 </div>
               </div>
             </div>

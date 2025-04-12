@@ -11,7 +11,9 @@ import {
   Linkedin,
   Twitter,
   Instagram,
-  Clock
+  Clock,
+  Phone,
+  MapPin
 } from "lucide-react";
 
 const Contact = () => {
@@ -115,27 +117,27 @@ const Contact = () => {
                       </div>
                       <div>
                         <p className="text-sm font-medium mb-1">Email</p>
-                        <p className="text-gray-600">hello@mediamojo.com</p>
+                        <p className="text-gray-600">mhmd167ali@gmail.com</p>
                       </div>
                     </div>
                     
                     <div className="flex items-start gap-4">
                       <div className="bg-media-purple/10 rounded-full p-3">
-                        <MessageSquare className="h-5 w-5 text-media-purple" />
+                        <Phone className="h-5 w-5 text-media-purple" />
                       </div>
                       <div>
-                        <p className="text-sm font-medium mb-1">Let's talk</p>
-                        <p className="text-gray-600">Schedule a consultation call</p>
+                        <p className="text-sm font-medium mb-1">Phone</p>
+                        <p className="text-gray-600">+201060098267</p>
                       </div>
                     </div>
                     
                     <div className="flex items-start gap-4">
                       <div className="bg-media-purple/10 rounded-full p-3">
-                        <Clock className="h-5 w-5 text-media-purple" />
+                        <MapPin className="h-5 w-5 text-media-purple" />
                       </div>
                       <div>
-                        <p className="text-sm font-medium mb-1">Working hours</p>
-                        <p className="text-gray-600">Monday - Friday: 9am - 5pm</p>
+                        <p className="text-sm font-medium mb-1">Location</p>
+                        <p className="text-gray-600">Cairo, Egypt</p>
                       </div>
                     </div>
                   </div>
@@ -169,7 +171,7 @@ const Contact = () => {
               <Card className="border border-gray-200 bg-gradient-to-br from-media-purple to-media-darkpurple text-white overflow-hidden">
                 <CardContent className="p-6 md:p-8">
                   <h3 className="text-xl font-semibold mb-2">Ready to boost your campaign performance?</h3>
-                  <p className="mb-4 opacity-90">I help businesses like yours achieve extraordinary results through strategic media buying.</p>
+                  <p className="mb-4 opacity-90">I help businesses achieve exceptional results through strategic media buying across multiple platforms and regions.</p>
                   <Button variant="secondary" size="sm">
                     Book a Strategy Call
                   </Button>
