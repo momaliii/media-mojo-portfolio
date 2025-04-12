@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card } from "@/components/ui/card";
 
@@ -124,6 +123,126 @@ const ClientLogos = () => {
       industry: "Cleaning Services",
       logo: "/lovable-uploads/b7ed208f-cfe3-4b04-86c7-42e1c56bd304.png", 
       alt: "Eya Clean Pro logo"
+    },
+    {
+      name: "Zakia Bagel Café",
+      industry: "Food & Beverage",
+      logo: "/lovable-uploads/5f72acce-6939-4407-a442-6aff6a48d019.png", 
+      alt: "Zakia Bagel Café logo"
+    },
+    {
+      name: "Hayah",
+      industry: "Healthcare",
+      logo: "/lovable-uploads/d2081756-59bf-4858-a77d-c4038c6f6c8c.png", 
+      alt: "Hayah logo"
+    },
+    {
+      name: "JORE Store",
+      industry: "Retail",
+      logo: "/lovable-uploads/f356bae6-c774-492b-91c7-77be0f1086e1.png", 
+      alt: "JORE Store logo"
+    },
+    {
+      name: "Imperial Dental Clinic",
+      industry: "Healthcare",
+      logo: "/lovable-uploads/ff3cd5e7-578b-4c18-ba7f-e66aae487f95.png", 
+      alt: "Imperial Dental Clinic logo"
+    },
+    {
+      name: "Lava Mattress & Furniture",
+      industry: "Furniture & Home",
+      logo: "/lovable-uploads/ebe75d66-8891-465f-8f49-812477d03dac.png", 
+      alt: "Lava Mattress & Furniture logo"
+    },
+    {
+      name: "Makeen & Raseen Law Firm",
+      industry: "Legal Services",
+      logo: "/lovable-uploads/ac48a933-56ae-401f-88f7-8242104e7dd5.png", 
+      alt: "Makeen & Raseen Law Firm logo"
+    },
+    {
+      name: "Mansour Furniture",
+      industry: "Furniture & Home",
+      logo: "/lovable-uploads/39d0e0ca-8542-4824-8013-3971ec999a22.png", 
+      alt: "Mansour Furniture logo"
+    },
+    {
+      name: "Maximus",
+      industry: "Construction",
+      logo: "/lovable-uploads/ea4c93fe-7cf8-48e5-a8fc-085b8ff57833.png", 
+      alt: "Maximus logo"
+    },
+    {
+      name: "MD By Dina Kadry",
+      industry: "Fashion & Design",
+      logo: "/lovable-uploads/90b6f75c-5af3-4d14-a7c7-97fdd4de046b.png", 
+      alt: "MD By Dina Kadry logo"
+    },
+    {
+      name: "Nagwa Alhaw Fashion Designer",
+      industry: "Fashion & Design",
+      logo: "/lovable-uploads/75a4b4c5-2ee2-4ea8-808a-145ba7559879.png", 
+      alt: "Nagwa Alhaw Fashion Designer logo"
+    },
+    {
+      name: "National Cruise",
+      industry: "Travel & Tourism",
+      logo: "/lovable-uploads/0d49ecc4-44a8-4377-97ee-82dcddd3e476.png", 
+      alt: "National Cruise logo"
+    },
+    {
+      name: "One All Digital Marketing",
+      industry: "Digital Marketing Agency",
+      logo: "/lovable-uploads/91961d95-a4b9-46ea-9f22-c25734d958ff.png", 
+      alt: "One All Digital Marketing logo"
+    },
+    {
+      name: "ReRim",
+      industry: "Fashion & Design",
+      logo: "/lovable-uploads/32188649-e4db-4d7a-b87f-25dd2c22a7b8.png", 
+      alt: "ReRim logo"
+    },
+    {
+      name: "The Moustache",
+      industry: "Fashion & Grooming",
+      logo: "/lovable-uploads/4adb96a2-fa10-4ca9-ab89-47e477a337b2.png", 
+      alt: "The Moustache logo"
+    },
+    {
+      name: "ThermaFlow",
+      industry: "Clean Air Solutions",
+      logo: "/lovable-uploads/b80727b7-66d8-4763-a17a-87ae06ce9ea1.png", 
+      alt: "ThermaFlow logo"
+    },
+    {
+      name: "Unimed Prime",
+      industry: "Healthcare",
+      logo: "/lovable-uploads/f57ede24-91e3-4267-acf6-a7492dae4b16.png", 
+      alt: "Unimed Prime logo"
+    },
+    {
+      name: "UVAS",
+      industry: "Technology",
+      logo: "/lovable-uploads/9635afa6-4771-41df-b9d6-37ce4da07275.png", 
+      alt: "UVAS logo"
+    },
+    {
+      name: "Velato Egypt",
+      industry: "Fashion & Style",
+      logo: "/lovable-uploads/c1b6c3d3-7347-4bc1-8da0-607ba8771784.png", 
+      alt: "Velato Egypt logo"
+    },
+    {
+      name: "WENT",
+      industry: "Digital Services",
+      logo: "/lovable-uploads/6fd01691-4155-4bed-a275-c0d34e018c17.png", 
+      alt: "WENT logo"
+    },
+    {
+      name: "YUCCA Fashion",
+      industry: "Fashion & Design Courses",
+      logo: "/lovable-uploads/ebcefa09-62bf-4d57-aece-498da3c3197d.png", 
+      alt: "YUCCA Fashion logo"
     }
   ];
 
