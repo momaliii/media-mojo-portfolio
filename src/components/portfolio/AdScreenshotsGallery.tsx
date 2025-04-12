@@ -24,6 +24,26 @@ const AdScreenshotsGallery: React.FC = () => {
       url: "/lovable-uploads/8a21f5c2-80de-458b-b6de-a6a618ee43b7.png",
       industry: "Fashion",
       client: "Clothing Brand"
+    },
+    {
+      url: "/lovable-uploads/26e6f270-fff7-432d-9153-8a8fd986c69c.png",
+      industry: "Cosmetics",
+      client: "Beauty Products"
+    },
+    {
+      url: "/lovable-uploads/92ae0ae7-b223-4d17-aceb-c8c87dbbe638.png",
+      industry: "Cosmetics",
+      client: "Makeup Brand"
+    },
+    {
+      url: "/lovable-uploads/2b19e181-a080-4cc8-9219-3086a5edd17c.png",
+      industry: "Cosmetics",
+      client: "Lip Products"
+    },
+    {
+      url: "/lovable-uploads/c8259e43-59cb-4ab5-a015-c4bd4f607f1f.png",
+      industry: "Cosmetics",
+      client: "Sunblock Products"
     }
   ];
 
