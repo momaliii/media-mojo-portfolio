@@ -36,5 +36,5 @@ export {
   miscClients
 };
 
-// Re-export the Client interface
-export { Client };
+// Re-export the Client interface with the correct syntax for isolatedModules
+export type { Client };

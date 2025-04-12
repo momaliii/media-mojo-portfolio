@@ -1,7 +1,9 @@
 
 // This file is kept for backward compatibility
 // Import from the new structure to maintain compatibility
-import { clientsData, Client } from "./clients";
+import { clientsData } from "./clients";
+import type { Client } from "./clients";
 
 // Re-export for backward compatibility
-export { clientsData, Client };
+export { clientsData };
+export type { Client };
