@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, ChevronRight, ChevronLeft } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { CaseStudy } from "@/data/caseStudies";
 
 interface CaseStudyCardProps {
@@ -11,14 +11,6 @@ interface CaseStudyCardProps {
 }
 
 const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
-  // State for image carousel
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  
-  // All images including main screenshot and additional screenshots
-  const allImages = study.screenshot 
-    ? [study.screenshot, ...(study.additionalScreenshots || [])]
-    : [];
-
   // Helper function to get pretty category name
   const getCategoryName = (category: string): string => {
     switch (category) {
@@ -31,15 +23,18 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
       default: return category;
     }
   };
-
-  const handlePrevImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrentImageIndex(prev => (prev === 0 ? allImages.length - 1 : prev - 1));
-  };
-
-  const handleNextImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrentImageIndex(prev => (prev === allImages.length - 1 ? 0 : prev + 1));
+  
+  // Get gradient class based on category
+  const getGradientClass = (category: string): string => {
+    switch (category) {
+      case "e-commerce": return "bg-gradient-to-br from-media-purple/80 to-media-pink/80";
+      case "b2b": return "bg-gradient-to-br from-media-blue/90 to-media-oceanblue/90";
+      case "apps": return "bg-gradient-to-br from-indigo-500/80 to-blue-500/80";
+      case "branding": return "bg-gradient-to-br from-emerald-500/80 to-media-oceanblue/80";
+      case "local": return "bg-gradient-to-br from-indigo-500/80 to-media-vibrantpurple/80";
+      case "travel": return "bg-gradient-to-br from-sky-500/80 to-media-blue/80";
+      default: return "bg-gradient-to-br from-gray-500/80 to-gray-700/80";
+    }
   };
 
   return (
@@ -47,55 +42,18 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
       className="overflow-hidden cursor-pointer border border-gray-200 hover:shadow-lg transition-all opacity-0 animate-fade-in-up"
       style={{ animationDelay: `${index * 100}ms` }}
     >
-      {allImages.length > 0 ? (
-        <div className="h-48 relative overflow-hidden">
-          <img 
-            src={allImages[currentImageIndex]} 
-            alt={study.title} 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-white text-opacity-50 font-bold text-xl transform rotate-[-30deg] select-none" style={{fontSize: '28px'}}>
-              CASE STUDY
-            </span>
-          </div>
-          {allImages.length > 1 && (
-            <>
-              <button 
-                onClick={handlePrevImage}
-                className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-1 hover:bg-black/70"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </button>
-              <button 
-                onClick={handleNextImage}
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-1 hover:bg-black/70"
-              >
-                <ChevronRight className="h-5 w-5" />
-              </button>
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-1">
-                {allImages.map((_, i) => (
-                  <span 
-                    key={i} 
-                    className={`block h-1.5 w-1.5 rounded-full ${i === currentImageIndex ? 'bg-white' : 'bg-white/50'}`}
-                  />
-                ))}
-              </div>
-            </>
-          )}
-          <div className="absolute bottom-4 left-4">
-            <Badge className="bg-white/90 text-gray-800 hover:bg-white/90">
-              {getCategoryName(study.category)}
-            </Badge>
-          </div>
+      <div className={`h-48 relative overflow-hidden ${getGradientClass(study.category)}`}>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-white text-opacity-50 font-bold text-xl transform rotate-[-30deg] select-none" style={{fontSize: '28px'}}>
+            CASE STUDY
+          </span>
         </div>
-      ) : (
-        <div className={`h-48 ${study.image} flex items-end p-4`}>
+        <div className="absolute bottom-4 left-4">
           <Badge className="bg-white/90 text-gray-800 hover:bg-white/90">
             {getCategoryName(study.category)}
           </Badge>
         </div>
-      )}
+      </div>
       <CardContent className="p-5">
         <div className="mb-2 text-sm text-gray-500">{study.client}</div>
         <h3 className="text-xl font-semibold mb-3">{study.title}</h3>
