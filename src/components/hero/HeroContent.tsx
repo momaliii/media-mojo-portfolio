@@ -1,7 +1,9 @@
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import HeroStats from "./HeroStats";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Linkedin } from "lucide-react";
 
 const HeroContent = () => {
   return (
@@ -24,6 +26,17 @@ const HeroContent = () => {
           <p className="mt-6 text-lg text-gray-600 md:pr-10">
             Senior Media Buyer with 5+ years of experience optimizing campaigns across Meta, LinkedIn, TikTok, Snapchat, Twitter, and Google Ads. Delivering measurable results and exceptional ROI.
           </p>
+          <div className="flex gap-2 mt-3">
+            <a 
+              href="https://www.linkedin.com/in/mhmdali02/"
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-media-purple hover:text-media-darkpurple transition-colors"
+            >
+              <Linkedin className="h-5 w-5 mr-1" />
+              <span className="text-sm font-medium">Connect on LinkedIn</span>
+            </a>
+          </div>
         </div>
       </div>
       
