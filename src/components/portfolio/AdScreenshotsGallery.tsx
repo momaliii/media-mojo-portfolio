@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { 
   Carousel, 
   CarouselContent, 
@@ -11,6 +11,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Eye, Lock, ShieldCheck } from "lucide-react";
 import { caseStudies } from "@/data/caseStudies";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 
 const AdScreenshotsGallery: React.FC = () => {
   // Prepare all screenshots with their industry info
@@ -93,11 +95,29 @@ const AdScreenshotsGallery: React.FC = () => {
     }
   ];
 
+  // Set up state for autoplay control
+  const [autoplayEnabled, setAutoplayEnabled] = useState(true);
+  const [api, setApi] = useState<any>(null);
+
   // Prevent right-clicking for download
   const handleContextMenu = (e: React.MouseEvent) => {
     e.preventDefault();
     return false;
   };
+
+  // Handle mouse interactions to pause/resume autoplay
+  const handleMouseEnter = useCallback(() => {
+    if (api && autoplayEnabled) {
+      api.plugins().autoplay.stop();
+    }
+  }, [api, autoplayEnabled]);
+
+  const handleMouseLeave = useCallback(() => {
+    if (api && autoplayEnabled) {
+      api.plugins().autoplay.reset();
+      api.plugins().autoplay.play();
+    }
+  }, [api, autoplayEnabled]);
 
   return (
     <div className="py-12 bg-gray-50">
@@ -116,16 +136,26 @@ const AdScreenshotsGallery: React.FC = () => {
               align: "start",
               loop: true,
             }}
+            plugins={[
+              Autoplay({
+                delay: 3000,
+                stopOnInteraction: false,
+                stopOnMouseEnter: true,
+              }),
+            ]}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            setApi={setApi}
             className="w-full"
           >
             <CarouselContent>
               {adCampaignScreenshots.map((screenshot, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 transition-transform duration-500 ease-in-out hover:scale-105">
                   <div className="p-1">
-                    <Card className="border border-gray-200 overflow-hidden">
+                    <Card className="border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300">
                       <CardContent className="p-0 relative">
                         <div 
-                          className="relative w-full h-64 md:h-72 lg:h-80 bg-gray-100"
+                          className="relative w-full h-64 md:h-72 lg:h-80 bg-gray-100 overflow-hidden"
                           onContextMenu={handleContextMenu}
                           style={{ userSelect: 'none' }}
                         >
@@ -133,7 +163,7 @@ const AdScreenshotsGallery: React.FC = () => {
                           <img 
                             src={screenshot.url} 
                             alt={`${screenshot.industry} Ad Campaign`}
-                            className="w-full h-full object-cover object-top opacity-95"
+                            className="w-full h-full object-cover object-top opacity-95 transition-transform duration-700 ease-in-out hover:scale-110"
                             draggable="false"
                             style={{ 
                               pointerEvents: 'none',
@@ -160,14 +190,14 @@ const AdScreenshotsGallery: React.FC = () => {
                           </div>
 
                           {/* Industry badge */}
-                          <div className="absolute bottom-4 left-4">
+                          <div className="absolute bottom-4 left-4 transform transition-transform duration-300 hover:translate-x-1">
                             <Badge className="bg-white/90 text-gray-800 hover:bg-white/80">
                               {screenshot.industry}
                             </Badge>
                           </div>
                           
                           {/* Client info */}
-                          <div className="absolute bottom-4 right-4">
+                          <div className="absolute bottom-4 right-4 transform transition-transform duration-300 hover:-translate-x-1">
                             <Badge variant="outline" className="bg-black/50 text-white border-none">
                               {screenshot.client}
                             </Badge>
