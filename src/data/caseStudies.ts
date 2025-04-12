@@ -42,11 +42,11 @@ export const caseStudies: CaseStudy[] = [
     image: "bg-gradient-to-br from-pink-500/80 to-red-400/80",
     client: "Beauty Brand",
     metrics: [
-      { label: "ROAS", value: "6.7x" },
+      { label: "ROAS", value: "8.6x" },
       { label: "Revenue", value: "$245K+" },
       { label: "AOV", value: "+32%" }
     ],
-    description: "Transformed an underperforming cosmetics brand with strategic paid media optimization, achieving 6.7x ROAS and increasing average order value by 32%."
+    description: "Transformed an underperforming cosmetics brand with strategic paid media optimization, achieving 8.6x ROAS and increasing average order value by 32%."
   },
   {
     title: "B2B Lead Generation",
