@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -18,6 +17,7 @@ const Portfolio = () => {
       title: "E-commerce Revenue Growth",
       category: "e-commerce",
       image: "bg-gradient-to-br from-media-purple/80 to-media-pink/80",
+      screenshot: "/lovable-uploads/097d6b1dd-bd01-420f-857d-b18eae7dbd5d.png",
       client: "Fashion Retailer",
       metrics: [
         { label: "ROAS", value: "8.2x" },
@@ -179,17 +179,43 @@ const CaseStudyCard = ({ study, index }: { study: any, index: number }) => {
       className="overflow-hidden cursor-pointer border border-gray-200 hover:shadow-lg transition-all opacity-0 animate-fade-in-up"
       style={{ animationDelay: `${index * 100}ms` }}
     >
-      <div className={`h-48 ${study.image} flex items-end p-4`}>
-        <Badge className="bg-white/90 text-gray-800 hover:bg-white/90">
-          {study.category === "e-commerce" ? "E-commerce" : 
-           study.category === "b2b" ? "B2B" :
-           study.category === "apps" ? "Mobile App" :
-           study.category === "branding" ? "Branding" :
-           study.category === "local" ? "Local Business" :
-           study.category === "travel" ? "Travel" : 
-           study.category}
-        </Badge>
-      </div>
+      {study.screenshot ? (
+        <div className="h-48 relative overflow-hidden">
+          <img 
+            src={study.screenshot} 
+            alt={study.title} 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-white text-opacity-50 font-bold text-xl transform rotate-[-30deg] select-none" style={{fontSize: '28px'}}>
+              CASE STUDY
+            </span>
+          </div>
+          <div className="absolute bottom-4 left-4">
+            <Badge className="bg-white/90 text-gray-800 hover:bg-white/90">
+              {study.category === "e-commerce" ? "E-commerce" : 
+              study.category === "b2b" ? "B2B" :
+              study.category === "apps" ? "Mobile App" :
+              study.category === "branding" ? "Branding" :
+              study.category === "local" ? "Local Business" :
+              study.category === "travel" ? "Travel" : 
+              study.category}
+            </Badge>
+          </div>
+        </div>
+      ) : (
+        <div className={`h-48 ${study.image} flex items-end p-4`}>
+          <Badge className="bg-white/90 text-gray-800 hover:bg-white/90">
+            {study.category === "e-commerce" ? "E-commerce" : 
+             study.category === "b2b" ? "B2B" :
+             study.category === "apps" ? "Mobile App" :
+             study.category === "branding" ? "Branding" :
+             study.category === "local" ? "Local Business" :
+             study.category === "travel" ? "Travel" : 
+             study.category}
+          </Badge>
+        </div>
+      )}
       <CardContent className="p-5">
         <div className="mb-2 text-sm text-gray-500">{study.client}</div>
         <h3 className="text-xl font-semibold mb-3">{study.title}</h3>
