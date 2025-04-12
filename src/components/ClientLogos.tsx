@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Card } from "@/components/ui/card";
 
@@ -243,6 +244,121 @@ const ClientLogos = () => {
       industry: "Fashion & Design Courses",
       logo: "/lovable-uploads/ebcefa09-62bf-4d57-aece-498da3c3197d.png", 
       alt: "YUCCA Fashion logo"
+    },
+    // New client logos from recent uploads
+    {
+      name: "Mashawi AlDeira",
+      industry: "Restaurant",
+      logo: "/lovable-uploads/ab72b0c3-1a2d-49aa-a266-48de9e13af09.png",
+      alt: "Mashawi AlDeira logo"
+    },
+    {
+      name: "AlBaraka Forum",
+      industry: "Islamic Economy",
+      logo: "/lovable-uploads/674d2167-6a40-4f1c-92ef-12fca8456a21.png",
+      alt: "AlBaraka Forum logo"
+    },
+    {
+      name: "Modern Suspended Ceilings",
+      industry: "Construction",
+      logo: "/lovable-uploads/77e77bcf-77f5-409b-8de0-e548544c58c7.png",
+      alt: "Modern Suspended Ceilings logo"
+    },
+    {
+      name: "Al Omran",
+      industry: "Construction & Real Estate",
+      logo: "/lovable-uploads/cbc5d1b5-721f-4e97-9dd4-b0abe510f6ca.png",
+      alt: "Al Omran logo"
+    },
+    {
+      name: "Petra Kitchens",
+      industry: "Kitchen & Home",
+      logo: "/lovable-uploads/064fe47f-6699-4aa9-9117-f41f5fb73078.png",
+      alt: "Petra Kitchens logo"
+    },
+    {
+      name: "Zain",
+      industry: "Telecommunications",
+      logo: "/lovable-uploads/f0327b2c-6e71-466a-95d8-12fadedced15.png",
+      alt: "Zain logo"
+    },
+    {
+      name: "Sebou Cart",
+      industry: "Retail & E-commerce",
+      logo: "/lovable-uploads/483619f5-996e-441e-acfc-abbcdcb9a7b6.png",
+      alt: "Sebou Cart logo"
+    },
+    {
+      name: "Al-Almia",
+      industry: "Manufacturing",
+      logo: "/lovable-uploads/9346e7a4-3664-492a-89e0-04c47bbf435b.png",
+      alt: "Al-Almia logo"
+    },
+    {
+      name: "Alfa Group",
+      industry: "Business & Investment",
+      logo: "/lovable-uploads/282b121d-7a15-460b-9496-e04ae979bea4.png",
+      alt: "Alfa Group logo"
+    },
+    {
+      name: "Borha Store",
+      industry: "Retail",
+      logo: "/lovable-uploads/97391abb-a9fa-43d6-9fc6-6384e00fc85f.png",
+      alt: "Borha Store logo"
+    },
+    {
+      name: "Baby Snafer",
+      industry: "Baby Products",
+      logo: "/lovable-uploads/e7da6e3c-66cf-4166-9955-98eb4097a88f.png",
+      alt: "Baby Snafer logo"
+    },
+    {
+      name: "Merhaba",
+      industry: "Services",
+      logo: "/lovable-uploads/fd652819-54ef-4faf-9f18-e4e8a9545f30.png",
+      alt: "Merhaba logo"
+    },
+    {
+      name: "Decorama",
+      industry: "Interior Design",
+      logo: "/lovable-uploads/66bc4854-9bfe-40ca-96f8-55d2cdd7f3e5.png",
+      alt: "Decorama logo"
+    },
+    {
+      name: "Bab Al Omda Furniture",
+      industry: "Furniture",
+      logo: "/lovable-uploads/d29a683b-6d60-437b-8506-ce6d5683a300.png",
+      alt: "Bab Al Omda Furniture logo"
+    },
+    {
+      name: "Almasria Steel",
+      industry: "Manufacturing & Industry",
+      logo: "/lovable-uploads/97d6b1dd-bd01-420f-857d-b18eae7dbd5d.png",
+      alt: "Almasria Steel logo"
+    },
+    {
+      name: "Bukhari Chicken",
+      industry: "Restaurant & Food",
+      logo: "/lovable-uploads/75cd841a-2575-4247-997b-df4334a23211.png",
+      alt: "Bukhari Chicken logo"
+    },
+    {
+      name: "Tabla and Oud Restaurant",
+      industry: "Restaurant & Entertainment",
+      logo: "/lovable-uploads/a5522709-399c-4526-a8c3-27c989b6a4b0.png",
+      alt: "Tabla and Oud Restaurant logo"
+    },
+    {
+      name: "MAS Mattresses",
+      industry: "Furniture & Bedding",
+      logo: "/lovable-uploads/b2f7bf86-8ae2-4019-8a6a-e360aa8f18d9.png",
+      alt: "MAS Mattresses logo"
+    },
+    {
+      name: "Karma Marketing Agency",
+      industry: "Marketing & Advertising",
+      logo: "/lovable-uploads/64c102de-0d99-4fd5-8306-3f34cc9a99cb.png",
+      alt: "Karma Marketing Agency logo"
     }
   ];
 
