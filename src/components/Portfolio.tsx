@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { caseStudies } from "@/data/caseStudies";
 import PortfolioHeader from "@/components/portfolio/PortfolioHeader";
 import FilterTabs from "@/components/portfolio/FilterTabs";
+import AdScreenshotsGallery from "@/components/portfolio/AdScreenshotsGallery";
 
 const Portfolio = () => {
   const [filter, setFilter] = useState("all");
@@ -31,6 +32,9 @@ const Portfolio = () => {
           </Button>
         </div>
       </div>
+      
+      {/* Add the Ad Screenshots Gallery section */}
+      <AdScreenshotsGallery />
     </section>
   );
 };
