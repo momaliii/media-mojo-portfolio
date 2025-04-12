@@ -13,11 +13,19 @@ import { Eye, Lock, ShieldCheck } from "lucide-react";
 import { caseStudies } from "@/data/caseStudies";
 
 const AdScreenshotsGallery: React.FC = () => {
-  // Prepare all screenshots with their industry info (without actual URLs)
-  const allScreenshots = caseStudies.map(study => ({
-    industry: study.industry || study.category,
-    client: study.client
-  }));
+  // Prepare all screenshots with their industry info
+  const adCampaignScreenshots = [
+    {
+      url: "/lovable-uploads/156fb6fb-7127-4fc4-958a-cc7f67e44deb.png",
+      industry: "Fashion",
+      client: "eCommerce Store"
+    },
+    {
+      url: "/lovable-uploads/8a21f5c2-80de-458b-b6de-a6a618ee43b7.png",
+      industry: "Fashion",
+      client: "Clothing Brand"
+    }
+  ];
 
   // Prevent right-clicking for download
   const handleContextMenu = (e: React.MouseEvent) => {
@@ -45,7 +53,7 @@ const AdScreenshotsGallery: React.FC = () => {
             className="w-full"
           >
             <CarouselContent>
-              {allScreenshots.map((screenshot, index) => (
+              {adCampaignScreenshots.map((screenshot, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                   <div className="p-1">
                     <Card className="border border-gray-200 overflow-hidden">
@@ -55,10 +63,20 @@ const AdScreenshotsGallery: React.FC = () => {
                           onContextMenu={handleContextMenu}
                           style={{ userSelect: 'none' }}
                         >
-                          {/* Placeholder area for new images */}
-                          <div className="w-full h-full flex items-center justify-center bg-gray-200">
-                            <p className="text-gray-500 font-medium">Image placeholder</p>
-                          </div>
+                          {/* Facebook Ads Manager screenshot */}
+                          <img 
+                            src={screenshot.url} 
+                            alt={`${screenshot.industry} Ad Campaign`}
+                            className="w-full h-full object-cover object-top opacity-95"
+                            draggable="false"
+                            style={{ 
+                              pointerEvents: 'none',
+                              userSelect: 'none',
+                              MozUserSelect: 'none',
+                              WebkitUserSelect: 'none',
+                              msUserSelect: 'none'
+                            }}
+                          />
                           
                           {/* Diagonal watermark */}
                           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
