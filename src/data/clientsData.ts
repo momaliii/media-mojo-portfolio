@@ -255,12 +255,7 @@ export const clientsData: Client[] = [
     logo: "/lovable-uploads/ab72b0c3-1a2d-49aa-a266-48de9e13af09.png",
     alt: "Mashawi AlDeira logo"
   },
-  {
-    name: "AlBaraka Forum",
-    industry: "Islamic Economy",
-    logo: "/lovable-uploads/674d2167-6a40-4f1c-92ef-12fca8456a21.png",
-    alt: "AlBaraka Forum logo"
-  },
+  // Removed duplicate AlBaraka Forum entry
   {
     name: "Modern Suspended Ceilings",
     industry: "Construction",
@@ -345,11 +340,12 @@ export const clientsData: Client[] = [
     logo: "/lovable-uploads/75cd841a-2575-4247-997b-df4334a23211.png",
     alt: "Bukhari Chicken logo"
   },
+  // Renamed from "Tabla and Oud Restaurant" to avoid duplicate with "Tabla and Oud Lounge"
   {
-    name: "Tabla and Oud Restaurant",
+    name: "Tabla and Oud Restaurant & Lounge",
     industry: "Restaurant & Entertainment",
     logo: "/lovable-uploads/a5522709-399c-4526-a8c3-27c989b6a4b0.png",
-    alt: "Tabla and Oud Restaurant logo"
+    alt: "Tabla and Oud Restaurant & Lounge logo"
   },
   {
     name: "MAS Mattresses",
