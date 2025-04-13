@@ -46,7 +46,7 @@ const Portfolio = () => {
         </div>
       </div>
       
-      {/* Add the Ad Screenshots Gallery section with an id for scrolling */}
+      {/* Ad Screenshots Gallery section with an id for scrolling */}
       <div id="ad-campaign-showcase" className="scroll-mt-24">
         <AdScreenshotsGallery />
       </div>

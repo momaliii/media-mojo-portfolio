@@ -3,7 +3,7 @@ export interface AdScreenshot {
   url: string;
   industry: string;
   client: string;
-  platform?: "LinkedIn" | "Facebook" | "Instagram" | "Analytics" | "META";
+  platform?: "LinkedIn" | "Facebook" | "Instagram" | "Analytics" | "META" | "Lightfunnel";
   details?: string;
 }
 
@@ -15,6 +15,13 @@ export const adCampaignScreenshots: AdScreenshot[] = [
     client: "Cosmetics Store",
     platform: "META",
     details: "EGP 6.77M Revenue | 18,639 Orders"
+  },
+  {
+    url: "/lovable-uploads/04d1a30f-45d2-4e23-aa75-648fd59db8a2.png",
+    industry: "E-commerce",
+    client: "E-commerce Store",
+    platform: "Lightfunnel",
+    details: "EGP 3.7M Sales | 15,644 Orders | 278K Visitors"
   },
   {
     url: "/lovable-uploads/156fb6fb-7127-4fc4-958a-cc7f67e44deb.png",

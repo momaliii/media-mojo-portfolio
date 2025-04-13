@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Linkedin, LineChart, Facebook } from "lucide-react";
+import { Linkedin, LineChart, Facebook, BarChart } from "lucide-react";
 
 const AdGalleryHeader: React.FC = () => {
   return (
@@ -33,6 +33,13 @@ const AdGalleryHeader: React.FC = () => {
           <LineChart className="text-[#34A853]" size={20} />
           <span className="font-medium text-gray-700">
             Real campaign analytics with +3.66M EGP in revenue
+          </span>
+        </div>
+        
+        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-4 rounded-lg inline-flex items-center gap-2 border border-indigo-100 shadow-sm hover:shadow-md transition-shadow">
+          <BarChart className="text-[#6366f1]" size={20} />
+          <span className="font-medium text-gray-700">
+            Lightfunnel campaigns with +3.7M EGP in sales and 15,644 orders
           </span>
         </div>
       </div>

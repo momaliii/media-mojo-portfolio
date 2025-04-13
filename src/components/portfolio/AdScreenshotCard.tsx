@@ -2,7 +2,7 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Lock, Linkedin, HandHeart, LineChart, Facebook } from "lucide-react";
+import { Lock, Linkedin, HandHeart, LineChart, Facebook, BarChart } from "lucide-react";
 import { AdScreenshot } from "@/data/adScreenshots";
 
 interface AdScreenshotCardProps {
@@ -75,6 +75,13 @@ const AdScreenshotCard: React.FC<AdScreenshotCardProps> = ({
             <div className="absolute top-2 left-2 bg-[#34A853] text-white rounded-md px-2 py-1 text-xs flex items-center shadow-md animate-fade-in">
               <LineChart size={14} className="mr-1" />
               Analytics
+            </div>
+          )}
+          
+          {screenshot.platform === "Lightfunnel" && (
+            <div className="absolute top-2 left-2 bg-[#6366f1] text-white rounded-md px-2 py-1 text-xs flex items-center shadow-md animate-fade-in">
+              <BarChart size={14} className="mr-1" />
+              Lightfunnel
             </div>
           )}
           
