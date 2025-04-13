@@ -3,6 +3,7 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { Client } from "@/data/clientsData";
+import { Image } from "lucide-react";
 
 type ClientCardProps = {
   client: Client;
@@ -16,11 +17,17 @@ const ClientCard: React.FC<ClientCardProps> = ({ client }) => {
     >
       <Card className="p-5 flex flex-col items-center justify-center border border-gray-200 hover:border-media-purple/50 transition-all hover:shadow-lg h-full">
         <div className="w-24 h-24 flex items-center justify-center mb-4 overflow-hidden">
-          <img 
-            src={client.logo} 
-            alt={client.alt} 
-            className="max-w-full max-h-full object-contain" 
-          />
+          {client.logo ? (
+            <img 
+              src={client.logo} 
+              alt={client.alt} 
+              className="max-w-full max-h-full object-contain" 
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-md">
+              <Image className="w-8 h-8 text-gray-400" />
+            </div>
+          )}
         </div>
         <div className="text-center">
           <p className="font-medium text-sm mb-1">{client.name}</p>
