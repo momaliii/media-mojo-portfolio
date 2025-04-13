@@ -2,7 +2,7 @@
 import React from "react";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { Client } from "@/data/clientsData";
+import { Client } from "@/data/clients/types";
 import { Image } from "lucide-react";
 
 type ClientCardProps = {
