@@ -2,7 +2,7 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Lock, Linkedin, HandHeart, LineChart } from "lucide-react";
+import { Lock, Linkedin, HandHeart, LineChart, Facebook } from "lucide-react";
 import { AdScreenshot } from "@/data/adScreenshots";
 
 interface AdScreenshotCardProps {
@@ -60,6 +60,13 @@ const AdScreenshotCard: React.FC<AdScreenshotCardProps> = ({
             <div className="absolute top-2 left-2 bg-[#0A66C2] text-white rounded-md px-2 py-1 text-xs flex items-center">
               <Linkedin size={14} className="mr-1" />
               LinkedIn
+            </div>
+          )}
+          
+          {screenshot.platform === "META" && (
+            <div className="absolute top-2 left-2 bg-[#1877F2] text-white rounded-md px-2 py-1 text-xs flex items-center">
+              <Facebook size={14} className="mr-1" />
+              META ADS
             </div>
           )}
           

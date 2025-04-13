@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Linkedin, LineChart } from "lucide-react";
+import { Linkedin, LineChart, Facebook } from "lucide-react";
 
 const AdGalleryHeader: React.FC = () => {
   return (
@@ -16,6 +16,13 @@ const AdGalleryHeader: React.FC = () => {
           <Linkedin className="text-[#0A66C2]" size={20} />
           <span className="font-medium text-gray-700">
             LinkedIn campaigns for non-profit organizations across the Middle East
+          </span>
+        </div>
+        
+        <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg inline-flex items-center gap-2 border border-blue-200">
+          <Facebook className="text-[#1877F2]" size={20} />
+          <span className="font-medium text-gray-700">
+            META ADS with +6.77M EGP in revenue and 18,639 orders
           </span>
         </div>
         

@@ -1,15 +1,21 @@
-
 // Define types for ad screenshots
 export interface AdScreenshot {
   url: string;
   industry: string;
   client: string;
-  platform?: "LinkedIn" | "Facebook" | "Instagram" | "Analytics";
+  platform?: "LinkedIn" | "Facebook" | "Instagram" | "Analytics" | "META";
   details?: string;
 }
 
 // Ad screenshots data
 export const adCampaignScreenshots: AdScreenshot[] = [
+  {
+    url: "/lovable-uploads/d0480bb8-df6e-4aab-936f-643572f852cd.png",
+    industry: "Cosmetics",
+    client: "Cosmetics Store",
+    platform: "META",
+    details: "EGP 6.77M Revenue | 18,639 Orders"
+  },
   {
     url: "/lovable-uploads/156fb6fb-7127-4fc4-958a-cc7f67e44deb.png",
     industry: "Fashion",
