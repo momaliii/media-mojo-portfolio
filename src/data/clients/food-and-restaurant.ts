@@ -17,19 +17,19 @@ export const foodAndRestaurantClients: Client[] = [
   {
     name: "AH Together",
     industry: "Food & Beverage",
-    logo: "",
+    logo: "public/lovable-uploads/9346e7a4-3664-492a-89e0-04c47bbf435b.png",
     alt: "AH Together logo"
   },
   {
     name: "Sports Grill Burger Bar",
     industry: "Restaurant",
-    logo: "",
+    logo: "public/lovable-uploads/4adb96a2-fa10-4ca9-ab89-47e477a337b2.png",
     alt: "Sports Grill Burger Bar logo"
   },
   {
     name: "Awlad Khatab",
     industry: "Food & Restaurant",
-    logo: "",
+    logo: "public/lovable-uploads/483619f5-996e-441e-acfc-abbcdcb9a7b6.png",
     alt: "Awlad Khatab logo"
   },
   {
