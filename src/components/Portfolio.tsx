@@ -39,7 +39,7 @@ const Portfolio = () => {
         />
         
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg" className="inline-flex items-center">
+          <Button variant="outline" size="lg" className="inline-flex items-center hover:bg-media-purple/10 transition-colors">
             View More Case Studies
             <ArrowUpRight className="ml-2 h-4 w-4" />
           </Button>
@@ -47,7 +47,7 @@ const Portfolio = () => {
       </div>
       
       {/* Add the Ad Screenshots Gallery section with an id for scrolling */}
-      <div id="ad-campaign-showcase">
+      <div id="ad-campaign-showcase" className="scroll-mt-24">
         <AdScreenshotsGallery />
       </div>
     </section>

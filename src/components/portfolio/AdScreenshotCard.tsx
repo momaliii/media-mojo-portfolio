@@ -27,6 +27,7 @@ const AdScreenshotCard: React.FC<AdScreenshotCardProps> = ({
             alt={`${screenshot.industry} Ad Campaign`}
             className="w-full h-full object-cover object-top opacity-95 transition-transform duration-700 ease-in-out hover:scale-110"
             draggable="false"
+            loading="lazy"
             style={{ 
               pointerEvents: 'none',
               userSelect: 'none',
@@ -50,42 +51,42 @@ const AdScreenshotCard: React.FC<AdScreenshotCardProps> = ({
           </div>
 
           <div className="absolute bottom-4 left-4 transform transition-transform duration-300 hover:translate-x-1">
-            <Badge className="bg-white/90 text-gray-800 hover:bg-white/80 flex items-center gap-1">
+            <Badge className="bg-white/90 text-gray-800 hover:bg-white/80 flex items-center gap-1 shadow-sm">
               {screenshot.industry === "Non-Profit" && <HandHeart className="w-3 h-3" />}
               {screenshot.industry}
             </Badge>
           </div>
           
           {screenshot.platform === "LinkedIn" && (
-            <div className="absolute top-2 left-2 bg-[#0A66C2] text-white rounded-md px-2 py-1 text-xs flex items-center">
+            <div className="absolute top-2 left-2 bg-[#0A66C2] text-white rounded-md px-2 py-1 text-xs flex items-center shadow-md animate-fade-in">
               <Linkedin size={14} className="mr-1" />
               LinkedIn
             </div>
           )}
           
           {screenshot.platform === "META" && (
-            <div className="absolute top-2 left-2 bg-[#1877F2] text-white rounded-md px-2 py-1 text-xs flex items-center">
+            <div className="absolute top-2 left-2 bg-[#1877F2] text-white rounded-md px-2 py-1 text-xs flex items-center shadow-md animate-fade-in">
               <Facebook size={14} className="mr-1" />
               META ADS
             </div>
           )}
           
           {screenshot.platform === "Analytics" && (
-            <div className="absolute top-2 left-2 bg-[#34A853] text-white rounded-md px-2 py-1 text-xs flex items-center">
+            <div className="absolute top-2 left-2 bg-[#34A853] text-white rounded-md px-2 py-1 text-xs flex items-center shadow-md animate-fade-in">
               <LineChart size={14} className="mr-1" />
               Analytics
             </div>
           )}
           
           <div className="absolute bottom-4 right-4 transform transition-transform duration-300 hover:-translate-x-1">
-            <Badge variant="outline" className="bg-black/50 text-white border-none">
+            <Badge variant="outline" className="bg-black/50 text-white border-none shadow-sm">
               {screenshot.client}
             </Badge>
           </div>
           
           {screenshot.details && (
             <div className="absolute bottom-12 right-4">
-              <Badge variant="outline" className="bg-blue-500/70 text-white border-none">
+              <Badge variant="outline" className="bg-blue-500/70 text-white border-none shadow-sm animate-fade-in">
                 {screenshot.details}
               </Badge>
             </div>
