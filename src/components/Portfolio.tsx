@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
 import { caseStudies } from "@/data/caseStudies";
@@ -13,19 +13,6 @@ const Portfolio = () => {
   const filteredCaseStudies = filter === "all" 
     ? caseStudies 
     : caseStudies.filter(study => study.category === filter);
-
-  // Highlight cosmetics case study initially
-  useEffect(() => {
-    // Scroll to the gallery section with a small delay to ensure it's rendered
-    const timer = setTimeout(() => {
-      const element = document.getElementById('ad-campaign-showcase');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 500);
-    
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <section id="portfolio" className="section-padding bg-gray-50">

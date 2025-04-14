@@ -3,10 +3,16 @@ import React, { useState } from "react";
 import { clientsData } from "@/data/clients";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Filter } from "lucide-react";
 import { Separator } from "./ui/separator";
 import { cn } from "@/lib/utils";
 import ClientCard from "./client-logos/ClientCard";
+import { 
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger 
+} from "./ui/dropdown-menu";
 import { 
   Carousel, 
   CarouselContent, 
@@ -14,6 +20,10 @@ import {
   CarouselPrevious,
   CarouselNext
 } from "./ui/carousel";
+import { 
+  ToggleGroup, 
+  ToggleGroupItem 
+} from "./ui/toggle-group";
 
 const ClientLogos = () => {
   // State for filters and display options
@@ -38,65 +48,63 @@ const ClientLogos = () => {
     : filteredClients.slice(0, initialDisplayCount);
 
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-gray-50" id="clients">
+    <section className="py-12 bg-gradient-to-b from-white to-gray-50" id="clients">
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="mb-12 text-center">
+        <div className="mb-8 text-center">
           <span className="bg-media-purple/10 text-media-purple px-4 py-1 rounded-full text-sm font-medium">
             Our Clients
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-4 mb-4 tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-bold mt-4 mb-2 tracking-tight">
             Trusted by <span className="text-media-purple">Industry Leaders</span>
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-600 max-w-2xl mx-auto mb-6">
             Partnering with businesses across various sectors to drive meaningful results
           </p>
         </div>
         
-        {/* View Mode Toggle */}
-        <div className="flex justify-center gap-4 mb-8">
-          <Button
-            variant={viewMode === 'grid' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setViewMode('grid')}
-            className="rounded-full"
-          >
-            Grid View
-          </Button>
-          <Button
-            variant={viewMode === 'carousel' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setViewMode('carousel')}
-            className="rounded-full"
-          >
-            Carousel View
-          </Button>
+        <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
+          {/* Compact Industry Filter Dropdown */}
+          <div className="flex items-center">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" className="flex items-center gap-2">
+                  <Filter className="h-4 w-4" />
+                  <span>{selectedIndustry || 'All Industries'}</span>
+                  <ChevronDown className="h-3 w-3 opacity-50" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-56 max-h-80 overflow-y-auto">
+                <DropdownMenuItem 
+                  onClick={() => setSelectedIndustry(null)}
+                  className={cn(selectedIndustry === null ? "bg-muted" : "")}
+                >
+                  All Industries
+                </DropdownMenuItem>
+                {uniqueIndustries.map((industry) => (
+                  <DropdownMenuItem
+                    key={industry}
+                    onClick={() => setSelectedIndustry(industry)}
+                    className={cn(selectedIndustry === industry ? "bg-muted" : "")}
+                  >
+                    {industry}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          {/* View Mode Toggle */}
+          <ToggleGroup type="single" value={viewMode} onValueChange={(value) => value && setViewMode(value as 'grid' | 'carousel')}>
+            <ToggleGroupItem value="grid" aria-label="Grid view">
+              Grid
+            </ToggleGroupItem>
+            <ToggleGroupItem value="carousel" aria-label="Carousel view">
+              Carousel
+            </ToggleGroupItem>
+          </ToggleGroup>
         </div>
         
-        {/* Industry Filters */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
-          <Button
-            variant={selectedIndustry === null ? "default" : "outline"}
-            size="sm"
-            onClick={() => setSelectedIndustry(null)}
-            className="rounded-full"
-          >
-            All Industries
-          </Button>
-          
-          {uniqueIndustries.map((industry) => (
-            <Button
-              key={industry}
-              variant={selectedIndustry === industry ? "default" : "outline"}
-              size="sm"
-              onClick={() => setSelectedIndustry(industry)}
-              className="rounded-full text-sm"
-            >
-              {industry}
-            </Button>
-          ))}
-        </div>
-        
-        <Separator className="my-8 max-w-4xl mx-auto opacity-30" />
+        <Separator className="my-6 max-w-4xl mx-auto opacity-30" />
         
         {/* Grid View */}
         {viewMode === 'grid' && (
@@ -134,7 +142,7 @@ const ClientLogos = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <div className="flex justify-center mt-8">
+              <div className="flex justify-center mt-6">
                 <CarouselPrevious className="relative static transform-none mx-2" />
                 <CarouselNext className="relative static transform-none mx-2" />
               </div>
@@ -144,13 +152,13 @@ const ClientLogos = () => {
         
         {/* Show More Button */}
         {filteredClients.length > initialDisplayCount && (
-          <div className="mt-12 text-center">
+          <div className="mt-10 text-center">
             <Button
               variant="outline"
-              size="lg"
+              size="sm"
               onClick={() => setExpanded(!expanded)}
               className={cn(
-                "rounded-full border-2 transition-all duration-300",
+                "rounded-full border transition-all duration-300",
                 expanded ? "border-gray-300" : "border-media-purple"
               )}
             >
