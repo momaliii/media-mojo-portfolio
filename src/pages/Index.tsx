@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Portfolio from "@/components/Portfolio";
+import ClientLogos from "@/components/ClientLogos";
 import Platforms from "@/components/Platforms";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -50,6 +51,7 @@ const Index = () => {
         <Hero />
         <About />
         <Portfolio />
+        <ClientLogos />
         <Platforms />
         <Contact />
       </main>
