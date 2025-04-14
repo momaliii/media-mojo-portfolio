@@ -6,11 +6,20 @@ import { Button } from "./ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Separator } from "./ui/separator";
 import { cn } from "@/lib/utils";
+import ClientCard from "./client-logos/ClientCard";
+import { 
+  Carousel, 
+  CarouselContent, 
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext
+} from "./ui/carousel";
 
 const ClientLogos = () => {
-  // State for filters and search
+  // State for filters and display options
   const [selectedIndustry, setSelectedIndustry] = useState<string | null>(null);
   const [expanded, setExpanded] = useState(false);
+  const [viewMode, setViewMode] = useState<'grid' | 'carousel'>('grid');
   
   // Get unique industries (sorted alphabetically)
   const uniqueIndustries = Array.from(
@@ -23,25 +32,47 @@ const ClientLogos = () => {
     : clientsData;
 
   // Initial display count and total for "see more" functionality
-  const initialDisplayCount = 10;
+  const initialDisplayCount = 8;
   const displayedClients = expanded 
     ? filteredClients 
     : filteredClients.slice(0, initialDisplayCount);
 
   return (
-    <section className="py-16 bg-white" id="clients">
+    <section className="py-16 bg-gradient-to-b from-white to-gray-50" id="clients">
       <div className="container mx-auto px-4 max-w-6xl">
-        {/* Modern Header */}
         <div className="mb-12 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
+          <span className="bg-media-purple/10 text-media-purple px-4 py-1 rounded-full text-sm font-medium">
+            Our Clients
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold mt-4 mb-4 tracking-tight">
             Trusted by <span className="text-media-purple">Industry Leaders</span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Partnering with businesses across different sectors to drive results
+            Partnering with businesses across various sectors to drive meaningful results
           </p>
         </div>
         
-        {/* Modern Industry Filters */}
+        {/* View Mode Toggle */}
+        <div className="flex justify-center gap-4 mb-8">
+          <Button
+            variant={viewMode === 'grid' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setViewMode('grid')}
+            className="rounded-full"
+          >
+            Grid View
+          </Button>
+          <Button
+            variant={viewMode === 'carousel' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setViewMode('carousel')}
+            className="rounded-full"
+          >
+            Carousel View
+          </Button>
+        </div>
+        
+        {/* Industry Filters */}
         <div className="flex flex-wrap justify-center gap-2 mb-10">
           <Button
             variant={selectedIndustry === null ? "default" : "outline"}
@@ -49,7 +80,7 @@ const ClientLogos = () => {
             onClick={() => setSelectedIndustry(null)}
             className="rounded-full"
           >
-            All
+            All Industries
           </Button>
           
           {uniqueIndustries.map((industry) => (
@@ -67,40 +98,49 @@ const ClientLogos = () => {
         
         <Separator className="my-8 max-w-4xl mx-auto opacity-30" />
         
-        {/* Modern Client Logo Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 max-w-4xl mx-auto">
-          <AnimatePresence>
-            {displayedClients.map((client, index) => (
-              <motion.div
-                key={client.name + index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ delay: Math.min(index * 0.05, 0.5) }}
-                className="flex flex-col items-center justify-center h-24"
-              >
-                <div className="h-16 flex items-center justify-center mb-2 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                  {client.logo ? (
-                    <img 
-                      src={client.logo} 
-                      alt={client.alt} 
-                      className="max-h-full max-w-full object-contain" 
-                    />
-                  ) : (
-                    <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center">
-                      <span className="text-lg font-medium text-gray-400">
-                        {client.name.charAt(0)}
-                      </span>
-                    </div>
-                  )}
-                </div>
-                <p className="text-xs text-center font-medium text-gray-500 truncate w-full">
-                  {client.name}
-                </p>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </div>
+        {/* Grid View */}
+        {viewMode === 'grid' && (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            <AnimatePresence>
+              {displayedClients.map((client, index) => (
+                <motion.div
+                  key={client.name + index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ delay: Math.min(index * 0.05, 0.5) }}
+                >
+                  <ClientCard client={client} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+        )}
+        
+        {/* Carousel View */}
+        {viewMode === 'carousel' && (
+          <div className="max-w-5xl mx-auto">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent>
+                {displayedClients.map((client, index) => (
+                  <CarouselItem key={index} className="basis-1/2 md:basis-1/3 lg:basis-1/4 pl-4">
+                    <ClientCard client={client} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="flex justify-center mt-8">
+                <CarouselPrevious className="relative static transform-none mx-2" />
+                <CarouselNext className="relative static transform-none mx-2" />
+              </div>
+            </Carousel>
+          </div>
+        )}
         
         {/* Show More Button */}
         {filteredClients.length > initialDisplayCount && (
