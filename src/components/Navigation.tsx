@@ -1,22 +1,41 @@
 
 import React, { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
 
-  // Handle scroll effect
+  // Handle scroll effect and active section
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
+      
+      // Determine if scrolled for styling
       if (scrollPosition > 20) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
+      
+      // Determine active section for menu highlighting
+      const sections = ["hero", "about", "services", "portfolio", "contact"];
+      let currentSection = "hero";
+      
+      sections.forEach(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            currentSection = section;
+          }
+        }
+      });
+      
+      setActiveSection(currentSection);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -73,14 +92,22 @@ const Navigation = () => {
               <motion.button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="text-gray-700 hover:text-media-purple transition-colors capitalize relative group"
+                className={`relative group ${
+                  activeSection === item 
+                    ? "text-media-purple font-medium" 
+                    : "text-gray-700 hover:text-media-purple"
+                } transition-colors capitalize`}
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 whileHover={{ scale: 1.05 }}
               >
                 {item}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-media-purple group-hover:w-full transition-all duration-300"></span>
+                <span 
+                  className={`absolute -bottom-1 left-0 h-0.5 bg-media-purple transition-all duration-300 ${
+                    activeSection === item ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                ></span>
               </motion.button>
             ))}
             <motion.div
@@ -92,7 +119,7 @@ const Navigation = () => {
                 onClick={() => scrollToSection("contact")}
                 className="bg-media-purple hover:bg-media-darkpurple text-white shadow-md hover:shadow-lg transition-all"
               >
-                Let's Talk
+                Let's Talk <ChevronRight className="ml-1 h-4 w-4" />
               </Button>
             </motion.div>
           </div>
@@ -121,12 +148,16 @@ const Navigation = () => {
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="flex flex-col space-y-4 bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
+              <div className="flex flex-col space-y-4 bg-white/90 backdrop-blur-sm p-4 rounded-xl shadow-sm">
                 {["about", "services", "portfolio", "contact"].map((item, index) => (
                   <motion.button
                     key={item}
                     onClick={() => scrollToSection(item)}
-                    className="text-gray-800 hover:text-media-purple transition-colors py-2 capitalize text-left pl-2 hover:bg-gray-50 rounded-md"
+                    className={`text-left pl-2 py-2 rounded-md transition-colors capitalize ${
+                      activeSection === item 
+                        ? "text-media-purple font-medium bg-media-purple/10" 
+                        : "text-gray-800 hover:text-media-purple hover:bg-gray-50"
+                    }`}
                     initial={{ x: -20, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: index * 0.1, duration: 0.3 }}
@@ -141,9 +172,10 @@ const Navigation = () => {
                 >
                   <Button
                     onClick={() => scrollToSection("contact")}
-                    className="bg-media-purple hover:bg-media-darkpurple text-white w-full shadow-md"
+                    className="bg-media-purple hover:bg-media-darkpurple text-white w-full shadow-md flex items-center justify-center"
                   >
-                    Let's Talk
+                    <span>Let's Talk</span>
+                    <ChevronRight className="ml-1 h-4 w-4" />
                   </Button>
                 </motion.div>
               </div>
