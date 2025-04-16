@@ -12,8 +12,8 @@ const HeroVisualization = () => {
   const isMobile = useIsMobile();
   
   return (
-    <div className="relative h-auto min-h-[350px] md:h-[500px]">
-      <div className={`grid ${isMobile ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-2 md:grid-cols-3'} gap-4 h-full`}>
+    <div className="relative h-auto py-4">
+      <div className={`grid ${isMobile ? 'grid-cols-1 gap-5' : 'grid-cols-2 md:grid-cols-3 gap-5 lg:gap-6'} h-full`}>
         <PerformanceCard />
         <CPCCard />
         <BudgetCard />
