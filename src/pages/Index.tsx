@@ -8,6 +8,7 @@ import ClientLogos from "@/components/ClientLogos";
 import Platforms from "@/components/Platforms";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import Services from "@/components/Services";
 
 const Index = () => {
   useEffect(() => {
@@ -50,6 +51,7 @@ const Index = () => {
       <main>
         <Hero />
         <About />
+        <Services />
         <Portfolio />
         <ClientLogos />
         <Platforms />

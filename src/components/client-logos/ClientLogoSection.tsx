@@ -10,18 +10,18 @@ type ClientLogoSectionProps = {
 const ClientLogoSection: React.FC<ClientLogoSectionProps> = ({ title, description }) => {
   return (
     <motion.div 
-      className="text-center mb-10"
+      className="text-center mb-10 max-w-3xl mx-auto"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <span className="inline-block py-1 px-3 rounded-full bg-media-purple/10 text-media-purple font-medium text-sm mb-4">
+      <span className="inline-block py-1.5 px-4 rounded-full bg-gradient-to-r from-media-purple/20 to-media-oceanblue/20 text-media-purple font-medium text-sm mb-4">
         Our Clients
       </span>
-      <h2 className="text-3xl md:text-4xl font-bold mb-3 tracking-tight">
+      <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
         {title}
       </h2>
-      <p className="text-gray-600 max-w-2xl mx-auto">
+      <p className="text-gray-600 mx-auto">
         {description}
       </p>
       
