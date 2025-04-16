@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { 
   Select, 
   SelectContent, 
@@ -7,9 +7,10 @@ import {
   SelectTrigger, 
   SelectValue 
 } from "@/components/ui/select";
-import { Filter, Search, GridIcon, LayoutGrid } from "lucide-react";
+import { Filter, Search, GridIcon, LayoutList } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 type FilterSectionProps = {
   industries: string[];
@@ -31,57 +32,46 @@ const FilterSection: React.FC<FilterSectionProps> = ({
   onViewModeChange
 }) => {
   return (
-    <div className="flex flex-col lg:flex-row gap-4 justify-between mb-8">
-      <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-        <div className="flex items-center gap-2">
-          <Filter size={16} className="text-media-purple" />
-          <span className="text-sm font-medium whitespace-nowrap">Filter by:</span>
+    <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
+      <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+        <div className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-md">
+          <Filter size={14} className="text-media-purple" />
+          <Select value={selectedIndustry} onValueChange={onIndustryChange}>
+            <SelectTrigger className="border-0 bg-transparent w-[160px] h-7 p-0 hover:bg-transparent focus:ring-0 focus:ring-offset-0">
+              <SelectValue placeholder="All Industries" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Industries</SelectItem>
+              {industries.map((industry) => (
+                <SelectItem key={industry} value={industry}>
+                  {industry}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
-        <Select value={selectedIndustry} onValueChange={onIndustryChange}>
-          <SelectTrigger className="w-full sm:w-[220px]">
-            <SelectValue placeholder="Select an industry" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Industries</SelectItem>
-            {industries.map((industry) => (
-              <SelectItem key={industry} value={industry}>
-                {industry}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
         
-        <div className="relative w-full sm:w-[280px]">
-          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+        <div className="relative w-full sm:w-[200px]">
+          <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" />
           <Input 
-            placeholder="Search by name..."
+            placeholder="Search clients..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="pl-10"
+            className="pl-8 h-8 text-sm"
           />
         </div>
       </div>
       
-      <div className="flex items-center gap-2 self-end">
-        <span className="text-sm text-gray-500">View:</span>
-        <div className="flex border rounded-md overflow-hidden">
-          <Button 
-            variant={viewMode === "grid" ? "default" : "ghost"}
-            size="sm"
-            className="rounded-none px-2 py-1 h-9"
-            onClick={() => onViewModeChange("grid")}
-          >
-            <GridIcon size={16} />
-          </Button>
-          <Button 
-            variant={viewMode === "compact" ? "default" : "ghost"}
-            size="sm"
-            className="rounded-none px-2 py-1 h-9"
-            onClick={() => onViewModeChange("compact")}
-          >
-            <LayoutGrid size={16} />
-          </Button>
-        </div>
+      <div className="flex items-center gap-2">
+        <span className="text-xs text-gray-500">View:</span>
+        <ToggleGroup type="single" value={viewMode} onValueChange={(value) => value && onViewModeChange(value as "grid" | "compact")} size="sm">
+          <ToggleGroupItem value="grid" aria-label="Grid view" className="px-2 py-1 h-7">
+            <GridIcon size={14} />
+          </ToggleGroupItem>
+          <ToggleGroupItem value="compact" aria-label="Compact view" className="px-2 py-1 h-7">
+            <LayoutList size={14} />
+          </ToggleGroupItem>
+        </ToggleGroup>
       </div>
     </div>
   );

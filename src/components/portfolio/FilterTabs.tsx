@@ -19,13 +19,13 @@ const FilterTabs = ({ filter, setFilter, filteredCaseStudies }: FilterTabsProps)
           type="single" 
           value={filter}
           onValueChange={(value) => value && setFilter(value)} 
-          className="bg-gray-100 p-1 rounded-lg"
+          className="bg-gray-50 p-1.5 rounded-lg"
         >
-          <ToggleGroupItem value="all" className="rounded-md px-4 text-sm">All Work</ToggleGroupItem>
-          <ToggleGroupItem value="e-commerce" className="rounded-md px-4 text-sm">E-commerce</ToggleGroupItem>
-          <ToggleGroupItem value="b2b" className="rounded-md px-4 text-sm">B2B</ToggleGroupItem>
-          <ToggleGroupItem value="branding" className="rounded-md px-4 text-sm">Branding</ToggleGroupItem>
-          <ToggleGroupItem value="local" className="rounded-md px-4 text-sm">Local</ToggleGroupItem>
+          <ToggleGroupItem value="all" className="rounded-md px-4 py-1.5 text-sm">All Work</ToggleGroupItem>
+          <ToggleGroupItem value="e-commerce" className="rounded-md px-4 py-1.5 text-sm">E-commerce</ToggleGroupItem>
+          <ToggleGroupItem value="b2b" className="rounded-md px-4 py-1.5 text-sm">B2B</ToggleGroupItem>
+          <ToggleGroupItem value="branding" className="rounded-md px-4 py-1.5 text-sm">Branding</ToggleGroupItem>
+          <ToggleGroupItem value="local" className="rounded-md px-4 py-1.5 text-sm">Local</ToggleGroupItem>
         </ToggleGroup>
       </div>
       
