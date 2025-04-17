@@ -146,7 +146,7 @@ const RegularServices = () => {
   return (
     <div id="regular-services">
       <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
-        <span className="inline-block py-1 px-3 rounded-full bg-media-purple/10 text-media-purple font-medium text-sm mb-4">
+        <span className="inline-block py-1.5 px-4 rounded-full bg-media-purple/10 text-media-purple font-medium text-sm mb-4">
           Our Services
         </span>
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -163,7 +163,7 @@ const RegularServices = () => {
       />
 
       {isVisible && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 md:gap-8 mt-8">
           {filteredServices.map((service, index) => (
             <ServiceCard 
               key={index} 

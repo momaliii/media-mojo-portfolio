@@ -12,20 +12,20 @@ interface ExpertServiceCardProps {
 const ExpertServiceCard = ({ icon, title, description, color }: ExpertServiceCardProps) => {
   return (
     <div 
-      className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow transform hover:-translate-y-1 duration-300"
+      className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow transform hover:-translate-y-1 duration-300"
     >
       <div className={`${color} h-2 w-full`}></div>
-      <div className="p-5">
-        <div className="flex items-center mb-3">
+      <div className="p-6 md:p-7">
+        <div className="flex items-center mb-4">
           <div 
-            className={`${color} w-10 h-10 rounded-lg flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300`}
+            className={`${color} w-12 h-12 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300`}
             aria-hidden="true"
           >
             {icon}
           </div>
-          <h3 className="font-bold">{title}</h3>
+          <h3 className="font-bold text-lg text-gray-800">{title}</h3>
         </div>
-        <p className="text-gray-600 text-sm">{description}</p>
+        <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
       </div>
     </div>
   );

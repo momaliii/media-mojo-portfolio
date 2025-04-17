@@ -16,7 +16,7 @@ const Portfolio = () => {
 
   return (
     <section id="portfolio" className="section-padding bg-gray-50">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-8">
         <PortfolioHeader />
         
         <FilterTabs 
@@ -25,16 +25,16 @@ const Portfolio = () => {
           filteredCaseStudies={filteredCaseStudies} 
         />
         
-        <div className="text-center mt-12">
-          <Button variant="outline" size="lg" className="inline-flex items-center hover:bg-media-purple/10 transition-colors">
-            View More Case Studies
-            <ArrowUpRight className="ml-2 h-4 w-4" />
+        <div className="text-center mt-16">
+          <Button variant="outline" size="lg" className="inline-flex items-center hover:bg-media-purple/10 transition-colors rounded-xl py-6 px-8">
+            <span className="text-base">View More Case Studies</span>
+            <ArrowUpRight className="ml-2 h-5 w-5" />
           </Button>
         </div>
       </div>
       
       {/* Ad Screenshots Gallery section with an id for scrolling */}
-      <div id="ad-campaign-showcase" className="scroll-mt-24">
+      <div id="ad-campaign-showcase" className="scroll-mt-24 mt-24">
         <AdScreenshotsGallery />
       </div>
     </section>
