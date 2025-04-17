@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,31 +11,8 @@ import {
   Phone,
   MapPin 
 } from "lucide-react";
-import { getContactContent, ContactContent as ContactContentType } from "@/utils/contentManager";
 
 const Contact = () => {
-  const [content, setContent] = useState<ContactContentType>(getContactContent());
-
-  // Re-fetch content when component mounts or when localStorage might have changed
-  useEffect(() => {
-    const handleStorageChange = () => {
-      setContent(getContactContent());
-    };
-
-    // Listen for storage events (when content is updated in another tab/window)
-    window.addEventListener('storage', handleStorageChange);
-    
-    // Check for updates every 2 seconds (in case changes are made in the same tab)
-    const intervalId = setInterval(() => {
-      setContent(getContactContent());
-    }, 2000);
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      clearInterval(intervalId);
-    };
-  }, []);
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Form handling would go here in a real implementation
@@ -53,10 +30,10 @@ const Contact = () => {
               Get in Touch
             </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              {content.heading}
+              Let's Discuss Your <span className="gradient-text">Media Strategy</span>
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              {content.description}
+              Ready to elevate your media buying performance? Reach out to discuss how we can work together to achieve your business goals.
             </p>
           </div>
 

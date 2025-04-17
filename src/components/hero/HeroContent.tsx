@@ -5,13 +5,8 @@ import HeroStats from "./HeroStats";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Linkedin } from "lucide-react";
 import { motion } from "framer-motion";
-import { HeroContent as HeroContentType } from "@/utils/contentManager";
 
-interface HeroContentProps {
-  content: HeroContentType;
-}
-
-const HeroContent: React.FC<HeroContentProps> = ({ content }) => {
+const HeroContent = () => {
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -64,7 +59,7 @@ const HeroContent: React.FC<HeroContentProps> = ({ content }) => {
             variants={item}
             className="mt-6 text-lg text-gray-600 md:pr-10"
           >
-            {content.subheading}
+            Performance Media Buyer with 5+ years of experience optimizing campaigns across Meta, LinkedIn, TikTok, Snapchat, Twitter, and Google Ads. Delivering measurable results and exceptional ROI.
           </motion.p>
           
           <motion.div 
@@ -96,17 +91,17 @@ const HeroContent: React.FC<HeroContentProps> = ({ content }) => {
           View Portfolio
         </Button>
         <Button 
-          onClick={() => window.open(content.whatsAppLink || "https://wa.me/+201060098267", "_blank")}
+          onClick={() => document.getElementById('contact')?.scrollIntoView({behavior: 'smooth'})}
           variant="outline"
           size="lg"
           className="border-media-purple/30 text-media-purple hover:bg-media-purple/5 hover:border-media-purple/50 shadow-sm hover:shadow-md transition-all"
         >
-          {content.ctaText}
+          Get in Touch
         </Button>
       </motion.div>
       
       <motion.div variants={item}>
-        <HeroStats stats={content.stats} />
+        <HeroStats />
       </motion.div>
     </motion.div>
   );

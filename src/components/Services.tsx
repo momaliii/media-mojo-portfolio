@@ -1,10 +1,16 @@
 
 import React from "react";
+import ExpertServices from "@/components/services/ExpertServices";
 
 const Services = () => {
-  // This component has been simplified as requested by the user
-  // Our Services section has been removed
-  return null;
+  return (
+    <section id="services" className="section-padding bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Expert Media Buying Solutions Section */}
+        <ExpertServices />
+      </div>
+    </section>
+  );
 };
 
 export default Services;

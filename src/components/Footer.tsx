@@ -1,35 +1,12 @@
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Separator } from "@/components/ui/separator";
 import { 
   Linkedin, 
   ArrowUp 
 } from "lucide-react";
-import { getFooterContent, FooterContent as FooterContentType } from "@/utils/contentManager";
 
 const Footer = () => {
-  const [content, setContent] = useState<FooterContentType>(getFooterContent());
-
-  // Re-fetch content when component mounts or when localStorage might have changed
-  useEffect(() => {
-    const handleStorageChange = () => {
-      setContent(getFooterContent());
-    };
-
-    // Listen for storage events (when content is updated in another tab/window)
-    window.addEventListener('storage', handleStorageChange);
-    
-    // Check for updates every 2 seconds (in case changes are made in the same tab)
-    const intervalId = setInterval(() => {
-      setContent(getFooterContent());
-    }, 2000);
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      clearInterval(intervalId);
-    };
-  }, []);
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -41,14 +18,14 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12">
           <div>
             <div className="text-xl font-bold mb-4">
-              <span className="gradient-text">{content.companyName}</span>
+              <span className="gradient-text">Media Mojo</span>
             </div>
             <p className="text-gray-600 mb-6">
-              {content.companyDescription}
+              Strategic media buying for businesses seeking exceptional results and maximum ROI.
             </p>
             <div className="flex space-x-3">
               <a 
-                href={content.linkedinUrl} 
+                href="https://www.linkedin.com/in/mhmdali02/" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-gray-200 hover:bg-gray-300 transition-colors p-2 rounded-full"
@@ -57,7 +34,7 @@ const Footer = () => {
                 <Linkedin className="h-4 w-4 text-gray-700" />
               </a>
               <a 
-                href={content.whatsappUrl} 
+                href="https://wa.me/+201060098267" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-gray-200 hover:bg-gray-300 transition-colors p-2 rounded-full"
@@ -182,15 +159,15 @@ const Footer = () => {
             </h3>
             <ul className="space-y-3">
               <li className="text-gray-600 text-sm">
-                {content.email}
+                mhmd167ali@gmail.com
               </li>
               <li className="text-gray-600 text-sm">
-                <a href={content.whatsAppLink} className="hover:text-media-purple transition-colors">
+                <a href="https://wa.me/+201060098267" className="hover:text-media-purple transition-colors">
                   Schedule a consultation call
                 </a>
               </li>
               <li className="text-gray-600 text-sm">
-                {content.workingHours}
+                Sunday - Thursday: 9am - 5pm
               </li>
             </ul>
           </div>
@@ -201,7 +178,7 @@ const Footer = () => {
         {/* Footer Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} {content.companyName}. All rights reserved.
+            © {new Date().getFullYear()} Media Mojo. All rights reserved.
           </p>
           
           <button 

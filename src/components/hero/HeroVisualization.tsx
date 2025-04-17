@@ -8,19 +8,7 @@ import CampaignCard from "./cards/CampaignCard";
 import PlatformsCard from "./cards/PlatformsCard";
 import ChannelsCard from "./cards/ChannelsCard";
 
-interface HeroVisualizationProps {
-  stats?: {
-    roasValue: string;
-    performancePercentage: string;
-    cpcValue: string;
-    cpcBenchmark: string;
-    impressions: string;
-    ctr: string;
-    convRate: string;
-  }
-}
-
-const HeroVisualization: React.FC<HeroVisualizationProps> = ({ stats }) => {
+const HeroVisualization = () => {
   const isMobile = useIsMobile();
   
   return (
