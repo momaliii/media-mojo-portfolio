@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Separator } from "@/components/ui/separator";
 import { 
@@ -158,13 +159,15 @@ const Footer = () => {
             </h3>
             <ul className="space-y-3">
               <li className="text-gray-600 text-sm">
-                hello@mediamojo.com
+                mhmd167ali@gmail.com
               </li>
               <li className="text-gray-600 text-sm">
-                Schedule a consultation call
+                <a href="https://wa.me/+201060098267" className="hover:text-media-purple transition-colors">
+                  Schedule a consultation call
+                </a>
               </li>
               <li className="text-gray-600 text-sm">
-                Monday - Friday: 9am - 5pm
+                Sunday - Thursday: 9am - 5pm
               </li>
             </ul>
           </div>

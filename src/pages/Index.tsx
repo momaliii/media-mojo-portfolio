@@ -5,7 +5,6 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Portfolio from "@/components/Portfolio";
 import ClientLogos from "@/components/ClientLogos";
-import Platforms from "@/components/Platforms";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Services from "@/components/Services";
@@ -13,7 +12,7 @@ import Services from "@/components/Services";
 const Index = () => {
   useEffect(() => {
     // Update document title
-    document.title = "Mohamed Ali | Senior Media Buyer";
+    document.title = "Mohamed Ali | Performance Media Buyer";
     
     // Add animation to elements when they enter viewport
     const observer = new IntersectionObserver(
@@ -48,13 +47,12 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
-      <main>
+      <main className="overflow-hidden">
         <Hero />
         <About />
         <Services />
         <Portfolio />
         <ClientLogos />
-        <Platforms />
         <Contact />
       </main>
       <Footer />

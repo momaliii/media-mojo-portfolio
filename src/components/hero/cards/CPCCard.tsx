@@ -5,8 +5,8 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const CPCCard = () => {
   return (
-    <Card className="overflow-hidden shadow-sm border border-gray-200 hover:shadow-md transition-all bg-white">
-      <CardContent className="p-5">
+    <Card className="overflow-hidden shadow-sm border border-gray-200 hover:shadow-md transition-all bg-white w-full">
+      <CardContent className="p-4 sm:p-5">
         <div className="flex justify-between items-center mb-2">
           <h3 className="font-medium text-gray-700">CPC</h3>
           <div className="p-1.5 rounded-full bg-blue-100/80">
@@ -16,7 +16,7 @@ const CPCCard = () => {
         
         <div className="mt-2">
           <div className="flex items-baseline mb-1">
-            <span className="text-3xl font-bold text-gray-800">$1.18</span>
+            <span className="text-2xl sm:text-3xl font-bold text-gray-800">$1.18</span>
           </div>
           
           <div className="flex items-center mt-1">

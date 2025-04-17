@@ -45,7 +45,7 @@ const HeroContent = () => {
             variants={item}
             className="inline-block py-1.5 px-4 rounded-full bg-gradient-to-r from-media-purple/20 to-media-oceanblue/20 text-media-purple font-medium text-sm mb-4 shadow-sm"
           >
-            Senior Media Buyer
+            Performance Media Buyer
           </motion.span>
           
           <motion.h1 
@@ -59,7 +59,7 @@ const HeroContent = () => {
             variants={item}
             className="mt-6 text-lg text-gray-600 md:pr-10"
           >
-            Senior Media Buyer with 5+ years of experience optimizing campaigns across Meta, LinkedIn, TikTok, Snapchat, Twitter, and Google Ads. Delivering measurable results and exceptional ROI.
+            Performance Media Buyer with 5+ years of experience optimizing campaigns across Meta, LinkedIn, TikTok, Snapchat, Twitter, and Google Ads. Delivering measurable results and exceptional ROI.
           </motion.p>
           
           <motion.div 

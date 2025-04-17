@@ -1,7 +1,6 @@
 
 import React from "react";
 import ExpertServices from "@/components/services/ExpertServices";
-import RegularServices from "@/components/services/RegularServices";
 
 const Services = () => {
   return (
@@ -9,9 +8,6 @@ const Services = () => {
       <div className="container mx-auto px-4 md:px-6">
         {/* Expert Media Buying Solutions Section */}
         <ExpertServices />
-
-        {/* Regular Services Section */}
-        <RegularServices />
       </div>
     </section>
   );

@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { 
   Mail, 
-  MessageSquare, 
   Send,
   Linkedin,
   Phone,
@@ -181,9 +180,11 @@ const Contact = () => {
                 <CardContent className="p-6 md:p-8">
                   <h3 className="text-xl font-semibold mb-2">Ready to boost your campaign performance?</h3>
                   <p className="mb-4 opacity-90">I help businesses achieve exceptional results through strategic media buying across multiple platforms and regions.</p>
-                  <Button variant="secondary" size="sm">
-                    Book a Strategy Call
-                  </Button>
+                  <a href="https://wa.me/+201060098267" target="_blank" rel="noopener noreferrer">
+                    <Button variant="secondary" size="sm">
+                      Book a Strategy Call
+                    </Button>
+                  </a>
                 </CardContent>
               </Card>
             </div>
