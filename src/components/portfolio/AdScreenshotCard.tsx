@@ -15,17 +15,17 @@ const AdScreenshotCard: React.FC<AdScreenshotCardProps> = ({
   handleContextMenu 
 }) => {
   return (
-    <Card className="border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300">
-      <CardContent className="p-0 relative">
+    <Card className="border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
+      <CardContent className="p-0 relative h-full">
         <div 
-          className="relative w-full h-64 md:h-72 lg:h-80 bg-gray-100 overflow-hidden"
+          className="relative w-full aspect-[3/4] bg-gray-100 overflow-hidden"
           onContextMenu={handleContextMenu}
           style={{ userSelect: 'none' }}
         >
           <img 
             src={screenshot.url} 
             alt={`${screenshot.industry} Ad Campaign`}
-            className="w-full h-full object-cover object-top opacity-95 transition-transform duration-700 ease-in-out hover:scale-110"
+            className="w-full h-full object-cover object-top transition-transform duration-700 ease-in-out hover:scale-110"
             draggable="false"
             loading="lazy"
             style={{ 
