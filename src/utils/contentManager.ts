@@ -6,6 +6,7 @@ export interface HeroContent {
   heading: string;
   subheading: string;
   ctaText: string;
+  whatsAppLink?: string;
   stats: {
     roasValue: string;
     performancePercentage: string;
@@ -56,6 +57,7 @@ const getDefaultHeroContent = (): HeroContent => ({
   heading: "Transform Your Online Presence with Strategic Media Buying",
   subheading: "Data-driven marketing campaigns that maximize ROI across all major platforms. Let me handle your ad spend while you focus on scaling your business.",
   ctaText: "Book a Strategy Call",
+  whatsAppLink: "https://wa.me/+201060098267",
   stats: {
     roasValue: "8x+",
     performancePercentage: "88",

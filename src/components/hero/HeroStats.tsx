@@ -1,7 +1,19 @@
 
 import React from "react";
 
-const HeroStats = () => {
+interface HeroStatsProps {
+  stats?: {
+    roasValue: string;
+    performancePercentage: string;
+    cpcValue: string;
+    cpcBenchmark: string;
+    impressions: string;
+    ctr: string;
+    convRate: string;
+  }
+}
+
+const HeroStats: React.FC<HeroStatsProps> = ({ stats }) => {
   return (
     <div className="pt-6 grid grid-cols-2 md:grid-cols-3 gap-4">
       <div className="flex items-center gap-2">

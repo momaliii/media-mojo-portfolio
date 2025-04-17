@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Lock, Linkedin, HandHeart, LineChart, Facebook, BarChart } from "lucide-react";
 import { AdScreenshot } from "@/data/adScreenshots";
 
-interface AdScreenshotCardProps {
+export interface AdScreenshotCardProps {
   screenshot: AdScreenshot;
   handleContextMenu: (e: React.MouseEvent) => void;
 }
