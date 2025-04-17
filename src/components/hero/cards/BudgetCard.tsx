@@ -41,7 +41,7 @@ const BudgetCard = () => {
               <span className="font-medium text-gray-800">$38K</span>
             </div>
             <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
-              <div className="h-full bg-blue-500 rounded-full" style={{width: '55%'}}></div>
+              <div className="h-full bg-blue-500 rounded-full" style={{width: '45%'}}></div>
             </div>
           </div>
           
