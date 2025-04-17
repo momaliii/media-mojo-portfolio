@@ -18,7 +18,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12">
           <div>
             <div className="text-xl font-bold mb-4">
-              <span className="gradient-text">Media Mojo</span>
+              <span className="gradient-text">Mohamed Ali</span>
             </div>
             <p className="text-gray-600 mb-6">
               Strategic media buying for businesses seeking exceptional results and maximum ROI.
@@ -178,7 +178,7 @@ const Footer = () => {
         {/* Footer Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} Media Mojo. All rights reserved.
+            © {new Date().getFullYear()} MDZ. All rights reserved.
           </p>
           
           <button 
