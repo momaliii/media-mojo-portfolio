@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,19 +7,33 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { getHeroContent, saveHeroContent, HeroContent } from "@/utils/contentManager";
 
 const EditHero = () => {
   const { toast } = useToast();
-  const [heading, setHeading] = useState<string>("Transform Your Online Presence with Strategic Media Buying");
-  const [subheading, setSubheading] = useState<string>("Data-driven marketing campaigns that maximize ROI across all major platforms. Let me handle your ad spend while you focus on scaling your business.");
-  const [ctaText, setCtaText] = useState<string>("Book a Strategy Call");
+  const [content, setContent] = useState<HeroContent>(getHeroContent());
+
+  const handleInputChange = (field: string, value: string) => {
+    setContent(prev => {
+      if (field.includes('.')) {
+        const [section, key] = field.split('.');
+        return {
+          ...prev,
+          [section]: {
+            ...prev[section as keyof typeof prev] as any,
+            [key]: value
+          }
+        };
+      }
+      return { ...prev, [field]: value };
+    });
+  };
 
   const handleSave = () => {
-    // In a real application, this would save to a database or API
-    // For now, we'll just show a toast notification
+    saveHeroContent(content);
     toast({
       title: "Changes saved",
-      description: "Your changes have been saved successfully",
+      description: "Your changes have been saved and will be reflected on the landing page",
       duration: 3000,
     });
   };
@@ -45,8 +59,8 @@ const EditHero = () => {
             <Label htmlFor="heading">Main Heading</Label>
             <Textarea
               id="heading"
-              value={heading}
-              onChange={(e) => setHeading(e.target.value)}
+              value={content.heading}
+              onChange={(e) => handleInputChange('heading', e.target.value)}
               className="min-h-20"
             />
           </div>
@@ -55,8 +69,8 @@ const EditHero = () => {
             <Label htmlFor="subheading">Subheading</Label>
             <Textarea
               id="subheading"
-              value={subheading}
-              onChange={(e) => setSubheading(e.target.value)}
+              value={content.subheading}
+              onChange={(e) => handleInputChange('subheading', e.target.value)}
               className="min-h-24"
             />
           </div>
@@ -65,8 +79,8 @@ const EditHero = () => {
             <Label htmlFor="ctaText">CTA Button Text</Label>
             <Input
               id="ctaText"
-              value={ctaText}
-              onChange={(e) => setCtaText(e.target.value)}
+              value={content.ctaText}
+              onChange={(e) => handleInputChange('ctaText', e.target.value)}
             />
           </div>
         </CardContent>
@@ -86,12 +100,21 @@ const EditHero = () => {
               <AccordionContent className="space-y-4 pt-4">
                 <div className="space-y-2">
                   <Label htmlFor="roasValue">ROAS Value</Label>
-                  <Input id="roasValue" defaultValue="8x+" />
+                  <Input 
+                    id="roasValue" 
+                    value={content.stats.roasValue} 
+                    onChange={(e) => handleInputChange('stats.roasValue', e.target.value)} 
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="performancePercentage">Performance Percentage</Label>
                   <div className="flex items-center space-x-2">
-                    <Input id="performancePercentage" type="number" defaultValue="88" max="100" min="0" />
+                    <Input 
+                      id="performancePercentage" 
+                      type="text" 
+                      value={content.stats.performancePercentage} 
+                      onChange={(e) => handleInputChange('stats.performancePercentage', e.target.value)} 
+                    />
                     <span>%</span>
                   </div>
                 </div>
@@ -105,13 +128,22 @@ const EditHero = () => {
                   <Label htmlFor="cpcValue">CPC Value</Label>
                   <div className="flex items-center space-x-2">
                     <span>$</span>
-                    <Input id="cpcValue" defaultValue="1.18" />
+                    <Input 
+                      id="cpcValue" 
+                      value={content.stats.cpcValue} 
+                      onChange={(e) => handleInputChange('stats.cpcValue', e.target.value)} 
+                    />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="cpcBenchmark">Benchmark Comparison</Label>
                   <div className="flex items-center space-x-2">
-                    <Input id="cpcBenchmark" type="number" defaultValue="24" />
+                    <Input 
+                      id="cpcBenchmark" 
+                      type="text" 
+                      value={content.stats.cpcBenchmark} 
+                      onChange={(e) => handleInputChange('stats.cpcBenchmark', e.target.value)} 
+                    />
                     <span>%</span>
                   </div>
                 </div>
@@ -123,19 +155,31 @@ const EditHero = () => {
               <AccordionContent className="space-y-4 pt-4">
                 <div className="space-y-2">
                   <Label htmlFor="impressions">Impressions</Label>
-                  <Input id="impressions" defaultValue="10.5M" />
+                  <Input 
+                    id="impressions" 
+                    value={content.stats.impressions} 
+                    onChange={(e) => handleInputChange('stats.impressions', e.target.value)} 
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="ctr">CTR</Label>
                   <div className="flex items-center space-x-2">
-                    <Input id="ctr" defaultValue="3.8" />
+                    <Input 
+                      id="ctr" 
+                      value={content.stats.ctr} 
+                      onChange={(e) => handleInputChange('stats.ctr', e.target.value)} 
+                    />
                     <span>%</span>
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="convRate">Conversion Rate</Label>
                   <div className="flex items-center space-x-2">
-                    <Input id="convRate" defaultValue="8.5" />
+                    <Input 
+                      id="convRate" 
+                      value={content.stats.convRate} 
+                      onChange={(e) => handleInputChange('stats.convRate', e.target.value)} 
+                    />
                     <span>%</span>
                   </div>
                 </div>

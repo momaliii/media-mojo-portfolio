@@ -1,10 +1,33 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeroContent from "./hero/HeroContent";
 import HeroVisualization from "./hero/HeroVisualization";
 import { motion } from "framer-motion";
+import { getHeroContent, HeroContent as HeroContentType } from "../utils/contentManager";
 
 const Hero = () => {
+  const [content, setContent] = useState<HeroContentType>(getHeroContent());
+
+  // Re-fetch content when component mounts or when localStorage might have changed
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setContent(getHeroContent());
+    };
+
+    // Listen for storage events (when content is updated in another tab/window)
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Check for updates every 2 seconds (in case changes are made in the same tab)
+    const intervalId = setInterval(() => {
+      setContent(getHeroContent());
+    }, 2000);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(intervalId);
+    };
+  }, []);
+
   return (
     <section id="hero" className="relative min-h-screen flex items-center bg-gradient-to-br from-media-blue/20 to-white overflow-hidden">
       {/* Enhanced grid pattern background */}
@@ -13,13 +36,13 @@ const Hero = () => {
       {/* Hero content container */}
       <div className="container mx-auto px-4 md:px-6 py-10 pt-24 md:pt-32 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          <HeroContent />
+          <HeroContent content={content} />
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
           >
-            <HeroVisualization />
+            <HeroVisualization stats={content.stats} />
           </motion.div>
         </div>
       </div>

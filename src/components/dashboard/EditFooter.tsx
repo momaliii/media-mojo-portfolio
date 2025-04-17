@@ -1,19 +1,26 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { Textarea } from "@/components/ui/textarea";
+import { getFooterContent, saveFooterContent, FooterContent } from "@/utils/contentManager";
 
 const EditFooter = () => {
   const { toast } = useToast();
+  const [content, setContent] = useState<FooterContent>(getFooterContent());
+
+  const handleInputChange = (field: string, value: string) => {
+    setContent(prev => ({ ...prev, [field]: value }));
+  };
 
   const handleSave = () => {
+    saveFooterContent(content);
     toast({
       title: "Changes saved",
-      description: "Your changes to the Footer section have been saved",
+      description: "Your changes to the Footer section have been saved and will be reflected on the landing page",
       duration: 3000,
     });
   };
@@ -39,7 +46,8 @@ const EditFooter = () => {
             <Label htmlFor="companyName">Company Name</Label>
             <Input
               id="companyName"
-              defaultValue="Media Mojo"
+              value={content.companyName}
+              onChange={(e) => handleInputChange('companyName', e.target.value)}
             />
           </div>
           
@@ -47,7 +55,8 @@ const EditFooter = () => {
             <Label htmlFor="companyDescription">Company Description</Label>
             <Textarea
               id="companyDescription"
-              defaultValue="Strategic media buying for businesses seeking exceptional results and maximum ROI."
+              value={content.companyDescription}
+              onChange={(e) => handleInputChange('companyDescription', e.target.value)}
               className="min-h-24"
             />
           </div>
@@ -66,7 +75,8 @@ const EditFooter = () => {
             <Label htmlFor="emailAddress">Email Address</Label>
             <Input
               id="emailAddress"
-              defaultValue="mhmd167ali@gmail.com"
+              value={content.email}
+              onChange={(e) => handleInputChange('email', e.target.value)}
             />
           </div>
           
@@ -74,7 +84,8 @@ const EditFooter = () => {
             <Label htmlFor="whatsAppLink">WhatsApp Link</Label>
             <Input
               id="whatsAppLink"
-              defaultValue="https://wa.me/+201060098267"
+              value={content.whatsAppLink}
+              onChange={(e) => handleInputChange('whatsAppLink', e.target.value)}
             />
           </div>
           
@@ -82,7 +93,8 @@ const EditFooter = () => {
             <Label htmlFor="workingHours">Working Hours</Label>
             <Input
               id="workingHours"
-              defaultValue="Sunday - Thursday: 9am - 5pm"
+              value={content.workingHours}
+              onChange={(e) => handleInputChange('workingHours', e.target.value)}
             />
           </div>
         </CardContent>
@@ -100,7 +112,8 @@ const EditFooter = () => {
             <Label htmlFor="linkedinUrl">LinkedIn URL</Label>
             <Input
               id="linkedinUrl"
-              defaultValue="https://www.linkedin.com/in/mhmdali02/"
+              value={content.linkedinUrl}
+              onChange={(e) => handleInputChange('linkedinUrl', e.target.value)}
             />
           </div>
           
@@ -108,7 +121,8 @@ const EditFooter = () => {
             <Label htmlFor="whatsappUrl">WhatsApp URL</Label>
             <Input
               id="whatsappUrl"
-              defaultValue="https://wa.me/+201060098267"
+              value={content.whatsappUrl}
+              onChange={(e) => handleInputChange('whatsappUrl', e.target.value)}
             />
           </div>
         </CardContent>

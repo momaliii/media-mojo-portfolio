@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -7,14 +7,21 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { Switch } from "@/components/ui/switch";
+import { getContactContent, saveContactContent, ContactContent } from "@/utils/contentManager";
 
 const EditContact = () => {
   const { toast } = useToast();
+  const [content, setContent] = useState<ContactContent>(getContactContent());
+
+  const handleInputChange = (field: string, value: string) => {
+    setContent(prev => ({ ...prev, [field]: value }));
+  };
 
   const handleSave = () => {
+    saveContactContent(content);
     toast({
       title: "Changes saved",
-      description: "Your changes to the Contact section have been saved",
+      description: "Your changes to the Contact section have been saved and will be reflected on the landing page",
       duration: 3000,
     });
   };
@@ -40,7 +47,8 @@ const EditContact = () => {
             <Label htmlFor="contactHeading">Section Heading</Label>
             <Input
               id="contactHeading"
-              defaultValue="Let's Discuss Your Next Campaign"
+              value={content.heading}
+              onChange={(e) => handleInputChange('heading', e.target.value)}
             />
           </div>
           
@@ -48,7 +56,8 @@ const EditContact = () => {
             <Label htmlFor="contactDescription">Description</Label>
             <Textarea
               id="contactDescription"
-              defaultValue="Ready to maximize your ROAS and scale your business? Get in touch to discuss how I can help you achieve your advertising goals."
+              value={content.description}
+              onChange={(e) => handleInputChange('description', e.target.value)}
               className="min-h-24"
             />
           </div>

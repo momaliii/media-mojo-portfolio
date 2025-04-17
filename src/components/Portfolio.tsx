@@ -1,14 +1,36 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
 import { caseStudies } from "@/data/caseStudies";
 import PortfolioHeader from "@/components/portfolio/PortfolioHeader";
 import FilterTabs from "@/components/portfolio/FilterTabs";
 import AdScreenshotsGallery from "@/components/portfolio/AdScreenshotsGallery";
+import { getPortfolioContent, PortfolioContent as PortfolioContentType } from "@/utils/contentManager";
 
 const Portfolio = () => {
   const [filter, setFilter] = useState("all");
+  const [content, setContent] = useState<PortfolioContentType>(getPortfolioContent());
+  
+  // Re-fetch content when component mounts or when localStorage might have changed
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setContent(getPortfolioContent());
+    };
+
+    // Listen for storage events (when content is updated in another tab/window)
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Check for updates every 2 seconds (in case changes are made in the same tab)
+    const intervalId = setInterval(() => {
+      setContent(getPortfolioContent());
+    }, 2000);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(intervalId);
+    };
+  }, []);
   
   const filteredCaseStudies = filter === "all" 
     ? caseStudies 
@@ -17,7 +39,7 @@ const Portfolio = () => {
   return (
     <section id="portfolio" className="section-padding bg-gray-50">
       <div className="container mx-auto px-4 md:px-6">
-        <PortfolioHeader />
+        <PortfolioHeader heading={content.heading} description={content.description} />
         
         <FilterTabs 
           filter={filter} 
@@ -35,7 +57,7 @@ const Portfolio = () => {
       
       {/* Ad Screenshots Gallery section with an id for scrolling */}
       <div id="ad-campaign-showcase" className="scroll-mt-24">
-        <AdScreenshotsGallery />
+        <AdScreenshotsGallery heading={content.galleryHeading} description={content.galleryDescription} />
       </div>
     </section>
   );

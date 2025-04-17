@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,14 +8,21 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { getPortfolioContent, savePortfolioContent, PortfolioContent } from "@/utils/contentManager";
 
 const EditPortfolio = () => {
   const { toast } = useToast();
+  const [content, setContent] = useState<PortfolioContent>(getPortfolioContent());
+
+  const handleInputChange = (field: string, value: string) => {
+    setContent(prev => ({ ...prev, [field]: value }));
+  };
 
   const handleSave = () => {
+    savePortfolioContent(content);
     toast({
       title: "Changes saved",
-      description: "Your changes to the Portfolio section have been saved",
+      description: "Your changes to the Portfolio section have been saved and will be reflected on the landing page",
       duration: 3000,
     });
   };
@@ -48,7 +55,8 @@ const EditPortfolio = () => {
                 <Label htmlFor="portfolioHeading">Section Heading</Label>
                 <Input
                   id="portfolioHeading"
-                  defaultValue="Recent Case Studies"
+                  value={content.heading}
+                  onChange={(e) => handleInputChange('heading', e.target.value)}
                 />
               </div>
               
@@ -56,7 +64,8 @@ const EditPortfolio = () => {
                 <Label htmlFor="portfolioDescription">Description</Label>
                 <Textarea
                   id="portfolioDescription"
-                  defaultValue="Explore some of my most successful media buying campaigns and the results they've achieved for clients across industries."
+                  value={content.description}
+                  onChange={(e) => handleInputChange('description', e.target.value)}
                   className="min-h-24"
                 />
               </div>
@@ -122,7 +131,8 @@ const EditPortfolio = () => {
                 <Label htmlFor="galleryHeading">Gallery Heading</Label>
                 <Input
                   id="galleryHeading"
-                  defaultValue="Ad Campaign Showcase"
+                  value={content.galleryHeading}
+                  onChange={(e) => handleInputChange('galleryHeading', e.target.value)}
                 />
               </div>
               
@@ -130,7 +140,8 @@ const EditPortfolio = () => {
                 <Label htmlFor="galleryDescription">Description</Label>
                 <Textarea
                   id="galleryDescription"
-                  defaultValue="Browse our portfolio of successful ad campaigns across various industries and platforms. Each screenshot demonstrates our approach to creating engaging, high-converting ads."
+                  value={content.galleryDescription}
+                  onChange={(e) => handleInputChange('galleryDescription', e.target.value)}
                   className="min-h-24"
                 />
               </div>

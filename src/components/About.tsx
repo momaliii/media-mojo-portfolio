@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
   BarChart3, 
@@ -11,27 +11,50 @@ import {
   LayoutGrid
 } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { getAboutContent, AboutContent as AboutContentType } from "../utils/contentManager";
 
 const About = () => {
+  const [content, setContent] = useState<AboutContentType>(getAboutContent());
+
+  // Re-fetch content when component mounts or when localStorage might have changed
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setContent(getAboutContent());
+    };
+
+    // Listen for storage events (when content is updated in another tab/window)
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Check for updates every 2 seconds (in case changes are made in the same tab)
+    const intervalId = setInterval(() => {
+      setContent(getAboutContent());
+    }, 2000);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(intervalId);
+    };
+  }, []);
+
   const stats = [
     { 
       icon: <BarChart3 className="text-media-purple" />, 
-      value: "5+", 
+      value: content.stats.yearsExperience, 
       label: "Years Experience" 
     },
     { 
       icon: <Globe className="text-media-oceanblue" />, 
-      value: "10+", 
+      value: content.stats.countriesServed, 
       label: "Countries Served" 
     },
     { 
       icon: <LayoutGrid className="text-media-orange" />, 
-      value: "6+", 
+      value: content.stats.platformsMastered, 
       label: "Platforms Mastered" 
     },
     { 
       icon: <Award className="text-media-pink" />, 
-      value: "90K+", 
+      value: content.stats.ordersGenerated, 
       label: "Orders Generated" 
     },
   ];
@@ -44,10 +67,10 @@ const About = () => {
             About Me
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Delivering <span className="gradient-text">Data-Driven</span> Media Buying Excellence
+            <span className="gradient-text">{content.heading}</span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Senior Media Buyer with over 5 years of experience optimizing paid media campaigns across platforms like Meta, LinkedIn, TikTok, Snapchat, Twitter, and Google Ads, driving growth and engagement across diverse industries.
+            {content.description}
           </p>
         </div>
 
@@ -82,13 +105,13 @@ const About = () => {
               </Avatar>
               <div>
                 <h3 className="text-2xl font-semibold">Mohamed Ali</h3>
-                <p className="text-media-purple">Senior Media Buyer</p>
+                <p className="text-media-purple">Performance Media Buyer</p>
               </div>
             </div>
             
             <h3 className="text-2xl font-semibold">My Approach</h3>
             <p className="text-gray-600">
-              I combine deep analytical expertise with creative thinking to craft media buying strategies that maximize ROI and deliver measurable business results across diverse industries in over 10 countries.
+              {content.personalDescription}
             </p>
             
             <div className="space-y-4">

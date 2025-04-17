@@ -1,19 +1,38 @@
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
+import { getAboutContent, saveAboutContent, AboutContent } from "@/utils/contentManager";
 
 const EditAbout = () => {
   const { toast } = useToast();
+  const [content, setContent] = useState<AboutContent>(getAboutContent());
+
+  const handleInputChange = (field: string, value: string) => {
+    setContent(prev => {
+      if (field.includes('.')) {
+        const [section, key] = field.split('.');
+        return {
+          ...prev,
+          [section]: {
+            ...prev[section as keyof typeof prev] as any,
+            [key]: value
+          }
+        };
+      }
+      return { ...prev, [field]: value };
+    });
+  };
 
   const handleSave = () => {
+    saveAboutContent(content);
     toast({
       title: "Changes saved",
-      description: "Your changes to the About section have been saved",
+      description: "Your changes to the About section have been saved and will be reflected on the landing page",
       duration: 3000,
     });
   };
@@ -39,7 +58,8 @@ const EditAbout = () => {
             <Label htmlFor="aboutHeading">Section Heading</Label>
             <Input
               id="aboutHeading"
-              defaultValue="Delivering Data-Driven Media Buying Excellence"
+              value={content.heading}
+              onChange={(e) => handleInputChange('heading', e.target.value)}
             />
           </div>
           
@@ -47,7 +67,8 @@ const EditAbout = () => {
             <Label htmlFor="aboutDescription">Description</Label>
             <Textarea
               id="aboutDescription"
-              defaultValue="Senior Media Buyer with over 5 years of experience optimizing paid media campaigns across platforms like Meta, LinkedIn, TikTok, Snapchat, Twitter, and Google Ads, driving growth and engagement across diverse industries."
+              value={content.description}
+              onChange={(e) => handleInputChange('description', e.target.value)}
               className="min-h-24"
             />
           </div>
@@ -56,7 +77,8 @@ const EditAbout = () => {
             <Label htmlFor="personalDescription">Personal Approach</Label>
             <Textarea
               id="personalDescription"
-              defaultValue="I combine deep analytical expertise with creative thinking to craft media buying strategies that maximize ROI and deliver measurable business results across diverse industries in over 10 countries."
+              value={content.personalDescription}
+              onChange={(e) => handleInputChange('personalDescription', e.target.value)}
               className="min-h-24"
             />
           </div>
@@ -73,19 +95,35 @@ const EditAbout = () => {
         <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="yearsExperience">Years Experience</Label>
-            <Input id="yearsExperience" defaultValue="5+" />
+            <Input 
+              id="yearsExperience" 
+              value={content.stats.yearsExperience} 
+              onChange={(e) => handleInputChange('stats.yearsExperience', e.target.value)} 
+            />
           </div>
           <div className="space-y-2">
             <Label htmlFor="countriesServed">Countries Served</Label>
-            <Input id="countriesServed" defaultValue="10+" />
+            <Input 
+              id="countriesServed" 
+              value={content.stats.countriesServed}
+              onChange={(e) => handleInputChange('stats.countriesServed', e.target.value)}
+            />
           </div>
           <div className="space-y-2">
             <Label htmlFor="platformsMastered">Platforms Mastered</Label>
-            <Input id="platformsMastered" defaultValue="6+" />
+            <Input 
+              id="platformsMastered" 
+              value={content.stats.platformsMastered}
+              onChange={(e) => handleInputChange('stats.platformsMastered', e.target.value)}
+            />
           </div>
           <div className="space-y-2">
             <Label htmlFor="ordersGenerated">Orders Generated</Label>
-            <Input id="ordersGenerated" defaultValue="90K+" />
+            <Input 
+              id="ordersGenerated" 
+              value={content.stats.ordersGenerated}
+              onChange={(e) => handleInputChange('stats.ordersGenerated', e.target.value)}
+            />
           </div>
         </CardContent>
       </Card>
