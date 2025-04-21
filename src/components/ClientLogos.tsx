@@ -38,16 +38,22 @@ const ClientLogos: React.FC = () => {
     : filteredClients.slice(0, initialDisplayCount);
 
   return (
-    <section className="relative py-20 overflow-hidden" id="clients">
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50/50 to-white"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-40"></div>
+    <section className="relative py-20 overflow-hidden bg-gradient-to-b from-gray-50 via-white to-gray-50" id="clients">
+      <div className="absolute inset-0 bg-grid-pattern opacity-[0.04] pointer-events-none"></div>
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white to-transparent"></div>
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
       
-      <div className="container mx-auto px-4 max-w-6xl relative">
+      <div className="container mx-auto px-4 relative">
         <ClientLogoSection 
           title={
-            <>
-              Trusted by <span className="gradient-text bg-gradient-to-r from-media-purple to-media-oceanblue">Industry Leaders</span>
-            </>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              Trusted by <span className="bg-clip-text text-transparent bg-gradient-to-r from-media-purple to-media-oceanblue font-extrabold">Industry Leaders</span>
+            </motion.div>
           }
           description="Partnering with businesses across various sectors to drive meaningful results through data-driven strategies"
         />
@@ -62,7 +68,7 @@ const ClientLogos: React.FC = () => {
           onViewModeChange={setViewMode}
         />
         
-        <Separator className="my-6 max-w-full mx-auto opacity-30" />
+        <Separator className="my-8 max-w-full mx-auto opacity-30" />
         
         <div className="max-w-full mx-auto">
           <Carousel
@@ -74,7 +80,10 @@ const ClientLogos: React.FC = () => {
           >
             <CarouselContent className="-ml-2 md:-ml-4">
               {displayedClients.map((client, index) => (
-                <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/3 lg:basis-1/4">
+                <CarouselItem 
+                  key={index} 
+                  className="pl-2 md:pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
+                >
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -90,8 +99,12 @@ const ClientLogos: React.FC = () => {
               ))}
             </CarouselContent>
             <div className="flex justify-center gap-4 mt-8">
-              <CarouselPrevious className="relative inset-0 translate-y-0 bg-white/80 hover:bg-white hover:text-media-purple transition-all duration-300" />
-              <CarouselNext className="relative inset-0 translate-y-0 bg-white/80 hover:bg-white hover:text-media-purple transition-all duration-300" />
+              <CarouselPrevious 
+                className="relative inset-0 translate-y-0 bg-white/80 hover:bg-white hover:text-media-purple transition-all duration-300" 
+              />
+              <CarouselNext 
+                className="relative inset-0 translate-y-0 bg-white/80 hover:bg-white hover:text-media-purple transition-all duration-300" 
+              />
             </div>
           </Carousel>
         </div>
