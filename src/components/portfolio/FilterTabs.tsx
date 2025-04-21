@@ -1,8 +1,9 @@
 
 import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingCart, Users, Globe, Tag } from "lucide-react";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import CaseStudyCard from "@/components/portfolio/CaseStudyCard";
 import { CaseStudy } from "@/data/caseStudies";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface FilterTabsProps {
   filter: string;
@@ -11,37 +12,38 @@ interface FilterTabsProps {
 }
 
 const FilterTabs = ({ filter, setFilter, filteredCaseStudies }: FilterTabsProps) => {
-  const filterItems = [
-    { id: "all", label: "All Projects", icon: null, bgColor: "bg-[#6B7AFF]" },
-    { id: "e-commerce", label: "E-commerce", icon: ShoppingCart },
-    { id: "b2b", label: "B2B", icon: Users },
-    { id: "branding", label: "Branding", icon: Tag },
-    { id: "local", label: "Local", icon: Globe },
-  ];
-
   return (
     <div className="space-y-8">
-      <div className="flex justify-center flex-wrap gap-3">
-        {filterItems.map((item) => {
-          const isActive = filter === item.id;
-          const Icon = item.icon;
-          
-          return (
-            <button
-              key={item.id}
-              onClick={() => setFilter(item.id)}
-              className={`
-                inline-flex items-center px-4 py-2 rounded-full transition-all
-                ${isActive 
-                  ? (item.bgColor || "bg-gray-100") + " text-white"
-                  : "bg-gray-50 text-gray-600 hover:bg-gray-100"}
-              `}
-            >
-              {Icon && <Icon className="w-4 h-4 mr-2" />}
-              <span className="text-sm font-medium">{item.label}</span>
-            </button>
-          );
-        })}
+      <div className="flex justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-gray-50/70 p-1.5 rounded-lg shadow-inner"
+        >
+          <ToggleGroup 
+            type="single" 
+            value={filter}
+            onValueChange={(value) => value && setFilter(value)}
+            className="flex flex-wrap justify-center gap-1"
+          >
+            <ToggleGroupItem value="all" className="rounded-md px-4 py-1.5 text-sm font-medium data-[state=on]:bg-white data-[state=on]:text-media-purple data-[state=on]:shadow-sm">
+              All Work
+            </ToggleGroupItem>
+            <ToggleGroupItem value="e-commerce" className="rounded-md px-4 py-1.5 text-sm font-medium data-[state=on]:bg-white data-[state=on]:text-media-purple data-[state=on]:shadow-sm">
+              E-commerce
+            </ToggleGroupItem>
+            <ToggleGroupItem value="b2b" className="rounded-md px-4 py-1.5 text-sm font-medium data-[state=on]:bg-white data-[state=on]:text-media-purple data-[state=on]:shadow-sm">
+              B2B
+            </ToggleGroupItem>
+            <ToggleGroupItem value="local" className="rounded-md px-4 py-1.5 text-sm font-medium data-[state=on]:bg-white data-[state=on]:text-media-purple data-[state=on]:shadow-sm">
+              Local Business
+            </ToggleGroupItem>
+            <ToggleGroupItem value="branding" className="rounded-md px-4 py-1.5 text-sm font-medium data-[state=on]:bg-white data-[state=on]:text-media-purple data-[state=on]:shadow-sm">
+              Events & Branding
+            </ToggleGroupItem>
+          </ToggleGroup>
+        </motion.div>
       </div>
       
       <AnimatePresence mode="wait">
@@ -54,55 +56,18 @@ const FilterTabs = ({ filter, setFilter, filteredCaseStudies }: FilterTabsProps)
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
         >
           {filteredCaseStudies.map((study, index) => (
-            <CaseStudyCard key={study.title} study={study} />
+            <motion.div
+              key={study.title + index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: Math.min(index * 0.1, 0.5), duration: 0.4 }}
+            >
+              <CaseStudyCard study={study} index={index} />
+            </motion.div>
           ))}
         </motion.div>
       </AnimatePresence>
     </div>
-  );
-};
-
-const CaseStudyCard = ({ study }: { study: CaseStudy }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-    >
-      <div className="aspect-[16/9] bg-gradient-to-br from-purple-100 to-blue-100 relative">
-        {study.screenshot && (
-          <img 
-            src={study.screenshot} 
-            alt={study.title}
-            className="w-full h-full object-cover"
-          />
-        )}
-      </div>
-      
-      <div className="p-6">
-        <div className="flex flex-wrap gap-2 mb-4">
-          {study.platforms?.map((platform) => (
-            <span key={platform} className="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
-              {platform}
-            </span>
-          ))}
-        </div>
-        
-        <h3 className="text-xl font-bold mb-2">{study.title}</h3>
-        <div className="text-[#6B7AFF] font-semibold mb-3">{study.metrics[0]?.value}</div>
-        
-        <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-          {study.description}
-        </p>
-        
-        <a 
-          href="#" 
-          className="text-[#6B7AFF] text-sm font-medium inline-flex items-center hover:underline"
-        >
-          View Details →
-        </a>
-      </div>
-    </motion.div>
   );
 };
 

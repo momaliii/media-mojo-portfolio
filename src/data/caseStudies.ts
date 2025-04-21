@@ -1,3 +1,4 @@
+
 // Define the type for metrics
 export interface CaseStudyMetric {
   label: string;
@@ -9,7 +10,6 @@ export interface CaseStudy {
   title: string;
   category: string;
   client: string;
-  platforms?: string[];
   metrics: CaseStudyMetric[];
   description: string;
   industry?: string;
@@ -20,26 +20,28 @@ export interface CaseStudy {
 // Case studies data
 export const caseStudies: CaseStudy[] = [
   {
-    title: "Cosmetics E-commerce Growth",
+    title: "Beauty Brand E-commerce Success",
     category: "e-commerce",
     client: "Cosmetics E-commerce",
-    platforms: ["Meta", "TikTok"],
     metrics: [
-      { label: "Orders", value: "95,000+ orders, 8x+ ROAS" }
+      { label: "Orders", value: "95K+" },
+      { label: "ROAS", value: "8x+" },
+      { label: "Duration", value: "2024" }
     ],
-    description: "Managed campaigns for a cosmetics brand, achieving over 95,000 orders with ROAS exceeding 8x through LightFunnel and Easy Order integration.",
+    description: "Led a highly successful e-commerce campaign using LightFunnel and Easy Order, achieving exceptional results through strategic messaging and optimization.",
     industry: "Beauty & Cosmetics",
     screenshot: "/lovable-uploads/e7da6e3c-66cf-4166-9955-98eb4097a88f.png"
   },
   {
-    title: "AlBaraka Forum Events",
+    title: "Islamic Economy Events",
     category: "b2b",
     client: "AlBaraka Forum",
-    platforms: ["LinkedIn", "Meta"],
     metrics: [
-      { label: "Budget", value: "$15K+ budget per event" }
+      { label: "Budget", value: "$15K+" },
+      { label: "Reach", value: "3+" },
+      { label: "Countries", value: "Global" }
     ],
-    description: "Managed digital campaigns for Islamic economy events across London, Saudi Arabia, and Pakistan.",
+    description: "Managed digital campaigns for major Islamic economy events across London, Saudi Arabia, and Pakistan, driving international engagement and attendance.",
     industry: "Finance",
     screenshot: "/lovable-uploads/9346e7a4-3664-492a-89e0-04c47bbf435b.png"
   },
@@ -47,11 +49,12 @@ export const caseStudies: CaseStudy[] = [
     title: "Restaurant Chain Growth",
     category: "local",
     client: "Shawaya Albukhari",
-    platforms: ["Meta", "Google Ads", "Snapchat"],
     metrics: [
-      { label: "Budget", value: "15K-35K SAR monthly budget" }
+      { label: "Branches", value: "3" },
+      { label: "Engagement", value: "+75%" },
+      { label: "Growth", value: "+120%" }
     ],
-    description: "Developed paid media campaigns for Saudi restaurant chain across 3 branches, optimizing for local traffic.",
+    description: "Implemented targeted advertising strategies across multiple branches, significantly improving customer acquisition and engagement rates.",
     industry: "Restaurant",
     screenshot: "/lovable-uploads/872450f0-c427-4e5a-8295-3550968a9973.png"
   },
