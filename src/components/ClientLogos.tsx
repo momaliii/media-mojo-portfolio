@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Separator } from "./ui/separator";
-import { cn } from "@/lib/utils";
 import ClientCard from "./client-logos/ClientCard";
 import ClientLogoSection from "./client-logos/ClientLogoSection";
 import FilterSection from "./client-logos/FilterSection";
@@ -18,33 +17,32 @@ import {
 } from "./ui/carousel";
 
 const ClientLogos: React.FC = () => {
-  // State for filters and display options
   const [selectedIndustry, setSelectedIndustry] = useState<string>("all");
   const [expanded, setExpanded] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'compact'>('grid');
   const [searchQuery, setSearchQuery] = useState("");
   
-  // Get unique industries (sorted alphabetically)
   const uniqueIndustries = Array.from(
     new Set(clientsData.map((client) => client.industry))
   ).sort();
   
-  // Filter clients based on selected industry and search query
   const filteredClients = clientsData
     .filter(client => 
       (selectedIndustry === "all" || client.industry === selectedIndustry) &&
       (searchQuery === "" || client.name.toLowerCase().includes(searchQuery.toLowerCase()))
     );
 
-  // Initial display count and total for "see more" functionality
   const initialDisplayCount = 8;
   const displayedClients = expanded 
     ? filteredClients 
     : filteredClients.slice(0, initialDisplayCount);
 
   return (
-    <section className="py-16 bg-gradient-to-b from-gray-50/50 to-white" id="clients">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <section className="relative py-20 overflow-hidden" id="clients">
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50/50 to-white"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-40"></div>
+      
+      <div className="container mx-auto px-4 max-w-6xl relative">
         <ClientLogoSection 
           title={
             <>
@@ -66,7 +64,6 @@ const ClientLogos: React.FC = () => {
         
         <Separator className="my-6 max-w-full mx-auto opacity-30" />
         
-        {/* Smart Carousel View */}
         <div className="max-w-full mx-auto">
           <Carousel
             opts={{
@@ -75,13 +72,17 @@ const ClientLogos: React.FC = () => {
             }}
             className="w-full"
           >
-            <CarouselContent className="py-4">
+            <CarouselContent className="-ml-2 md:-ml-4">
               {displayedClients.map((client, index) => (
-                <CarouselItem key={index} className="md:basis-1/4 lg:basis-1/5">
+                <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/3 lg:basis-1/4">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: Math.min(index * 0.1, 0.5) }}
+                    transition={{ 
+                      delay: Math.min(index * 0.1, 0.5),
+                      duration: 0.4,
+                      ease: [0.4, 0, 0.2, 1]
+                    }}
                   >
                     <ClientCard client={client} />
                   </motion.div>
@@ -89,28 +90,24 @@ const ClientLogos: React.FC = () => {
               ))}
             </CarouselContent>
             <div className="flex justify-center gap-4 mt-8">
-              <CarouselPrevious />
-              <CarouselNext />
+              <CarouselPrevious className="relative inset-0 translate-y-0 bg-white/80 hover:bg-white hover:text-media-purple transition-all duration-300" />
+              <CarouselNext className="relative inset-0 translate-y-0 bg-white/80 hover:bg-white hover:text-media-purple transition-all duration-300" />
             </div>
           </Carousel>
         </div>
         
-        {/* Show More Button */}
         {filteredClients.length > initialDisplayCount && (
           <motion.div 
-            className="mt-8 text-center"
+            className="mt-12 text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
             <Button
               variant="outline"
-              size="sm"
+              size="lg"
               onClick={() => setExpanded(!expanded)}
-              className={cn(
-                "rounded-full border transition-all duration-300",
-                expanded ? "border-gray-300" : "border-media-purple"
-              )}
+              className="rounded-xl border transition-all duration-300 hover:shadow-md bg-white/80 backdrop-blur-sm hover:bg-media-purple/10 hover:border-media-purple/30"
             >
               {expanded ? (
                 <>
