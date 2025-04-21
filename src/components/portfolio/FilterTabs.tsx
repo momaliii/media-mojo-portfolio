@@ -36,11 +36,11 @@ const FilterTabs = ({ filter, setFilter, filteredCaseStudies }: FilterTabsProps)
             <ToggleGroupItem value="b2b" className="rounded-md px-4 py-1.5 text-sm font-medium data-[state=on]:bg-white data-[state=on]:text-media-purple data-[state=on]:shadow-sm">
               B2B
             </ToggleGroupItem>
-            <ToggleGroupItem value="branding" className="rounded-md px-4 py-1.5 text-sm font-medium data-[state=on]:bg-white data-[state=on]:text-media-purple data-[state=on]:shadow-sm">
-              Branding
-            </ToggleGroupItem>
             <ToggleGroupItem value="local" className="rounded-md px-4 py-1.5 text-sm font-medium data-[state=on]:bg-white data-[state=on]:text-media-purple data-[state=on]:shadow-sm">
-              Local
+              Local Business
+            </ToggleGroupItem>
+            <ToggleGroupItem value="branding" className="rounded-md px-4 py-1.5 text-sm font-medium data-[state=on]:bg-white data-[state=on]:text-media-purple data-[state=on]:shadow-sm">
+              Events & Branding
             </ToggleGroupItem>
           </ToggleGroup>
         </motion.div>

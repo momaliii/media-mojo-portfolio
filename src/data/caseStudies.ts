@@ -9,142 +9,79 @@ export interface CaseStudyMetric {
 export interface CaseStudy {
   title: string;
   category: string;
-  image: string;
-  screenshot?: string;
-  additionalScreenshots?: string[];
   client: string;
   metrics: CaseStudyMetric[];
   description: string;
-  industry?: string; // Added industry field
+  industry?: string;
+  screenshot?: string;
+  additionalScreenshots?: string[];
 }
 
 // Case studies data
 export const caseStudies: CaseStudy[] = [
   {
-    title: "E-commerce Revenue Growth",
+    title: "Beauty Brand E-commerce Success",
     category: "e-commerce",
-    image: "bg-gradient-to-br from-media-purple/80 to-media-pink/80",
-    client: "Fashion Retailer",
+    client: "Cosmetics E-commerce",
     metrics: [
-      { label: "ROAS", value: "5.2x" },
-      { label: "Revenue", value: "$129K+" },
-      { label: "Conversion", value: "+145%" }
+      { label: "Orders", value: "95K+" },
+      { label: "ROAS", value: "8x+" },
+      { label: "Duration", value: "2024" }
     ],
-    description: "Increased e-commerce sales for a fashion retailer through optimized Meta campaigns, achieving 5.2x ROAS and generating over $129,000 in revenue from a single campaign.",
-    industry: "Fashion",
-    screenshot: "/lovable-uploads/97d6b1dd-bd01-420f-857d-b18eae7dbd5d.png",
-    additionalScreenshots: [
-      "/lovable-uploads/04a87b8a-bf75-42bd-be94-6ae0391bac19.png",
-      "/lovable-uploads/d18578fe-5e88-4f36-820d-b2a718472bd7.png"
-    ]
+    description: "Led a highly successful e-commerce campaign using LightFunnel and Easy Order, achieving exceptional results through strategic messaging and optimization.",
+    industry: "Beauty & Cosmetics",
+    screenshot: "/lovable-uploads/e7da6e3c-66cf-4166-9955-98eb4097a88f.png"
   },
   {
-    title: "E-commerce Revenue Growth on Cosmetics",
-    category: "e-commerce",
-    image: "bg-gradient-to-br from-pink-500/80 to-red-400/80",
-    client: "Beauty Brand",
-    metrics: [
-      { label: "ROAS", value: "8.6x" },
-      { label: "Revenue", value: "$245K+" },
-      { label: "AOV", value: "+32%" }
-    ],
-    description: "Transformed an underperforming cosmetics brand with strategic paid media optimization, achieving 8.6x ROAS and increasing average order value by 32%.",
-    industry: "Beauty",
-    screenshot: "/lovable-uploads/e7da6e3c-66cf-4166-9955-98eb4097a88f.png",
-    additionalScreenshots: [
-      "/lovable-uploads/90b6f75c-5af3-4d14-a7c7-97fdd4de046b.png",
-      "/lovable-uploads/cbc5d1b5-721f-4e97-9dd4-b0abe510f6ca.png"
-    ]
-  },
-  {
-    title: "B2B Lead Generation",
+    title: "Islamic Economy Events",
     category: "b2b",
-    image: "bg-gradient-to-br from-media-blue/90 to-media-oceanblue/90",
-    client: "SaaS Platform",
+    client: "AlBaraka Forum",
     metrics: [
-      { label: "CPL", value: "-42%" },
-      { label: "Leads", value: "+124%" },
-      { label: "CAC", value: "-28%" }
+      { label: "Budget", value: "$15K+" },
+      { label: "Reach", value: "3+" },
+      { label: "Countries", value: "Global" }
     ],
-    description: "Implemented an account-based marketing approach with targeted LinkedIn and Google campaigns, reducing cost per qualified lead by 42%.",
-    industry: "Technology",
-    screenshot: "/lovable-uploads/9346e7a4-3664-492a-89e0-04c47bbf435b.png",
-    additionalScreenshots: [
-      "/lovable-uploads/6169f3be-4578-4251-a8d5-421bd0d12051.png",
-      "/lovable-uploads/64c102de-0d99-4fd5-8306-3f34cc9a99cb.png"
-    ]
+    description: "Managed digital campaigns for major Islamic economy events across London, Saudi Arabia, and Pakistan, driving international engagement and attendance.",
+    industry: "Finance",
+    screenshot: "/lovable-uploads/9346e7a4-3664-492a-89e0-04c47bbf435b.png"
   },
   {
-    title: "Brand Awareness Campaign",
-    category: "branding",
-    image: "bg-gradient-to-br from-emerald-500/80 to-media-oceanblue/80",
-    client: "Food & Beverage",
-    metrics: [
-      { label: "Impressions", value: "12M" },
-      { label: "CPM", value: "-24%" },
-      { label: "Engagement", value: "+81%" }
-    ],
-    description: "Designed and managed programmatic display and video campaigns that reached over 12M targeted impressions with an 81% increase in engagement.",
-    industry: "Food & Beverage",
-    screenshot: "/lovable-uploads/900c6176-4030-4244-a97a-62a4c235d53f.png",
-    additionalScreenshots: [
-      "/lovable-uploads/ff3cd5e7-578b-4c18-ba7f-e66aae487f95.png",
-      "/lovable-uploads/75a4b4c5-2ee2-4ea8-808a-145ba7559879.png"
-    ]
-  },
-  {
-    title: "Local Business Growth",
+    title: "Restaurant Chain Growth",
     category: "local",
-    image: "bg-gradient-to-br from-indigo-500/80 to-media-vibrantpurple/80",
-    client: "Restaurant Chain",
+    client: "Shawaya Albukhari",
     metrics: [
-      { label: "Store Visits", value: "+45%" },
-      { label: "CPA", value: "$8.42" },
-      { label: "ROI", value: "3.8x" }
+      { label: "Branches", value: "3" },
+      { label: "Engagement", value: "+75%" },
+      { label: "Growth", value: "+120%" }
     ],
-    description: "Implemented location-based campaigns for 24 restaurants, increasing in-store visits by 45% and driving a measurable lift in revenue.",
-    industry: "Hospitality",
-    screenshot: "/lovable-uploads/872450f0-c427-4e5a-8295-3550968a9973.png",
-    additionalScreenshots: [
-      "/lovable-uploads/9063f5c0-17c4-4a9f-a1a4-91d1e4793e85.png",
-      "/lovable-uploads/ebe75d66-8891-465f-8f49-812477d03dac.png"
-    ]
+    description: "Implemented targeted advertising strategies across multiple branches, significantly improving customer acquisition and engagement rates.",
+    industry: "Restaurant",
+    screenshot: "/lovable-uploads/872450f0-c427-4e5a-8295-3550968a9973.png"
   },
   {
-    title: "Travel Booking Optimization",
-    category: "travel",
-    image: "bg-gradient-to-br from-sky-500/80 to-media-blue/80",
-    client: "Travel Agency",
+    title: "Entertainment Venue Marketing",
+    category: "branding",
+    client: "Tabla and Oud Lounge",
     metrics: [
-      { label: "Conversion Rate", value: "+57%" },
-      { label: "Booking Value", value: "+24%" },
-      { label: "ROAS", value: "5.2x" }
+      { label: "Budget", value: "35K SAR" },
+      { label: "Events", value: "10+" },
+      { label: "ROI", value: "+180%" }
     ],
-    description: "Restructured search and display campaigns with advanced audience targeting, increasing booking conversion rates by 57%.",
-    industry: "Travel",
-    screenshot: "/lovable-uploads/3078aa85-a337-44b4-87c8-97da41d33656.png",
-    additionalScreenshots: [
-      "/lovable-uploads/674d2167-6a40-4f1c-92ef-12fca8456a21.png",
-      "/lovable-uploads/f57ede24-91e3-4267-acf6-a7492dae4b16.png"
-    ]
+    description: "Developed and executed high-impact campaigns for exclusive events and concerts, including performances by renowned artists like Hamada Helal.",
+    industry: "Entertainment",
+    screenshot: "/lovable-uploads/a11917a6-704a-4ada-ba26-40899ba98b37.png"
   },
-  // Add new case study for non-profit LinkedIn campaigns
   {
-    title: "Non-Profit Awareness & Fundraising",
-    category: "non-profit",
-    image: "bg-gradient-to-br from-blue-500/80 to-indigo-400/80",
-    client: "International NGO",
+    title: "Education Platform Launch",
+    category: "b2b",
+    client: "CYC Academy",
     metrics: [
-      { label: "Total Spend", value: "$250K+" },
-      { label: "Engagement", value: "3.54%" },
-      { label: "Reach", value: "15.47M+" }
+      { label: "Leads", value: "500+" },
+      { label: "CPA", value: "-45%" },
+      { label: "Growth", value: "+200%" }
     ],
-    description: "Created and managed LinkedIn campaign series for non-profit organizations across Saudi Arabia and Middle Eastern countries, driving engagement and fundraising through targeted outreach.",
-    industry: "Non-Profit",
-    screenshot: "/lovable-uploads/a11917a6-704a-4ada-ba26-40899ba98b37.png",
-    additionalScreenshots: [
-      "/lovable-uploads/d07ff1b1-0451-4b63-9122-a1547f3ab4eb.png",
-      "/lovable-uploads/ea7c2b4d-8851-4c25-b5e6-7f33a0471af4.png"
-    ]
+    description: "Co-founded and led media buying strategy, focusing on lead generation and cost-per-acquisition optimization across multiple platforms.",
+    industry: "Education",
+    screenshot: "/lovable-uploads/900c6176-4030-4244-a97a-62a4c235d53f.png"
   }
 ];
