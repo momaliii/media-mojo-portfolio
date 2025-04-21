@@ -38,24 +38,25 @@ const ClientLogos: React.FC = () => {
     : filteredClients.slice(0, initialDisplayCount);
 
   return (
-    <section className="relative py-20 overflow-hidden bg-gradient-to-b from-gray-50 via-white to-gray-50" id="clients">
-      <div className="absolute inset-0 bg-grid-pattern opacity-[0.04] pointer-events-none"></div>
-      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white to-transparent"></div>
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
+    <section className="relative py-24 overflow-hidden" id="clients">
+      {/* Gradient mesh background */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_#f0f0f0_0%,_transparent_50%)] opacity-40"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_#f5f5f5_0%,_transparent_50%)] opacity-40"></div>
       
       <div className="container mx-auto px-4 relative">
         <ClientLogoSection 
           title={
-            <motion.div
+            <motion.span
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="relative"
             >
-              Trusted by <span className="bg-clip-text text-transparent bg-gradient-to-r from-media-purple to-media-oceanblue font-extrabold">Industry Leaders</span>
-            </motion.div>
+              Trusted by <span className="bg-clip-text text-transparent bg-gradient-to-r from-media-purple via-media-purple/90 to-media-oceanblue font-extrabold">Industry Leaders</span>
+            </motion.span>
           }
-          description="Partnering with businesses across various sectors to drive meaningful results through data-driven strategies"
+          description="Partnering with forward-thinking businesses across diverse sectors to deliver exceptional results through data-driven strategies and innovative solutions."
         />
         
         <FilterSection 
@@ -100,10 +101,10 @@ const ClientLogos: React.FC = () => {
             </CarouselContent>
             <div className="flex justify-center gap-4 mt-8">
               <CarouselPrevious 
-                className="relative inset-0 translate-y-0 bg-white/80 hover:bg-white hover:text-media-purple transition-all duration-300" 
+                className="relative inset-0 translate-y-0 bg-white hover:bg-media-purple/5 hover:text-media-purple border border-gray-100 transition-all duration-300" 
               />
               <CarouselNext 
-                className="relative inset-0 translate-y-0 bg-white/80 hover:bg-white hover:text-media-purple transition-all duration-300" 
+                className="relative inset-0 translate-y-0 bg-white hover:bg-media-purple/5 hover:text-media-purple border border-gray-100 transition-all duration-300" 
               />
             </div>
           </Carousel>
@@ -120,7 +121,7 @@ const ClientLogos: React.FC = () => {
               variant="outline"
               size="lg"
               onClick={() => setExpanded(!expanded)}
-              className="rounded-xl border transition-all duration-300 hover:shadow-md bg-white/80 backdrop-blur-sm hover:bg-media-purple/10 hover:border-media-purple/30"
+              className="rounded-xl border transition-all duration-300 hover:shadow-md bg-white hover:bg-media-purple/5 hover:border-media-purple/30"
             >
               {expanded ? (
                 <>
