@@ -1,6 +1,7 @@
+
 import React, { useState } from "react";
 import { clientsData } from "@/data/clients";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Separator } from "./ui/separator";
@@ -16,11 +17,11 @@ import {
   CarouselNext
 } from "./ui/carousel";
 
-const ClientLogos = () => {
+const ClientLogos: React.FC = () => {
   // State for filters and display options
   const [selectedIndustry, setSelectedIndustry] = useState<string>("all");
   const [expanded, setExpanded] = useState(false);
-  const [viewMode, setViewMode<'grid' | 'compact'>('grid');
+  const [viewMode, setViewMode] = useState<'grid' | 'compact'>('grid');
   const [searchQuery, setSearchQuery] = useState("");
   
   // Get unique industries (sorted alphabetically)
