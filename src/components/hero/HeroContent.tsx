@@ -1,10 +1,9 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import HeroStats from "./HeroStats";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Linkedin } from "lucide-react";
 import { motion } from "framer-motion";
+import ProfileLogo from "./ProfileLogo";
 
 const HeroContent = () => {
   const container = {
@@ -32,12 +31,7 @@ const HeroContent = () => {
     >
       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-4">
         <motion.div variants={item}>
-          <Avatar className="h-32 w-32 border-4 border-media-purple/20 shadow-xl hover:scale-105 transition-transform duration-300">
-            <AvatarImage src="/lovable-uploads/900c6176-4030-4244-a97a-62a4c235d53f.png" alt="Mohamed Ali" className="object-cover" />
-            <AvatarFallback className="text-3xl font-bold text-media-purple bg-media-purple/10">
-              MA
-            </AvatarFallback>
-          </Avatar>
+          <ProfileLogo />
         </motion.div>
         
         <div>
