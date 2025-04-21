@@ -1,10 +1,8 @@
-
 import React, { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Portfolio from "@/components/Portfolio";
-import ClientLogos from "@/components/ClientLogos";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Services from "@/components/Services";
@@ -52,7 +50,6 @@ const Index = () => {
         <About />
         <Services />
         <Portfolio />
-        <ClientLogos />
         <Contact />
       </main>
       <Footer />
