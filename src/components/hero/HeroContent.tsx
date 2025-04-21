@@ -32,7 +32,7 @@ const HeroContent = () => {
     >
       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-4">
         <motion.div variants={item}>
-          <Avatar className="h-28 w-28 border-2 border-media-purple/20 shadow-lg">
+          <Avatar className="h-32 w-32 border-4 border-media-purple/20 shadow-xl hover:scale-105 transition-transform duration-300">
             <AvatarImage src="/lovable-uploads/900c6176-4030-4244-a97a-62a4c235d53f.png" alt="Mohamed Ali" className="object-cover" />
             <AvatarFallback className="text-3xl font-bold text-media-purple bg-media-purple/10">
               MA
@@ -45,21 +45,21 @@ const HeroContent = () => {
             variants={item}
             className="inline-block py-1.5 px-4 rounded-full bg-gradient-to-r from-media-purple/20 to-media-oceanblue/20 text-media-purple font-medium text-sm mb-4 shadow-sm"
           >
-            Performance Media Buyer
+            Senior Media Buyer
           </motion.span>
           
           <motion.h1 
             variants={item}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight"
           >
             Mohamed <span className="gradient-text">Ali</span>
           </motion.h1>
           
           <motion.p 
             variants={item}
-            className="mt-6 text-lg text-gray-600 md:pr-10"
+            className="mt-6 text-lg text-gray-600 max-w-2xl"
           >
-            Performance Media Buyer with 5+ years of experience optimizing campaigns across Meta, LinkedIn, TikTok, Snapchat, Twitter, and Google Ads. Delivering measurable results and exceptional ROI.
+            Senior Media Buyer with 5+ years of experience optimizing campaigns across Meta, LinkedIn, TikTok, Snapchat, Twitter, and Google Ads. Delivering exceptional results and measurable ROI.
           </motion.p>
           
           <motion.div 

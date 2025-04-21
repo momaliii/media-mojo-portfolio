@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { clientsData } from "@/data/clients";
 import { motion, AnimatePresence } from "framer-motion";
@@ -21,7 +20,7 @@ const ClientLogos = () => {
   // State for filters and display options
   const [selectedIndustry, setSelectedIndustry] = useState<string>("all");
   const [expanded, setExpanded] = useState(false);
-  const [viewMode, setViewMode] = useState<'grid' | 'compact'>('grid');
+  const [viewMode, setViewMode<'grid' | 'compact'>('grid');
   const [searchQuery, setSearchQuery] = useState("");
   
   // Get unique industries (sorted alphabetically)
@@ -43,11 +42,15 @@ const ClientLogos = () => {
     : filteredClients.slice(0, initialDisplayCount);
 
   return (
-    <section className="py-16 bg-gradient-to-b from-gray-50 to-white" id="clients">
+    <section className="py-16 bg-gradient-to-b from-gray-50/50 to-white" id="clients">
       <div className="container mx-auto px-4 max-w-6xl">
         <ClientLogoSection 
-          title={<>Trusted by <span className="text-media-purple">Industry Leaders</span></>}
-          description="Partnering with businesses across various sectors to drive meaningful results"
+          title={
+            <>
+              Trusted by <span className="gradient-text bg-gradient-to-r from-media-purple to-media-oceanblue">Industry Leaders</span>
+            </>
+          }
+          description="Partnering with businesses across various sectors to drive meaningful results through data-driven strategies"
         />
         
         <FilterSection 
@@ -62,53 +65,43 @@ const ClientLogos = () => {
         
         <Separator className="my-6 max-w-full mx-auto opacity-30" />
         
-        {/* Grid View */}
-        {viewMode === 'grid' && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
-            <AnimatePresence>
+        {/* Smart Carousel View */}
+        <div className="max-w-full mx-auto">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="py-4">
               {displayedClients.map((client, index) => (
-                <motion.div
-                  key={client.name + index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ delay: Math.min(index * 0.05, 0.5) }}
-                >
-                  <ClientCard client={client} />
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
-        )}
-        
-        {/* Compact View (Carousel) */}
-        {viewMode === 'compact' && (
-          <div className="max-w-full mx-auto">
-            <Carousel
-              opts={{
-                align: "start",
-                loop: true,
-              }}
-              className="w-full"
-            >
-              <CarouselContent>
-                {displayedClients.map((client, index) => (
-                  <CarouselItem key={index} className="basis-1/3 md:basis-1/4 lg:basis-1/5 pl-4">
+                <CarouselItem key={index} className="md:basis-1/4 lg:basis-1/5">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: Math.min(index * 0.1, 0.5) }}
+                  >
                     <ClientCard client={client} />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <div className="flex justify-center mt-6">
-                <CarouselPrevious className="relative static transform-none mx-2" />
-                <CarouselNext className="relative static transform-none mx-2" />
-              </div>
-            </Carousel>
-          </div>
-        )}
+                  </motion.div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex justify-center gap-4 mt-8">
+              <CarouselPrevious />
+              <CarouselNext />
+            </div>
+          </Carousel>
+        </div>
         
         {/* Show More Button */}
         {filteredClients.length > initialDisplayCount && (
-          <div className="mt-8 text-center">
+          <motion.div 
+            className="mt-8 text-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
             <Button
               variant="outline"
               size="sm"
@@ -130,7 +123,7 @@ const ClientLogos = () => {
                 </>
               )}
             </Button>
-          </div>
+          </motion.div>
         )}
       </div>
     </section>
