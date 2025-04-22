@@ -11,7 +11,7 @@ import AdScreenshotCard from "./AdScreenshotCard";
 import AdGalleryHeader from "./AdGalleryHeader";
 import AdGalleryFooter from "./AdGalleryFooter";
 import { adCampaignScreenshots } from "@/data/adScreenshots";
-import { createSafeAutoplayPlugin } from "@/lib/carousel-compatibility";
+import { safeImportAutoplay } from "@/lib/carousel-compatibility";
 
 const AdScreenshotsGallery: React.FC = () => {
   // Set up state for autoplay control
@@ -21,14 +21,24 @@ const AdScreenshotsGallery: React.FC = () => {
 
   // Load autoplay plugin safely
   useEffect(() => {
-    // Use our safe wrapper instead of direct import
-    const plugin = createSafeAutoplayPlugin({
-      delay: 3000,
-      stopOnInteraction: false,
-      stopOnMouseEnter: true,
-    });
+    // Asynchronously load the autoplay plugin
+    const loadPlugin = async () => {
+      try {
+        const Autoplay = await safeImportAutoplay();
+        if (Autoplay) {
+          const plugin = Autoplay({
+            delay: 3000,
+            stopOnInteraction: false,
+            stopOnMouseEnter: true,
+          });
+          setAutoplayPlugin(plugin);
+        }
+      } catch (err) {
+        console.warn("Failed to load autoplay plugin:", err);
+      }
+    };
     
-    setAutoplayPlugin(plugin);
+    loadPlugin();
   }, []);
 
   // Prevent right-clicking for download

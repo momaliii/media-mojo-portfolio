@@ -20,10 +20,26 @@ export const safeImportAutoplay = async () => {
 // Safe wrapper for creating a carousel plugin
 export const createSafeAutoplayPlugin = (options = {}) => {
   try {
-    // Try to directly use the Autoplay import if available
-    // This helps when the dynamic import might fail
-    const Autoplay = require('embla-carousel-autoplay');
-    return Autoplay(options);
+    // Use dynamic import instead of require for browser compatibility
+    // This returns a placeholder object until the actual plugin is loaded
+    const placeholderPlugin = {
+      name: 'autoplay',
+      options,
+      init: () => ({ destroy: () => {} })
+    };
+    
+    // Immediately try to load the real plugin
+    safeImportAutoplay().then(Autoplay => {
+      if (Autoplay) {
+        // Successfully loaded, but we can't return it here
+        // The component using this should handle the async nature
+        console.log('Autoplay plugin successfully loaded');
+      }
+    }).catch(err => {
+      console.warn('Failed to load autoplay plugin:', err);
+    });
+    
+    return placeholderPlugin;
   } catch (error) {
     console.warn('Could not create embla-carousel-autoplay plugin:', error);
     // Return a no-op plugin as fallback
