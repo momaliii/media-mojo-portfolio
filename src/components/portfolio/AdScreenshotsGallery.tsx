@@ -1,5 +1,5 @@
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { 
   Carousel, 
   CarouselContent, 
@@ -11,12 +11,25 @@ import AdScreenshotCard from "./AdScreenshotCard";
 import AdGalleryHeader from "./AdGalleryHeader";
 import AdGalleryFooter from "./AdGalleryFooter";
 import { adCampaignScreenshots } from "@/data/adScreenshots";
-import Autoplay from "embla-carousel-autoplay";
+import { createSafeAutoplayPlugin } from "@/lib/carousel-compatibility";
 
 const AdScreenshotsGallery: React.FC = () => {
   // Set up state for autoplay control
   const [autoplayEnabled, setAutoplayEnabled] = useState(true);
   const [api, setApi] = useState<any>(null);
+  const [autoplayPlugin, setAutoplayPlugin] = useState<any>(null);
+
+  // Load autoplay plugin safely
+  useEffect(() => {
+    // Use our safe wrapper instead of direct import
+    const plugin = createSafeAutoplayPlugin({
+      delay: 3000,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+    });
+    
+    setAutoplayPlugin(plugin);
+  }, []);
 
   // Prevent right-clicking for download
   const handleContextMenu = (e: React.MouseEvent) => {
@@ -26,13 +39,13 @@ const AdScreenshotsGallery: React.FC = () => {
 
   // Handle mouse interactions to pause/resume autoplay
   const handleMouseEnter = useCallback(() => {
-    if (api && autoplayEnabled) {
+    if (api && autoplayEnabled && api.plugins && api.plugins().autoplay) {
       api.plugins().autoplay.stop();
     }
   }, [api, autoplayEnabled]);
 
   const handleMouseLeave = useCallback(() => {
-    if (api && autoplayEnabled) {
+    if (api && autoplayEnabled && api.plugins && api.plugins().autoplay) {
       api.plugins().autoplay.reset();
       api.plugins().autoplay.play();
     }
@@ -49,13 +62,7 @@ const AdScreenshotsGallery: React.FC = () => {
               align: "start",
               loop: true,
             }}
-            plugins={[
-              Autoplay({
-                delay: 3000,
-                stopOnInteraction: false,
-                stopOnMouseEnter: true,
-              }),
-            ]}
+            plugins={autoplayPlugin ? [autoplayPlugin] : []}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             setApi={setApi}

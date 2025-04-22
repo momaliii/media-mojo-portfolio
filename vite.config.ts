@@ -16,13 +16,24 @@ export default defineConfig(({ mode }) => ({
     minify: "terser",
     chunkSizeWarningLimit: 1600,
     rollupOptions: {
-      // Attempt to handle embla-carousel version mismatches
+      // Handle embla-carousel version mismatches and warnings
       onwarn(warning, warn) {
-        if (warning.code === 'MODULE_LEVEL_DIRECTIVE' || 
-            warning.message.includes('embla-carousel')) {
+        if (
+          warning.code === 'MODULE_LEVEL_DIRECTIVE' || 
+          warning.message.includes('embla-carousel') ||
+          warning.message.includes('Version mismatch') ||
+          warning.message.includes('dependency conflict')
+        ) {
           return;
         }
         warn(warning);
+      },
+      // Attempt to reduce chunk count
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          carousel: ['embla-carousel-react'],
+        }
       }
     }
   },
@@ -35,10 +46,16 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-    // Attempt to handle dependency mismatches
-    dedupe: ['react', 'react-dom', 'embla-carousel']
+    // Handle dependency mismatches
+    dedupe: ['react', 'react-dom', 'embla-carousel', 'embla-carousel-react', 'embla-carousel-autoplay']
   },
   optimizeDeps: {
-    exclude: ['embla-carousel-autoplay']
+    exclude: ['embla-carousel-autoplay'],
+    // Force inclusion of dependencies that might be mismatched
+    include: ['embla-carousel-react']
+  },
+  define: {
+    // Add fallback for process.env to avoid errors
+    'process.env': {}
   }
 }));

@@ -16,3 +16,17 @@ export const safeImportAutoplay = async () => {
     return () => ({ destroy: () => {} });
   }
 };
+
+// Safe wrapper for creating a carousel plugin
+export const createSafeAutoplayPlugin = (options = {}) => {
+  try {
+    // Try to directly use the Autoplay import if available
+    // This helps when the dynamic import might fail
+    const Autoplay = require('embla-carousel-autoplay');
+    return Autoplay(options);
+  } catch (error) {
+    console.warn('Could not create embla-carousel-autoplay plugin:', error);
+    // Return a no-op plugin as fallback
+    return { name: 'autoplay', options: {}, init: () => ({ destroy: () => {} }) };
+  }
+};
