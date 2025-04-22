@@ -1,5 +1,5 @@
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { 
   Carousel, 
   CarouselContent, 
@@ -11,35 +11,12 @@ import AdScreenshotCard from "./AdScreenshotCard";
 import AdGalleryHeader from "./AdGalleryHeader";
 import AdGalleryFooter from "./AdGalleryFooter";
 import { adCampaignScreenshots } from "@/data/adScreenshots";
-import { safeImportAutoplay } from "@/lib/carousel-compatibility";
+import Autoplay from "embla-carousel-autoplay";
 
 const AdScreenshotsGallery: React.FC = () => {
   // Set up state for autoplay control
   const [autoplayEnabled, setAutoplayEnabled] = useState(true);
   const [api, setApi] = useState<any>(null);
-  const [autoplayPlugin, setAutoplayPlugin] = useState<any>(null);
-
-  // Load autoplay plugin safely
-  useEffect(() => {
-    // Asynchronously load the autoplay plugin
-    const loadPlugin = async () => {
-      try {
-        const Autoplay = await safeImportAutoplay();
-        if (Autoplay) {
-          const plugin = Autoplay({
-            delay: 3000,
-            stopOnInteraction: false,
-            stopOnMouseEnter: true,
-          });
-          setAutoplayPlugin(plugin);
-        }
-      } catch (err) {
-        console.warn("Failed to load autoplay plugin:", err);
-      }
-    };
-    
-    loadPlugin();
-  }, []);
 
   // Prevent right-clicking for download
   const handleContextMenu = (e: React.MouseEvent) => {
@@ -49,13 +26,13 @@ const AdScreenshotsGallery: React.FC = () => {
 
   // Handle mouse interactions to pause/resume autoplay
   const handleMouseEnter = useCallback(() => {
-    if (api && autoplayEnabled && api.plugins && api.plugins().autoplay) {
+    if (api && autoplayEnabled) {
       api.plugins().autoplay.stop();
     }
   }, [api, autoplayEnabled]);
 
   const handleMouseLeave = useCallback(() => {
-    if (api && autoplayEnabled && api.plugins && api.plugins().autoplay) {
+    if (api && autoplayEnabled) {
       api.plugins().autoplay.reset();
       api.plugins().autoplay.play();
     }
@@ -72,7 +49,13 @@ const AdScreenshotsGallery: React.FC = () => {
               align: "start",
               loop: true,
             }}
-            plugins={autoplayPlugin ? [autoplayPlugin] : []}
+            plugins={[
+              Autoplay({
+                delay: 3000,
+                stopOnInteraction: false,
+                stopOnMouseEnter: true,
+              }),
+            ]}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             setApi={setApi}
