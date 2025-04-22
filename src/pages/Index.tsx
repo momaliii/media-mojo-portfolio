@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
@@ -47,7 +48,10 @@ const Index = () => {
       <Navigation />
       <main className="overflow-hidden">
         <Hero />
-        <About />
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50/50 to-white pointer-events-none" />
+          <About />
+        </div>
         <Services />
         <Portfolio />
         <Contact />

@@ -17,14 +17,14 @@ const ProfileLogo = () => {
       whileHover={{ scale: 1.05 }}
       className="relative"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-media-purple/30 to-media-oceanblue/30 rounded-full blur-xl" />
-      <Avatar className="h-32 w-32 border-4 border-white/80 shadow-xl relative bg-gradient-to-br from-media-purple/10 to-media-oceanblue/10">
+      <div className="absolute inset-0 bg-gradient-to-br from-media-purple/30 to-media-oceanblue/30 rounded-full blur-xl transform-gpu" />
+      <Avatar className="h-40 w-40 border-4 border-white shadow-2xl relative bg-gradient-to-br from-media-purple/10 to-media-oceanblue/10">
         <AvatarImage 
           src="/lovable-uploads/900c6176-4030-4244-a97a-62a4c235d53f.png" 
           alt="Mohamed Ali" 
           className="object-cover"
         />
-        <AvatarFallback className="text-3xl font-bold text-media-purple bg-media-purple/10">
+        <AvatarFallback className="text-4xl font-bold text-media-purple bg-media-purple/10">
           MA
         </AvatarFallback>
       </Avatar>
