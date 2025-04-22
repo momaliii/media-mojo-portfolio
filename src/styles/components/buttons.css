@@ -1,0 +1,18 @@
+
+/* Button base styles */
+.btn-base {
+  @apply px-4 py-2 rounded-lg transition-all duration-300;
+}
+
+/* Button variations */
+.btn-primary {
+  @apply bg-media-purple text-white hover:bg-media-darkpurple;
+}
+
+.btn-secondary {
+  @apply bg-gray-100 text-gray-800 hover:bg-gray-200;
+}
+
+.btn-outline {
+  @apply border border-media-purple text-media-purple hover:bg-media-purple hover:text-white;
+}

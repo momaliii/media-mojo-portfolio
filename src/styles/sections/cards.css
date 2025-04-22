@@ -1,0 +1,17 @@
+
+.card {
+  @apply rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-media-purple to-media-oceanblue;
+}
+
+.stat-value {
+  counter-reset: count 0;
+  animation: count-up 2s forwards;
+}
+
+.stat-value::after {
+  content: counter(count);
+}

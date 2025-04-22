@@ -1,0 +1,18 @@
+
+/* Card base styles */
+.card-base {
+  @apply bg-white rounded-xl shadow-sm transition-all duration-300;
+}
+
+/* Card variations */
+.card-hover {
+  @apply hover:shadow-lg hover:-translate-y-1;
+}
+
+.card-active {
+  @apply active:scale-95;
+}
+
+.card-gradient {
+  @apply bg-gradient-to-r from-media-purple to-media-oceanblue text-white;
+}
