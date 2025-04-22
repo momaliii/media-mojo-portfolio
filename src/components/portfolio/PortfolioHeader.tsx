@@ -26,7 +26,8 @@ const PortfolioHeader = () => {
         Featured <span className="gradient-text">Case Studies</span>
       </h2>
       <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
-        Delivering exceptional results across multiple industries, managing campaigns in Saudi Arabia, Egypt, Kuwait, Qatar, Turkey, China, UK, and the U.S.
+        Delivering exceptional results across multiple industries, managing campaigns 
+        in Saudi Arabia, Egypt, Kuwait, Qatar, Turkey, China, UK, and the U.S.
       </p>
       <motion.div 
         initial={{ scale: 0 }}
