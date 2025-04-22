@@ -1,0 +1,20 @@
+
+@layer base {
+  .section-padding {
+    @apply py-16 md:py-28;
+  }
+  
+  /* Improved section styling */
+  section {
+    @apply relative overflow-hidden;
+  }
+  
+  /* Card enhancements */
+  .card {
+    @apply rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-media-purple to-media-oceanblue;
+  }
+}

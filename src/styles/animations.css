@@ -1,0 +1,48 @@
+
+/* Custom animation classes */
+.animate-delay-100 { animation-delay: 100ms; }
+.animate-delay-200 { animation-delay: 200ms; }
+.animate-delay-300 { animation-delay: 300ms; }
+.animate-delay-400 { animation-delay: 400ms; }
+.animate-delay-500 { animation-delay: 500ms; }
+
+/* Stats animation */
+.stat-value {
+  counter-reset: count 0;
+  animation: count-up 2s forwards;
+}
+
+@keyframes count-up {
+  0% { counter-increment: count 0; }
+  100% { counter-increment: count var(--target); }
+}
+
+.stat-value::after {
+  content: counter(count);
+}
+
+/* Hero section animations */
+.hero-grid-item {
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fade-in-up 0.7s forwards;
+}
+
+.hero-grid-item:nth-child(1) { animation-delay: 100ms; }
+.hero-grid-item:nth-child(2) { animation-delay: 200ms; }
+.hero-grid-item:nth-child(3) { animation-delay: 300ms; }
+.hero-grid-item:nth-child(4) { animation-delay: 400ms; }
+.hero-grid-item:nth-child(5) { animation-delay: 500ms; }
+.hero-grid-item:nth-child(6) { animation-delay: 600ms; }
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
