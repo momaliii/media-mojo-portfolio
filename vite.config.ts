@@ -15,6 +15,16 @@ export default defineConfig(({ mode }) => ({
     sourcemap: true,
     minify: "terser",
     chunkSizeWarningLimit: 1600,
+    rollupOptions: {
+      // Attempt to handle embla-carousel version mismatches
+      onwarn(warning, warn) {
+        if (warning.code === 'MODULE_LEVEL_DIRECTIVE' || 
+            warning.message.includes('embla-carousel')) {
+          return;
+        }
+        warn(warning);
+      }
+    }
   },
   plugins: [
     react(),
@@ -25,5 +35,10 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+    // Attempt to handle dependency mismatches
+    dedupe: ['react', 'react-dom', 'embla-carousel']
   },
+  optimizeDeps: {
+    exclude: ['embla-carousel-autoplay']
+  }
 }));
