@@ -7,6 +7,8 @@ const PORT = process.env.PORT || 8080;
 // Log startup information
 console.log('Starting server...');
 console.log(`Node version: ${process.version}`);
+console.log(`Environment: ${process.env.NODE_ENV}`);
+console.log(`Port: ${PORT}`);
 console.log(`Serving from: ${path.join(__dirname, 'dist')}`);
 
 // Serve static files from the dist directory
@@ -20,3 +22,4 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
