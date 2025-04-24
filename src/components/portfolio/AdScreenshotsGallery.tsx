@@ -26,15 +26,15 @@ const AdScreenshotsGallery: React.FC = () => {
 
   // Handle mouse interactions to pause/resume autoplay
   const handleMouseEnter = useCallback(() => {
-    if (api && autoplayEnabled) {
-      api.plugins()?.autoplay?.stop();
+    if (api && autoplayEnabled && api.plugins() && api.plugins().autoplay) {
+      api.plugins().autoplay.stop();
     }
   }, [api, autoplayEnabled]);
 
   const handleMouseLeave = useCallback(() => {
-    if (api && autoplayEnabled) {
-      api.plugins()?.autoplay?.reset();
-      api.plugins()?.autoplay?.play();
+    if (api && autoplayEnabled && api.plugins() && api.plugins().autoplay) {
+      api.plugins().autoplay.reset();
+      api.plugins().autoplay.play();
     }
   }, [api, autoplayEnabled]);
 
