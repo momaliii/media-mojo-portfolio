@@ -4,6 +4,11 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+// Log startup information
+console.log('Starting server...');
+console.log(`Node version: ${process.version}`);
+console.log(`Serving from: ${path.join(__dirname, 'dist')}`);
+
 // Serve static files from the dist directory
 app.use(express.static(path.join(__dirname, 'dist')));
 

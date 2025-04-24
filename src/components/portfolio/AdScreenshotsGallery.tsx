@@ -24,6 +24,13 @@ const AdScreenshotsGallery: React.FC = () => {
     return false;
   };
 
+  // Create the plugin with the specific options
+  const autoplayOptions = {
+    delay: 3000,
+    stopOnInteraction: false,
+    stopOnMouseEnter: true,
+  };
+
   // Handle mouse interactions to pause/resume autoplay
   const handleMouseEnter = useCallback(() => {
     if (api && autoplayEnabled && api.plugins() && api.plugins().autoplay) {
@@ -50,11 +57,7 @@ const AdScreenshotsGallery: React.FC = () => {
               loop: true,
             }}
             plugins={[
-              Autoplay({
-                delay: 3000,
-                stopOnInteraction: false,
-                stopOnMouseEnter: true,
-              }),
+              Autoplay(autoplayOptions),
             ]}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
