@@ -14,4 +14,3 @@ services:
     value: "18.x"
   - key: NODE_ENV
     value: "production"
-

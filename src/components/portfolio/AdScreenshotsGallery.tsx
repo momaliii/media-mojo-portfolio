@@ -24,24 +24,30 @@ const AdScreenshotsGallery: React.FC = () => {
     return false;
   };
 
-  // Create the plugin with the specific options
-  const autoplayOptions = {
+  // Create the autoplay plugin with the specific options
+  const autoplayPlugin = Autoplay({
     delay: 3000,
     stopOnInteraction: false,
     stopOnMouseEnter: true,
-  };
+  });
 
   // Handle mouse interactions to pause/resume autoplay
   const handleMouseEnter = useCallback(() => {
-    if (api && autoplayEnabled && api.plugins() && api.plugins().autoplay) {
-      api.plugins().autoplay.stop();
+    if (api && autoplayEnabled && api.plugins()) {
+      const autoplayInstance = api.plugins().autoplay;
+      if (autoplayInstance) {
+        autoplayInstance.stop();
+      }
     }
   }, [api, autoplayEnabled]);
 
   const handleMouseLeave = useCallback(() => {
-    if (api && autoplayEnabled && api.plugins() && api.plugins().autoplay) {
-      api.plugins().autoplay.reset();
-      api.plugins().autoplay.play();
+    if (api && autoplayEnabled && api.plugins()) {
+      const autoplayInstance = api.plugins().autoplay;
+      if (autoplayInstance) {
+        autoplayInstance.reset();
+        autoplayInstance.play();
+      }
     }
   }, [api, autoplayEnabled]);
 
@@ -57,7 +63,7 @@ const AdScreenshotsGallery: React.FC = () => {
               loop: true,
             }}
             plugins={[
-              Autoplay(autoplayOptions),
+              autoplayPlugin,
             ]}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
