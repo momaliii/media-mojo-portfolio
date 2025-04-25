@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -13,7 +12,7 @@ import {
   MapPin,
   Loader2
 } from "lucide-react";
-import { trackFormSubmission } from "@/utils/analytics";
+import { trackFormSubmission, trackEvent } from "@/utils/analytics";
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
