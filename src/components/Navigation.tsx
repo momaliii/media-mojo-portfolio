@@ -3,13 +3,17 @@ import React, { useState, useEffect } from "react";
 import { Menu, X, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackEvent } from "@/utils/analytics";
 
-const Navigation = () => {
+interface NavigationProps {
+  activeSection?: string;
+}
+
+const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("hero");
 
-  // Handle scroll effect and active section
+  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
@@ -20,22 +24,6 @@ const Navigation = () => {
       } else {
         setIsScrolled(false);
       }
-      
-      // Determine active section for menu highlighting
-      const sections = ["hero", "about", "services", "portfolio", "contact"];
-      let currentSection = "hero";
-      
-      sections.forEach(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            currentSection = section;
-          }
-        }
-      });
-      
-      setActiveSection(currentSection);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -47,6 +35,10 @@ const Navigation = () => {
   // Toggle mobile menu
   const toggleMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
+    
+    trackEvent('toggle_mobile_menu', { 
+      action: !mobileMenuOpen ? 'open' : 'close'
+    });
   };
 
   // Smooth scroll to section
@@ -55,6 +47,10 @@ const Navigation = () => {
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
+      
+      trackEvent('navigation_click', {
+        section: sectionId
+      });
     }
   };
 
@@ -101,12 +97,14 @@ const Navigation = () => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 whileHover={{ scale: 1.05 }}
+                aria-label={`Navigate to ${item} section`}
               >
                 {item}
                 <span 
                   className={`absolute -bottom-1 left-0 h-0.5 bg-media-purple transition-all duration-300 ${
                     activeSection === item ? "w-full" : "w-0 group-hover:w-full"
                   }`}
+                  aria-hidden="true"
                 ></span>
               </motion.button>
             ))}
@@ -119,7 +117,7 @@ const Navigation = () => {
                 onClick={() => scrollToSection("contact")}
                 className="bg-media-purple hover:bg-media-darkpurple text-white shadow-md hover:shadow-lg transition-all"
               >
-                Let's Talk <ChevronRight className="ml-1 h-4 w-4" />
+                Let's Talk <ChevronRight className="ml-1 h-4 w-4" aria-hidden="true" />
               </Button>
             </motion.div>
           </div>
@@ -130,10 +128,12 @@ const Navigation = () => {
               variant="ghost"
               size="icon"
               onClick={toggleMenu}
-              aria-label="Menu"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
               className="focus:ring-0"
             >
-              {mobileMenuOpen ? <X /> : <Menu />}
+              {mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
             </Button>
           </div>
         </div>
@@ -147,6 +147,9 @@ const Navigation = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
+              id="mobile-menu"
+              role="navigation" 
+              aria-label="Mobile navigation menu"
             >
               <div className="flex flex-col space-y-4 bg-white/90 backdrop-blur-sm p-4 rounded-xl shadow-sm">
                 {["about", "services", "portfolio", "contact"].map((item, index) => (
@@ -161,6 +164,7 @@ const Navigation = () => {
                     initial={{ x: -20, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: index * 0.1, duration: 0.3 }}
+                    aria-label={`Navigate to ${item} section`}
                   >
                     {item}
                   </motion.button>
@@ -175,7 +179,7 @@ const Navigation = () => {
                     className="bg-media-purple hover:bg-media-darkpurple text-white w-full shadow-md flex items-center justify-center"
                   >
                     <span>Let's Talk</span>
-                    <ChevronRight className="ml-1 h-4 w-4" />
+                    <ChevronRight className="ml-1 h-4 w-4" aria-hidden="true" />
                   </Button>
                 </motion.div>
               </div>

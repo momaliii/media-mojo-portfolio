@@ -1,24 +1,135 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/use-toast";
 import { 
   Mail, 
   Send,
   Linkedin,
   Phone,
-  MapPin 
+  MapPin,
+  Loader2
 } from "lucide-react";
+import { trackFormSubmission } from "@/utils/analytics";
+
+type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
+
+interface FormData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
 
 const Contact = () => {
-  const handleSubmit = (e: React.FormEvent) => {
+  const { toast } = useToast();
+  const [formStatus, setFormStatus] = useState<FormStatus>('idle');
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const validateForm = (): boolean => {
+    if (!formData.name.trim()) {
+      toast({
+        title: "Name required",
+        description: "Please enter your name",
+        variant: "destructive"
+      });
+      return false;
+    }
+    
+    if (!formData.email.trim() || !/^\S+@\S+\.\S+$/.test(formData.email)) {
+      toast({
+        title: "Valid email required",
+        description: "Please enter a valid email address",
+        variant: "destructive"
+      });
+      return false;
+    }
+    
+    if (!formData.subject.trim()) {
+      toast({
+        title: "Subject required",
+        description: "Please provide a subject for your message",
+        variant: "destructive"
+      });
+      return false;
+    }
+    
+    if (!formData.message.trim() || formData.message.length < 10) {
+      toast({
+        title: "Message too short",
+        description: "Please provide a detailed message (at least 10 characters)",
+        variant: "destructive"
+      });
+      return false;
+    }
+    
+    return true;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Form handling would go here in a real implementation
-    console.log("Form submitted");
-    // Show success message
-    alert("Thanks for your message! I'll get back to you soon.");
+    
+    if (!validateForm()) return;
+    
+    setFormStatus('submitting');
+    
+    try {
+      // Simulate form submission with a delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Track successful submission
+      trackFormSubmission('contact_form', true);
+      
+      // Show success message
+      setFormStatus('success');
+      toast({
+        title: "Message sent!",
+        description: "Thanks for your message! I'll get back to you soon.",
+      });
+      
+      // Clear the form
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+      
+      // Reset form status after delay
+      setTimeout(() => setFormStatus('idle'), 3000);
+    } catch (error) {
+      console.error("Form submission error:", error);
+      
+      // Track failed submission
+      trackFormSubmission('contact_form', false);
+      
+      // Show error message
+      setFormStatus('error');
+      toast({
+        title: "Something went wrong",
+        description: "Please try again or contact me directly via email.",
+        variant: "destructive"
+      });
+      
+      // Reset form status
+      setTimeout(() => setFormStatus('idle'), 3000);
+    }
   };
 
   return (
@@ -49,9 +160,14 @@ const Contact = () => {
                         Name
                       </label>
                       <Input 
-                        id="name" 
+                        id="name"
+                        name="name" 
+                        value={formData.name}
+                        onChange={handleInputChange}
                         placeholder="Your name" 
                         required
+                        aria-required="true"
+                        disabled={formStatus === 'submitting'}
                       />
                     </div>
                     <div className="space-y-2">
@@ -59,10 +175,15 @@ const Contact = () => {
                         Email
                       </label>
                       <Input 
-                        id="email" 
+                        id="email"
+                        name="email" 
+                        value={formData.email}
+                        onChange={handleInputChange}
                         type="email" 
                         placeholder="Your email" 
                         required
+                        aria-required="true"
+                        disabled={formStatus === 'submitting'}
                       />
                     </div>
                   </div>
@@ -72,9 +193,14 @@ const Contact = () => {
                       Subject
                     </label>
                     <Input 
-                      id="subject" 
+                      id="subject"
+                      name="subject" 
+                      value={formData.subject}
+                      onChange={handleInputChange}
                       placeholder="What's this regarding?" 
                       required
+                      aria-required="true"
+                      disabled={formStatus === 'submitting'}
                     />
                   </div>
                   
@@ -83,19 +209,35 @@ const Contact = () => {
                       Message
                     </label>
                     <Textarea 
-                      id="message" 
+                      id="message"
+                      name="message" 
+                      value={formData.message}
+                      onChange={handleInputChange}
                       placeholder="Tell me about your project or inquiry" 
                       className="min-h-[120px]" 
                       required
+                      aria-required="true"
+                      disabled={formStatus === 'submitting'}
                     />
                   </div>
                   
                   <Button 
                     type="submit" 
                     className="w-full bg-media-purple hover:bg-media-darkpurple text-white"
+                    disabled={formStatus === 'submitting'}
+                    aria-busy={formStatus === 'submitting'}
                   >
-                    <Send className="mr-2 h-4 w-4" />
-                    Send Message
+                    {formStatus === 'submitting' ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="mr-2 h-4 w-4" />
+                        Send Message
+                      </>
+                    )}
                   </Button>
                 </form>
               </CardContent>
@@ -109,27 +251,39 @@ const Contact = () => {
                   <div className="space-y-5">
                     <div className="flex items-start gap-4">
                       <div className="bg-media-purple/10 rounded-full p-3">
-                        <Mail className="h-5 w-5 text-media-purple" />
+                        <Mail className="h-5 w-5 text-media-purple" aria-hidden="true" />
                       </div>
                       <div>
                         <p className="text-sm font-medium mb-1">Email</p>
-                        <p className="text-gray-600">mhmd167ali@gmail.com</p>
+                        <a 
+                          href="mailto:mhmd167ali@gmail.com" 
+                          className="text-gray-600 hover:text-media-purple transition-colors"
+                          onClick={() => trackEvent('contact_link_click', { type: 'email' })}
+                        >
+                          mhmd167ali@gmail.com
+                        </a>
                       </div>
                     </div>
                     
                     <div className="flex items-start gap-4">
                       <div className="bg-media-purple/10 rounded-full p-3">
-                        <Phone className="h-5 w-5 text-media-purple" />
+                        <Phone className="h-5 w-5 text-media-purple" aria-hidden="true" />
                       </div>
                       <div>
                         <p className="text-sm font-medium mb-1">Phone</p>
-                        <p className="text-gray-600">+201060098267</p>
+                        <a 
+                          href="tel:+201060098267" 
+                          className="text-gray-600 hover:text-media-purple transition-colors"
+                          onClick={() => trackEvent('contact_link_click', { type: 'phone' })}
+                        >
+                          +201060098267
+                        </a>
                       </div>
                     </div>
                     
                     <div className="flex items-start gap-4">
                       <div className="bg-media-purple/10 rounded-full p-3">
-                        <MapPin className="h-5 w-5 text-media-purple" />
+                        <MapPin className="h-5 w-5 text-media-purple" aria-hidden="true" />
                       </div>
                       <div>
                         <p className="text-sm font-medium mb-1">Location</p>
@@ -146,6 +300,8 @@ const Contact = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-gray-100 hover:bg-gray-200 transition-colors p-2 rounded-full"
+                        aria-label="LinkedIn Profile"
+                        onClick={() => trackEvent('social_link_click', { platform: 'linkedin' })}
                       >
                         <Linkedin className="h-5 w-5 text-gray-600" />
                       </a>
@@ -154,6 +310,8 @@ const Contact = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-gray-100 hover:bg-gray-200 transition-colors p-2 rounded-full"
+                        aria-label="WhatsApp Contact"
+                        onClick={() => trackEvent('social_link_click', { platform: 'whatsapp' })}
                       >
                         <svg 
                           xmlns="http://www.w3.org/2000/svg" 
@@ -164,6 +322,7 @@ const Contact = () => {
                           strokeWidth="2" 
                           strokeLinecap="round" 
                           strokeLinejoin="round"
+                          aria-hidden="true"
                         >
                           <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
                           <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Z" />
@@ -180,7 +339,12 @@ const Contact = () => {
                 <CardContent className="p-6 md:p-8">
                   <h3 className="text-xl font-semibold mb-2">Ready to boost your campaign performance?</h3>
                   <p className="mb-4 opacity-90">I help businesses achieve exceptional results through strategic media buying across multiple platforms and regions.</p>
-                  <a href="https://wa.me/+201060098267" target="_blank" rel="noopener noreferrer">
+                  <a 
+                    href="https://wa.me/+201060098267" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    onClick={() => trackEvent('cta_click', { button: 'strategy_call' })}
+                  >
                     <Button variant="secondary" size="sm">
                       Book a Strategy Call
                     </Button>

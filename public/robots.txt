@@ -1,3 +1,12 @@
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://mediamojomarketing.com/sitemap.xml
+
+# Specific bot permissions
 User-agent: Googlebot
 Allow: /
 
@@ -10,5 +19,7 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+# Prevent crawling of any future admin areas
 User-agent: *
-Allow: /
+Disallow: /admin/
+

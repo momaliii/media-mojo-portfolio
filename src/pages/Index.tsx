@@ -7,11 +7,19 @@ import Portfolio from "@/components/Portfolio";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Services from "@/components/Services";
+import ErrorBoundary from "@/components/ErrorBoundary";
+import { useScrollObserver } from "@/hooks/use-scroll-observer";
+import { trackPageView } from "@/utils/analytics";
 
 const Index = () => {
+  const { activeSection } = useScrollObserver();
+
   useEffect(() => {
     // Update document title
     document.title = "Mohamed Ali | Performance Media Buyer";
+    
+    // Track initial page view
+    trackPageView('/', document.title);
     
     // Add animation to elements when they enter viewport
     const observer = new IntersectionObserver(
@@ -45,16 +53,26 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Navigation />
+      <Navigation activeSection={activeSection} />
       <main className="overflow-hidden">
-        <Hero />
+        <ErrorBoundary>
+          <Hero />
+        </ErrorBoundary>
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50/50 to-white pointer-events-none" />
-          <About />
+          <ErrorBoundary>
+            <About />
+          </ErrorBoundary>
         </div>
-        <Services />
-        <Portfolio />
-        <Contact />
+        <ErrorBoundary>
+          <Services />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Portfolio />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Contact />
+        </ErrorBoundary>
       </main>
       <Footer />
     </div>
