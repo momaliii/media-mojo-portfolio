@@ -17,11 +17,27 @@ serve(async (req) => {
   }
 
   try {
-    // We're making this a public function, so we don't need to verify authorization
-    // Just check if we have data in the request
-    const { name, email, subject, message } = await req.json();
+    console.log('Received contact form submission request');
+    
+    let requestData;
+    try {
+      requestData = await req.json();
+      console.log('Parsed request data:', requestData);
+    } catch (parseError) {
+      console.error('Error parsing request JSON:', parseError);
+      return new Response(
+        JSON.stringify({ error: 'Invalid JSON in request body' }),
+        { 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      );
+    }
+
+    const { name, email, subject, message } = requestData;
     
     if (!name || !email || !subject || !message) {
+      console.error('Missing required fields:', { name, email, subject, message });
       return new Response(
         JSON.stringify({ error: 'Missing required fields' }),
         { 
@@ -31,9 +47,11 @@ serve(async (req) => {
       );
     }
 
-    // Send email notification using the verified domain email as the sender
+    console.log('Sending email with Resend...');
+    
+    // Send email notification using verified domain email
     const emailResult = await resend.emails.send({
-      from: 'mohamed.ali.kla@gmail.com', // Using your verified email
+      from: 'contact@mhmdali.site',
       to: 'mhmd167ali@gmail.com',
       subject: `New Contact Form Submission: ${subject}`,
       html: `
@@ -54,10 +72,17 @@ serve(async (req) => {
     });
   } catch (error) {
     console.error('Error processing contact form:', error);
-    return new Response(JSON.stringify({ error: error.message }), {
+    
+    // Enhanced error response with more details
+    const errorResponse = {
+      error: error.message,
+      code: error.code || 'UNKNOWN_ERROR',
+      details: error.details || null
+    };
+    
+    return new Response(JSON.stringify(errorResponse), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      status: 500,
+      status: error.status || 500,
     });
   }
 });
-
