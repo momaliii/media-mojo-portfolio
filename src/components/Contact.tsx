@@ -4,15 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import { 
-  Mail, 
-  Send,
-  Linkedin,
-  Phone,
-  MapPin,
-  Loader2
-} from "lucide-react";
+import { Mail, Send, Linkedin, Phone, MapPin, Loader2 } from "lucide-react";
 import { trackFormSubmission, trackEvent } from "@/utils/analytics";
+import { supabase } from "@/integrations/supabase/client";
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -89,20 +83,32 @@ const Contact = () => {
     setFormStatus('submitting');
     
     try {
-      // Simulate form submission with a delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Track successful submission
+      const { error: dbError } = await supabase
+        .from('contact_submissions')
+        .insert([formData]);
+
+      if (dbError) throw dbError;
+
+      const response = await fetch('https://mmvqmonjsopbieveugqj.functions.supabase.co/send-contact-notification', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send email notification');
+      }
+
       trackFormSubmission('contact_form', true);
       
-      // Show success message
       setFormStatus('success');
       toast({
         title: "Message sent!",
         description: "Thanks for your message! I'll get back to you soon.",
       });
       
-      // Clear the form
       setFormData({
         name: '',
         email: '',
@@ -110,15 +116,12 @@ const Contact = () => {
         message: ''
       });
       
-      // Reset form status after delay
       setTimeout(() => setFormStatus('idle'), 3000);
     } catch (error) {
       console.error("Form submission error:", error);
       
-      // Track failed submission
       trackFormSubmission('contact_form', false);
       
-      // Show error message
       setFormStatus('error');
       toast({
         title: "Something went wrong",
@@ -126,7 +129,6 @@ const Contact = () => {
         variant: "destructive"
       });
       
-      // Reset form status
       setTimeout(() => setFormStatus('idle'), 3000);
     }
   };
