@@ -11,21 +11,25 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
+  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
   }
 
   try {
-    // Verify we have proper authorization
-    const authHeader = req.headers.get('Authorization');
-    if (!authHeader) {
+    // We're making this a public function, so we don't need to verify authorization
+    // Just check if we have data in the request
+    const { name, email, subject, message } = await req.json();
+    
+    if (!name || !email || !subject || !message) {
       return new Response(
-        JSON.stringify({ error: 'Missing authorization header' }),
-        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({ error: 'Missing required fields' }),
+        { 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
       );
     }
-
-    const { name, email, subject, message } = await req.json();
 
     // Send email notification
     const emailResult = await resend.emails.send({
@@ -41,6 +45,8 @@ serve(async (req) => {
         <p>${message}</p>
       `
     });
+
+    console.log("Email sent successfully:", emailResult);
 
     return new Response(JSON.stringify(emailResult), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
