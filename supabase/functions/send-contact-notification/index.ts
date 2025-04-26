@@ -16,6 +16,15 @@ serve(async (req) => {
   }
 
   try {
+    // Verify we have proper authorization
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader) {
+      return new Response(
+        JSON.stringify({ error: 'Missing authorization header' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     const { name, email, subject, message } = await req.json();
 
     // Send email notification

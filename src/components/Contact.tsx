@@ -1,9 +1,10 @@
+
 import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { Mail, Send, Linkedin, Phone, MapPin, Loader2 } from "lucide-react";
 import { trackFormSubmission, trackEvent } from "@/utils/analytics";
 import { supabase } from "@/integrations/supabase/client";
@@ -89,15 +90,25 @@ const Contact = () => {
 
       if (dbError) throw dbError;
 
+      // Get the Supabase JWT token
+      const { data: { session } } = await supabase.auth.getSession();
+      const apiKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 
+                     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1tdnFtb25qc29wYmlldmV1Z3FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU3MDk0MTEsImV4cCI6MjA2MTI4NTQxMX0.kjYzDEJjBZyN3jm3gYbFmEsXBho98U0pMNyAGve4g58";
+
+      // Now make the request with the proper headers
       const response = await fetch('https://mmvqmonjsopbieveugqj.functions.supabase.co/send-contact-notification', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+          'apikey': apiKey
         },
         body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Email notification error:', errorData);
         throw new Error('Failed to send email notification');
       }
 
