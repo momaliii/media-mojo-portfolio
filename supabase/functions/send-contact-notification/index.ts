@@ -31,10 +31,10 @@ serve(async (req) => {
       );
     }
 
-    // Send email notification
+    // Send email notification using the verified domain email as the sender
     const emailResult = await resend.emails.send({
-      from: 'Contact Form <onboarding@resend.dev>',
-      to: 'mhmd167ali@gmail.com', // Your email address
+      from: 'mohamed.ali.kla@gmail.com', // Using your verified email
+      to: 'mhmd167ali@gmail.com',
       subject: `New Contact Form Submission: ${subject}`,
       html: `
         <h2>New Contact Form Submission</h2>
@@ -60,3 +60,4 @@ serve(async (req) => {
     });
   }
 });
+
