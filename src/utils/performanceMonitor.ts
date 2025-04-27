@@ -1,3 +1,4 @@
+
 import { throttle } from "./performance";
 
 type PerformanceMetric = {
@@ -5,6 +6,11 @@ type PerformanceMetric = {
   value: number;
   timestamp: number;
 };
+
+// Define additional performance entry types
+interface LayoutShiftEntry extends PerformanceEntry {
+  value: number;
+}
 
 class PerformanceMonitor {
   private metrics: PerformanceMetric[] = [];
@@ -29,7 +35,9 @@ class PerformanceMonitor {
       // Observe layout shifts
       const layoutShiftObserver = new PerformanceObserver((list) => {
         list.getEntries().forEach((entry) => {
-          this.logMetric('cumulative-layout-shift', entry.value);
+          // Type assertion to access the value property
+          const layoutShift = entry as LayoutShiftEntry;
+          this.logMetric('cumulative-layout-shift', layoutShift.value);
         });
       });
 
