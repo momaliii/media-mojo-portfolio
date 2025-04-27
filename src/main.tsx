@@ -3,12 +3,13 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
-import StructuredData from './components/StructuredData.tsx';
+import { ThemeProvider } from './components/ThemeProvider';
 
 const RootComponent = () => (
   <React.StrictMode>
-    <App />
-    <StructuredData />
+    <ThemeProvider defaultTheme="system" storageKey="ui-theme">
+      <App />
+    </ThemeProvider>
   </React.StrictMode>
 );
 
