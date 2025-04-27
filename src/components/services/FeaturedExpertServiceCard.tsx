@@ -5,11 +5,11 @@ import { featuredService } from "./ExpertServicesData";
 
 const FeaturedExpertServiceCard = () => {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 h-full">
-      <div className={`${featuredService.color} p-6`}>
+    <div className="bg-white dark:bg-gray-800/90 rounded-[20px] shadow-md hover:shadow-lg transition-all duration-300 h-full overflow-hidden">
+      <div className={`${featuredService.color} p-6 sm:p-8`}>
         <h3 className="text-2xl font-bold text-white mb-2">{featuredService.title}</h3>
       </div>
-      <div className="p-6">
+      <div className="p-6 sm:p-8">
         <ul className="space-y-3">
           {featuredService.description.map((item, index) => (
             <li key={index} className="flex items-start">
@@ -21,7 +21,7 @@ const FeaturedExpertServiceCard = () => {
           ))}
         </ul>
       </div>
-      <div className="px-6 pb-6">
+      <div className="px-6 pb-6 sm:px-8 sm:pb-8">
         <button 
           className="text-media-purple hover:text-media-oceanblue dark:text-media-oceanblue dark:hover:text-media-purple text-sm font-medium flex items-center transition-colors"
           aria-label="Learn more about our strategic media buying approach"

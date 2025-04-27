@@ -21,7 +21,19 @@ const ExpertServices = () => {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 px-4 md:px-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 px-4 md:px-6">
+        {/* Featured Service Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="lg:row-span-2"
+        >
+          <FeaturedExpertServiceCard />
+        </motion.div>
+
+        {/* Regular Service Cards */}
         {expertServices.map((service, index) => {
           const Icon = service.icon;
           return (
