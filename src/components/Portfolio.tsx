@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, Download } from "lucide-react";
@@ -7,12 +6,10 @@ import PortfolioHeader from "@/components/portfolio/PortfolioHeader";
 import EnhancedFilterTabs from "@/components/portfolio/EnhancedFilterTabs";
 import AdScreenshotsGallery from "@/components/portfolio/AdScreenshotsGallery";
 import { usePerformanceMonitor } from "@/hooks/use-performance-monitor";
-import { usePDFDownloader } from "@/hooks/use-pdf-downloader";
 
 const Portfolio = () => {
   const [filter, setFilter] = useState("all");
   const { logMetric } = usePerformanceMonitor('Portfolio');
-  const { downloadPDF, isGenerating } = usePDFDownloader();
   
   // Monitor filter changes performance
   useEffect(() => {
@@ -51,17 +48,21 @@ const Portfolio = () => {
             <ArrowUpRight className="ml-2 h-5 w-5" aria-hidden="true" />
           </Button>
           
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="inline-flex items-center bg-white/80 dark:bg-gray-800/80 hover:bg-media-purple/10 dark:hover:bg-media-blue/10 transition-all duration-300 rounded-xl py-6 px-8 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 shadow-sm hover:shadow-md"
-            onClick={downloadPDF}
-            disabled={isGenerating}
-            aria-label="Download PDF portfolio"
+          <a 
+            href="/Mohamed_Ali_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <span className="text-base">{isGenerating ? "Generating..." : "Download PDF Portfolio"}</span>
-            <Download className="ml-2 h-5 w-5" aria-hidden="true" />
-          </Button>
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="inline-flex items-center bg-white/80 dark:bg-gray-800/80 hover:bg-media-purple/10 dark:hover:bg-media-blue/10 transition-all duration-300 rounded-xl py-6 px-8 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 shadow-sm hover:shadow-md"
+              aria-label="Download PDF portfolio"
+            >
+              <span className="text-base">Download PDF Portfolio</span>
+              <Download className="ml-2 h-5 w-5" aria-hidden="true" />
+            </Button>
+          </a>
         </div>
       </div>
       
