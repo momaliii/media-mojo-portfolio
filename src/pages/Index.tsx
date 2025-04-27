@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+
+import React, { useEffect, lazy, Suspense } from "react";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -11,6 +12,21 @@ import NewsletterSubscription from "@/components/newsletter/NewsletterSubscripti
 import { useScrollObserver } from "@/hooks/use-scroll-observer";
 import { trackPageView } from "@/utils/analytics";
 import StructuredData from "@/components/StructuredData";
+import MetaTags from "@/components/MetaTags";
+import { LoadingSkeleton } from "@/components/ui/loading-skeleton";
+
+// Component to handle animations when elements enter viewport
+const AnimatedSection = ({ children, id, className = "" }: { 
+  children: React.ReactNode; 
+  id?: string; 
+  className?: string;
+}) => {
+  return (
+    <div id={id} className={`opacity-0 animate-fade-in-up ${className}`}>
+      {children}
+    </div>
+  );
+};
 
 const Index = () => {
   const { activeSection } = useScrollObserver();
@@ -54,29 +70,40 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
+      <MetaTags />
       <StructuredData />
       <Navigation activeSection={activeSection} />
-      <main className="overflow-hidden">
+      <main id="main-content" className="overflow-hidden" tabIndex={-1} aria-label="Main content">
         <ErrorBoundary>
           <Hero />
         </ErrorBoundary>
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50/50 to-white dark:from-gray-950 dark:via-gray-900/50 dark:to-gray-950 pointer-events-none" />
           <ErrorBoundary>
-            <About />
+            <AnimatedSection id="about-section">
+              <About />
+            </AnimatedSection>
           </ErrorBoundary>
         </div>
         <ErrorBoundary>
-          <Services />
+          <AnimatedSection id="services-section">
+            <Services />
+          </AnimatedSection>
         </ErrorBoundary>
         <ErrorBoundary>
-          <Portfolio />
+          <AnimatedSection id="portfolio-section">
+            <Portfolio />
+          </AnimatedSection>
         </ErrorBoundary>
         <ErrorBoundary>
-          <Contact />
+          <AnimatedSection id="contact-section">
+            <Contact />
+          </AnimatedSection>
         </ErrorBoundary>
         <ErrorBoundary>
-          <NewsletterSubscription />
+          <AnimatedSection id="newsletter-section">
+            <NewsletterSubscription />
+          </AnimatedSection>
         </ErrorBoundary>
       </main>
       <Footer />
