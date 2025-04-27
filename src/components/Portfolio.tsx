@@ -1,18 +1,27 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
 import { caseStudies } from "@/data/caseStudies";
 import PortfolioHeader from "@/components/portfolio/PortfolioHeader";
 import FilterTabs from "@/components/portfolio/FilterTabs";
 import AdScreenshotsGallery from "@/components/portfolio/AdScreenshotsGallery";
+import { usePerformanceMonitor } from "@/hooks/use-performance-monitor";
 
 const Portfolio = () => {
   const [filter, setFilter] = useState("all");
+  const { logMetric } = usePerformanceMonitor('Portfolio');
   
   const filteredCaseStudies = filter === "all" 
     ? caseStudies 
     : caseStudies.filter(study => study.category === filter);
+
+  // Monitor filter changes performance
+  useEffect(() => {
+    const startTime = performance.now();
+    const endTime = performance.now();
+    logMetric('portfolio-filter-time', endTime - startTime);
+  }, [filter, logMetric]);
 
   return (
     <section id="portfolio" className="section-padding relative overflow-hidden">
