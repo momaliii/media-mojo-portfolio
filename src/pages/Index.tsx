@@ -10,6 +10,7 @@ import Services from "@/components/Services";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { useScrollObserver } from "@/hooks/use-scroll-observer";
 import { trackPageView } from "@/utils/analytics";
+import StructuredData from "@/components/StructuredData";
 
 const Index = () => {
   const { activeSection } = useScrollObserver();
@@ -53,6 +54,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <StructuredData />
       <Navigation activeSection={activeSection} />
       <main className="overflow-hidden">
         <ErrorBoundary>

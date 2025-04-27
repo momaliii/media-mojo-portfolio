@@ -19,7 +19,17 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Pinterest
+Allow: /
+
 # Prevent crawling of any future admin areas
 User-agent: *
 Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
 
+# Improved crawl rate settings
+Crawl-delay: 10

@@ -25,7 +25,7 @@ const AdGalleryHeader: React.FC<AdGalleryHeaderProps> = ({
 
   return (
     <div className="text-center mb-12 opacity-0 animate-fade-in-up">
-      <h2 className="text-3xl md:text-4xl font-bold mb-4 relative inline-block">
+      <h2 id="ad-gallery-heading" className="text-3xl md:text-4xl font-bold mb-4 relative inline-block">
         Ad Campaign Showcase
         <span className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-media-purple to-media-oceanblue transform scale-x-0 animate-[scale-in_0.5s_ease-out_forwards]"></span>
       </h2>
@@ -70,6 +70,7 @@ const AdGalleryHeader: React.FC<AdGalleryHeaderProps> = ({
             id="autoplay-toggle"
             checked={autoplayEnabled}
             onCheckedChange={handleAutoplayToggle}
+            aria-label={autoplayEnabled ? "Disable autoplay" : "Enable autoplay"}
           />
           <Label htmlFor="autoplay-toggle" className="text-sm text-gray-600">
             Auto-rotate slides: {autoplayEnabled ? 'On' : 'Off'}
