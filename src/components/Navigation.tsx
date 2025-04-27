@@ -5,7 +5,11 @@ import { Button } from '@/components/ui/button';
 import { MenuIcon, X } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-const Navigation = () => {
+interface NavigationProps {
+  activeSection?: string;
+}
+
+const Navigation = ({ activeSection }: NavigationProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isMobile = useIsMobile();
   
@@ -39,7 +43,9 @@ const Navigation = () => {
                 <Link
                   key={link.text}
                   to={link.href}
-                  className="text-gray-600 hover:text-media-purple transition-colors duration-200"
+                  className={`text-gray-600 hover:text-media-purple transition-colors duration-200 ${
+                    activeSection === link.href.replace('#', '') ? 'text-media-purple font-medium' : ''
+                  }`}
                 >
                   {link.text}
                 </Link>
@@ -72,7 +78,9 @@ const Navigation = () => {
                 <Link
                   key={link.text}
                   to={link.href}
-                  className="text-gray-600 hover:text-media-purple transition-colors duration-200 py-1"
+                  className={`text-gray-600 hover:text-media-purple transition-colors duration-200 py-1 ${
+                    activeSection === link.href.replace('#', '') ? 'text-media-purple font-medium' : ''
+                  }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.text}
