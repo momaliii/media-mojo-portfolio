@@ -17,7 +17,7 @@ const Index = () => {
 
   useEffect(() => {
     // Update document title
-    document.title = "Mohamed Ali | Performance Media Buyer";
+    document.title = "Mohamed Ali | Senior Media Buyer";
     
     // Track initial page view
     trackPageView('/', document.title);
