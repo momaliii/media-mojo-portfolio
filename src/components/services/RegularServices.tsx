@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import InteractiveServiceCard from "./InteractiveServiceCard";
 import ServiceCategories from "./ServiceCategories";
-import { allServices } from "./ExpertServicesData";
+import { expertServices } from "./ExpertServicesData";
 import { motion } from "framer-motion";
 
 const RegularServices = () => {
@@ -11,8 +11,8 @@ const RegularServices = () => {
   
   // Filter services based on selected category
   const filteredServices = activeCategory === "all" 
-    ? allServices 
-    : allServices.filter(service => service.category === activeCategory);
+    ? expertServices 
+    : expertServices.filter(service => service.category === activeCategory);
 
   // Lazy loading using Intersection Observer
   useEffect(() => {
@@ -71,8 +71,8 @@ const RegularServices = () => {
                 icon={<Icon />}
                 title={service.title}
                 description={service.description}
-                longDescription={service.longDescription}
-                features={service.features}
+                longDescription={service.description}
+                features={service.features || []}
                 color={service.color}
                 index={index}
               />
