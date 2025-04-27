@@ -28,12 +28,15 @@ const NewsletterSubscription = () => {
     setIsSubmitting(true);
     
     try {
-      // Try to add the email to the newsletter_subscribers table
+      // Using contact_submissions table since newsletter_subscribers doesn't exist
       const { error } = await supabase
-        .from('newsletter_subscribers')
-        .insert([
-          { email, subscribed_at: new Date() }
-        ]);
+        .from('contact_submissions')
+        .insert({
+          email,
+          name: "Newsletter Subscriber", // Required field
+          subject: "Newsletter Subscription",
+          message: "User subscribed to the newsletter"
+        });
         
       if (error) {
         if (error.code === '23505') { // Unique violation error code

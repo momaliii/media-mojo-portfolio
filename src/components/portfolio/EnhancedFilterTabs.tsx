@@ -48,15 +48,15 @@ const EnhancedFilterTabs = ({ filter, setFilter, caseStudies }: EnhancedFilterTa
     const searchMatch = searchQuery === "" || 
       study.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       study.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      study.industry.toLowerCase().includes(searchQuery.toLowerCase());
+      study.industry?.toLowerCase().includes(searchQuery.toLowerCase()) || false;
     
     // Filter by budget (if any selected)
     const budgetMatch = selectedBudgets.length === 0 || 
-      selectedBudgets.includes(study.budgetRange);
+      (study.budgetRange && selectedBudgets.includes(study.budgetRange)) || false;
     
     // Filter by platform (if any selected)
     const platformMatch = selectedPlatforms.length === 0 || 
-      study.platforms.some(platform => selectedPlatforms.includes(platform));
+      (study.platforms && study.platforms.some(platform => selectedPlatforms.includes(platform))) || false;
     
     return categoryMatch && searchMatch && budgetMatch && platformMatch;
   });

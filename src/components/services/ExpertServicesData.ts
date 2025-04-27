@@ -96,3 +96,22 @@ export const expertServices: ExpertService[] = [
     color: "bg-emerald-500"
   }
 ];
+
+// Add the missing allServices export for RegularServices.tsx
+export type RegularService = {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  longDescription?: string;
+  features?: string[];
+  color: string;
+  category?: string;
+};
+
+// Create the allServices array that includes expertServices and additional services if needed
+export const allServices: RegularService[] = expertServices.map(service => ({
+  ...service,
+  category: 'media',
+  longDescription: `Comprehensive ${service.title} services tailored to your business needs.`,
+  features: ["Data-driven approach", "Performance tracking", "ROI optimization"]
+}));

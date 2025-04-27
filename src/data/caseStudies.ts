@@ -1,4 +1,3 @@
-
 // Define the type for metrics
 export interface CaseStudyMetric {
   label: string;
@@ -15,6 +14,8 @@ export interface CaseStudy {
   industry?: string;
   screenshot?: string;
   additionalScreenshots?: string[];
+  budgetRange?: string;
+  platforms?: string[];
 }
 
 // Case studies data
