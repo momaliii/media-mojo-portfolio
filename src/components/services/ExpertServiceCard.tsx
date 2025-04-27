@@ -10,7 +10,7 @@ interface ExpertServiceCardProps {
 
 const ExpertServiceCard = ({ icon, title, description, color }: ExpertServiceCardProps) => {
   return (
-    <div className="group bg-white dark:bg-gray-800/90 rounded-2xl shadow-md p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+    <div className="group bg-white dark:bg-gray-800/90 rounded-2xl shadow-md p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-full">
       <div className="space-y-6">
         <div className={`${color} w-16 h-16 rounded-xl flex items-center justify-center mb-2 transform group-hover:scale-110 transition-transform duration-300`}>
           <div className="w-8 h-8 text-white">

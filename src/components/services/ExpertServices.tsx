@@ -1,6 +1,6 @@
+
 import React from "react";
 import ExpertServiceCard from "./ExpertServiceCard";
-import FeaturedExpertServiceCard from "./FeaturedExpertServiceCard";
 import { expertServices } from "./ExpertServicesData";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "framer-motion";
@@ -32,9 +32,9 @@ const ExpertServices = () => {
       <TopProgressBar />
       <SkipToContent />
       
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
-          className="text-center mb-10"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -46,7 +46,7 @@ const ExpertServices = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Expert <span className="gradient-text">Media Solutions</span>
           </h2>
-          <p className="text-gray-600 max-w-3xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Specialized in data-driven media buying and campaign optimization to maximize your ROI 
             across multiple platforms and markets.
           </p>
@@ -62,28 +62,22 @@ const ExpertServices = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-blue-50 rounded-3xl -z-10 dark:from-gray-900 dark:to-gray-800"></div>
           
           <motion.div 
-            className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 lg:grid-cols-2'} gap-8 p-6 md:p-10`}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-8 md:p-12"
             variants={container}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-100px" }}
           >
-            <motion.div variants={item}>
-              <FeaturedExpertServiceCard />
-            </motion.div>
-            
-            <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2'} gap-6`}>
-              {expertServices.slice(1, 5).map((service, index) => (
-                <motion.div key={`expert-mini-${index}`} variants={item}>
-                  <ExpertServiceCard 
-                    icon={<service.icon className="w-8 h-8 text-white" />}
-                    title={service.title}
-                    description={service.description}
-                    color={service.color}
-                  />
-                </motion.div>
-              ))}
-            </div>
+            {expertServices.map((service, index) => (
+              <motion.div key={index} variants={item}>
+                <ExpertServiceCard 
+                  icon={<service.icon className="w-8 h-8 text-white" />}
+                  title={service.title}
+                  description={service.description}
+                  color={service.color}
+                />
+              </motion.div>
+            ))}
           </motion.div>
         </motion.div>
       </div>
