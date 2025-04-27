@@ -78,12 +78,19 @@ export const usePDFDownloader = () => {
         
         doc.setTextColor(80, 80, 80);
         doc.setFontSize(10);
-        study.results.forEach((result, index) => {
-          doc.text(`• ${result}`, 25, resultsYStart + (index + 1) * 5);
-        });
         
-        // Update Y position for next case study
-        yPosition = resultsYStart + (study.results.length + 1) * 5 + 15;
+        // Make sure results array exists before trying to iterate through it
+        if (study.metrics) {
+          study.metrics.forEach((metric, index) => {
+            doc.text(`• ${metric.label}: ${metric.value}`, 25, resultsYStart + (index + 1) * 5);
+          });
+          
+          // Update Y position for next case study
+          yPosition = resultsYStart + (study.metrics.length + 1) * 5 + 15;
+        } else {
+          // If no metrics, just add some spacing
+          yPosition = resultsYStart + 15;
+        }
       }
       
       // Add contact information page
