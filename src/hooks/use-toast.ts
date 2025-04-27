@@ -1,3 +1,4 @@
+
 import * as React from "react"
 
 import type {
@@ -126,9 +127,12 @@ export const reducer = (state: State, action: Action): State => {
   }
 }
 
-const listeners: Array<(state: State) => void> = []
+// Initialize with a default empty state
+const INITIAL_STATE: State = { toasts: [] }
 
-let memoryState: State = { toasts: [] }
+let memoryState: State = INITIAL_STATE
+
+const listeners: Array<(state: State) => void> = []
 
 function dispatch(action: Action) {
   memoryState = reducer(memoryState, action)
@@ -168,7 +172,8 @@ function toast({ ...props }: Toast) {
   }
 }
 
-function useToast() {
+// Make sure useToast works properly
+export function useToast() {
   const [state, setState] = React.useState<State>(memoryState)
 
   React.useEffect(() => {
@@ -188,4 +193,4 @@ function useToast() {
   }
 }
 
-export { useToast, toast }
+export { toast }
