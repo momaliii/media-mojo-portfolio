@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
@@ -74,10 +73,10 @@ const Index = () => {
           <Portfolio />
         </ErrorBoundary>
         <ErrorBoundary>
-          <NewsletterSubscription />
+          <Contact />
         </ErrorBoundary>
         <ErrorBoundary>
-          <Contact />
+          <NewsletterSubscription />
         </ErrorBoundary>
       </main>
       <Footer />
