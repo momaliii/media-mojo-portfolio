@@ -2,61 +2,13 @@
 import React from "react";
 import ExpertServiceCard from "./ExpertServiceCard";
 import FeaturedExpertServiceCard from "./FeaturedExpertServiceCard";
-import { 
-  MonitorSmartphone, 
-  Search, 
-  BarChart, 
-  Target, 
-  LineChart,
-  Clock,
-  Globe
-} from "lucide-react";
+import { expertServices } from "./ExpertServicesData";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "framer-motion";
 
 const ExpertServices = () => {
   const isMobile = useIsMobile();
   
-  // Expert media buying solutions services
-  const expertServices = [
-    {
-      icon: <MonitorSmartphone className="w-8 h-8 text-white" />,
-      title: "Social Media Marketing",
-      description: "Strategic campaigns across Facebook, Instagram, LinkedIn, TikTok, Snapchat, and Twitter to reach and engage your target audience.",
-      color: "bg-[#A88BEB]"
-    },
-    {
-      icon: <Search className="w-8 h-8 text-white" />,
-      title: "Search Engine Marketing",
-      description: "Data-driven PPC campaigns on Google Ads to capture high-intent traffic and drive conversions with optimal ROI.",
-      color: "bg-[#0ABDF2]"
-    },
-    {
-      icon: <LineChart className="w-8 h-8 text-white" />,
-      title: "Performance Analysis",
-      description: "In-depth campaign tracking and reporting using Google Data Studio, Microsoft Clarity, and Google Analytics with actionable insights.",
-      color: "bg-[#FF7E33]"
-    },
-    {
-      icon: <Target className="w-8 h-8 text-white" />,
-      title: "Audience Strategy",
-      description: "Developing precise targeting strategies based on demographics, interests, behaviors, and custom audiences for optimal campaign performance.",
-      color: "bg-[#A88BEB]"
-    },
-    {
-      icon: <Clock className="w-8 h-8 text-white" />,
-      title: "Budget Optimization",
-      description: "Strategic allocation and management of media budgets ranging from $15K to $35K+ to maximize ROI and business results.",
-      color: "bg-[#E64FB8]"
-    },
-    {
-      icon: <Globe className="w-8 h-8 text-white" />,
-      title: "Global Campaign Management",
-      description: "Expertise in managing campaigns across 10+ countries including Saudi Arabia, Egypt, Kuwait, Qatar, Turkey, China, UK, and the U.S.",
-      color: "bg-[#619DF9]"
-    },
-  ];
-
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -118,7 +70,7 @@ const ExpertServices = () => {
             {expertServices.slice(1, 5).map((service, index) => (
               <motion.div key={`expert-mini-${index}`} variants={item}>
                 <ExpertServiceCard 
-                  icon={service.icon}
+                  icon={<service.icon className="w-8 h-8 text-white" />}
                   title={service.title}
                   description={service.description}
                   color={service.color}
