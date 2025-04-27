@@ -63,18 +63,21 @@ const RegularServices = () => {
         <motion.div 
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 md:gap-8 mt-8"
         >
-          {filteredServices.map((service, index) => (
-            <InteractiveServiceCard 
-              key={index} 
-              icon={service.icon}
-              title={service.title}
-              description={service.description}
-              longDescription={service.longDescription}
-              features={service.features}
-              color={service.color}
-              index={index}
-            />
-          ))}
+          {filteredServices.map((service, index) => {
+            const Icon = service.icon;
+            return (
+              <InteractiveServiceCard 
+                key={index} 
+                icon={<Icon />}
+                title={service.title}
+                description={service.description}
+                longDescription={service.longDescription}
+                features={service.features}
+                color={service.color}
+                index={index}
+              />
+            );
+          })}
         </motion.div>
       )}
     </div>

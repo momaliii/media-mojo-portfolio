@@ -1,7 +1,8 @@
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import HeroStats from "./HeroStats";
-import { Linkedin } from "lucide-react";
+import { Linkedin, FileText } from "lucide-react";
 import { motion } from "framer-motion";
 import ProfileLogo from "./ProfileLogo";
 
@@ -58,7 +59,7 @@ const HeroContent = () => {
           
           <motion.div 
             variants={item}
-            className="flex gap-3 mt-4"
+            className="flex flex-wrap gap-3 mt-4"
           >
             <a 
               href="https://www.linkedin.com/in/mhmdali02/"
@@ -68,6 +69,16 @@ const HeroContent = () => {
             >
               <Linkedin className="h-5 w-5" />
               <span className="text-sm font-medium">Connect on LinkedIn</span>
+            </a>
+            
+            <a 
+              href="/Mohamed_Ali_CV.pdf"
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-media-purple bg-white px-3 py-2 rounded-md shadow-sm hover:shadow-md transition-all hover:bg-media-purple/5"
+            >
+              <FileText className="h-5 w-5" />
+              <span className="text-sm font-medium">Download CV</span>
             </a>
           </motion.div>
         </div>
