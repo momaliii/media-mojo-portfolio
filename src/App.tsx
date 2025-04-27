@@ -5,7 +5,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider as TooltipProvider } from "@radix-ui/react-tooltip";
-import { ThemeProvider } from "@/components/ThemeProvider";
 import { HelmetProvider } from "react-helmet-async";
 import { TopProgressBar } from "@/components/ui/progress-bar";
 import { ScrollToTopButton } from "@/components/ui/scroll-to-top";
@@ -53,7 +52,6 @@ const LazyComponent = ({ children }: { children: React.ReactNode }) => {
 
 const App = () => (
   <HelmetProvider>
-    <ThemeProvider defaultTheme="light">
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <ErrorBoundary>
@@ -77,7 +75,6 @@ const App = () => (
           </ErrorBoundary>
         </TooltipProvider>
       </QueryClientProvider>
-    </ThemeProvider>
   </HelmetProvider>
 );
 

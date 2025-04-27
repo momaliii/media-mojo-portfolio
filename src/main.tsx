@@ -7,7 +7,7 @@ import { ThemeProvider } from './components/ThemeProvider';
 
 const RootComponent = () => (
   <React.StrictMode>
-    <ThemeProvider defaultTheme="system" storageKey="ui-theme">
+    <ThemeProvider defaultTheme="light" storageKey="ui-theme">
       <App />
     </ThemeProvider>
   </React.StrictMode>
