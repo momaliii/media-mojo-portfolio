@@ -1,11 +1,11 @@
+
 import type { LucideIcon } from "lucide-react";
 import { 
-  Target, 
-  TrendingUp, 
-  Users, 
+  Monitor,
+  Search,
   ChartLine,
-  BadgeCheck,
-  Search
+  Target,
+  Clock
 } from "lucide-react";
 
 type ExpertService = {
@@ -15,58 +15,42 @@ type ExpertService = {
   color: string;
 };
 
+export const featuredService = {
+  title: "Strategic Media Buying",
+  description: [
+    "Comprehensive multi-platform campaigns",
+    "Data-driven optimization strategies",
+    "Expert budget management and allocation",
+    "Global market reach and localization"
+  ],
+  icon: Monitor,
+  color: "bg-gradient-to-r from-media-purple to-media-oceanblue"
+};
+
 export const expertServices: ExpertService[] = [
   {
+    icon: Search,
+    title: "Search Engine Marketing",
+    description: "Data-driven PPC campaigns on Google Ads to capture high-intent traffic and drive conversions with optimal ROI.",
+    color: "bg-[#00B6F1]"
+  },
+  {
     icon: ChartLine,
-    title: "Performance Marketing",
-    description: "Data-driven strategies to maximize ROAS and campaign effectiveness across platforms.",
-    color: "bg-blue-500"
+    title: "Performance Analysis",
+    description: "In-depth campaign tracking and reporting using Google Data Studio, Microsoft Clarity, and Google Analytics with actionable insights.",
+    color: "bg-[#FF7051]"
   },
   {
     icon: Target,
     title: "Audience Strategy",
-    description: "Advanced targeting and segmentation to reach your ideal customers efficiently.",
-    color: "bg-purple-500"
+    description: "Developing precise targeting strategies based on demographics, interests, behaviors, and custom audiences for optimal campaign performance.",
+    color: "bg-[#9B87F5]"
   },
   {
-    icon: Search,
-    title: "Search Marketing",
-    description: "Expert SEM management across Google, Microsoft & Amazon platforms.",
-    color: "bg-green-500"
-  },
-  {
-    icon: TrendingUp,
-    title: "Growth Optimization",
-    description: "Continuous performance optimization to scale your campaigns profitably.",
-    color: "bg-red-500"
-  },
-  {
-    icon: Users,
-    title: "Social Media Ads",
-    description: "Strategic social media campaigns across Meta, TikTok & LinkedIn.",
-    color: "bg-amber-500"
-  },
-  {
-    icon: BadgeCheck,
-    title: "Campaign Analysis",
-    description: "In-depth analytics and insights to drive continuous improvement.",
-    color: "bg-cyan-500"
+    icon: Clock,
+    title: "Budget Optimization",
+    description: "Strategic allocation and management of media budgets ranging from $15K to $35K+ to maximize ROI and business results.",
+    color: "bg-[#D946EF]"
   }
 ];
 
-export type RegularService = {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-  longDescription?: string;
-  features?: string[];
-  color: string;
-  category?: string;
-};
-
-export const allServices: RegularService[] = expertServices.map(service => ({
-  ...service,
-  category: 'media',
-  longDescription: `Comprehensive ${service.title} services tailored to your business needs.`,
-  features: ["Data-driven approach", "Performance tracking", "ROI optimization"]
-}));
