@@ -1,4 +1,3 @@
-
 import React from "react";
 import ExpertServiceCard from "./ExpertServiceCard";
 import FeaturedExpertServiceCard from "./FeaturedExpertServiceCard";
@@ -7,7 +6,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "framer-motion";
 import { ScrollToTopButton } from "@/components/ui/scroll-to-top";
 import { TopProgressBar } from "@/components/ui/progress-bar";
-import { SkipToContent } from "@/components/SkipToContent";
+import SkipToContent from "@/components/SkipToContent";
 
 const ExpertServices = () => {
   const isMobile = useIsMobile();
