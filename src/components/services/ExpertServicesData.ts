@@ -1,187 +1,91 @@
 
-import { MonitorSmartphone, Megaphone, FileImage, BarChart, Video, Film, Mic, Layers, Target, Code, ShoppingBag, Globe } from "lucide-react";
+import React from "react";
+import { 
+  BarChart3,
+  Target, 
+  PieChart,
+  TrendingUp, 
+  Megaphone, 
+  Users, 
+  Search,
+  LineChart,
+  Mail,
+  MonitorSmartphone,
+  MessageSquare,
+  Code
+} from "lucide-react";
 
-export interface ServiceType {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  longDescription: string;
-  features: string[];
-  color: string;
-  category: string;
-}
-
-export const expertServices: ServiceType[] = [
+export const expertServices = [
   {
-    icon: <MonitorSmartphone className="w-8 h-8 text-white" />,
-    title: "Media Buying",
-    description: "Strategic campaigns across Facebook, Instagram, LinkedIn, TikTok, Snapchat, and Twitter to reach your target audience.",
-    longDescription: "Comprehensive media buying services that maximize ROI by strategically placing ads across multiple platforms.",
-    features: [
-      "Platform-specific optimization strategies",
-      "Audience targeting and segmentation",
-      "Budget allocation and management",
-      "Performance monitoring and reporting"
-    ],
-    color: "bg-media-purple",
-    category: "media"
+    icon: <BarChart3 size={24} color="white" />,
+    title: "Performance Marketing",
+    description: "Data-driven marketing focused on measurable results and KPI optimization across all platforms.",
+    color: "bg-blue-500"
   },
   {
-    icon: <Megaphone className="w-8 h-8 text-white" />,
-    title: "Marketing Strategy",
-    description: "Comprehensive marketing strategies tailored to your business goals and target audience for maximum results.",
-    longDescription: "Data-driven marketing strategies aligned with business objectives to drive measurable results.",
-    features: [
-      "Market research and competitive analysis",
-      "Brand positioning and messaging",
-      "Multi-channel campaign planning",
-      "Performance metrics and KPI tracking"
-    ],
-    color: "bg-media-oceanblue",
-    category: "media"
+    icon: <Target size={24} color="white" />,
+    title: "Media Planning",
+    description: "Strategic allocation of budgets across multiple channels to maximize campaign effectiveness.",
+    color: "bg-purple-500"
   },
   {
-    icon: <FileImage className="w-8 h-8 text-white" />,
-    title: "Graphic Design",
-    description: "Eye-catching visual designs that communicate your brand message and capture audience attention.",
-    longDescription: "Professional graphic design services that ensure visual consistency across all marketing materials.",
-    features: [
-      "Brand identity development",
-      "Ad creative production",
-      "Social media graphics",
-      "Marketing collateral design"
-    ],
-    color: "bg-media-orange",
-    category: "design"
+    icon: <PieChart size={24} color="white" />,
+    title: "Analytics",
+    description: "Comprehensive data analysis with actionable insights for continuous campaign improvement.",
+    color: "bg-green-500"
   },
   {
-    icon: <Video className="w-8 h-8 text-white" />,
-    title: "Video Editing",
-    description: "Professional video editing services that transform raw footage into compelling visual stories.",
-    longDescription: "High-quality video editing that creates engaging content optimized for each platform.",
-    features: [
-      "Ad-specific video formatting",
-      "Motion graphics integration",
-      "Sound design and optimization",
-      "Platform-specific optimizations"
-    ],
-    color: "bg-media-pink",
-    category: "content"
-  }
-];
-
-export const allServices: ServiceType[] = [
-  ...expertServices,
-  {
-    icon: <Film className="w-8 h-8 text-white" />,
-    title: "Video Graphics",
-    description: "Dynamic video graphics that enhance your content with professional visual elements and animations.",
-    longDescription: "Eye-catching motion graphics that bring your brand message to life through animation.",
-    features: [
-      "Custom animations for brand elements",
-      "Promotional video graphics",
-      "Animated product showcases",
-      "Social media optimized animations"
-    ],
-    color: "bg-gradient-to-r from-media-purple to-media-oceanblue",
-    category: "content"
+    icon: <TrendingUp size={24} color="white" />,
+    title: "CRO",
+    description: "Conversion Rate Optimization to improve your landing page performance and boost conversions.",
+    color: "bg-red-500"
   },
   {
-    icon: <Mic className="w-8 h-8 text-white" />,
-    title: "Voice Over",
-    description: "Professional voice over services to give your content a polished, authoritative sound.",
-    longDescription: "High-quality voice overs that add professionalism and clarity to your video content.",
-    features: [
-      "Professional voice talent selection",
-      "Script optimization for spoken delivery",
-      "Multiple language options",
-      "Audio mixing and enhancement"
-    ],
-    color: "bg-media-orange",
-    category: "content"
+    icon: <Megaphone size={24} color="white" />,
+    title: "Paid Social",
+    description: "Expert management of social media ad campaigns across Facebook, Instagram, TikTok, and more.",
+    color: "bg-pink-500"
   },
   {
-    icon: <Layers className="w-8 h-8 text-white" />,
-    title: "Motion Graphics",
-    description: "Captivating motion graphics that bring your ideas to life through animated visual storytelling.",
-    longDescription: "Custom motion graphics that simplify complex concepts and engage viewers with dynamic visuals.",
-    features: [
-      "2D and 3D animation",
-      "Infographic animations",
-      "Logo animations",
-      "Promotional motion graphics"
-    ],
-    color: "bg-media-vibrantpurple",
-    category: "design"
+    icon: <Users size={24} color="white" />,
+    title: "PPC",
+    description: "Strategic Pay-Per-Click campaign management for Google, Microsoft, and Amazon platforms.",
+    color: "bg-amber-500"
   },
   {
-    icon: <Target className="w-8 h-8 text-white" />,
-    title: "Animations",
-    description: "Creative animations that simplify complex concepts and engage viewers with dynamic visual experiences.",
-    longDescription: "Stunning animations that capture attention and effectively communicate your brand message.",
-    features: [
-      "Character animations",
-      "Product demonstrations",
-      "Explainer videos",
-      "Social media animations"
-    ],
-    color: "bg-media-purple",
-    category: "design"
+    icon: <Search size={24} color="white" />,
+    title: "SEO",
+    description: "Search Engine Optimization to improve organic visibility and drive sustainable traffic growth.",
+    color: "bg-cyan-500"
   },
   {
-    icon: <Code className="w-8 h-8 text-white" />,
-    title: "Web Development",
-    description: "Custom website development that combines attractive design with powerful functionality.",
-    longDescription: "Professional web development services that create responsive, user-friendly websites.",
-    features: [
-      "Responsive design implementation",
-      "E-commerce functionality",
-      "Custom CMS development",
-      "Performance optimization"
-    ],
-    color: "bg-media-oceanblue",
-    category: "development"
+    icon: <LineChart size={24} color="white" />,
+    title: "SEM",
+    description: "Search Engine Marketing combining paid search, display advertising and strategic optimization.",
+    color: "bg-teal-500"
   },
   {
-    icon: <ShoppingBag className="w-8 h-8 text-white" />,
-    title: "Shopify Store",
-    description: "Complete Shopify store setup and optimization for a seamless e-commerce experience that drives sales.",
-    longDescription: "End-to-end Shopify development with focus on conversion optimization and user experience.",
-    features: [
-      "Custom theme development",
-      "Product setup and optimization",
-      "Payment gateway integration",
-      "Analytics and tracking setup"
-    ],
-    color: "bg-[#7AB55C]",
-    category: "development"
+    icon: <Mail size={24} color="white" />,
+    title: "Email Marketing",
+    description: "Strategic email campaigns to nurture leads, retain customers and drive repeat business.",
+    color: "bg-indigo-500"
   },
   {
-    icon: <Globe className="w-8 h-8 text-white" />,
-    title: "WordPress Store",
-    description: "Professional WordPress store development with powerful e-commerce capabilities and customizations.",
-    longDescription: "WordPress and WooCommerce development that creates flexible, scalable online stores.",
-    features: [
-      "Custom theme development",
-      "Plugin customization",
-      "Payment processing integration",
-      "SEO optimization"
-    ],
-    color: "bg-[#21759B]",
-    category: "development"
+    icon: <MonitorSmartphone size={24} color="white" />,
+    title: "Digital Strategy",
+    description: "Comprehensive digital marketing strategy development aligned with your business goals.",
+    color: "bg-rose-500"
   },
   {
-    icon: <BarChart className="w-8 h-8 text-white" />,
-    title: "Analytics Setup",
-    description: "Comprehensive analytics setup to track campaign performance and provide actionable insights.",
-    longDescription: "Data-driven analytics setup that enables informed decision making and campaign optimization.",
-    features: [
-      "Google Analytics implementation",
-      "Custom dashboard creation",
-      "Conversion tracking setup",
-      "Regular performance reporting"
-    ],
-    color: "bg-media-vibrantpurple",
-    category: "media"
+    icon: <MessageSquare size={24} color="white" />,
+    title: "SMS Marketing",
+    description: "Direct and high-converting text message campaigns with strategic timing and segmentation.",
+    color: "bg-orange-500"
+  },
+  {
+    icon: <Code size={24} color="white" />,
+    title: "Technical SEO",
+    description: "Website architecture optimization for crawlability, indexability and enhanced performance.",
+    color: "bg-emerald-500"
   }
 ];

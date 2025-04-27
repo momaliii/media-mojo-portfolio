@@ -79,7 +79,7 @@ export const usePDFDownloader = () => {
         doc.setTextColor(80, 80, 80);
         doc.setFontSize(10);
         
-        // Make sure results array exists before trying to iterate through it
+        // Make sure metrics array exists before trying to iterate through it
         if (study.metrics) {
           study.metrics.forEach((metric, index) => {
             doc.text(`• ${metric.label}: ${metric.value}`, 25, resultsYStart + (index + 1) * 5);
