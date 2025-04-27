@@ -33,7 +33,7 @@ export const expertServices: ExpertService[] = [
     icon: Search,
     title: "Search Engine Marketing",
     description: "Data-driven PPC campaigns on Google Ads to capture high-intent traffic and drive conversions with optimal ROI.",
-    color: "bg-[#FF7051]",
+    color: "bg-[#33C3F0]",
     features: [
       "Keyword research and optimization",
       "Ad copy creation and testing",
