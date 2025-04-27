@@ -1,5 +1,6 @@
 
-import React, { useState } from "react";
+import React from "react";
+import { motion } from "framer-motion";
 
 interface ServiceCategoryProps {
   activeCategory: string;
@@ -16,22 +17,33 @@ const ServiceCategories: React.FC<ServiceCategoryProps> = ({ activeCategory, set
   ];
 
   return (
-    <div className="flex flex-wrap justify-center gap-3 mb-10">
-      {categories.map((category) => (
-        <button
+    <motion.div 
+      className="flex flex-wrap justify-center gap-3 mb-10"
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+      {categories.map((category, index) => (
+        <motion.button
           key={category.id}
           onClick={() => setActiveCategory(category.id)}
           className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
             activeCategory === category.id
-              ? "bg-media-purple text-white shadow-md"
-              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              ? "bg-media-purple dark:bg-media-blue text-white shadow-md"
+              : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
           }`}
           aria-pressed={activeCategory === category.id}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.1, duration: 0.3 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           {category.label}
-        </button>
+        </motion.button>
       ))}
-    </div>
+    </motion.div>
   );
 };
 

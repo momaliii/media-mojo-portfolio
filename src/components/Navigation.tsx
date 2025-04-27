@@ -4,6 +4,7 @@ import { Menu, X, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { trackEvent } from "@/utils/analytics";
+import ThemeToggle from "./ThemeToggle";
 
 interface NavigationProps {
   activeSection?: string;
@@ -58,8 +59,8 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
     <motion.nav
       className={`fixed w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-md py-3"
-          : "bg-transparent py-5"
+          ? "bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-md py-3"
+          : "bg-transparent dark:bg-transparent py-5"
       }`}
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -75,23 +76,23 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
           >
             <div className="relative">
               <span className="inline-block animate-slide-in-right overflow-hidden whitespace-nowrap">
-                <span className="gradient-text">Mohamed</span>
-                <span className="animate-pulse ml-1 text-media-purple">Ali</span>
+                <span className="gradient-text dark:text-white">Mohamed</span>
+                <span className="animate-pulse ml-1 text-media-purple dark:text-media-blue">Ali</span>
               </span>
               <span className="animate-fade-in absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-media-purple to-blue-500"></span>
             </div>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {["about", "services", "portfolio", "contact"].map((item, index) => (
               <motion.button
                 key={item}
                 onClick={() => scrollToSection(item)}
                 className={`relative group ${
                   activeSection === item 
-                    ? "text-media-purple font-medium" 
-                    : "text-gray-700 hover:text-media-purple"
+                    ? "text-media-purple dark:text-media-blue font-medium" 
+                    : "text-gray-700 dark:text-gray-300 hover:text-media-purple dark:hover:text-media-blue"
                 } transition-colors capitalize`}
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -101,13 +102,14 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
               >
                 {item}
                 <span 
-                  className={`absolute -bottom-1 left-0 h-0.5 bg-media-purple transition-all duration-300 ${
+                  className={`absolute -bottom-1 left-0 h-0.5 bg-media-purple dark:bg-media-blue transition-all duration-300 ${
                     activeSection === item ? "w-full" : "w-0 group-hover:w-full"
                   }`}
                   aria-hidden="true"
                 ></span>
               </motion.button>
             ))}
+            <ThemeToggle />
             <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -115,15 +117,16 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
             >
               <Button
                 onClick={() => scrollToSection("contact")}
-                className="bg-media-purple hover:bg-media-darkpurple text-white shadow-md hover:shadow-lg transition-all"
+                className="bg-media-purple dark:bg-media-blue hover:bg-media-darkpurple dark:hover:bg-blue-600 text-white shadow-md hover:shadow-lg transition-all"
               >
                 Let's Talk <ChevronRight className="ml-1 h-4 w-4" aria-hidden="true" />
               </Button>
             </motion.div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          {/* Mobile Menu Button and Theme Toggle */}
+          <div className="md:hidden flex items-center space-x-2">
+            <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
@@ -151,15 +154,15 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
               role="navigation" 
               aria-label="Mobile navigation menu"
             >
-              <div className="flex flex-col space-y-4 bg-white/90 backdrop-blur-sm p-4 rounded-xl shadow-sm">
+              <div className="flex flex-col space-y-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm p-4 rounded-xl shadow-sm">
                 {["about", "services", "portfolio", "contact"].map((item, index) => (
                   <motion.button
                     key={item}
                     onClick={() => scrollToSection(item)}
                     className={`text-left pl-2 py-2 rounded-md transition-colors capitalize ${
                       activeSection === item 
-                        ? "text-media-purple font-medium bg-media-purple/10" 
-                        : "text-gray-800 hover:text-media-purple hover:bg-gray-50"
+                        ? "text-media-purple dark:text-media-blue font-medium bg-media-purple/10 dark:bg-media-blue/10" 
+                        : "text-gray-800 dark:text-gray-200 hover:text-media-purple hover:bg-gray-50 dark:hover:text-media-blue dark:hover:bg-gray-800"
                     }`}
                     initial={{ x: -20, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
@@ -176,7 +179,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
                 >
                   <Button
                     onClick={() => scrollToSection("contact")}
-                    className="bg-media-purple hover:bg-media-darkpurple text-white w-full shadow-md flex items-center justify-center"
+                    className="bg-media-purple dark:bg-media-blue hover:bg-media-darkpurple dark:hover:bg-blue-600 text-white w-full shadow-md flex items-center justify-center"
                   >
                     <span>Let's Talk</span>
                     <ChevronRight className="ml-1 h-4 w-4" aria-hidden="true" />

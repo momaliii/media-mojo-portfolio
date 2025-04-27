@@ -8,6 +8,7 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Services from "@/components/Services";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import NewsletterSubscription from "@/components/newsletter/NewsletterSubscription";
 import { useScrollObserver } from "@/hooks/use-scroll-observer";
 import { trackPageView } from "@/utils/analytics";
 import StructuredData from "@/components/StructuredData";
@@ -53,7 +54,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
       <StructuredData />
       <Navigation activeSection={activeSection} />
       <main className="overflow-hidden">
@@ -61,7 +62,7 @@ const Index = () => {
           <Hero />
         </ErrorBoundary>
         <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50/50 to-white pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50/50 to-white dark:from-gray-950 dark:via-gray-900/50 dark:to-gray-950 pointer-events-none" />
           <ErrorBoundary>
             <About />
           </ErrorBoundary>
@@ -71,6 +72,9 @@ const Index = () => {
         </ErrorBoundary>
         <ErrorBoundary>
           <Portfolio />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <NewsletterSubscription />
         </ErrorBoundary>
         <ErrorBoundary>
           <Contact />
