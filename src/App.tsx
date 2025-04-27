@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider as TooltipProvider } from "@radix-ui/react-tooltip";
 import Index from "./pages/Index";
-import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { trackPageView } from "./utils/analytics";
@@ -37,16 +36,15 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <ErrorBoundary>
+        <Toaster />
+        <Sonner />
         <BrowserRouter>
           <RouteTracker />
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/dashboard" element={<Dashboard />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-          <Toaster />
-          <Sonner />
         </BrowserRouter>
       </ErrorBoundary>
     </TooltipProvider>
