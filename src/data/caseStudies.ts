@@ -1,3 +1,4 @@
+
 // Define the type for metrics
 export interface CaseStudyMetric {
   label: string;
@@ -83,8 +84,11 @@ export const caseStudies: CaseStudy[] = [
     ],
     description: "Co-founded and led media buying strategy for an innovative HR education platform. Focused on lead generation optimization and cost-efficient student acquisition across digital channels. Successfully promoted specialized courses including HR Excel and HR Management programs.",
     industry: "Education",
-    screenshot: "/lovable-uploads/72505037-b6fe-441a-a01b-d513f63c5fb7.png",
-    additionalScreenshots: ["/lovable-uploads/900c6176-4030-4244-a97a-62a4c235d53f.png"],
+    screenshot: "/lovable-uploads/3725b286-7258-4fa4-9ad1-3cdc8e8f5b98.png",
+    additionalScreenshots: [
+      "/lovable-uploads/900c6176-4030-4244-a97a-62a4c235d53f.png",
+      "/lovable-uploads/72505037-b6fe-441a-a01b-d513f63c5fb7.png"
+    ],
     budgetRange: "medium",
     platforms: ["facebook", "instagram", "linkedin"]
   }
