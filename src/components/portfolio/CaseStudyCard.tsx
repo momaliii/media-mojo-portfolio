@@ -43,18 +43,9 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.4 }}
     >
-      <Card className="group overflow-hidden cursor-pointer border-none rounded-2xl shadow-md hover:shadow-xl transition-all duration-500 bg-white dark:bg-gray-800">
+      <Card className="group overflow-hidden cursor-pointer border-none rounded-2xl shadow-md hover:shadow-xl transition-all duration-500 bg-white">
         <CardContent className="p-0 relative">
           <div className={`h-52 relative overflow-hidden ${getGradientClass(study.category)} transition-all duration-500 group-hover:h-56`}>
-            {study.screenshot && (
-              <div className="absolute inset-0 w-full h-full">
-                <img 
-                  src={study.screenshot} 
-                  alt={`${study.title} screenshot`} 
-                  className="w-full h-full object-cover object-center opacity-30"
-                />
-              </div>
-            )}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.2),rgba(255,255,255,0))]" />
             <div className="absolute inset-0 flex items-center justify-center opacity-50">
               <span className="text-white text-opacity-50 font-bold text-xl transform rotate-[-30deg] select-none" style={{fontSize: '28px'}}>
@@ -62,17 +53,17 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
               </span>
             </div>
             <div className="absolute bottom-4 left-4 transform transition-transform duration-300 group-hover:translate-y-1">
-              <Badge className="bg-white/90 text-gray-800 hover:bg-white/90 dark:bg-gray-700/90 dark:text-white dark:hover:bg-gray-700/90">
+              <Badge className="bg-white/90 text-gray-800 hover:bg-white/90">
                 {getCategoryName(study.category)}
               </Badge>
             </div>
           </div>
-          <div className="p-6 md:p-7 dark:bg-gray-800 dark:text-gray-200">
-            <div className="mb-2 text-sm text-gray-500 dark:text-gray-400 font-medium">{study.client}</div>
-            <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white group-hover:text-media-purple dark:group-hover:text-media-blue transition-colors">
+          <div className="p-6 md:p-7">
+            <div className="mb-2 text-sm text-gray-500 font-medium">{study.client}</div>
+            <h3 className="text-xl font-semibold mb-3 text-gray-800 group-hover:text-media-purple transition-colors">
               {study.title}
             </h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm mb-5 line-clamp-2 leading-relaxed">
+            <p className="text-gray-600 text-sm mb-5 line-clamp-2 leading-relaxed">
               {study.description}
             </p>
             
@@ -80,15 +71,15 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
               {study.metrics.map((metric, i) => (
                 <div 
                   key={i} 
-                  className="bg-gray-50 dark:bg-gray-700 p-3 rounded-xl text-center transform transition-all duration-300 group-hover:translate-y-[-2px] group-hover:shadow-sm"
+                  className="bg-gray-50 p-3 rounded-xl text-center transform transition-all duration-300 group-hover:translate-y-[-2px] group-hover:shadow-sm"
                 >
-                  <div className="font-semibold text-media-purple dark:text-media-blue">{metric.value}</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">{metric.label}</div>
+                  <div className="font-semibold text-media-purple">{metric.value}</div>
+                  <div className="text-xs text-gray-500 mt-1">{metric.label}</div>
                 </div>
               ))}
             </div>
             
-            <div className="flex items-center text-media-purple dark:text-media-blue font-medium text-sm opacity-75 group-hover:opacity-100 transition-opacity">
+            <div className="flex items-center text-media-purple font-medium text-sm opacity-75 group-hover:opacity-100 transition-opacity">
               <span>View case study</span>
               <ExternalLink className="ml-1.5 w-3.5 h-3.5 transform transition-transform group-hover:translate-x-0.5" />
             </div>

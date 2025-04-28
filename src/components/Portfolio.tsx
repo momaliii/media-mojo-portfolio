@@ -14,9 +14,6 @@ const Portfolio = () => {
   // Monitor filter changes performance
   useEffect(() => {
     const startTime = performance.now();
-    
-    // Code to filter case studies would go here
-    
     const endTime = performance.now();
     logMetric('portfolio-filter-time', endTime - startTime);
   }, [filter, logMetric]);
