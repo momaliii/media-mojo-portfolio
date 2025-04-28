@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -61,8 +62,14 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
       <Card className="group overflow-hidden cursor-pointer border-none rounded-2xl shadow-md hover:shadow-xl transition-all duration-500 bg-white">
         <CardContent className="p-0 relative">
           <div 
-            className={`h-52 relative overflow-hidden transition-all duration-500 group-hover:h-56`}
-            style={getBackgroundStyle(study)}
+            className={`h-52 relative overflow-hidden ${study.client === "CYC Academy" ? "" : getGradientClass(study.category)} transition-all duration-500 group-hover:h-56`}
+            style={study.client === "CYC Academy" ? {
+              backgroundImage: `url('/lovable-uploads/feedd43a-31bc-47ba-9a40-dbd5b245f207.png')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              backgroundBlendMode: 'overlay',
+            } : undefined}
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.2),rgba(255,255,255,0))]" />
             <div className="absolute inset-0 flex items-center justify-center opacity-50">
