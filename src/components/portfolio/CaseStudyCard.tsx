@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -27,7 +26,7 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
   const getBackgroundStyle = (study: CaseStudy) => {
     if (study.client === "CYC Academy") {
       return {
-        backgroundImage: `url('/lovable-uploads/feedd43a-31bc-47ba-9a40-dbd5b245f207.png')`,
+        backgroundImage: `url('/lovable-uploads/24b2712e-a180-499b-ae70-dcf44df8d187.png')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -64,7 +63,7 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
           <div 
             className={`h-52 relative overflow-hidden ${study.client === "CYC Academy" ? "" : getGradientClass(study.category)} transition-all duration-500 group-hover:h-56`}
             style={study.client === "CYC Academy" ? {
-              backgroundImage: `url('/lovable-uploads/feedd43a-31bc-47ba-9a40-dbd5b245f207.png')`,
+              backgroundImage: `url('/lovable-uploads/24b2712e-a180-499b-ae70-dcf44df8d187.png')`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundColor: 'rgba(0, 0, 0, 0.5)',
