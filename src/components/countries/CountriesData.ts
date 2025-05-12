@@ -3,6 +3,7 @@ interface Country {
   name: string;
   region: string;
   flag: string;
+  code: string; // Adding ISO country code for flag images
   note?: string;
 }
 
@@ -11,60 +12,70 @@ export const countriesData: Country[] = [
     name: "Saudi Arabia",
     region: "Middle East",
     flag: "🇸🇦",
+    code: "sa",
     note: "Emerging market for digital campaigns"
   },
   {
     name: "Egypt",
     region: "Middle East",
     flag: "🇪🇬",
+    code: "eg",
     note: "Growing digital advertising market"
   },
   {
     name: "UAE",
     region: "Middle East",
     flag: "🇦🇪",
+    code: "ae",
     note: "Luxury and high-end services"
   },
   {
     name: "Kuwait",
     region: "Middle East",
     flag: "🇰🇼",
+    code: "kw",
     note: "Premium consumer market"
   },
   {
     name: "Qatar",
     region: "Middle East",
     flag: "🇶🇦",
+    code: "qa",
     note: "High-value luxury campaigns"
   },
   {
     name: "Turkey",
     region: "Middle East",
     flag: "🇹🇷",
+    code: "tr",
     note: "Bridging European and Middle Eastern markets"
   },
   {
     name: "China",
     region: "Asia",
     flag: "🇨🇳",
+    code: "cn",
     note: "Large-scale ecommerce opportunities"
   },
   {
     name: "UK",
     region: "Europe",
     flag: "🇬🇧",
+    code: "gb",
     note: "Key market for finance and ecommerce"
   },
   {
     name: "Libya",
     region: "Middle East",
     flag: "🇱🇾",
+    code: "ly",
     note: "Developing market with growth potential"
   },
   {
     name: "U.S.",
     region: "North America",
     flag: "🇺🇸",
+    code: "us",
     note: "Primary market for tech and SaaS campaigns"
   }
 ];

@@ -31,7 +31,7 @@ const GlobalPresence = () => {
           </motion.div>
           
           {/* Countries Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-8">
             {countriesData.map((country, index) => (
               <motion.div
                 key={country.name}
@@ -42,8 +42,17 @@ const GlobalPresence = () => {
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm hover:shadow-md transition-all"
               >
-                <div className="text-4xl mb-2">{country.flag}</div>
+                <div className="mb-3 flex justify-center">
+                  <img 
+                    src={`https://flagcdn.com/w80/${country.code}.png`}
+                    srcSet={`https://flagcdn.com/w160/${country.code}.png 2x`}
+                    width="80" 
+                    alt={`Flag of ${country.name}`}
+                    className="rounded shadow-sm"
+                  />
+                </div>
                 <h3 className="font-medium text-sm md:text-base">{country.name}</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{country.region}</p>
               </motion.div>
             ))}
           </div>
