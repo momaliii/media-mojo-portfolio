@@ -7,6 +7,7 @@ import Portfolio from "@/components/Portfolio";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Services from "@/components/Services";
+import GlobalPresence from "@/components/countries/GlobalPresence";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import NewsletterSubscription from "@/components/newsletter/NewsletterSubscription";
 import { useScrollObserver } from "@/hooks/use-scroll-observer";
@@ -85,6 +86,12 @@ const Index = () => {
             </AnimatedSection>
           </ErrorBoundary>
         </div>
+        {/* New Countries Section */}
+        <ErrorBoundary>
+          <AnimatedSection id="countries-section">
+            <GlobalPresence />
+          </AnimatedSection>
+        </ErrorBoundary>
         <ErrorBoundary>
           <AnimatedSection id="services-section">
             <Services />

@@ -18,7 +18,7 @@ export const useScrollObserver = () => {
     setScrollPosition(scrolled);
     
     // Determine which section is currently in view
-    const sections = ['hero', 'about', 'services', 'portfolio', 'contact'];
+    const sections = ['hero', 'about', 'countries', 'services', 'portfolio', 'contact'];
     let currentSection = activeSection;
     
     sections.forEach(section => {

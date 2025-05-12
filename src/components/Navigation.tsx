@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Menu, X, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -85,7 +84,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {["about", "services", "portfolio", "contact"].map((item, index) => (
+            {["about", "countries", "services", "portfolio", "contact"].map((item, index) => (
               <motion.button
                 key={item}
                 onClick={() => scrollToSection(item)}
@@ -155,7 +154,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
               aria-label="Mobile navigation menu"
             >
               <div className="flex flex-col space-y-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm p-4 rounded-xl shadow-sm">
-                {["about", "services", "portfolio", "contact"].map((item, index) => (
+                {["about", "countries", "services", "portfolio", "contact"].map((item, index) => (
                   <motion.button
                     key={item}
                     onClick={() => scrollToSection(item)}
