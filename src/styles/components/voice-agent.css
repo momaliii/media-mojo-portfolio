@@ -15,26 +15,15 @@ elevenlabs-convai[data-expanded="true"] {
 
 /* Animation for widget appearance */
 .elevenlabs-convai-container {
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
   position: fixed;
   bottom: 1rem;
   right: 1rem;
   z-index: 50;
-}
-
-/* Widget visibility states */
-.elevenlabs-convai-container.hidden {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  pointer-events: none;
-}
-
-.elevenlabs-convai-container.visible {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
   animation: fade-in-up 0.5s ease-out forwards;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
 @media (max-width: 640px) {
