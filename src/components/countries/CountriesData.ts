@@ -8,76 +8,64 @@ interface Country {
 
 export const countriesData: Country[] = [
   {
-    name: "United States",
-    region: "North America",
-    flag: "🇺🇸",
-    note: "Primary market for tech and SaaS campaigns"
-  },
-  {
-    name: "United Kingdom",
-    region: "Europe",
-    flag: "🇬🇧",
-    note: "Key market for finance and ecommerce"
-  },
-  {
-    name: "Canada",
-    region: "North America",
-    flag: "🇨🇦",
-    note: "Growing market for service-based businesses"
-  },
-  {
-    name: "Australia",
-    region: "Oceania",
-    flag: "🇦🇺",
-    note: "Strong performance in lifestyle and retail"
-  },
-  {
-    name: "Germany",
-    region: "Europe",
-    flag: "🇩🇪",
-    note: "Focused on precision engineering and B2B"
-  },
-  {
-    name: "France",
-    region: "Europe",
-    flag: "🇫🇷",
-    note: "Luxury and premium brand campaigns"
-  },
-  {
-    name: "United Arab Emirates",
-    region: "Middle East",
-    flag: "🇦🇪",
-    note: "Luxury and high-end services"
-  },
-  {
-    name: "Singapore",
-    region: "Asia",
-    flag: "🇸🇬",
-    note: "Tech and financial services hub"
-  },
-  {
     name: "Saudi Arabia",
     region: "Middle East",
     flag: "🇸🇦",
     note: "Emerging market for digital campaigns"
   },
   {
-    name: "India",
-    region: "Asia",
-    flag: "🇮🇳",
-    note: "Fast-growing market across sectors"
+    name: "Egypt",
+    region: "Middle East",
+    flag: "🇪🇬",
+    note: "Growing digital advertising market"
   },
   {
-    name: "Japan",
-    region: "Asia",
-    flag: "🇯🇵",
-    note: "Specialized technology campaigns"
+    name: "UAE",
+    region: "Middle East",
+    flag: "🇦🇪",
+    note: "Luxury and high-end services"
   },
   {
-    name: "Brazil",
-    region: "South America",
-    flag: "🇧🇷",
-    note: "Emerging ecommerce opportunities"
+    name: "Kuwait",
+    region: "Middle East",
+    flag: "🇰🇼",
+    note: "Premium consumer market"
+  },
+  {
+    name: "Qatar",
+    region: "Middle East",
+    flag: "🇶🇦",
+    note: "High-value luxury campaigns"
+  },
+  {
+    name: "Turkey",
+    region: "Middle East",
+    flag: "🇹🇷",
+    note: "Bridging European and Middle Eastern markets"
+  },
+  {
+    name: "China",
+    region: "Asia",
+    flag: "🇨🇳",
+    note: "Large-scale ecommerce opportunities"
+  },
+  {
+    name: "UK",
+    region: "Europe",
+    flag: "🇬🇧",
+    note: "Key market for finance and ecommerce"
+  },
+  {
+    name: "Libya",
+    region: "Middle East",
+    flag: "🇱🇾",
+    note: "Developing market with growth potential"
+  },
+  {
+    name: "U.S.",
+    region: "North America",
+    flag: "🇺🇸",
+    note: "Primary market for tech and SaaS campaigns"
   }
 ];
 
