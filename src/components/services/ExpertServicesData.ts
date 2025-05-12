@@ -4,7 +4,8 @@ import {
   Search,
   ChartLine,
   Target,
-  Clock
+  Clock,
+  Code
 } from "lucide-react";
 
 export type ExpertService = {
@@ -75,6 +76,18 @@ export const expertServices: ExpertService[] = [
       "Bid management and optimization",
       "Performance-based adjustments",
       "ROI maximization tactics"
+    ]
+  },
+  {
+    icon: Code,
+    title: "Vibe Coder",
+    description: "Creating immersive digital experiences that capture your brand's unique vibe through cutting-edge frontend development.",
+    color: "bg-[#0EA5E9]",
+    features: [
+      "Interactive UI/UX development",
+      "Responsive design implementation",
+      "Modern framework integration",
+      "Performance optimization"
     ]
   }
 ];
