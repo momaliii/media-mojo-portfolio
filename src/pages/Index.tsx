@@ -15,6 +15,7 @@ import { trackPageView } from "@/utils/analytics";
 import StructuredData from "@/components/StructuredData";
 import MetaTags from "@/components/MetaTags";
 import { LoadingSkeleton } from "@/components/ui/loading-skeleton";
+import ElevenLabsWidget from "@/components/voice-agent/ElevenLabsWidget";
 
 // Component to handle animations when elements enter viewport
 const AnimatedSection = ({ children, id, className = "" }: { 
@@ -114,6 +115,11 @@ const Index = () => {
         </ErrorBoundary>
       </main>
       <Footer />
+      
+      {/* Add the ElevenLabs Conversational AI Widget */}
+      <ErrorBoundary>
+        <ElevenLabsWidget agentId="f1qZNFUcdFk0xsChWBnF" />
+      </ErrorBoundary>
     </div>
   );
 };
