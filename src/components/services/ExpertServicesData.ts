@@ -5,7 +5,8 @@ import {
   ChartLine,
   Target,
   Clock,
-  Code
+  Code,
+  Bot
 } from "lucide-react";
 
 export type ExpertService = {
@@ -88,6 +89,18 @@ export const expertServices: ExpertService[] = [
       "Responsive design implementation",
       "Modern framework integration",
       "Performance optimization"
+    ]
+  },
+  {
+    icon: Bot,
+    title: "AI Agent Builder",
+    description: "Designing and developing intelligent AI agents that understand your business and help drive customer engagement and satisfaction.",
+    color: "bg-[#10B981]",
+    features: [
+      "Custom AI agent development",
+      "Natural language processing",
+      "Integration with business systems",
+      "Continuous learning and improvement"
     ]
   }
 ];
