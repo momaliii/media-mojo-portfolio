@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -28,7 +27,6 @@ const NewsletterSubscription = () => {
     setIsSubmitting(true);
     
     try {
-      // Using contact_submissions table since newsletter_subscribers doesn't exist
       const { error } = await supabase
         .from('contact_submissions')
         .insert({
