@@ -7,6 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Mail, Send, Linkedin, Phone, MapPin, Loader2 } from "lucide-react";
 import { trackFormSubmission, trackEvent } from "@/utils/analytics";
 import { supabase } from "@/integrations/supabase/client";
+import { useFormValidation } from "@/hooks/use-form-validation";
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -20,60 +21,38 @@ interface FormData {
 const Contact = () => {
   const { toast } = useToast();
   const [formStatus, setFormStatus] = useState<FormStatus>('idle');
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+  
+  const validationRules = {
+    name: (value: string) => !value.trim() ? "Name is required" : undefined,
+    email: (value: string) => {
+      if (!value.trim()) return "Email is required";
+      if (!/^\S+@\S+\.\S+$/.test(value)) return "Valid email is required";
+      return undefined;
+    },
+    subject: (value: string) => !value.trim() ? "Subject is required" : undefined,
+    message: (value: string) => {
+      if (!value.trim()) return "Message is required";
+      if (value.trim().length < 10) return "Message must be at least 10 characters";
+      return undefined;
+    }
   };
 
-  const validateForm = (): boolean => {
-    if (!formData.name.trim()) {
-      toast({
-        title: "Name required",
-        description: "Please enter your name",
-        variant: "destructive"
-      });
-      return false;
-    }
-    
-    if (!formData.email.trim() || !/^\S+@\S+\.\S+$/.test(formData.email)) {
-      toast({
-        title: "Valid email required",
-        description: "Please enter a valid email address",
-        variant: "destructive"
-      });
-      return false;
-    }
-    
-    if (!formData.subject.trim()) {
-      toast({
-        title: "Subject required",
-        description: "Please provide a subject for your message",
-        variant: "destructive"
-      });
-      return false;
-    }
-    
-    if (!formData.message.trim() || formData.message.length < 10) {
-      toast({
-        title: "Message too short",
-        description: "Please provide a detailed message (at least 10 characters)",
-        variant: "destructive"
-      });
-      return false;
-    }
-    
-    return true;
-  };
+  const {
+    formData,
+    errors,
+    handleChange,
+    handleBlur,
+    validateForm,
+    resetForm
+  } = useFormValidation<FormData>(
+    {
+      name: '',
+      email: '',
+      subject: '',
+      message: ''
+    },
+    validationRules
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -83,27 +62,33 @@ const Contact = () => {
     setFormStatus('submitting');
     
     try {
+      // First save to Supabase database
       const { error: dbError } = await supabase
         .from('contact_submissions')
         .insert([formData]);
 
       if (dbError) throw dbError;
 
-      const apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1tdnFtb25qc29wYmlldmV1Z3FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU3MDk0MTEsImV4cCI6MjA2MTI4NTQxMX0.kjYzDEJjBZyN3jm3gYbFmEsXBho98U0pMNyAGve4g58";
+      // Then send email notification via edge function
+      try {
+        const apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1tdnFtb25qc29wYmlldmV1Z3FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU3MDk0MTEsImV4cCI6MjA2MTI4NTQxMX0.kjYzDEJjBZyN3jm3gYbFmEsXBho98U0pMNyAGve4g58";
+        
+        const emailResponse = await fetch('https://mmvqmonjsopbieveugqj.functions.supabase.co/send-contact-notification', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': apiKey
+          },
+          body: JSON.stringify(formData),
+        });
 
-      const response = await fetch('https://mmvqmonjsopbieveugqj.functions.supabase.co/send-contact-notification', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': apiKey
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Email notification error:', errorData);
-        throw new Error('Failed to send email notification');
+        if (!emailResponse.ok) {
+          console.log('Email API response status:', emailResponse.status);
+          // Continue even if email fails - we've stored the message in the database
+        }
+      } catch (emailError) {
+        // Log but don't fail the whole submission just because email failed
+        console.error('Email notification error:', emailError);
       }
 
       trackFormSubmission('contact_form', true);
@@ -114,12 +99,7 @@ const Contact = () => {
         description: "Thanks for your message! I'll get back to you soon.",
       });
       
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
+      resetForm();
       
       setTimeout(() => setFormStatus('idle'), 3000);
     } catch (error) {
@@ -169,12 +149,15 @@ const Contact = () => {
                         id="name"
                         name="name" 
                         value={formData.name}
-                        onChange={handleInputChange}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                         placeholder="Your name" 
                         required
                         aria-required="true"
                         disabled={formStatus === 'submitting'}
+                        className={errors.name ? "border-red-400" : ""}
                       />
+                      {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="email" className="text-sm font-medium">
@@ -184,13 +167,16 @@ const Contact = () => {
                         id="email"
                         name="email" 
                         value={formData.email}
-                        onChange={handleInputChange}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                         type="email" 
                         placeholder="Your email" 
                         required
                         aria-required="true"
                         disabled={formStatus === 'submitting'}
+                        className={errors.email ? "border-red-400" : ""}
                       />
+                      {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
                     </div>
                   </div>
                   
@@ -202,12 +188,15 @@ const Contact = () => {
                       id="subject"
                       name="subject" 
                       value={formData.subject}
-                      onChange={handleInputChange}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
                       placeholder="What's this regarding?" 
                       required
                       aria-required="true"
                       disabled={formStatus === 'submitting'}
+                      className={errors.subject ? "border-red-400" : ""}
                     />
+                    {errors.subject && <p className="text-xs text-red-500">{errors.subject}</p>}
                   </div>
                   
                   <div className="space-y-2">
@@ -218,13 +207,15 @@ const Contact = () => {
                       id="message"
                       name="message" 
                       value={formData.message}
-                      onChange={handleInputChange}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
                       placeholder="Tell me about your project or inquiry" 
-                      className="min-h-[120px]" 
+                      className={`min-h-[120px] ${errors.message ? "border-red-400" : ""}`}
                       required
                       aria-required="true"
                       disabled={formStatus === 'submitting'}
                     />
+                    {errors.message && <p className="text-xs text-red-500">{errors.message}</p>}
                   </div>
                   
                   <Button 
