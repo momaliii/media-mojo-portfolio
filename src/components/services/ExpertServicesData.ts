@@ -82,7 +82,7 @@ export const expertServices: ExpertService[] = [
   {
     icon: Code,
     title: "Vibe Coder",
-    description: "Creating immersive digital experiences that capture your brand's unique vibe through cutting-edge frontend development.",
+    description: "Building, Designing and developing website, landing pages, app By AI Models",
     color: "bg-[#0EA5E9]",
     features: [
       "Interactive UI/UX development",
