@@ -77,6 +77,13 @@ export const countriesData: Country[] = [
     flag: "🇺🇸",
     code: "us",
     note: "Primary market for tech and SaaS campaigns"
+  },
+  {
+    name: "Oman",
+    region: "Middle East",
+    flag: "🇴🇲",
+    code: "om",
+    note: "Growing F&B and retail market"
   }
 ];
 
