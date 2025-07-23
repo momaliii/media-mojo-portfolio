@@ -35,7 +35,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     title: "Islamic Economy Events",
-    category: "b2b",
+    category: "ngo",
     client: "AlBaraka Forum",
     metrics: [
       { label: "Budget", value: "$15K+" },
@@ -48,7 +48,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     title: "Restaurant Chain Growth",
-    category: "local",
+    category: "f&b",
     client: "Shawaya Albukhari",
     metrics: [
       { label: "Branches", value: "3" },
@@ -74,7 +74,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     title: "Multi-Brand F&B Expansion",
-    category: "local",
+    category: "f&b",
     client: "Fasela Agency",
     metrics: [
       { label: "Branches", value: "80+" },
