@@ -74,16 +74,22 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     title: "Multi-Brand F&B Expansion",
-    category: "e-commerce",
+    category: "local",
     client: "Fasela Agency",
     metrics: [
       { label: "Branches", value: "80+" },
       { label: "Countries", value: "3" },
-      { label: "Sales Growth", value: "+25%" }
+      { label: "Sales Growth", value: "+25%" },
+      { label: "Monthly Budget", value: "$25K+" }
     ],
     description: "Managed comprehensive digital marketing campaigns for three major F&B brands: Smoothie Paradise (80+ branches across Egypt, Oman, and Saudi Arabia), Miso Sushi (Egypt), and Tatis (Oman). Achieved over 25% sales increase across all brands within 3 months through strategic media buying and targeted advertising.",
     industry: "Food & Beverage",
     screenshot: "/lovable-uploads/f00d5f5c8f07.png",
+    additionalScreenshots: [
+      "/lovable-uploads/smoothie-paradise-logo.png",
+      "/lovable-uploads/miso-sushi-logo.png", 
+      "/lovable-uploads/tatis-logo.png"
+    ],
     budgetRange: "high",
     platforms: ["facebook", "instagram", "snapchat", "tiktok"]
   },
