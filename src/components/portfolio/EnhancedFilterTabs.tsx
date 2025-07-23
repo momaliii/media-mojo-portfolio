@@ -200,11 +200,11 @@ const EnhancedFilterTabs = ({ filter, setFilter, caseStudies }: EnhancedFilterTa
             <ToggleGroupItem value="e-commerce" className="rounded-xl px-4 py-2 text-sm font-medium data-[state=on]:bg-white data-[state=on]:dark:bg-gray-700 data-[state=on]:text-media-purple data-[state=on]:dark:text-media-blue data-[state=on]:shadow-sm">
               E-commerce
             </ToggleGroupItem>
-            <ToggleGroupItem value="b2b" className="rounded-xl px-4 py-2 text-sm font-medium data-[state=on]:bg-white data-[state=on]:dark:bg-gray-700 data-[state=on]:text-media-purple data-[state=on]:dark:text-media-blue data-[state=on]:shadow-sm">
-              B2B
+            <ToggleGroupItem value="f&b" className="rounded-xl px-4 py-2 text-sm font-medium data-[state=on]:bg-white data-[state=on]:dark:bg-gray-700 data-[state=on]:text-media-purple data-[state=on]:dark:text-media-blue data-[state=on]:shadow-sm">
+              F&B
             </ToggleGroupItem>
-            <ToggleGroupItem value="local" className="rounded-xl px-4 py-2 text-sm font-medium data-[state=on]:bg-white data-[state=on]:dark:bg-gray-700 data-[state=on]:text-media-purple data-[state=on]:dark:text-media-blue data-[state=on]:shadow-sm">
-              Local Business
+            <ToggleGroupItem value="ngo" className="rounded-xl px-4 py-2 text-sm font-medium data-[state=on]:bg-white data-[state=on]:dark:bg-gray-700 data-[state=on]:text-media-purple data-[state=on]:dark:text-media-blue data-[state=on]:shadow-sm">
+              NGO
             </ToggleGroupItem>
             <ToggleGroupItem value="branding" className="rounded-xl px-4 py-2 text-sm font-medium data-[state=on]:bg-white data-[state=on]:dark:bg-gray-700 data-[state=on]:text-media-purple data-[state=on]:dark:text-media-blue data-[state=on]:shadow-sm">
               Events & Branding

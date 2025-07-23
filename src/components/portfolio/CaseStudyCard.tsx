@@ -14,10 +14,12 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
   const getCategoryName = (category: string): string => {
     switch (category) {
       case "e-commerce": return "E-commerce";
-      case "b2b": return "B2B";
-      case "apps": return "Mobile App";
+      case "f&b": return "F&B";
+      case "ngo": return "NGO";
       case "branding": return "Branding";
+      case "b2b": return "B2B";
       case "local": return "Local Business";
+      case "apps": return "Mobile App";
       case "travel": return "Travel";
       default: return category;
     }
@@ -42,10 +44,12 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
   const getGradientClass = (category: string): string => {
     switch (category) {
       case "e-commerce": return "bg-gradient-to-br from-media-purple/90 to-media-pink/90";
-      case "b2b": return "bg-gradient-to-br from-media-blue/90 to-media-oceanblue/90";
-      case "apps": return "bg-gradient-to-br from-indigo-500/90 to-blue-500/90";
+      case "f&b": return "bg-gradient-to-br from-media-orange/90 to-media-pink/90";
+      case "ngo": return "bg-gradient-to-br from-media-blue/90 to-media-oceanblue/90";
       case "branding": return "bg-gradient-to-br from-emerald-500/90 to-media-oceanblue/90";
+      case "b2b": return "bg-gradient-to-br from-media-blue/90 to-media-oceanblue/90";
       case "local": return "bg-gradient-to-br from-indigo-500/90 to-media-vibrantpurple/90";
+      case "apps": return "bg-gradient-to-br from-indigo-500/90 to-blue-500/90";
       case "travel": return "bg-gradient-to-br from-sky-500/90 to-media-blue/90";
       default: return "bg-gradient-to-br from-gray-500/90 to-gray-700/90";
     }

@@ -8,6 +8,7 @@ import { Mail, Send, Linkedin, Phone, MapPin, Loader2 } from "lucide-react";
 import { trackFormSubmission, trackEvent } from "@/utils/analytics";
 import { supabase } from "@/integrations/supabase/client";
 import { useFormValidation } from "@/hooks/use-form-validation";
+import { useAnalytics } from "@/hooks/use-analytics";
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -19,6 +20,7 @@ interface FormData {
 }
 
 const Contact = () => {
+  const { trackCustomEvent } = useAnalytics({ analyticsId: 'contact-section' });
   const { toast } = useToast();
   const [formStatus, setFormStatus] = useState<FormStatus>('idle');
   
@@ -92,6 +94,7 @@ const Contact = () => {
       }
 
       trackFormSubmission('contact_form', true);
+      trackCustomEvent('contact', { success: true, method: 'form' });
       
       setFormStatus('success');
       toast({
@@ -106,6 +109,7 @@ const Contact = () => {
       console.error("Form submission error:", error);
       
       trackFormSubmission('contact_form', false);
+      trackCustomEvent('contact', { success: false, error: error });
       
       setFormStatus('error');
       toast({
