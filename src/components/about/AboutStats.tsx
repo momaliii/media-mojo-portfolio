@@ -8,7 +8,7 @@ const AboutStats = () => {
   const stats = [
     { 
       icon: <BarChart3 className="text-media-purple h-6 w-6" />, 
-      value: "5+", 
+      value: "6+", 
       label: "Years Experience" 
     },
     { 
