@@ -12,6 +12,7 @@ import SkipToContent from "@/components/SkipToContent";
 import { LoadingSkeleton } from "@/components/ui/loading-skeleton";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import CaseStudyDetail from "./pages/CaseStudyDetail";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { trackPageView } from "./utils/analytics";
 
@@ -66,6 +67,11 @@ const App = () => (
                 <Route path="/" element={
                   <LazyComponent>
                     <Index />
+                  </LazyComponent>
+                } />
+                <Route path="/case-study/:slug" element={
+                  <LazyComponent>
+                    <CaseStudyDetail />
                   </LazyComponent>
                 } />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

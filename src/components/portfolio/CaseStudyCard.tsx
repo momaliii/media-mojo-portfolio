@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { ExternalLink } from "lucide-react";
 import { CaseStudy } from "@/data/caseStudies";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 interface CaseStudyCardProps {
   study: CaseStudy;
@@ -11,6 +12,14 @@ interface CaseStudyCardProps {
 }
 
 const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
+  const navigate = useNavigate();
+  
+  const titleToSlug = (title: string) => 
+    title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  
+  const handleCardClick = () => {
+    navigate(`/case-study/${titleToSlug(study.title)}`);
+  };
   const getCategoryName = (category: string): string => {
     switch (category) {
       case "e-commerce": return "E-commerce";
@@ -62,7 +71,7 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.4 }}
     >
-      <Card className="group overflow-hidden cursor-pointer border-none rounded-2xl shadow-md hover:shadow-xl transition-all duration-500 bg-white">
+      <Card className="group overflow-hidden cursor-pointer border-none rounded-2xl shadow-md hover:shadow-xl transition-all duration-500 bg-white" onClick={handleCardClick}>
         <CardContent className="p-0 relative">
           <div 
             className={`h-52 relative overflow-hidden ${study.client === "CYC Academy" ? "" : getGradientClass(study.category)} transition-all duration-500 group-hover:h-56`}
