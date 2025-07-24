@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Calendar, Globe, Target, TrendingUp } from "lucide-react";
+import { ArrowLeft, ExternalLink, Calendar, Globe, Target, TrendingUp, Users, Award, Zap, BarChart3 } from "lucide-react";
 import { caseStudies } from "@/data/caseStudies";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -133,7 +133,10 @@ const CaseStudyDetail = () => {
               transition={{ delay: 0.1 }}
               className="mb-12"
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Key Results</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <BarChart3 className="w-6 h-6 text-media-purple" />
+                Key Results & Performance
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {caseStudy.metrics.map((metric, index) => (
                   <motion.div
@@ -142,10 +145,10 @@ const CaseStudyDetail = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 + index * 0.1 }}
                   >
-                    <Card className="text-center p-6 bg-white border-none shadow-lg">
+                    <Card className="text-center p-6 bg-white border-none shadow-lg hover:shadow-xl transition-shadow">
                       <CardContent className="p-0">
-                        <div className={`inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br ${getGradientClass(caseStudy.category)} mb-4`}>
-                          <TrendingUp className="w-6 h-6 text-white" />
+                        <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br ${getGradientClass(caseStudy.category)} mb-4`}>
+                          <TrendingUp className="w-8 h-8 text-white" />
                         </div>
                         <div className="text-3xl font-bold text-gray-900 mb-2">
                           {metric.value}
@@ -160,7 +163,81 @@ const CaseStudyDetail = () => {
               </div>
             </motion.div>
 
-            {/* Screenshots */}
+            {/* Project Overview */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 }}
+              className="mb-12"
+            >
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <Award className="w-6 h-6 text-media-purple" />
+                Project Overview
+              </h2>
+              <Card className="p-8 bg-white border-none shadow-lg">
+                <CardContent className="p-0">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                        <Users className="w-5 h-5 text-media-purple" />
+                        Client Information
+                      </h3>
+                      <div className="space-y-3">
+                        <div>
+                          <span className="font-medium text-gray-600">Client:</span>
+                          <span className="ml-2 text-gray-900">{caseStudy.client}</span>
+                        </div>
+                        {caseStudy.industry && (
+                          <div>
+                            <span className="font-medium text-gray-600">Industry:</span>
+                            <span className="ml-2 text-gray-900">{caseStudy.industry}</span>
+                          </div>
+                        )}
+                        <div>
+                          <span className="font-medium text-gray-600">Category:</span>
+                          <span className="ml-2 text-gray-900">{getCategoryName(caseStudy.category)}</span>
+                        </div>
+                        {caseStudy.budgetRange && (
+                          <div>
+                            <span className="font-medium text-gray-600">Budget Range:</span>
+                            <Badge variant="outline" className="ml-2">
+                              {caseStudy.budgetRange.charAt(0).toUpperCase() + caseStudy.budgetRange.slice(1)}
+                            </Badge>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                        <Zap className="w-5 h-5 text-media-purple" />
+                        Campaign Details
+                      </h3>
+                      <div className="space-y-3">
+                        <div>
+                          <span className="font-medium text-gray-600">Challenge:</span>
+                          <p className="text-gray-900 mt-1 leading-relaxed">{caseStudy.description}</p>
+                        </div>
+                        {caseStudy.platforms && caseStudy.platforms.length > 0 && (
+                          <div>
+                            <span className="font-medium text-gray-600 block mb-2">Platforms Used:</span>
+                            <div className="flex flex-wrap gap-2">
+                              {caseStudy.platforms.map((platform, index) => (
+                                <Badge key={index} variant="secondary" className="text-xs">
+                                  {platform.charAt(0).toUpperCase() + platform.slice(1)}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Screenshots Gallery */}
             {caseStudy.screenshot && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -168,49 +245,96 @@ const CaseStudyDetail = () => {
                 transition={{ delay: 0.2 }}
                 className="mb-12"
               >
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Campaign Screenshots</h2>
-                <div className="rounded-2xl overflow-hidden shadow-2xl">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                  <Globe className="w-6 h-6 text-media-purple" />
+                  Campaign Gallery
+                </h2>
+                
+                {/* Main Screenshot */}
+                <div className="rounded-2xl overflow-hidden shadow-2xl mb-8">
                   <LazyImage
                     src={caseStudy.screenshot}
-                    alt={`${caseStudy.title} screenshot`}
+                    alt={`${caseStudy.title} main campaign screenshot`}
                     className="w-full h-auto"
                   />
                 </div>
                 
+                {/* Additional Screenshots */}
                 {caseStudy.additionalScreenshots && caseStudy.additionalScreenshots.length > 0 && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-                    {caseStudy.additionalScreenshots.map((screenshot, index) => (
-                      <div key={index} className="rounded-xl overflow-hidden shadow-lg">
-                        <LazyImage
-                          src={screenshot}
-                          alt={`${caseStudy.title} additional screenshot ${index + 1}`}
-                          className="w-full h-48 object-cover"
-                        />
-                      </div>
-                    ))}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Additional Campaign Materials</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {caseStudy.additionalScreenshots.map((screenshot, index) => (
+                        <motion.div 
+                          key={index} 
+                          className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.3 + index * 0.1 }}
+                        >
+                          <LazyImage
+                            src={screenshot}
+                            alt={`${caseStudy.title} additional material ${index + 1}`}
+                            className="w-full h-48 object-cover hover:scale-105 transition-transform duration-300"
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
                 )}
               </motion.div>
             )}
 
-            {/* Platforms Used */}
-            {caseStudy.platforms && caseStudy.platforms.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="mb-12"
-              >
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Platforms Used</h2>
-                <div className="flex flex-wrap gap-3">
-                  {caseStudy.platforms.map((platform, index) => (
-                    <Badge key={index} variant="outline" className="px-4 py-2 text-sm">
-                      {platform.charAt(0).toUpperCase() + platform.slice(1)}
-                    </Badge>
-                  ))}
-                </div>
-              </motion.div>
-            )}
+            {/* Success Factors */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25 }}
+              className="mb-12"
+            >
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <Target className="w-6 h-6 text-media-purple" />
+                Success Factors
+              </h2>
+              <Card className="p-8 bg-gradient-to-br from-gray-50 to-blue-50 border-none">
+                <CardContent className="p-0">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">What Made This Campaign Successful</h3>
+                      <ul className="space-y-3 text-gray-700">
+                        <li className="flex items-start gap-3">
+                          <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
+                          <span>Strategic audience targeting and segmentation</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
+                          <span>Data-driven optimization and continuous testing</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
+                          <span>Creative messaging aligned with brand values</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
+                          <span>Multi-platform integrated approach</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">Key Achievements</h3>
+                      <div className="space-y-4">
+                        {caseStudy.metrics.map((metric, index) => (
+                          <div key={index} className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm">
+                            <span className="text-gray-600">{metric.label}</span>
+                            <span className="font-bold text-media-purple">{metric.value}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
 
             {/* CTA Section */}
             <motion.div
