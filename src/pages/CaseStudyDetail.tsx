@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Calendar, Globe, Target, TrendingUp, Users, Award, Zap, BarChart3 } from "lucide-react";
+import { ArrowLeft, ExternalLink, Calendar, Globe, Target, TrendingUp, Users, Award, Zap, BarChart3, Share2, ChevronLeft, ChevronRight, Clock } from "lucide-react";
 import { caseStudies } from "@/data/caseStudies";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -25,14 +25,43 @@ const CaseStudyDetail = () => {
 
   if (!caseStudy) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Case Study Not Found</h1>
-          <Button onClick={() => navigate('/')}>Back to Home</Button>
+          <h1 className="text-2xl font-bold mb-4 text-gray-900">Case Study Not Found</h1>
+          <p className="text-gray-600 mb-6">The case study you're looking for doesn't exist or has been moved.</p>
+          <Button onClick={() => navigate('/')} className="bg-media-purple hover:bg-media-purple/90">
+            Back to Home
+          </Button>
         </div>
       </div>
     );
   }
+
+  // Get related case studies (same category, excluding current)
+  const relatedCaseStudies = caseStudies.filter(study => 
+    study.category === caseStudy.category && titleToSlug(study.title) !== slug
+  ).slice(0, 2);
+
+  // Share functionality
+  const shareUrl = window.location.href;
+  const shareText = `Check out this case study: ${caseStudy.title}`;
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: caseStudy.title,
+          text: shareText,
+          url: shareUrl,
+        });
+      } catch (err) {
+        console.log('Error sharing:', err);
+      }
+    } else {
+      // Fallback to copying to clipboard
+      navigator.clipboard.writeText(shareUrl);
+    }
+  };
 
   const getCategoryName = (category: string): string => {
     switch (category) {
@@ -73,6 +102,30 @@ const CaseStudyDetail = () => {
         
         <div className="pt-20 pb-16">
           <div className="container mx-auto px-4 max-w-4xl">
+            {/* Breadcrumb & Actions */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="mb-6 flex items-center justify-between"
+            >
+              <div className="flex items-center gap-2 text-sm text-gray-500">
+                <button onClick={() => navigate('/')} className="hover:text-gray-700">Home</button>
+                <span>/</span>
+                <button onClick={() => navigate('/#portfolio')} className="hover:text-gray-700">Portfolio</button>
+                <span>/</span>
+                <span className="text-gray-900">{caseStudy.title}</span>
+              </div>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={handleShare}
+                className="text-gray-600 hover:text-gray-900"
+              >
+                <Share2 className="w-4 h-4 mr-2" />
+                Share
+              </Button>
+            </motion.div>
+
             {/* Back Button */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -336,6 +389,57 @@ const CaseStudyDetail = () => {
               </Card>
             </motion.div>
 
+            {/* Related Case Studies */}
+            {relatedCaseStudies.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="mb-12"
+              >
+                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                  <Target className="w-6 h-6 text-media-purple" />
+                  Related Case Studies
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {relatedCaseStudies.map((study, index) => (
+                    <motion.div
+                      key={study.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 + index * 0.1 }}
+                    >
+                      <Card 
+                        className="group cursor-pointer hover:shadow-xl transition-all duration-300 border-none bg-white"
+                        onClick={() => navigate(`/case-study/${titleToSlug(study.title)}`)}
+                      >
+                        <CardContent className="p-6">
+                          <div className="flex items-center gap-2 mb-3">
+                            <Badge className="bg-gray-100 text-gray-800 text-xs">
+                              {getCategoryName(study.category)}
+                            </Badge>
+                            {study.industry && (
+                              <Badge variant="outline" className="text-xs">{study.industry}</Badge>
+                            )}
+                          </div>
+                          <h3 className="font-bold text-lg text-gray-900 mb-2 group-hover:text-media-purple transition-colors">
+                            {study.title}
+                          </h3>
+                          <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                            {study.description}
+                          </p>
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs text-gray-500">{study.client}</span>
+                            <ChevronRight className="w-4 h-4 text-media-purple opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
             {/* CTA Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -351,19 +455,29 @@ const CaseStudyDetail = () => {
                   <p className="text-white/90 mb-6">
                     Let's discuss how we can help your business grow with strategic digital marketing.
                   </p>
-                  <Button 
-                    size="lg" 
-                    className="bg-white text-gray-900 hover:bg-gray-100"
-                    onClick={() => {
-                      navigate('/');
-                      setTimeout(() => {
-                        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                      }, 100);
-                    }}
-                  >
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Get Started Today
-                  </Button>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Button 
+                      size="lg" 
+                      className="bg-white text-gray-900 hover:bg-gray-100"
+                      onClick={() => {
+                        navigate('/');
+                        setTimeout(() => {
+                          document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                        }, 100);
+                      }}
+                    >
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      Get Started Today
+                    </Button>
+                    <Button 
+                      size="lg" 
+                      variant="outline"
+                      className="bg-transparent border-white text-white hover:bg-white hover:text-gray-900"
+                      onClick={() => navigate('/#portfolio')}
+                    >
+                      View More Case Studies
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             </motion.div>
