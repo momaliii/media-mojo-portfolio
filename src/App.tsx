@@ -13,6 +13,7 @@ import { LoadingSkeleton } from "@/components/ui/loading-skeleton";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import CaseStudyDetail from "./pages/CaseStudyDetail";
+import CaseStudies from "./pages/CaseStudies";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { trackPageView } from "./utils/analytics";
 
@@ -67,6 +68,11 @@ const App = () => (
                 <Route path="/" element={
                   <LazyComponent>
                     <Index />
+                  </LazyComponent>
+                } />
+                <Route path="/case-studies" element={
+                  <LazyComponent>
+                    <CaseStudies />
                   </LazyComponent>
                 } />
                 <Route path="/case-study/:slug" element={

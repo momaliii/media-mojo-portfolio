@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, Download } from "lucide-react";
+import { Link } from "react-router-dom";
 import { caseStudies } from "@/data/caseStudies";
 import PortfolioHeader from "@/components/portfolio/PortfolioHeader";
 import EnhancedFilterTabs from "@/components/portfolio/EnhancedFilterTabs";
@@ -38,15 +39,17 @@ const Portfolio = () => {
         />
         
         <div className="text-center mt-16 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="inline-flex items-center bg-white/80 dark:bg-gray-800/80 hover:bg-media-purple/10 dark:hover:bg-media-blue/10 transition-all duration-300 rounded-xl py-6 px-8 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 shadow-sm hover:shadow-md"
-            aria-label="View more case studies"
-          >
-            <span className="text-base">View More Case Studies</span>
-            <ArrowUpRight className="ml-2 h-5 w-5" aria-hidden="true" />
-          </Button>
+          <Link to="/case-studies">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="inline-flex items-center bg-white/80 dark:bg-gray-800/80 hover:bg-media-purple/10 dark:hover:bg-media-blue/10 transition-all duration-300 rounded-xl py-6 px-8 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 shadow-sm hover:shadow-md"
+              aria-label="View more case studies"
+            >
+              <span className="text-base">View More Case Studies</span>
+              <ArrowUpRight className="ml-2 h-5 w-5" aria-hidden="true" />
+            </Button>
+          </Link>
           
           <a 
             href="/Mohamed_Ali_CV.pdf"
