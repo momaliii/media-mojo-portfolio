@@ -118,7 +118,7 @@ const Index = () => {
       
       {/* Add the ElevenLabs Conversational AI Widget */}
       <ErrorBoundary>
-        <ElevenLabsWidget agentId="f1qZNFUcdFk0xsChWBnF" />
+        <ElevenLabsWidget />
       </ErrorBoundary>
     </div>
   );

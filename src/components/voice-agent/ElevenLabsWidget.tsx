@@ -2,23 +2,19 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 
-interface ElevenLabsWidgetProps {
-  agentId: string;
-}
-
-const ElevenLabsWidget: React.FC<ElevenLabsWidgetProps> = ({ agentId }) => {
+const ElevenLabsWidget: React.FC = () => {
   return (
     <>
       <Helmet>
         <script 
-          src="https://elevenlabs.io/convai-widget/index.js" 
+          src="https://unpkg.com/@elevenlabs/convai-widget-embed" 
           async 
           type="text/javascript"
         />
       </Helmet>
       <div className="elevenlabs-convai-container">
         <elevenlabs-convai 
-          agent-id={agentId}
+          agent-id="agent_4501k15nq9xjemnshg4w9yfr0tmk"
           className="fixed bottom-4 right-4 z-50"
         />
       </div>
