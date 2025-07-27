@@ -1,24 +1,30 @@
 
-import React from "react";
-import { Helmet } from "react-helmet-async";
+import React, { useEffect } from "react";
 
 const ElevenLabsWidget: React.FC = () => {
+  useEffect(() => {
+    // Load the ElevenLabs script
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
+    script.async = true;
+    script.type = 'text/javascript';
+    document.head.appendChild(script);
+
+    return () => {
+      // Cleanup on unmount
+      const existingScript = document.querySelector('script[src="https://unpkg.com/@elevenlabs/convai-widget-embed"]');
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
+    };
+  }, []);
+
   return (
-    <>
-      <Helmet>
-        <script 
-          src="https://unpkg.com/@elevenlabs/convai-widget-embed" 
-          async 
-          type="text/javascript"
-        />
-      </Helmet>
-      <div className="elevenlabs-convai-container">
-        <elevenlabs-convai 
-          agent-id="agent_4501k15nq9xjemnshg4w9yfr0tmk"
-          className="fixed bottom-4 right-4 z-50"
-        />
-      </div>
-    </>
+    <div className="fixed bottom-4 right-4 z-[9999]">
+      <elevenlabs-convai 
+        agent-id="agent_4501k15nq9xjemnshg4w9yfr0tmk"
+      />
+    </div>
   );
 };
 
