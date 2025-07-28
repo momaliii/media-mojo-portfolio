@@ -14,14 +14,14 @@ interface MetaTagsProps {
 }
 
 const MetaTags = ({
-  title = "Mohamed Ali - Expert Media Buyer & Digital Marketing Specialist",
-  description = "Mohamed Ali is a highly skilled media buyer with 6+ years of experience driving exceptional results across 10+ countries. Specializing in Meta Ads, Google Ads, TikTok, and Snapchat with proven ROAS of 8x+ and 95K+ orders generated.",
+  title = "Mohamed Ali - Expert Media Buyer & Digital Marketing Specialist | 8x+ ROAS",
+  description = "Mohamed Ali is a highly skilled media buyer with 6+ years of experience driving exceptional results across 10+ countries. Specializing in Meta Ads, Google Ads, TikTok, and Snapchat with proven ROAS of 8x+ and 95K+ orders generated. Available for remote consultation and campaign management.",
   imageUrl = "/lovable-uploads/e7da6e3c-66cf-4166-9955-98eb4097a88f.png",
-  url = "https://media-mojo-portfolio.lovableproject.com",
+  url = "https://mediamojomarketing.com",
   type = "website",
   author = "Mohamed Ali",
   twitterHandle = "@mohamedali_ads",
-  keywords = "media buying, digital marketing, Meta Ads, Google Ads, TikTok Ads, Snapchat Ads, ROAS optimization, e-commerce marketing, performance marketing, conversion optimization, media buyer Egypt, digital advertising specialist"
+  keywords = "media buying expert, digital marketing specialist, Meta Ads manager, Google Ads expert, TikTok advertising, Snapchat Ads, ROAS optimization, e-commerce marketing, performance marketing, conversion optimization, media buyer Egypt, digital advertising consultant, remote media buyer, campaign management, ad spend optimization, social media advertising"
 }: MetaTagsProps) => {
   return (
     <Helmet>
@@ -58,6 +58,30 @@ const MetaTags = ({
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       <meta name="format-detection" content="telephone=no" />
+      
+      {/* Enhanced SEO Tags */}
+      <meta name="geo.region" content="EG-C" />
+      <meta name="geo.placename" content="Cairo" />
+      <meta name="geo.position" content="30.0444;31.2357" />
+      <meta name="ICBM" content="30.0444, 31.2357" />
+      <meta name="rating" content="General" />
+      <meta name="referrer" content="no-referrer-when-downgrade" />
+      
+      {/* Business & Contact Information */}
+      <meta name="contact" content="mhmd167ali@gmail.com" />
+      <meta name="copyright" content="© 2024 Mohamed Ali Media Buyer" />
+      <meta name="distribution" content="global" />
+      <meta name="target" content="all" />
+      
+      {/* Performance & Technical SEO */}
+      <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name="apple-touch-fullscreen" content="yes" />
+      
+      {/* Rich Snippets Support */}
+      <meta name="application-name" content="Mohamed Ali - Media Buyer" />
+      <meta name="msapplication-tooltip" content="Expert Media Buyer & Digital Marketing Specialist" />
+      <meta name="msapplication-starturl" content="/" />
     </Helmet>
   );
 };
