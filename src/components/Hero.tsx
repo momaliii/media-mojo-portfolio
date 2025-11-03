@@ -6,7 +6,9 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <section id="hero" className="relative min-h-[100vh] min-h-[100dvh] flex items-center bg-gradient-to-br from-media-purple/10 via-media-blue/5 to-white overflow-hidden">
+    <section id="hero" className="relative min-h-[100vh] min-h-[100dvh] flex items-center overflow-hidden">
+      {/* Full background layer */}
+      <div className="absolute inset-0 bg-gradient-to-br from-media-purple/10 via-media-blue/5 to-media-peach/5 z-0"></div>
       {/* Enhanced grid pattern background with animation */}
       <div className="absolute inset-0 bg-grid-pattern opacity-5 z-0"></div>
       
