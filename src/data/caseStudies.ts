@@ -108,5 +108,61 @@ export const caseStudies: CaseStudy[] = [
     additionalScreenshots: ["/lovable-uploads/900c6176-4030-4244-a97a-62a4c235d53f.png"],
     budgetRange: "medium",
     platforms: ["facebook", "instagram", "linkedin"]
+  },
+  {
+    title: "Smart Home Solutions",
+    category: "branding",
+    client: "NexGen Egypt",
+    metrics: [
+      { label: "Projects", value: "200+" },
+      { label: "Engagement", value: "+150%" },
+      { label: "Lead Growth", value: "+180%" }
+    ],
+    description: "Developed comprehensive digital marketing strategy for Egypt's leading smart home automation company. Promoted smart home solutions for apartments, villas, and duplexes, targeting premium residential market segments with innovative campaigns.",
+    industry: "Technology & Real Estate",
+    budgetRange: "high",
+    platforms: ["facebook", "instagram", "linkedin", "google"]
+  },
+  {
+    title: "Multi-Branch Restaurant Expansion",
+    category: "f&b",
+    client: "Kokh Al Moneh",
+    metrics: [
+      { label: "Branches", value: "7+" },
+      { label: "Countries", value: "2" },
+      { label: "Sales Growth", value: "+85%" }
+    ],
+    description: "Managed large-scale digital campaigns for premium restaurant chain with 7+ branches across Jordan and Saudi Arabia. Implemented location-based targeting strategies and seasonal promotions to drive foot traffic and increase brand awareness in both markets.",
+    industry: "Food & Beverage",
+    budgetRange: "high",
+    platforms: ["facebook", "instagram", "snapchat", "google"]
+  },
+  {
+    title: "Premium Education Academy Growth",
+    category: "b2b",
+    client: "Muscat Foundation Academy (MFA)",
+    metrics: [
+      { label: "Enrollments", value: "+120%" },
+      { label: "Brand Awareness", value: "+200%" },
+      { label: "Engagement", value: "+165%" }
+    ],
+    description: "Led digital transformation for Oman's leading educational institution offering world-class education experience. Developed targeted campaigns to position MFA as the premier choice for the Omani community, focusing on quality education and community values.",
+    industry: "Education",
+    budgetRange: "high",
+    platforms: ["facebook", "instagram", "linkedin", "google"]
+  },
+  {
+    title: "Strategic Consulting Services",
+    category: "b2b",
+    client: "الكيان الأمثل للاستشارات",
+    metrics: [
+      { label: "Lead Quality", value: "+175%" },
+      { label: "Client Acquisition", value: "+140%" },
+      { label: "ROI", value: "12x" }
+    ],
+    description: "Executed sophisticated B2B marketing campaigns for Saudi Arabia's premier consulting firm specializing in feasibility studies, environmental consulting, financial advisory, and project structuring. Targeted entrepreneurs and investors across the Kingdom and internationally with multi-channel strategies.",
+    industry: "Consulting & Advisory",
+    budgetRange: "high",
+    platforms: ["linkedin", "google", "facebook", "twitter"]
   }
 ];
