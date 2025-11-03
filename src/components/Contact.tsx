@@ -67,7 +67,7 @@ const Contact = () => {
       // First save to Supabase database
       const { error: dbError } = await supabase
         .from('contact_submissions')
-        .insert([formData]);
+        .insert([{ ...formData, submission_type: 'contact' }]);
 
       if (dbError) throw dbError;
 

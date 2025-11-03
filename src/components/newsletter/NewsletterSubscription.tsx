@@ -31,9 +31,7 @@ const NewsletterSubscription = () => {
         .from('contact_submissions')
         .insert({
           email,
-          name: "Newsletter Subscriber", // Required field
-          subject: "Newsletter Subscription",
-          message: "User subscribed to the newsletter"
+          submission_type: 'newsletter'
         });
         
       if (error) {
