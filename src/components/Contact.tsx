@@ -73,19 +73,15 @@ const Contact = () => {
 
       // Then send email notification via edge function
       try {
-        const apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1tdnFtb25qc29wYmlldmV1Z3FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU3MDk0MTEsImV4cCI6MjA2MTI4NTQxMX0.kjYzDEJjBZyN3jm3gYbFmEsXBho98U0pMNyAGve4g58";
-        
-        const emailResponse = await fetch('https://mmvqmonjsopbieveugqj.functions.supabase.co/send-contact-notification', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': apiKey
-          },
-          body: JSON.stringify(formData),
-        });
+        const { data, error: functionError } = await supabase.functions.invoke(
+          'send-contact-notification',
+          {
+            body: formData,
+          }
+        );
 
-        if (!emailResponse.ok) {
-          console.log('Email API response status:', emailResponse.status);
+        if (functionError) {
+          console.log('Email notification error:', functionError);
           // Continue even if email fails - we've stored the message in the database
         }
       } catch (emailError) {

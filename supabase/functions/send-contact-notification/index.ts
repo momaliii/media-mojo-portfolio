@@ -5,6 +5,18 @@ import { Resend } from "npm:resend@2.0.0"
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
+// HTML escape function to prevent XSS attacks
+const escapeHtml = (text: string): string => {
+  const map: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, (m) => map[m]);
+};
+
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
@@ -50,18 +62,18 @@ serve(async (req) => {
 
     console.log('Sending email with Resend...');
     
-    // Send email notification using verified domain email
+    // Send email notification using verified domain email with sanitized inputs
     const emailResult = await resend.emails.send({
       from: 'contact@mhmdali.site',
       to: 'mhmd167ali@gmail.com',
-      subject: `New Contact Form Submission: ${subject}`,
+      subject: `New Contact Form Submission: ${escapeHtml(subject)}`,
       html: `
         <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Subject:</strong> ${subject}</p>
+        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+        <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
         <p><strong>Message:</strong></p>
-        <p>${message}</p>
+        <p>${escapeHtml(message)}</p>
       `
     });
 
