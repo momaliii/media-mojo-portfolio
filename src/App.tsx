@@ -14,7 +14,9 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import CaseStudyDetail from "./pages/CaseStudyDetail";
 import CaseStudies from "./pages/CaseStudies";
+import Auth from "./pages/Auth";
 import ErrorBoundary from "./components/ErrorBoundary";
+import { AuthProvider } from "./hooks/use-auth";
 import { trackPageView } from "./utils/analytics";
 
 const queryClient = new QueryClient({
@@ -63,26 +65,29 @@ const App = () => (
             <ScrollToTopButton />
             <SkipToContent />
             <BrowserRouter>
-              <RouteTracker />
-              <Routes>
-                <Route path="/" element={
-                  <LazyComponent>
-                    <Index />
-                  </LazyComponent>
-                } />
-                <Route path="/case-studies" element={
-                  <LazyComponent>
-                    <CaseStudies />
-                  </LazyComponent>
-                } />
-                <Route path="/case-study/:slug" element={
-                  <LazyComponent>
-                    <CaseStudyDetail />
-                  </LazyComponent>
-                } />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+              <AuthProvider>
+                <RouteTracker />
+                <Routes>
+                  <Route path="/auth" element={<Auth />} />
+                  <Route path="/" element={
+                    <LazyComponent>
+                      <Index />
+                    </LazyComponent>
+                  } />
+                  <Route path="/case-studies" element={
+                    <LazyComponent>
+                      <CaseStudies />
+                    </LazyComponent>
+                  } />
+                  <Route path="/case-study/:slug" element={
+                    <LazyComponent>
+                      <CaseStudyDetail />
+                    </LazyComponent>
+                  } />
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </AuthProvider>
             </BrowserRouter>
           </ErrorBoundary>
         </TooltipProvider>
