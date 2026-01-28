@@ -20,6 +20,11 @@ import { AuthProvider } from "./hooks/use-auth";
 import { trackPageView } from "./utils/analytics";
 import AdminRoute from "./components/AdminRoute";
 import AdminCaseStudies from "./pages/AdminCaseStudies";
+import AdminDashboard from "./pages/AdminDashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Profile from "./pages/Profile";
+import AdminSubmissions from "./pages/AdminSubmissions";
+import AdminAnalytics from "./pages/AdminAnalytics";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -90,6 +95,38 @@ const App = () => (
                 <RouteTracker />
                 <Routes>
                   <Route path="/auth" element={<Auth />} />
+                  <Route
+                    path="/profile"
+                    element={
+                      <ProtectedRoute>
+                        <Profile />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin"
+                    element={
+                      <AdminRoute>
+                        <AdminDashboard />
+                      </AdminRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/analytics"
+                    element={
+                      <AdminRoute>
+                        <AdminAnalytics />
+                      </AdminRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/submissions"
+                    element={
+                      <AdminRoute>
+                        <AdminSubmissions />
+                      </AdminRoute>
+                    }
+                  />
                   <Route
                     path="/admin/case-studies"
                     element={

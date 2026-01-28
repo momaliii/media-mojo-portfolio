@@ -11,9 +11,11 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Plus, Save, Trash2, Upload, Image as ImageIcon, Sparkles } from "lucide-react";
+import { Loader2, Plus, Save, Trash2, Upload, Image as ImageIcon, Sparkles, Monitor, Smartphone } from "lucide-react";
 import { caseStudies as localCaseStudies } from "@/data/caseStudies";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import AdminLayout from "@/components/admin/AdminLayout";
 
 const metricSchema = z.object({
   label: z.string().min(1, "Metric label required"),
@@ -69,6 +71,8 @@ export default function AdminCaseStudies() {
   const [aiContext, setAiContext] = useState({ category: "", client: "", industry: "" });
   const [aiImageUrls, setAiImageUrls] = useState<string[]>([]);
   const [aiOpen, setAiOpen] = useState(false);
+  const [editorTab, setEditorTab] = useState<"edit" | "preview">("edit");
+  const [previewDevice, setPreviewDevice] = useState<"desktop" | "mobile">("desktop");
   const BUCKET = "case-study-assets";
   const mainFileRef = useRef<HTMLInputElement | null>(null);
   const additionalFilesRef = useRef<HTMLInputElement | null>(null);
@@ -110,6 +114,9 @@ export default function AdminCaseStudies() {
     control: form.control,
     name: "metrics",
   });
+
+  // Live preview values (updates as you type)
+  const preview = form.watch();
 
   // Load selected record into form
   useEffect(() => {
@@ -352,37 +359,35 @@ export default function AdminCaseStudies() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-gray-50/50 to-white dark:from-gray-950 dark:via-gray-900/50 dark:to-gray-950">
-      <div className="container mx-auto px-4 md:px-6 pt-24 pb-12">
-        <div className="flex items-center justify-between gap-4 mb-6">
-          <div>
-            <h1 className="text-3xl font-bold">Admin: Case Studies</h1>
-            <p className="text-gray-600 dark:text-gray-300">
-              Create and edit case studies shown on the site.
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => importMutation.mutate()}
-              disabled={importMutation.isPending}
-            >
-              {importMutation.isPending ? (
-                <>
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" /> Importing…
-                </>
-              ) : (
-                <>
-                  <Upload className="h-4 w-4 mr-2" /> Import existing
-                </>
-              )}
-            </Button>
-            <Button onClick={onNew} className="bg-media-purple hover:bg-media-darkpurple text-white">
-              <Plus className="h-4 w-4 mr-2" /> New
-            </Button>
-          </div>
+    <AdminLayout title="Case Studies">
+      <div className="flex items-center justify-between gap-4 mb-6">
+        <div>
+          <p className="text-gray-600 dark:text-gray-300">
+            Create, edit, preview and publish case studies shown on the site.
+          </p>
         </div>
+        <div className="flex items-center gap-2">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => importMutation.mutate()}
+            disabled={importMutation.isPending}
+          >
+            {importMutation.isPending ? (
+              <>
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" /> Importing…
+              </>
+            ) : (
+              <>
+                <Upload className="h-4 w-4 mr-2" /> Import existing
+              </>
+            )}
+          </Button>
+          <Button onClick={onNew} className="bg-media-purple hover:bg-media-darkpurple text-white">
+            <Plus className="h-4 w-4 mr-2" /> New
+          </Button>
+        </div>
+      </div>
 
         {/* AI Generation Panel */}
         <Collapsible open={aiOpen} onOpenChange={setAiOpen} className="mb-6">
@@ -589,16 +594,27 @@ export default function AdminCaseStudies() {
           </Card>
 
           <Card className="lg:col-span-2">
-            <CardHeader>
-              <CardTitle className="text-lg">
-                {selected ? "Edit case study" : "Create a new case study"}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <form
-                onSubmit={form.handleSubmit((v) => upsertMutation.mutate(v))}
-                className="space-y-5"
-              >
+            <Tabs value={editorTab} onValueChange={(v) => setEditorTab(v as "edit" | "preview")}>
+              <CardHeader className="space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <CardTitle className="text-lg">
+                    {selected ? "Edit case study" : "Create a new case study"}
+                  </CardTitle>
+                  <TabsList>
+                    <TabsTrigger value="edit">Edit</TabsTrigger>
+                    <TabsTrigger value="preview">Preview</TabsTrigger>
+                  </TabsList>
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
+                  Use <span className="font-medium">Preview</span> to see changes live before publishing.
+                </p>
+              </CardHeader>
+              <CardContent>
+                <TabsContent value="edit">
+                  <form
+                    onSubmit={form.handleSubmit((v) => upsertMutation.mutate(v))}
+                    className="space-y-5"
+                  >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Title</label>
@@ -858,12 +874,178 @@ export default function AdminCaseStudies() {
                     )}
                   </Button>
                 </div>
-              </form>
-            </CardContent>
+                  </form>
+                </TabsContent>
+
+                <TabsContent value="preview">
+                  <div className="flex items-center justify-between gap-3 mb-4">
+                    <div className="flex items-center gap-2">
+                      <Badge variant={preview.published ? "default" : "secondary"}>
+                        {preview.published ? "Published" : "Draft preview"}
+                      </Badge>
+                      <span className="text-sm text-gray-500">
+                        Updates live as you edit.
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        type="button"
+                        variant={previewDevice === "desktop" ? "default" : "outline"}
+                        onClick={() => setPreviewDevice("desktop")}
+                        className={previewDevice === "desktop" ? "bg-media-purple hover:bg-media-darkpurple text-white" : ""}
+                      >
+                        <Monitor className="h-4 w-4 mr-2" /> Desktop
+                      </Button>
+                      <Button
+                        type="button"
+                        variant={previewDevice === "mobile" ? "default" : "outline"}
+                        onClick={() => setPreviewDevice("mobile")}
+                        className={previewDevice === "mobile" ? "bg-media-purple hover:bg-media-darkpurple text-white" : ""}
+                      >
+                        <Smartphone className="h-4 w-4 mr-2" /> Mobile
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div
+                    className={`mx-auto rounded-2xl border bg-white dark:bg-gray-950 overflow-hidden ${
+                      previewDevice === "mobile" ? "max-w-[390px]" : "w-full"
+                    }`}
+                  >
+                    <div className="p-6 md:p-8 space-y-6">
+                      <div className="space-y-3">
+                        <div className="flex flex-wrap items-center gap-2">
+                          {preview.category && (
+                            <Badge className="bg-gray-100 text-gray-800 hover:bg-gray-100">
+                              {preview.category}
+                            </Badge>
+                          )}
+                          {preview.industry && <Badge variant="outline">{preview.industry}</Badge>}
+                        </div>
+
+                        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100">
+                          {preview.title || "Untitled case study"}
+                        </h2>
+                        <p className="text-gray-600 dark:text-gray-300">
+                          {preview.description || "Add a description to see it here."}
+                        </p>
+
+                        <div className="text-sm text-gray-500">
+                          <span className="font-medium text-gray-700 dark:text-gray-200">Client:</span>{" "}
+                          {preview.client || "—"}
+                        </div>
+                      </div>
+
+                      {/* Key metrics */}
+                      {Array.isArray(preview.metrics) && preview.metrics.length > 0 && (
+                        <div className="space-y-3">
+                          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                            Key results
+                          </h3>
+                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            {preview.metrics.slice(0, 6).map((m: any, idx: number) => (
+                              <div
+                                key={idx}
+                                className="rounded-xl border border-gray-200 dark:border-gray-800 p-4 text-center"
+                              >
+                                <div className="text-xl font-bold text-media-purple">
+                                  {m?.value || "—"}
+                                </div>
+                                <div className="text-xs text-gray-500 mt-1">
+                                  {m?.label || "Metric"}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Narrative sections */}
+                      <div className="space-y-4">
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                            Challenge
+                          </h3>
+                          <p className="text-gray-600 dark:text-gray-300 whitespace-pre-wrap">
+                            {preview.challenge || "Add the challenge to preview it here."}
+                          </p>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                            Strategy
+                          </h3>
+                          <p className="text-gray-600 dark:text-gray-300 whitespace-pre-wrap">
+                            {preview.strategy || "Add the strategy to preview it here."}
+                          </p>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                            Results
+                          </h3>
+                          <p className="text-gray-600 dark:text-gray-300 whitespace-pre-wrap">
+                            {preview.results || "Add results to preview it here."}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Platforms & tools */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <h4 className="font-medium text-gray-900 dark:text-gray-100">Platforms</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {splitList(preview.platforms_text).length > 0
+                              ? splitList(preview.platforms_text).map((p) => (
+                                  <Badge key={p} variant="secondary" className="text-xs">
+                                    {p}
+                                  </Badge>
+                                ))
+                              : <span className="text-sm text-gray-500">—</span>}
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <h4 className="font-medium text-gray-900 dark:text-gray-100">Tools</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {splitList(preview.tools_text).length > 0
+                              ? splitList(preview.tools_text).map((t) => (
+                                  <Badge key={t} variant="secondary" className="text-xs">
+                                    {t}
+                                  </Badge>
+                                ))
+                              : <span className="text-sm text-gray-500">—</span>}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Images */}
+                      {(preview.screenshot || splitList(preview.additional_screenshots_text).length > 0) && (
+                        <div className="space-y-3">
+                          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                            Gallery
+                          </h3>
+                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            {[preview.screenshot, ...splitList(preview.additional_screenshots_text)]
+                              .filter(Boolean)
+                              .slice(0, 9)
+                              .map((url, idx) => (
+                                <img
+                                  key={`${url}-${idx}`}
+                                  src={url as string}
+                                  alt={`Preview screenshot ${idx + 1}`}
+                                  className="w-full h-28 object-cover rounded-xl border border-gray-200 dark:border-gray-800"
+                                  loading="lazy"
+                                />
+                              ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </TabsContent>
+              </CardContent>
+            </Tabs>
           </Card>
         </div>
-      </div>
-    </div>
+    </AdminLayout>
   );
 }
 
