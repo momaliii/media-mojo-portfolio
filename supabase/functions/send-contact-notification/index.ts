@@ -87,15 +87,16 @@ serve(async (req) => {
     console.error('Error processing contact form:', error);
     
     // Enhanced error response with more details
+    const err = error as { message?: string; code?: string; details?: unknown; status?: number };
     const errorResponse = {
-      error: error.message,
-      code: error.code || 'UNKNOWN_ERROR',
-      details: error.details || null
+      error: err.message || 'Unknown error',
+      code: err.code || 'UNKNOWN_ERROR',
+      details: err.details || null
     };
     
     return new Response(JSON.stringify(errorResponse), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      status: error.status || 500,
+      status: err.status || 500,
     });
   }
 });
