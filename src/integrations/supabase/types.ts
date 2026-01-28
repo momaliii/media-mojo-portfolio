@@ -124,58 +124,51 @@ export type Database = {
       }
       page_views: {
         Row: {
-          id: string
           created_at: string
+          id: string
           path: string
           referrer: string | null
           referrer_domain: string | null
-          utm_source: string | null
-          utm_medium: string | null
-          utm_campaign: string | null
-          utm_term: string | null
-          utm_content: string | null
-          visitor_id: string
           session_id: string
           user_id: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+          visitor_id: string
         }
         Insert: {
-          id?: string
           created_at?: string
+          id?: string
           path: string
           referrer?: string | null
           referrer_domain?: string | null
-          utm_source?: string | null
-          utm_medium?: string | null
-          utm_campaign?: string | null
-          utm_term?: string | null
-          utm_content?: string | null
-          visitor_id: string
           session_id: string
           user_id?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          visitor_id: string
         }
         Update: {
-          id?: string
           created_at?: string
+          id?: string
           path?: string
           referrer?: string | null
           referrer_domain?: string | null
-          utm_source?: string | null
-          utm_medium?: string | null
-          utm_campaign?: string | null
-          utm_term?: string | null
-          utm_content?: string | null
-          visitor_id?: string
           session_id?: string
           user_id?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          visitor_id?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "page_views_user_id_fkey"
-            columns: ["user_id"]
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
+        Relationships: []
       }
       user_roles: {
         Row: {
