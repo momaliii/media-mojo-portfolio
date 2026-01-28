@@ -1,12 +1,10 @@
+/* Layout utilities - imported after tailwind directives */
+.section-padding {
+  @apply py-16 md:py-28;
+}
 
-@layer base {
-  .section-padding {
-    @apply py-16 md:py-28;
-  }
-  
-  section {
-    @apply relative overflow-hidden;
-  }
+section {
+  @apply relative overflow-hidden;
 }
 
 .section-divider {
