@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { trackEvent } from "@/utils/analytics";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
-import UserMenu from "@/components/UserMenu";
 
 interface NavigationProps {
   activeSection?: string;
@@ -152,7 +151,6 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
               </div>
             )}
             <ThemeToggle />
-            <UserMenu />
             <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -190,7 +188,6 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
           {/* Mobile Menu Button and Theme Toggle */}
           <div className="md:hidden flex items-center space-x-2">
             <ThemeToggle />
-            <UserMenu />
             <Button
               variant="ghost"
               size="icon"
