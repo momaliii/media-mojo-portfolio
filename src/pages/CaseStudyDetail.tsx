@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Calendar, Globe, Target, TrendingUp, Users, Award, Zap, BarChart3, Share2, ChevronLeft, ChevronRight, Clock } from "lucide-react";
-import { caseStudies } from "@/data/caseStudies";
+import { useCaseStudyBySlug, usePublishedCaseStudies } from "@/hooks/use-case-studies";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -10,18 +10,25 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import LazyImage from "@/components/ui/lazy-image";
 import MetaTags from "@/components/MetaTags";
+import { Loader2 } from "lucide-react";
 
 const CaseStudyDetail = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const { data: caseStudy, isLoading } = useCaseStudyBySlug(slug);
+  const { data: allCaseStudies = [] } = usePublishedCaseStudies();
   
   // Convert title to slug format for matching
   const titleToSlug = (title: string) => 
     title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-  
-  const caseStudy = caseStudies.find(study => 
-    titleToSlug(study.title) === slug
-  );
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
+        <Loader2 className="h-8 w-8 animate-spin text-media-purple" />
+      </div>
+    );
+  }
 
   if (!caseStudy) {
     return (
@@ -38,8 +45,8 @@ const CaseStudyDetail = () => {
   }
 
   // Get related case studies (same category, excluding current)
-  const relatedCaseStudies = caseStudies.filter(study => 
-    study.category === caseStudy.category && titleToSlug(study.title) !== slug
+  const relatedCaseStudies = allCaseStudies.filter(study => 
+    study.category === caseStudy.category && (study.slug || titleToSlug(study.title)) !== slug
   ).slice(0, 2);
 
   // Share functionality
@@ -94,8 +101,9 @@ const CaseStudyDetail = () => {
   return (
     <>
       <MetaTags 
-        title={`${caseStudy.title} - Case Study`}
+        title={`${caseStudy.title} - Case Study | Mohamed Ali`}
         description={caseStudy.description}
+        url={`/case-study/${slug}`}
       />
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
         <Navigation />
@@ -355,22 +363,51 @@ const CaseStudyDetail = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900 mb-4">What Made This Campaign Successful</h3>
                       <ul className="space-y-3 text-gray-700">
-                        <li className="flex items-start gap-3">
-                          <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
-                          <span>Strategic audience targeting and segmentation</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
-                          <span>Data-driven optimization and continuous testing</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
-                          <span>Creative messaging aligned with brand values</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
-                          <span>Multi-platform integrated approach</span>
-                        </li>
+                        {caseStudy.strategy ? (
+                          <>
+                            <li className="flex items-start gap-3">
+                              <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
+                              <span><strong>Strategy:</strong> {caseStudy.strategy}</span>
+                            </li>
+                            {caseStudy.challenge && (
+                              <li className="flex items-start gap-3">
+                                <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
+                                <span><strong>Challenge:</strong> {caseStudy.challenge}</span>
+                              </li>
+                            )}
+                            {caseStudy.results && (
+                              <li className="flex items-start gap-3">
+                                <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
+                                <span><strong>Results:</strong> {caseStudy.results}</span>
+                              </li>
+                            )}
+                            {caseStudy.tools && caseStudy.tools.length > 0 && (
+                              <li className="flex items-start gap-3">
+                                <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
+                                <span><strong>Tools:</strong> {caseStudy.tools.join(", ")}</span>
+                              </li>
+                            )}
+                          </>
+                        ) : (
+                          <>
+                            <li className="flex items-start gap-3">
+                              <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
+                              <span>Strategic audience targeting and segmentation</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                              <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
+                              <span>Data-driven optimization and continuous testing</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                              <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
+                              <span>Creative messaging aligned with brand values</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                              <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
+                              <span>Multi-platform integrated approach</span>
+                            </li>
+                          </>
+                        )}
                       </ul>
                     </div>
                     <div>
@@ -411,7 +448,7 @@ const CaseStudyDetail = () => {
                     >
                       <Card 
                         className="group cursor-pointer hover:shadow-xl transition-all duration-300 border-none bg-white"
-                        onClick={() => navigate(`/case-study/${titleToSlug(study.title)}`)}
+                        onClick={() => navigate(`/case-study/${study.slug || titleToSlug(study.title)}`)}
                       >
                         <CardContent className="p-6">
                           <div className="flex items-center gap-2 mb-3">

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, Download } from "lucide-react";
 import { Link } from "react-router-dom";
-import { caseStudies } from "@/data/caseStudies";
+import { usePublishedCaseStudies } from "@/hooks/use-case-studies";
 import PortfolioHeader from "@/components/portfolio/PortfolioHeader";
 import EnhancedFilterTabs from "@/components/portfolio/EnhancedFilterTabs";
 import AdScreenshotsGallery from "@/components/portfolio/AdScreenshotsGallery";
@@ -11,6 +11,7 @@ import { usePerformanceMonitor } from "@/hooks/use-performance-monitor";
 const Portfolio = () => {
   const [filter, setFilter] = useState("all");
   const { logMetric } = usePerformanceMonitor('Portfolio');
+  const { data: caseStudies = [] } = usePublishedCaseStudies();
   
   // Monitor filter changes performance
   useEffect(() => {

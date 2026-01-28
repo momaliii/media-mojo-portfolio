@@ -15,7 +15,8 @@ import { trackPageView } from "@/utils/analytics";
 import StructuredData from "@/components/StructuredData";
 import MetaTags from "@/components/MetaTags";
 import { LoadingSkeleton } from "@/components/ui/loading-skeleton";
-import ElevenLabsWidget from "@/components/voice-agent/ElevenLabsWidget";
+
+const ElevenLabsWidget = lazy(() => import("@/components/voice-agent/ElevenLabsWidget"));
 
 // Component to handle animations when elements enter viewport
 const AnimatedSection = ({ children, id, className = "" }: { 
@@ -24,7 +25,7 @@ const AnimatedSection = ({ children, id, className = "" }: {
   className?: string;
 }) => {
   return (
-    <div id={id} className={`opacity-0 animate-fade-in-up ${className}`}>
+    <div id={id} className={`opacity-0 animate-on-scroll ${className}`}>
       {children}
     </div>
   );
@@ -34,10 +35,7 @@ const Index = () => {
   const { activeSection } = useScrollObserver();
 
   useEffect(() => {
-    // Update document title
-    document.title = "Mohamed Ali | Senior Media Buyer";
-    
-    // Track initial page view
+    // Track initial page view (title managed by MetaTags component)
     trackPageView('/', document.title);
     
     // Add animation to elements when they enter viewport
@@ -46,25 +44,27 @@ const Index = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("animate-fade-in-up");
+            entry.target.classList.remove("opacity-0");
             observer.unobserve(entry.target);
           }
         });
       },
       {
         root: null,
-        rootMargin: "0px",
+        rootMargin: "50px",
         threshold: 0.1,
       }
     );
 
-    // Observe all elements with animate-on-scroll class
-    document.querySelectorAll(".opacity-0").forEach((el) => {
+    // Observe only elements with animate-on-scroll class (scoped to avoid performance issues)
+    const animatedElements = document.querySelectorAll(".animate-on-scroll");
+    animatedElements.forEach((el) => {
       observer.observe(el);
     });
 
     return () => {
       // Clean up
-      document.querySelectorAll(".opacity-0").forEach((el) => {
+      animatedElements.forEach((el) => {
         observer.unobserve(el);
       });
     };
@@ -116,9 +116,11 @@ const Index = () => {
       </main>
       <Footer />
       
-      {/* Add the ElevenLabs Conversational AI Widget */}
+      {/* Add the ElevenLabs Conversational AI Widget - Lazy loaded for performance */}
       <ErrorBoundary>
-        <ElevenLabsWidget />
+        <Suspense fallback={null}>
+          <ElevenLabsWidget />
+        </Suspense>
       </ErrorBoundary>
     </div>
   );

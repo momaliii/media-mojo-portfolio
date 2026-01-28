@@ -3,7 +3,7 @@ import { Menu, X, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { trackEvent } from "@/utils/analytics";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 
 interface NavigationProps {
@@ -14,6 +14,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const isHomePage = location.pathname === '/';
 
   // Handle scroll effect
@@ -49,7 +50,17 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
     setMobileMenuOpen(false);
     const section = document.getElementById(sectionId);
     if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+      
+      // Focus management for accessibility
+      setTimeout(() => {
+        const focusableElement = section.querySelector('button, a, input, textarea, select, h2, h3') as HTMLElement;
+        if (focusableElement) {
+          focusableElement.setAttribute('tabindex', '-1');
+          focusableElement.focus();
+          focusableElement.removeAttribute('tabindex');
+        }
+      }, 300);
       
       trackEvent('navigation_click', {
         section: sectionId
@@ -146,18 +157,28 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
               transition={{ delay: 0.4, duration: 0.5 }}
             >
               {isHomePage ? (
-                <Button
-                  onClick={() => scrollToSection("contact")}
-                  className="bg-media-purple dark:bg-media-blue hover:bg-media-darkpurple dark:hover:bg-blue-600 text-white shadow-md hover:shadow-lg transition-all"
-                >
-                  Let's Talk <ChevronRight className="ml-1 h-4 w-4" aria-hidden="true" />
-                </Button>
+                <div className="flex items-center gap-2">
+                  <Button
+                    onClick={() => scrollToSection("contact")}
+                    className="bg-media-purple dark:bg-media-blue hover:bg-media-darkpurple dark:hover:bg-blue-600 text-white shadow-md hover:shadow-lg transition-all"
+                  >
+                    Work With Me <ChevronRight className="ml-1 h-4 w-4" aria-hidden="true" />
+                  </Button>
+                </div>
               ) : (
-                <Link to="/#contact">
+                <Link 
+                  to="/#contact"
+                  onClick={(e) => {
+                    if (location.pathname !== '/') {
+                      e.preventDefault();
+                      navigate('/#contact');
+                    }
+                  }}
+                >
                   <Button
                     className="bg-media-purple dark:bg-media-blue hover:bg-media-darkpurple dark:hover:bg-blue-600 text-white shadow-md hover:shadow-lg transition-all"
                   >
-                    Let's Talk <ChevronRight className="ml-1 h-4 w-4" aria-hidden="true" />
+                    Work With Me <ChevronRight className="ml-1 h-4 w-4" aria-hidden="true" />
                   </Button>
                 </Link>
               )}
@@ -245,15 +266,24 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
                       onClick={() => scrollToSection("contact")}
                       className="bg-media-purple dark:bg-media-blue hover:bg-media-darkpurple dark:hover:bg-blue-600 text-white w-full shadow-md flex items-center justify-center"
                     >
-                      <span>Let's Talk</span>
+                      <span>Work With Me</span>
                       <ChevronRight className="ml-1 h-4 w-4" aria-hidden="true" />
                     </Button>
                   ) : (
-                    <Link to="/#contact" onClick={() => setMobileMenuOpen(false)}>
+                    <Link 
+                      to="/#contact" 
+                      onClick={(e) => {
+                        setMobileMenuOpen(false);
+                        if (location.pathname !== '/') {
+                          e.preventDefault();
+                          navigate('/#contact');
+                        }
+                      }}
+                    >
                       <Button
                         className="bg-media-purple dark:bg-media-blue hover:bg-media-darkpurple dark:hover:bg-blue-600 text-white w-full shadow-md flex items-center justify-center"
                       >
-                        <span>Let's Talk</span>
+                        <span>Work With Me</span>
                         <ChevronRight className="ml-1 h-4 w-4" aria-hidden="true" />
                       </Button>
                     </Link>

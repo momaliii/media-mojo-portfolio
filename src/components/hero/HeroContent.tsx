@@ -44,6 +44,7 @@ const HeroContent = () => {
           </motion.span>
           
           <motion.h1 
+            id="hero-heading"
             variants={item}
             className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight"
           >
@@ -54,7 +55,7 @@ const HeroContent = () => {
             variants={item}
             className="mt-6 text-lg text-gray-600 max-w-2xl"
           >
-            Senior Media Buyer with 5+ years of experience optimizing campaigns across Meta, LinkedIn, TikTok, Snapchat, Twitter, and Google Ads. Delivering exceptional results and measurable ROI.
+            Senior Media Buyer with 6+ years of experience optimizing campaigns across Meta, LinkedIn, TikTok, Snapchat, and Google Ads. Delivering exceptional results and measurable ROI.
           </motion.p>
           
           <motion.div 
@@ -84,16 +85,16 @@ const HeroContent = () => {
         </div>
       </div>
       
-      <motion.div 
-        variants={item}
-        className="flex flex-col sm:flex-row gap-4"
-      >
+          <motion.div 
+            variants={item}
+            className="flex flex-col sm:flex-row gap-4"
+          >
         <Button 
           onClick={() => document.getElementById('portfolio')?.scrollIntoView({behavior: 'smooth'})}
           className="bg-media-purple hover:bg-media-darkpurple text-white shadow-md hover:shadow-lg transition-all"
           size="lg"
         >
-          View Portfolio
+          View My Work
         </Button>
         <Button 
           onClick={() => document.getElementById('contact')?.scrollIntoView({behavior: 'smooth'})}
@@ -101,8 +102,31 @@ const HeroContent = () => {
           size="lg"
           className="border-media-purple/30 text-media-purple hover:bg-media-purple/5 hover:border-media-purple/50 shadow-sm hover:shadow-md transition-all"
         >
-          Get in Touch
+          Work With Me
         </Button>
+      </motion.div>
+      
+      {/* Dual-path CTAs for hiring vs clients */}
+      <motion.div 
+        variants={item}
+        className="flex flex-wrap gap-3 mt-4 text-sm"
+      >
+        <span className="text-gray-500">Looking to hire?</span>
+        <a 
+          href="/Mohamed_Ali_CV.pdf"
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-media-purple hover:text-media-darkpurple font-medium underline"
+        >
+          View Resume
+        </a>
+        <span className="text-gray-400">|</span>
+        <a 
+          href="/case-studies"
+          className="text-media-purple hover:text-media-darkpurple font-medium underline"
+        >
+          See Case Studies
+        </a>
       </motion.div>
       
       <motion.div variants={item}>

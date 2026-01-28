@@ -6,6 +6,7 @@ export interface CaseStudyMetric {
 
 // Define the type for case studies
 export interface CaseStudy {
+  slug?: string;
   title: string;
   category: string;
   client: string;
@@ -16,6 +17,10 @@ export interface CaseStudy {
   additionalScreenshots?: string[];
   budgetRange?: string;
   platforms?: string[];
+  challenge?: string;
+  strategy?: string;
+  results?: string;
+  tools?: string[];
 }
 
 // Case studies data
@@ -23,7 +28,7 @@ export const caseStudies: CaseStudy[] = [
   {
     title: "Beauty Brand E-commerce Success",
     category: "e-commerce",
-    client: "Cosmetics E-commerce",
+    client: "Premium Cosmetics Brand",
     metrics: [
       { label: "Orders", value: "95K+" },
       { label: "ROAS", value: "8x+" },
@@ -31,12 +36,16 @@ export const caseStudies: CaseStudy[] = [
     ],
     description: "Led a highly successful e-commerce campaign using LightFunnel and Easy Order, achieving exceptional results through strategic messaging and optimization.",
     industry: "Beauty & Cosmetics",
-    screenshot: "/lovable-uploads/e7da6e3c-66cf-4166-9955-98eb4097a88f.png"
+    screenshot: "/lovable-uploads/e7da6e3c-66cf-4166-9955-98eb4097a88f.png",
+    challenge: "Scale e-commerce operations while maintaining profitability and optimizing customer acquisition costs across multiple product lines.",
+    strategy: "Implemented advanced funnel optimization with LightFunnel, A/B tested creative messaging, and leveraged dynamic product ads with retargeting strategies.",
+    results: "Achieved 8x+ ROAS with 95K+ orders generated, significantly reducing CPA while scaling ad spend efficiently across Meta and TikTok platforms.",
+    tools: ["LightFunnel", "Easy Order", "Meta Ads Manager", "TikTok Ads"]
   },
   {
     title: "Islamic Economy Events",
     category: "ngo",
-    client: "AlBaraka Forum",
+    client: "International Economic Forum",
     metrics: [
       { label: "Budget", value: "$15K+" },
       { label: "Reach", value: "3+" },
@@ -44,12 +53,16 @@ export const caseStudies: CaseStudy[] = [
     ],
     description: "Managed digital campaigns for major Islamic economy events across London, Saudi Arabia, and Pakistan, driving international engagement and attendance.",
     industry: "Finance",
-    screenshot: "/lovable-uploads/9346e7a4-3664-492a-89e0-04c47bbf435b.png"
+    screenshot: "/lovable-uploads/9346e7a4-3664-492a-89e0-04c47bbf435b.png",
+    challenge: "Drive international attendance for multi-location events with diverse cultural audiences and varying digital adoption rates.",
+    strategy: "Developed geo-targeted campaigns for each event location, created culturally relevant creative content, and implemented multi-language ad sets with localized messaging.",
+    results: "Successfully promoted events across 3+ countries with optimized reach and engagement, achieving strong attendance rates and international brand recognition.",
+    tools: ["Meta Ads", "LinkedIn Ads", "Google Ads"]
   },
   {
     title: "Restaurant Chain Growth",
     category: "f&b",
-    client: "Shawaya Albukhari",
+    client: "Premium Restaurant Chain",
     metrics: [
       { label: "Branches", value: "3" },
       { label: "Engagement", value: "+75%" },
@@ -57,20 +70,28 @@ export const caseStudies: CaseStudy[] = [
     ],
     description: "Implemented targeted advertising strategies across multiple branches, significantly improving customer acquisition and engagement rates.",
     industry: "Restaurant",
-    screenshot: "/lovable-uploads/872450f0-c427-4e5a-8295-3550968a9973.png"
+    screenshot: "/lovable-uploads/872450f0-c427-4e5a-8295-3550968a9973.png",
+    challenge: "Increase foot traffic and brand awareness across multiple restaurant locations while maintaining consistent brand messaging and optimizing local targeting.",
+    strategy: "Created location-specific ad campaigns with geo-targeting, implemented dynamic menu promotions, and leveraged user-generated content to build social proof.",
+    results: "Achieved 75% increase in engagement and 120% growth in customer acquisition across all branches, with improved cost per acquisition and higher repeat visit rates.",
+    tools: ["Meta Ads", "Instagram Ads", "Google Local Ads"]
   },
   {
     title: "Entertainment Venue Marketing",
     category: "branding",
-    client: "Tabla and Oud Lounge",
+    client: "Premium Entertainment Venue",
     metrics: [
       { label: "Budget", value: "35K SAR" },
       { label: "Events", value: "10+" },
       { label: "ROI", value: "+180%" }
     ],
-    description: "Developed and executed high-impact campaigns for exclusive events and concerts, including performances by renowned artists like Hamada Helal.",
+    description: "Developed and executed high-impact campaigns for exclusive events and concerts, including performances by renowned artists.",
     industry: "Entertainment",
-    screenshot: "/lovable-uploads/a11917a6-704a-4ada-ba26-40899ba98b37.png"
+    screenshot: "/lovable-uploads/a11917a6-704a-4ada-ba26-40899ba98b37.png",
+    challenge: "Drive ticket sales for premium entertainment events with limited-time promotions and high-value target audiences.",
+    strategy: "Created event-specific campaigns with countdown timers, leveraged influencer partnerships, and implemented lookalike audiences based on previous event attendees.",
+    results: "Successfully promoted 10+ events with 180% ROI, achieving strong ticket sales and building a loyal customer base for recurring events.",
+    tools: ["Meta Ads", "Instagram Ads", "Snapchat Ads"]
   },
   {
     title: "Multi-Brand F&B Expansion",

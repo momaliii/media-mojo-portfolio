@@ -14,6 +14,75 @@ export type Database = {
   }
   public: {
     Tables: {
+      case_studies: {
+        Row: {
+          additional_screenshots: string[]
+          budget_range: string | null
+          category: string
+          challenge: string | null
+          client: string
+          created_at: string
+          description: string
+          id: string
+          industry: string | null
+          metrics: Json
+          platforms: string[]
+          published: boolean
+          results: string | null
+          screenshot: string | null
+          slug: string
+          sort_order: number
+          strategy: string | null
+          title: string
+          tools: string[]
+          updated_at: string
+        }
+        Insert: {
+          additional_screenshots?: string[]
+          budget_range?: string | null
+          category: string
+          challenge?: string | null
+          client: string
+          created_at?: string
+          description: string
+          id?: string
+          industry?: string | null
+          metrics?: Json
+          platforms?: string[]
+          published?: boolean
+          results?: string | null
+          screenshot?: string | null
+          slug: string
+          sort_order?: number
+          strategy?: string | null
+          title: string
+          tools?: string[]
+          updated_at?: string
+        }
+        Update: {
+          additional_screenshots?: string[]
+          budget_range?: string | null
+          category?: string
+          challenge?: string | null
+          client?: string
+          created_at?: string
+          description?: string
+          id?: string
+          industry?: string | null
+          metrics?: Json
+          platforms?: string[]
+          published?: boolean
+          results?: string | null
+          screenshot?: string | null
+          slug?: string
+          sort_order?: number
+          strategy?: string | null
+          title?: string
+          tools?: string[]
+          updated_at?: string
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string

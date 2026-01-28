@@ -18,6 +18,8 @@ import Auth from "./pages/Auth";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { AuthProvider } from "./hooks/use-auth";
 import { trackPageView } from "./utils/analytics";
+import AdminRoute from "./components/AdminRoute";
+import AdminCaseStudies from "./pages/AdminCaseStudies";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,6 +38,25 @@ const RouteTracker = () => {
   useEffect(() => {
     // Track page view on route change
     trackPageView(location.pathname, document.title);
+    
+    // Handle hash scrolling after route change
+    if (location.hash) {
+      setTimeout(() => {
+        const element = document.querySelector(location.hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Focus management for accessibility
+          const focusableElement = element.querySelector('button, a, input, textarea, select') as HTMLElement;
+          if (focusableElement) {
+            focusableElement.focus();
+          } else {
+            element.setAttribute('tabindex', '-1');
+            (element as HTMLElement).focus();
+            element.removeAttribute('tabindex');
+          }
+        }
+      }, 100);
+    }
   }, [location]);
   
   return null;
@@ -69,6 +90,14 @@ const App = () => (
                 <RouteTracker />
                 <Routes>
                   <Route path="/auth" element={<Auth />} />
+                  <Route
+                    path="/admin/case-studies"
+                    element={
+                      <AdminRoute>
+                        <AdminCaseStudies />
+                      </AdminRoute>
+                    }
+                  />
                   <Route path="/" element={
                     <LazyComponent>
                       <Index />

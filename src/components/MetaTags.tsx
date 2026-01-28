@@ -13,16 +13,22 @@ interface MetaTagsProps {
   keywords?: string;
 }
 
+const BASE_URL = typeof window !== 'undefined' 
+  ? window.location.origin 
+  : "https://mediamojomarketing.com";
+
 const MetaTags = ({
-  title = "Mohamed Ali - Expert Media Buyer & Digital Marketing Specialist | 8x+ ROAS",
-  description = "Mohamed Ali is a highly skilled media buyer with 6+ years of experience driving exceptional results across 10+ countries. Specializing in Meta Ads, Google Ads, TikTok, and Snapchat with proven ROAS of 8x+ and 95K+ orders generated. Available for remote consultation and campaign management.",
+  title = "Mohamed Ali | Senior Media Buyer & Digital Marketing Specialist",
+  description = "Senior Media Buyer with 6+ years of experience driving exceptional results across 10+ countries. Specializing in Meta Ads, Google Ads, TikTok, and Snapchat with proven ROAS of 8x+ and 95K+ orders generated. Available for remote consultation and campaign management.",
   imageUrl = "/lovable-uploads/e7da6e3c-66cf-4166-9955-98eb4097a88f.png",
-  url = "https://mediamojomarketing.com",
+  url,
   type = "website",
   author = "Mohamed Ali",
   twitterHandle = "@mohamedali_ads",
   keywords = "media buying expert, digital marketing specialist, Meta Ads manager, Google Ads expert, TikTok advertising, Snapchat Ads, ROAS optimization, e-commerce marketing, performance marketing, conversion optimization, media buyer Egypt, digital advertising consultant, remote media buyer, campaign management, ad spend optimization, social media advertising"
 }: MetaTagsProps) => {
+  const fullUrl = url ? (url.startsWith('http') ? url : `${BASE_URL}${url}`) : BASE_URL;
+  const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${BASE_URL}${imageUrl}`;
   return (
     <Helmet>
       {/* Basic Meta Tags */}
@@ -33,13 +39,13 @@ const MetaTags = ({
       <meta name="robots" content="index, follow" />
       <meta name="language" content="English" />
       <meta name="revisit-after" content="7 days" />
-      <link rel="canonical" href={url} />
+      <link rel="canonical" href={fullUrl} />
 
       {/* Open Graph */}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={imageUrl} />
-      <meta property="og:url" content={url} />
+      <meta property="og:image" content={fullImageUrl} />
+      <meta property="og:url" content={fullUrl} />
       <meta property="og:type" content={type} />
       <meta property="og:site_name" content="Mohamed Ali Media Buyer" />
       <meta property="og:locale" content="en_US" />
@@ -49,7 +55,7 @@ const MetaTags = ({
       <meta name="twitter:site" content={twitterHandle} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={imageUrl} />
+      <meta name="twitter:image" content={fullImageUrl} />
       <meta name="twitter:creator" content={twitterHandle} />
       
       {/* Additional SEO Tags */}

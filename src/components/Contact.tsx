@@ -135,49 +135,61 @@ const Contact = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-            <Card className="border border-gray-200 opacity-0 animate-fade-in-up">
+            <Card className="border border-gray-200 opacity-0 animate-on-scroll">
               <CardContent className="p-6 md:p-8">
                 <h3 className="text-xl font-semibold mb-6">Send Me a Message</h3>
                 
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-medium">
-                        Name
-                      </label>
-                      <Input 
-                        id="name"
-                        name="name" 
-                        value={formData.name}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        placeholder="Your name" 
-                        required
-                        aria-required="true"
-                        disabled={formStatus === 'submitting'}
-                        className={errors.name ? "border-red-400" : ""}
-                      />
-                      {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium">
-                        Email
-                      </label>
-                      <Input 
-                        id="email"
-                        name="email" 
-                        value={formData.email}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        type="email" 
-                        placeholder="Your email" 
-                        required
-                        aria-required="true"
-                        disabled={formStatus === 'submitting'}
-                        className={errors.email ? "border-red-400" : ""}
-                      />
-                      {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
-                    </div>
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="text-sm font-medium">
+                      Name
+                    </label>
+                    <Input 
+                      id="name"
+                      name="name" 
+                      value={formData.name}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      placeholder="Your name" 
+                      required
+                      aria-required="true"
+                      aria-describedby={errors.name ? "name-error" : undefined}
+                      aria-invalid={!!errors.name}
+                      disabled={formStatus === 'submitting'}
+                      className={errors.name ? "border-red-400" : ""}
+                    />
+                    {errors.name && (
+                      <p id="name-error" className="text-xs text-red-500" role="alert">
+                        {errors.name}
+                      </p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="text-sm font-medium">
+                      Email
+                    </label>
+                    <Input 
+                      id="email"
+                      name="email" 
+                      value={formData.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      type="email" 
+                      placeholder="Your email" 
+                      required
+                      aria-required="true"
+                      aria-describedby={errors.email ? "email-error" : undefined}
+                      aria-invalid={!!errors.email}
+                      disabled={formStatus === 'submitting'}
+                      className={errors.email ? "border-red-400" : ""}
+                    />
+                    {errors.email && (
+                      <p id="email-error" className="text-xs text-red-500" role="alert">
+                        {errors.email}
+                      </p>
+                    )}
+                  </div>
                   </div>
                   
                   <div className="space-y-2">
@@ -193,10 +205,16 @@ const Contact = () => {
                       placeholder="What's this regarding?" 
                       required
                       aria-required="true"
+                      aria-describedby={errors.subject ? "subject-error" : undefined}
+                      aria-invalid={!!errors.subject}
                       disabled={formStatus === 'submitting'}
                       className={errors.subject ? "border-red-400" : ""}
                     />
-                    {errors.subject && <p className="text-xs text-red-500">{errors.subject}</p>}
+                    {errors.subject && (
+                      <p id="subject-error" className="text-xs text-red-500" role="alert">
+                        {errors.subject}
+                      </p>
+                    )}
                   </div>
                   
                   <div className="space-y-2">
@@ -213,10 +231,19 @@ const Contact = () => {
                       className={`min-h-[120px] ${errors.message ? "border-red-400" : ""}`}
                       required
                       aria-required="true"
+                      aria-describedby={errors.message ? "message-error" : undefined}
+                      aria-invalid={!!errors.message}
                       disabled={formStatus === 'submitting'}
                     />
-                    {errors.message && <p className="text-xs text-red-500">{errors.message}</p>}
+                    {errors.message && (
+                      <p id="message-error" className="text-xs text-red-500" role="alert">
+                        {errors.message}
+                      </p>
+                    )}
                   </div>
+                  <p className="text-xs text-gray-500 mt-2">
+                    Your information will be kept confidential and used only to respond to your inquiry.
+                  </p>
                   
                   <Button 
                     type="submit" 
@@ -240,7 +267,7 @@ const Contact = () => {
               </CardContent>
             </Card>
             
-            <div className="space-y-6 opacity-0 animate-fade-in-up animate-delay-200">
+            <div className="space-y-6 opacity-0 animate-on-scroll">
               <Card className="border border-gray-200 overflow-hidden">
                 <CardContent className="p-6 md:p-8">
                   <h3 className="text-xl font-semibold mb-6">Contact Information</h3>
@@ -336,16 +363,28 @@ const Contact = () => {
                 <CardContent className="p-6 md:p-8">
                   <h3 className="text-xl font-semibold mb-2">Ready to boost your campaign performance?</h3>
                   <p className="mb-4 opacity-90">I help businesses achieve exceptional results through strategic media buying across multiple platforms and regions.</p>
-                  <a 
-                    href="https://wa.me/+201060098267" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    onClick={() => trackEvent('cta_click', { button: 'strategy_call' })}
-                  >
-                    <Button variant="secondary" size="sm">
-                      Book a Strategy Call
-                    </Button>
-                  </a>
+                  <div className="space-y-3">
+                    <a 
+                      href="https://wa.me/+201060098267" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      onClick={() => trackEvent('cta_click', { button: 'strategy_call' })}
+                    >
+                      <Button variant="secondary" size="sm" className="w-full">
+                        Book a Strategy Call
+                      </Button>
+                    </a>
+                    <a 
+                      href="/Mohamed_Ali_CV.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackEvent('cta_click', { button: 'download_cv' })}
+                    >
+                      <Button variant="outline" size="sm" className="w-full bg-white/10 border-white/30 text-white hover:bg-white/20">
+                        Download Resume
+                      </Button>
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
             </div>

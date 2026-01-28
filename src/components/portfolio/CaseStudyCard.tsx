@@ -18,7 +18,8 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
     title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
   
   const handleCardClick = () => {
-    navigate(`/case-study/${titleToSlug(study.title)}`);
+    const slug = study.slug || titleToSlug(study.title);
+    navigate(`/case-study/${slug}`);
   };
   const getCategoryName = (category: string): string => {
     switch (category) {

@@ -7,13 +7,14 @@ import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import EnhancedFilterTabs from "@/components/portfolio/EnhancedFilterTabs";
-import { caseStudies } from "@/data/caseStudies";
+import { usePublishedCaseStudies } from "@/hooks/use-case-studies";
 import { trackPageView, trackEvent } from "@/utils/analytics";
 import { usePerformanceMonitor } from "@/hooks/use-performance-monitor";
 
 const CaseStudies = () => {
   const [filter, setFilter] = useState("all");
   const { logMetric } = usePerformanceMonitor('CaseStudies');
+  const { data: caseStudies = [] } = usePublishedCaseStudies();
 
   useEffect(() => {
     trackPageView('/case-studies', 'Case Studies - Mohamed Ali');
@@ -43,13 +44,14 @@ const CaseStudies = () => {
           content={`Explore ${totalProjects} successful digital marketing case studies across e-commerce, F&B, NGO, and branding campaigns. See proven results and strategies.`}
         />
         <meta name="keywords" content="case studies, digital marketing portfolio, campaign results, e-commerce marketing, social media campaigns" />
-        <link rel="canonical" href="/case-studies" />
+        <link rel="canonical" href={`${typeof window !== 'undefined' ? window.location.origin : 'https://mediamojomarketing.com'}/case-studies`} />
         
         {/* Open Graph */}
         <meta property="og:title" content="Case Studies - Mohamed Ali | Digital Marketing Portfolio" />
         <meta property="og:description" content={`Explore ${totalProjects} successful digital marketing case studies with proven results`} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="/case-studies" />
+        <meta property="og:url" content={`${typeof window !== 'undefined' ? window.location.origin : 'https://mediamojomarketing.com'}/case-studies`} />
+        <meta property="og:image" content={`${typeof window !== 'undefined' ? window.location.origin : 'https://mediamojomarketing.com'}/lovable-uploads/e7da6e3c-66cf-4166-9955-98eb4097a88f.png`} />
         
         {/* Structured Data */}
         <script type="application/ld+json">

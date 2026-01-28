@@ -18,7 +18,7 @@ const ProfileLogo = () => {
       className="relative"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-media-purple/30 to-media-oceanblue/30 rounded-full blur-xl transform-gpu" />
-      <Avatar className="h-40 w-40 border-4 border-white shadow-2xl relative bg-gradient-to-br from-media-purple/10 to-media-oceanblue/10">
+      <Avatar className="h-28 w-28 sm:h-40 sm:w-40 border-4 border-white shadow-2xl relative bg-gradient-to-br from-media-purple/10 to-media-oceanblue/10">
         <AvatarImage 
           src="/lovable-uploads/900c6176-4030-4244-a97a-62a4c235d53f.png" 
           alt="Mohamed Ali" 
