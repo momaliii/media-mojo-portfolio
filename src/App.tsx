@@ -18,6 +18,7 @@ import Auth from "./pages/Auth";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { AuthProvider } from "./hooks/use-auth";
 import { trackPageView } from "./utils/analytics";
+import { trackPageViewToSupabase } from "./utils/visitor-analytics";
 import AdminRoute from "./components/AdminRoute";
 import AdminCaseStudies from "./pages/AdminCaseStudies";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -41,8 +42,11 @@ const RouteTracker = () => {
   const location = useLocation();
   
   useEffect(() => {
-    // Track page view on route change
+    // Track page view on route change (Google Analytics)
     trackPageView(location.pathname, document.title);
+    
+    // Track page view to Supabase (visitor analytics)
+    trackPageViewToSupabase(location.pathname, location.search);
     
     // Handle hash scrolling after route change
     if (location.hash) {

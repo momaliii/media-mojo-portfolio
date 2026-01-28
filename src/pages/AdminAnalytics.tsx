@@ -5,7 +5,8 @@ import AdminLayout from "@/components/admin/AdminLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Loader2, BarChart3, Mail, FileText, Clock, PieChart, Layers } from "lucide-react";
+import { Loader2, BarChart3, Mail, FileText, Clock, PieChart, Layers, Users, Globe, TrendingUp } from "lucide-react";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 type ByDayPoint = {
   key: string;
@@ -255,6 +256,17 @@ export default function AdminAnalytics() {
       const caseStudiesRange =
         caseStudiesRangeRes.error || !caseStudiesRangeRes.data ? ([] as any[]) : caseStudiesRangeRes.data;
 
+      // Fetch page views for visitor analytics
+      const pageViewsRangeRes = await supabase
+        .from("page_views")
+        .select("id,created_at,path,referrer,referrer_domain,utm_source,utm_medium,utm_campaign,visitor_id,session_id")
+        .gte("created_at", since)
+        .order("created_at", { ascending: true })
+        .limit(10000);
+
+      const pageViewsRange =
+        pageViewsRangeRes.error || !pageViewsRangeRes.data ? ([] as any[]) : pageViewsRangeRes.data;
+
       return {
         since,
         rangeDays,
@@ -266,6 +278,7 @@ export default function AdminAnalytics() {
         caseStudiesPublished,
         caseStudiesDrafts,
         caseStudiesRange,
+        pageViewsRange,
       };
     },
     staleTime: 15_000,
@@ -363,6 +376,137 @@ export default function AdminAnalytics() {
       createdValues,
     };
   }, [overviewQuery.data?.caseStudiesRange, rangeDays]);
+
+  const visitorStats = useMemo(() => {
+    const rows = overviewQuery.data?.pageViewsRange ?? [];
+    const totalViews = rows.length;
+    
+    // Unique visitors
+    const uniqueVisitors = new Set(rows.map((r) => r.visitor_id));
+    const uniqueCount = uniqueVisitors.size;
+    
+    // Visitor visit counts (for returning visitor detection)
+    const visitorCounts = new Map<string, number>();
+    for (const r of rows) {
+      visitorCounts.set(r.visitor_id, (visitorCounts.get(r.visitor_id) ?? 0) + 1);
+    }
+    
+    // Returning visitors (≥2 views in range)
+    const returningVisitors = Array.from(visitorCounts.values()).filter((c) => c >= 2).length;
+    const newVisitors = uniqueCount - returningVisitors;
+    const avgViewsPerVisitor = uniqueCount > 0 ? (totalViews / uniqueCount).toFixed(1) : "0";
+    
+    // Top pages
+    const pageCounts = new Map<string, number>();
+    for (const r of rows) {
+      const path = r.path.split("?")[0]; // Remove query params
+      pageCounts.set(path, (pageCounts.get(path) ?? 0) + 1);
+    }
+    const topPages = Array.from(pageCounts.entries())
+      .map(([label, value]) => ({ label, value }))
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 10);
+    
+    // Source breakdown
+    let directCount = 0;
+    let utmCount = 0;
+    let referrerCount = 0;
+    const referrerDomainMap = new Map<string, number>();
+    const utmSourceMap = new Map<string, number>();
+    const utmCampaignMap = new Map<string, number>();
+    
+    for (const r of rows) {
+      if (r.utm_source) {
+        utmCount++;
+        utmSourceMap.set(r.utm_source, (utmSourceMap.get(r.utm_source) ?? 0) + 1);
+        if (r.utm_campaign) {
+          utmCampaignMap.set(r.utm_campaign, (utmCampaignMap.get(r.utm_campaign) ?? 0) + 1);
+        }
+      } else if (r.referrer_domain) {
+        referrerCount++;
+        referrerDomainMap.set(r.referrer_domain, (referrerDomainMap.get(r.referrer_domain) ?? 0) + 1);
+      } else {
+        directCount++;
+      }
+    }
+    
+    const topReferrers = Array.from(referrerDomainMap.entries())
+      .map(([label, value]) => ({ label, value }))
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 8);
+    
+    const topUtmSources = Array.from(utmSourceMap.entries())
+      .map(([label, value]) => ({ label, value }))
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 8);
+    
+    const topUtmCampaigns = Array.from(utmCampaignMap.entries())
+      .map(([label, value]) => ({ label, value }))
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 8);
+    
+    // Daily visitor trends
+    const { keys, labels } = buildLastNDays(rangeDays);
+    const dailyUnique = new Map<string, Set<string>>();
+    const dailyNew = new Map<string, Set<string>>();
+    const dailyReturning = new Map<string, Set<string>>();
+    const firstSeenMap = new Map<string, string>(); // visitor_id -> first date seen
+    
+    for (const r of rows) {
+      const k = new Date(r.created_at).toISOString().slice(0, 10);
+      if (!dailyUnique.has(k)) {
+        dailyUnique.set(k, new Set());
+        dailyNew.set(k, new Set());
+        dailyReturning.set(k, new Set());
+      }
+      
+      const firstSeen = firstSeenMap.get(r.visitor_id);
+      if (!firstSeen) {
+        firstSeenMap.set(r.visitor_id, k);
+        dailyNew.get(k)!.add(r.visitor_id);
+      } else if (firstSeen < k) {
+        dailyReturning.get(k)!.add(r.visitor_id);
+      }
+      
+      dailyUnique.get(k)!.add(r.visitor_id);
+    }
+    
+    const dailyTrend = keys.map((k, idx) => ({
+      key: k,
+      label: labels[idx],
+      unique: dailyUnique.get(k)?.size ?? 0,
+      new: dailyNew.get(k)?.size ?? 0,
+      returning: dailyReturning.get(k)?.size ?? 0,
+    }));
+    
+    // Most active visitors (anonymized)
+    const mostActive = Array.from(visitorCounts.entries())
+      .map(([visitorId, count]) => ({
+        visitorId: visitorId.slice(-6), // Last 6 chars only
+        count,
+      }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 10);
+    
+    return {
+      totalViews,
+      uniqueVisitors: uniqueCount,
+      returningVisitors,
+      newVisitors,
+      avgViewsPerVisitor,
+      topPages,
+      sourceBreakdown: {
+        direct: directCount,
+        utm: utmCount,
+        referrer: referrerCount,
+      },
+      topReferrers,
+      topUtmSources,
+      topUtmCampaigns,
+      dailyTrend,
+      mostActive,
+    };
+  }, [overviewQuery.data?.pageViewsRange, rangeDays]);
 
   return (
     <AdminLayout title="Analytics">
@@ -601,6 +745,307 @@ export default function AdminAnalytics() {
                 )}
               </CardContent>
             </Card>
+          </div>
+
+          {/* Visitor Analytics Section */}
+          <div className="space-y-6 pt-6 border-t">
+            <div>
+              <h2 className="text-xl font-semibold mb-2">Visitor Analytics</h2>
+              <p className="text-sm text-muted-foreground">
+                Traffic sources and returning visitor behavior. Tracking is approximate (same browser/device).
+              </p>
+            </div>
+
+            {/* Visitor KPIs */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-base">
+                    <BarChart3 className="h-4 w-4 text-media-purple" />
+                    Page Views
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-semibold tabular-nums">{visitorStats.totalViews}</div>
+                  <div className="text-xs text-muted-foreground mt-1">Last {rangeDays} days</div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-base">
+                    <Users className="h-4 w-4 text-media-purple" />
+                    Unique Visitors
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-semibold tabular-nums">{visitorStats.uniqueVisitors}</div>
+                  <div className="text-xs text-muted-foreground mt-1">
+                    Avg {visitorStats.avgViewsPerVisitor} views/visitor
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-base">
+                    <TrendingUp className="h-4 w-4 text-media-purple" />
+                    Returning Visitors
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-semibold tabular-nums">{visitorStats.returningVisitors}</div>
+                  <div className="text-xs text-muted-foreground mt-1">
+                    {visitorStats.uniqueVisitors > 0
+                      ? percent(visitorStats.returningVisitors, visitorStats.uniqueVisitors)
+                      : 0}
+                    % of visitors
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-base">
+                    <Globe className="h-4 w-4 text-media-purple" />
+                    New Visitors
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-semibold tabular-nums">{visitorStats.newVisitors}</div>
+                  <div className="text-xs text-muted-foreground mt-1">First-time in range</div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Source Breakdown */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <PieChart className="h-5 w-5 text-media-purple" />
+                    Traffic Sources (last {rangeDays} days)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Donut
+                    title="Traffic sources"
+                    items={[
+                      {
+                        label: "Direct",
+                        value: visitorStats.sourceBreakdown.direct,
+                        color: "hsl(var(--primary))",
+                      },
+                      {
+                        label: "UTM Campaigns",
+                        value: visitorStats.sourceBreakdown.utm,
+                        color: "hsl(var(--secondary))",
+                      },
+                      {
+                        label: "Referrers",
+                        value: visitorStats.sourceBreakdown.referrer,
+                        color: "hsl(var(--muted-foreground))",
+                      },
+                    ]}
+                  />
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <BarChart3 className="h-5 w-5 text-media-purple" />
+                    Top Pages (last {rangeDays} days)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {visitorStats.topPages.length === 0 ? (
+                    <div className="text-sm text-muted-foreground">No page views in this range.</div>
+                  ) : (
+                    visitorStats.topPages.map((p) => {
+                      const max = Math.max(1, ...visitorStats.topPages.map((x) => x.value));
+                      return (
+                        <div key={p.label} className="space-y-1">
+                          <div className="flex items-center justify-between text-sm">
+                            <div className="text-muted-foreground truncate font-mono text-xs">{p.label}</div>
+                            <div className="font-medium tabular-nums">{p.value}</div>
+                          </div>
+                          <div className="h-2 rounded-full bg-muted overflow-hidden">
+                            <div
+                              className="h-full rounded-full"
+                              style={{
+                                width: `${Math.round((p.value / max) * 100)}%`,
+                                background: "hsl(var(--primary))",
+                              }}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })
+                  )}
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Referrer and UTM Breakdown */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Globe className="h-5 w-5 text-media-purple" />
+                    Top Referrer Domains
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {visitorStats.topReferrers.length === 0 ? (
+                    <div className="text-sm text-muted-foreground">No referrers in this range.</div>
+                  ) : (
+                    visitorStats.topReferrers.map((r) => {
+                      const max = Math.max(1, ...visitorStats.topReferrers.map((x) => x.value));
+                      return (
+                        <div key={r.label} className="space-y-1">
+                          <div className="flex items-center justify-between text-sm">
+                            <div className="text-muted-foreground truncate">{r.label}</div>
+                            <div className="font-medium tabular-nums">{r.value}</div>
+                          </div>
+                          <div className="h-2 rounded-full bg-muted overflow-hidden">
+                            <div
+                              className="h-full rounded-full"
+                              style={{
+                                width: `${Math.round((r.value / max) * 100)}%`,
+                                background: "hsl(var(--secondary))",
+                              }}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })
+                  )}
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <BarChart3 className="h-5 w-5 text-media-purple" />
+                    Top UTM Sources
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {visitorStats.topUtmSources.length === 0 ? (
+                    <div className="text-sm text-muted-foreground">No UTM campaigns in this range.</div>
+                  ) : (
+                    visitorStats.topUtmSources.map((u) => {
+                      const max = Math.max(1, ...visitorStats.topUtmSources.map((x) => x.value));
+                      return (
+                        <div key={u.label} className="space-y-1">
+                          <div className="flex items-center justify-between text-sm">
+                            <div className="text-muted-foreground truncate">{u.label}</div>
+                            <div className="font-medium tabular-nums">{u.value}</div>
+                          </div>
+                          <div className="h-2 rounded-full bg-muted overflow-hidden">
+                            <div
+                              className="h-full rounded-full"
+                              style={{
+                                width: `${Math.round((u.value / max) * 100)}%`,
+                                background: "hsl(var(--primary))",
+                              }}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })
+                  )}
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Returning Visitor Trends */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <TrendingUp className="h-5 w-5 text-media-purple" />
+                    Visitor Trends (last {rangeDays} days)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center justify-between gap-3 mb-4">
+                    <div className="space-y-1">
+                      <div className="text-xs text-muted-foreground">Unique visitors/day</div>
+                      <div className="text-2xl font-semibold tabular-nums">
+                        {visitorStats.dailyTrend.reduce((s, d) => s + d.unique, 0) / Math.max(1, visitorStats.dailyTrend.length) | 0}
+                      </div>
+                    </div>
+                    <div className="hidden md:block">
+                      <Sparkline values={visitorStats.dailyTrend.map((d) => d.unique)} />
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
+                    <div className="flex items-center gap-1">
+                      <span className="h-2 w-2 rounded-sm" style={{ background: "hsl(var(--primary))" }} />
+                      New
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <span className="h-2 w-2 rounded-sm" style={{ background: "hsl(var(--secondary))" }} />
+                      Returning
+                    </div>
+                  </div>
+                  <div className="flex items-end gap-2 h-28">
+                    {visitorStats.dailyTrend.slice(-clamp(rangeDays, 7, 30)).map((d) => {
+                      const max = Math.max(1, ...visitorStats.dailyTrend.map((x) => x.unique));
+                      const newH = Math.round((d.new / max) * 100);
+                      const retH = Math.round((d.returning / max) * 100);
+                      return (
+                        <div key={d.key} className="flex-1 flex flex-col items-center gap-2 min-w-0">
+                          <div className="w-full h-24 flex flex-col justify-end overflow-hidden rounded-md bg-muted" title={`${d.label}: ${d.unique} unique`}>
+                            <div className="w-full" style={{ height: `${retH}%`, background: "hsl(var(--secondary))" }} />
+                            <div className="w-full" style={{ height: `${newH}%`, background: "hsl(var(--primary))" }} />
+                          </div>
+                          <div className="text-[11px] text-muted-foreground truncate">{d.label}</div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Users className="h-5 w-5 text-media-purple" />
+                    Most Active Visitors
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {visitorStats.mostActive.length === 0 ? (
+                    <div className="text-sm text-muted-foreground">No visitor data in this range.</div>
+                  ) : (
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="w-[100px]">Visitor ID</TableHead>
+                          <TableHead className="text-right">Visits</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {visitorStats.mostActive.map((v, idx) => (
+                          <TableRow key={idx}>
+                            <TableCell className="font-mono text-xs text-muted-foreground">
+                              ...{v.visitorId}
+                            </TableCell>
+                            <TableCell className="text-right font-medium tabular-nums">{v.count}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  )}
+                  <div className="mt-3 text-xs text-muted-foreground">
+                    Note: IDs are anonymized (last 6 chars only). Same person tracking is approximate (same browser/device).
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       )}
