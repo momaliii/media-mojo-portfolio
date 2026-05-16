@@ -19,6 +19,16 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+				display: ['"Space Grotesk"', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+			},
+			fontSize: {
+				'display-2xl': ['clamp(3rem, 6vw + 1rem, 5.25rem)', { lineHeight: '1.02', letterSpacing: '-0.035em', fontWeight: '700' }],
+				'display-xl': ['clamp(2.5rem, 5vw + 0.5rem, 4.25rem)', { lineHeight: '1.05', letterSpacing: '-0.03em', fontWeight: '700' }],
+				'display-lg': ['clamp(2rem, 4vw + 0.25rem, 3.25rem)', { lineHeight: '1.1', letterSpacing: '-0.025em', fontWeight: '700' }],
+				'eyebrow': ['0.75rem', { lineHeight: '1', letterSpacing: '0.18em', fontWeight: '600' }],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -63,16 +73,20 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Custom colors for media buyer portfolio
+				// Performance-marketing palette: deep ink + confident indigo + electric cyan signal
 				media: {
-					purple: '#9b87f5',
-					darkpurple: '#7E69AB',
-					blue: '#D3E4FD',
-					peach: '#FDE1D3',
-					vibrantpurple: '#8B5CF6',
+					ink: '#0B1120',
+					navy: '#0F172A',
+					slate: '#1E293B',
+					purple: '#4F46E5',
+					darkpurple: '#3730A3',
+					vibrantpurple: '#6366F1',
+					blue: '#DBEAFE',
+					oceanblue: '#06B6D4',
+					cyan: '#22D3EE',
 					orange: '#F97316',
-					oceanblue: '#0EA5E9',
-					pink: '#D946EF',
+					peach: '#FBBF24',
+					pink: '#EC4899',
 				},
 			},
 			borderRadius: {
@@ -82,80 +96,40 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
 				},
 				'fade-in-up': {
-					'0%': {
-						opacity: '0',
-						transform: 'translateY(20px)'
-					},
-					'100%': {
-						opacity: '1',
-						transform: 'translateY(0)'
-					}
+					'0%': { opacity: '0', transform: 'translateY(20px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' }
 				},
 				'fade-in': {
-					'0%': {
-						opacity: '0'
-					},
-					'100%': {
-						opacity: '1'
-					}
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' }
 				},
 				'pulse-slow': {
-					'0%, 100%': {
-						opacity: '1'
-					},
-					'50%': {
-						opacity: '0.8'
-					}
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.8' }
 				},
 				'slide-in-right': {
-					'0%': {
-						transform: 'translateX(100%)',
-						opacity: '0'
-					},
-					'100%': {
-						transform: 'translateX(0)',
-						opacity: '1'
-					}
+					'0%': { transform: 'translateX(100%)', opacity: '0' },
+					'100%': { transform: 'translateX(0)', opacity: '1' }
 				},
 				'bounce-gentle': {
-					'0%, 100%': {
-						transform: 'translateY(0)'
-					},
-					'50%': {
-						transform: 'translateY(-5px)'
-					}
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-5px)' }
 				},
 				'float': {
-					'0%, 100%': {
-						transform: 'translateY(0)'
-					},
-					'50%': {
-						transform: 'translateY(-10px)'
-					}
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' }
 				},
-				'number-count': {
-					'0%': { 'content': '"0"' },
-					'20%': { 'content': '"1"' },
-					'40%': { 'content': '"2"' },
-					'60%': { 'content': '"3"' },
-					'80%': { 'content': '"4"' },
-					'100%': { 'content': '"5"' },
+				'marquee': {
+					'0%': { transform: 'translateX(0)' },
+					'100%': { transform: 'translateX(-50%)' }
 				},
 				'flip-in': {
 					'0%': { transform: 'rotateY(90deg)', opacity: '0' },
@@ -175,14 +149,14 @@ export default {
 				'slide-in-right': 'slide-in-right 0.6s ease-out forwards',
 				'bounce-gentle': 'bounce-gentle 4s infinite ease-in-out',
 				'float': 'float 6s infinite ease-in-out',
-				'number-count': 'number-count 2s ease-out forwards',
+				'marquee': 'marquee 30s linear infinite',
 				'flip-in': 'flip-in 0.5s ease-out forwards',
 				'flip-out': 'flip-out 0.5s ease-out forwards'
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'hero-pattern': 'linear-gradient(135deg, #9b87f5 0%, #D3E4FD 100%)',
-				'dark-hero-pattern': 'linear-gradient(135deg, #4d3b99 0%, #1a3b6e 100%)',
+				'hero-pattern': 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)',
+				'dark-hero-pattern': 'linear-gradient(135deg, #0B1120 0%, #0F172A 100%)',
 			}
 		}
 	},

@@ -1,13 +1,29 @@
-/* Typography utilities */
+/* Typography */
 * {
   @apply border-border;
 }
 
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
 body {
-  @apply bg-background text-foreground;
-  font-feature-settings: "rlig" 1, "calt" 1;
+  @apply bg-background text-foreground font-sans;
+  font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1, "cv11" 1;
 }
 
 h1, h2, h3, h4 {
-  @apply font-bold tracking-tight;
+  @apply font-display font-bold tracking-tight;
+  font-feature-settings: "ss01" 1;
+}
+
+.eyebrow {
+  @apply font-sans uppercase text-eyebrow text-media-purple;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
 }
