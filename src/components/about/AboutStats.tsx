@@ -6,25 +6,29 @@ import { BarChart3, Globe, LayoutGrid, Award } from "lucide-react";
 
 const AboutStats = () => {
   const stats = [
-    { 
-      icon: <BarChart3 className="text-media-purple h-6 w-6" />, 
-      value: "6+", 
-      label: "Years Experience" 
+    {
+      icon: <BarChart3 className="text-media-purple h-6 w-6" />,
+      value: "6+",
+      label: "Years Experience",
+      context: "Senior media buying",
     },
-    { 
-      icon: <Globe className="text-media-oceanblue h-6 w-6" />, 
-      value: "10+", 
-      label: "Countries Served" 
+    {
+      icon: <Globe className="text-media-oceanblue h-6 w-6" />,
+      value: "10",
+      label: "Countries Served",
+      context: "MENA · EU · US · China",
     },
-    { 
-      icon: <LayoutGrid className="text-media-orange h-6 w-6" />, 
-      value: "6+", 
-      label: "Platforms Mastered" 
+    {
+      icon: <LayoutGrid className="text-media-orange h-6 w-6" />,
+      value: "5",
+      label: "Platforms",
+      context: "Meta, TikTok, Google, LinkedIn, Snap",
     },
-    { 
-      icon: <Award className="text-media-pink h-6 w-6" />, 
-      value: "95K+", 
-      label: "Orders Generated" 
+    {
+      icon: <Award className="text-media-pink h-6 w-6" />,
+      value: "95K+",
+      label: "Orders Generated",
+      context: "Last 24 months",
     },
   ];
 
@@ -45,10 +49,11 @@ const AboutStats = () => {
                 <div className="mx-auto w-12 h-12 flex items-center justify-center bg-white rounded-xl shadow-sm mb-4 group-hover:scale-110 transition-transform duration-300">
                   {stat.icon}
                 </div>
-                <h3 className="text-3xl font-bold mb-1 bg-gradient-to-r from-media-purple to-media-oceanblue bg-clip-text text-transparent">
+                <h3 className="text-3xl font-display font-bold mb-1 tabular bg-gradient-to-r from-media-purple to-media-oceanblue bg-clip-text text-transparent">
                   {stat.value}
                 </h3>
-                <p className="text-gray-600 text-sm font-medium">{stat.label}</p>
+                <p className="text-gray-700 dark:text-gray-200 text-sm font-medium">{stat.label}</p>
+                <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">{stat.context}</p>
               </div>
             </CardContent>
           </Card>

@@ -101,7 +101,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {isHomePage ? (
-              ["about", "countries", "services", "portfolio", "contact"].map((item, index) => (
+              ["portfolio", "services", "testimonials", "about", "contact"].map((item, index) => (
                 <motion.button
                   key={item}
                   onClick={() => scrollToSection(item)}
@@ -217,7 +217,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
             >
               <div className="flex flex-col space-y-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm p-4 rounded-xl shadow-sm">
                 {isHomePage ? (
-                  ["about", "countries", "services", "portfolio", "contact"].map((item, index) => (
+                  ["portfolio", "services", "testimonials", "about", "contact"].map((item, index) => (
                     <motion.button
                       key={item}
                       onClick={() => scrollToSection(item)}

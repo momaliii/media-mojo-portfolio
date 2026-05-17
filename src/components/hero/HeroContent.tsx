@@ -2,133 +2,87 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import HeroStats from "./HeroStats";
-import { Linkedin, FileText } from "lucide-react";
+import { ArrowRight, FileText } from "lucide-react";
 import { motion } from "framer-motion";
-import ProfileLogo from "./ProfileLogo";
 
 const HeroContent = () => {
   const container = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
+      transition: { staggerChildren: 0.12, delayChildren: 0.15 },
+    },
   };
-  
+
   const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    hidden: { opacity: 0, y: 18 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
   };
 
   return (
-    <motion.div 
-      className="space-y-6 md:space-y-8"
+    <motion.div
+      className="space-y-8 max-w-2xl"
       variants={container}
       initial="hidden"
       animate="show"
     >
-      <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-4">
-        <motion.div variants={item}>
-          <ProfileLogo />
-        </motion.div>
-        
-        <div>
-          <motion.span 
-            variants={item}
-            className="inline-block py-1.5 px-4 rounded-full bg-gradient-to-r from-media-purple/20 to-media-oceanblue/20 text-media-purple font-medium text-sm mb-4 shadow-sm"
-          >
-            Senior Media Buyer
-          </motion.span>
-          
-          <motion.h1 
-            id="hero-heading"
-            variants={item}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight"
-          >
-            Mohamed <span className="gradient-text">Ali</span>
-          </motion.h1>
-          
-          <motion.p 
-            variants={item}
-            className="mt-6 text-lg text-gray-600 max-w-2xl"
-          >
-            Senior Media Buyer with 6+ years of experience optimizing campaigns across Meta, LinkedIn, TikTok, Snapchat, and Google Ads. Delivering exceptional results and measurable ROI.
-          </motion.p>
-          
-          <motion.div 
-            variants={item}
-            className="flex flex-wrap gap-3 mt-4"
-          >
-            <a 
-              href="https://www.linkedin.com/in/mhmdali02/"
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-media-purple bg-white px-3 py-2 rounded-md shadow-sm hover:shadow-md transition-all hover:bg-media-purple/5"
-            >
-              <Linkedin className="h-5 w-5" />
-              <span className="text-sm font-medium">Connect on LinkedIn</span>
-            </a>
-            
-            <a 
-              href="/Mohamed_Ali_CV.pdf"
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-media-purple bg-white px-3 py-2 rounded-md shadow-sm hover:shadow-md transition-all hover:bg-media-purple/5"
-            >
-              <FileText className="h-5 w-5" />
-              <span className="text-sm font-medium">Download CV</span>
-            </a>
-          </motion.div>
-        </div>
-      </div>
-      
-          <motion.div 
-            variants={item}
-            className="flex flex-col sm:flex-row gap-4"
-          >
-        <Button 
-          onClick={() => document.getElementById('portfolio')?.scrollIntoView({behavior: 'smooth'})}
-          className="bg-media-purple hover:bg-media-darkpurple text-white shadow-md hover:shadow-lg transition-all"
-          size="lg"
-        >
-          View My Work
-        </Button>
-        <Button 
-          onClick={() => document.getElementById('contact')?.scrollIntoView({behavior: 'smooth'})}
-          variant="outline"
-          size="lg"
-          className="border-media-purple/30 text-media-purple hover:bg-media-purple/5 hover:border-media-purple/50 shadow-sm hover:shadow-md transition-all"
-        >
-          Work With Me
-        </Button>
+      <motion.div variants={item} className="flex items-center gap-3">
+        <span className="inline-flex h-2 w-2 rounded-full bg-media-cyan animate-pulse" />
+        <span className="eyebrow text-white/70">
+          Mohamed Ali · Senior Media Buyer
+        </span>
       </motion.div>
-      
-      {/* Dual-path CTAs for hiring vs clients */}
-      <motion.div 
+
+      <motion.h1
+        id="hero-heading"
         variants={item}
-        className="flex flex-wrap gap-3 mt-4 text-sm"
+        className="text-display-2xl font-display text-white"
       >
-        <span className="text-gray-500">Looking to hire?</span>
-        <a 
-          href="/Mohamed_Ali_CV.pdf"
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="text-media-purple hover:text-media-darkpurple font-medium underline"
-        >
-          View Resume
-        </a>
-        <span className="text-gray-400">|</span>
-        <a 
-          href="/case-studies"
-          className="text-media-purple hover:text-media-darkpurple font-medium underline"
+        I scale DTC &amp; e-commerce brands across{" "}
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-media-vibrantpurple via-media-cyan to-media-vibrantpurple">
+          Meta, TikTok &amp; Google
+        </span>
+        .
+      </motion.h1>
+
+      <motion.p
+        variants={item}
+        className="text-lg md:text-xl text-white/70 leading-relaxed max-w-xl"
+      >
+        6+ years optimizing paid media for brands in 10+ countries. 95K+ orders
+        generated, 8x+ ROAS on flagship campaigns — across Meta, TikTok, Google,
+        LinkedIn, and Snapchat.
+      </motion.p>
+
+      <motion.div
+        variants={item}
+        className="flex flex-col sm:flex-row gap-3"
+      >
+        <Button
+          onClick={() =>
+            document
+              .getElementById("portfolio")
+              ?.scrollIntoView({ behavior: "smooth" })
+          }
+          size="lg"
+          className="bg-white text-media-ink hover:bg-white/90 font-semibold shadow-lg shadow-black/20 group"
         >
           See Case Studies
-        </a>
+          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+        </Button>
+        <Button
+          asChild
+          variant="outline"
+          size="lg"
+          className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm"
+        >
+          <a href="/Mohamed_Ali_CV.pdf" target="_blank" rel="noopener noreferrer">
+            <FileText className="mr-2 h-4 w-4" />
+            Download CV
+          </a>
+        </Button>
       </motion.div>
-      
+
       <motion.div variants={item}>
         <HeroStats />
       </motion.div>

@@ -122,20 +122,24 @@ const Contact = () => {
     <section id="contact" className="section-padding">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12 md:mb-16">
-            <span className="inline-block py-1 px-3 rounded-full bg-media-purple/10 text-media-purple font-medium text-sm mb-4">
-              Get in Touch
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Let's Discuss Your <span className="gradient-text">Media Strategy</span>
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Ready to elevate your media buying performance? Reach out to discuss how we can work together to achieve your business goals.
+          <div className="mb-12 md:mb-16">
+            <p className="eyebrow text-media-purple dark:text-media-cyan mb-3">
+              06 · Let&apos;s talk
             </p>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-end">
+              <h2 className="text-display-lg md:col-span-7 text-media-ink dark:text-white">
+                Got a brand to{" "}
+                <span className="gradient-text">scale profitably</span>?
+              </h2>
+              <p className="text-gray-600 dark:text-gray-300 md:col-span-5 text-base md:text-lg leading-relaxed">
+                Tell me about your current spend, your funnel, and where it&apos;s
+                stuck. I reply within 24h with a candid view on whether I can move the needle.
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-            <Card className="border border-gray-200 opacity-0 animate-on-scroll">
+            <Card className="border border-gray-200">
               <CardContent className="p-6 md:p-8">
                 <h3 className="text-xl font-semibold mb-6">Send Me a Message</h3>
                 
@@ -267,7 +271,7 @@ const Contact = () => {
               </CardContent>
             </Card>
             
-            <div className="space-y-6 opacity-0 animate-on-scroll">
+            <div className="space-y-6">
               <Card className="border border-gray-200 overflow-hidden">
                 <CardContent className="p-6 md:p-8">
                   <h3 className="text-xl font-semibold mb-6">Contact Information</h3>
