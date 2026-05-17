@@ -2,49 +2,112 @@ import React from "react";
 
 /**
  * NDA-friendly client showcase — same visual rhythm as LogoStrip
- * (monogram + name + dot, scrolling marquee, pause on hover).
- * Each "logo" is a procedurally-generated monogram circle that visually
- * stands in for a real brand mark.
+ * (mark + name + dot, scrolling marquee, pause on hover).
+ * Each "logo" is a distinct hand-crafted abstract SVG mark — varied
+ * shapes so it reads as a row of real brand logos, not a row of
+ * identical circles.
  */
+
+type ClientMark = (props: { size?: number }) => JSX.Element;
 
 type Client = {
   name: string;
-  initials: string;
   region: string;
+  mark: ClientMark;
 };
+
+// ─── 10 distinct abstract marks ───────────────────────────────────────────
+const SunBurst: ClientMark = ({ size = 28 }) => (
+  <svg viewBox="0 0 32 32" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.4">
+    <circle cx="16" cy="16" r="6" />
+    {[0, 45, 90, 135, 180, 225, 270, 315].map((d) => (
+      <line key={d} x1="16" y1="16" x2={16 + 13 * Math.cos((d * Math.PI) / 180)} y2={16 + 13 * Math.sin((d * Math.PI) / 180)} strokeLinecap="round" />
+    ))}
+  </svg>
+);
+
+const ForkBranch: ClientMark = ({ size = 28 }) => (
+  <svg viewBox="0 0 32 32" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 4v24" />
+    <path d="M10 8v6a6 6 0 006 6" />
+    <path d="M22 8v6a6 6 0 01-6 6" />
+    <circle cx="16" cy="4" r="1.5" fill="currentColor" />
+  </svg>
+);
+
+const HousePeak: ClientMark = ({ size = 28 }) => (
+  <svg viewBox="0 0 32 32" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round">
+    <path d="M4 18l12-12 12 12" />
+    <path d="M8 18v8h16v-8" />
+    <path d="M14 26v-6h4v6" />
+  </svg>
+);
+
+const DhowSail: ClientMark = ({ size = 28 }) => (
+  <svg viewBox="0 0 32 32" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 4v18" />
+    <path d="M16 6c6 4 8 10 8 16H10c0-4 1-9 6-16z" fill="currentColor" fillOpacity=".15" />
+    <path d="M4 26c2 1.5 4 2 6 2s4-.5 6-2 4-2 6-2 4 .5 6 2" />
+  </svg>
+);
+
+const CompassRose: ClientMark = ({ size = 28 }) => (
+  <svg viewBox="0 0 32 32" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round">
+    <circle cx="16" cy="16" r="12" />
+    <path d="M16 4l3 12-3 12-3-12z" fill="currentColor" fillOpacity=".2" />
+    <path d="M4 16l12-3 12 3-12 3z" />
+  </svg>
+);
+
+const OpenBook: ClientMark = ({ size = 28 }) => (
+  <svg viewBox="0 0 32 32" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round">
+    <path d="M4 8c4 0 8 1 12 4 4-3 8-4 12-4v18c-4 0-8 1-12 4-4-3-8-4-12-4z" />
+    <path d="M16 12v18" />
+  </svg>
+);
+
+const Waves: ClientMark = ({ size = 28 }) => (
+  <svg viewBox="0 0 32 32" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+    <path d="M3 11c3 0 3-3 6.5-3S13 11 16 11s3-3 6.5-3 3.5 3 6.5 3" />
+    <path d="M3 18c3 0 3-3 6.5-3S13 18 16 18s3-3 6.5-3 3.5 3 6.5 3" />
+    <path d="M3 25c3 0 3-3 6.5-3S13 25 16 25s3-3 6.5-3 3.5 3 6.5 3" />
+  </svg>
+);
+
+const MountainStack: ClientMark = ({ size = 28 }) => (
+  <svg viewBox="0 0 32 32" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round">
+    <path d="M2 26l9-14 6 9 4-5 9 10z" />
+    <circle cx="22" cy="9" r="2" fill="currentColor" />
+  </svg>
+);
+
+const PetalLeaf: ClientMark = ({ size = 28 }) => (
+  <svg viewBox="0 0 32 32" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round">
+    <path d="M16 4c6 4 10 10 10 16 0 4-3 8-10 8s-10-4-10-8c0-6 4-12 10-16z" />
+    <path d="M16 8v18" />
+    <path d="M16 16c-2-1-4-3-5-5M16 16c2-1 4-3 5-5" strokeLinecap="round" />
+  </svg>
+);
+
+const Cedar: ClientMark = ({ size = 28 }) => (
+  <svg viewBox="0 0 32 32" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 2l-6 8h3l-5 7h3l-5 8h20l-5-8h3l-5-7h3z" fill="currentColor" fillOpacity=".15" />
+    <path d="M16 25v5" />
+  </svg>
+);
 
 const clients: Client[] = [
-  { name: "Lumière Beauty",       initials: "LB", region: "Riyadh"   },
-  { name: "Cairo Eats",           initials: "CE", region: "Cairo"    },
-  { name: "Atelier Maison",       initials: "AM", region: "Doha"     },
-  { name: "Kuwait Co.",           initials: "KC", region: "Kuwait"   },
-  { name: "Orient Capital",       initials: "OC", region: "London"   },
-  { name: "House of Verse",       initials: "HV", region: "Istanbul" },
-  { name: "Northshore DTC",       initials: "ND", region: "NYC"      },
-  { name: "Pacific Goods",        initials: "PG", region: "Shanghai" },
-  { name: "Andalus Skincare",     initials: "AS", region: "Jeddah"   },
-  { name: "Cedar & Stone",        initials: "CS", region: "Dubai"    },
+  { name: "Lumière Beauty",   region: "Riyadh",   mark: SunBurst       },
+  { name: "Cairo Eats",       region: "Cairo",    mark: ForkBranch     },
+  { name: "Atelier Maison",   region: "Doha",     mark: HousePeak      },
+  { name: "Kuwait Co.",       region: "Kuwait",   mark: DhowSail       },
+  { name: "Orient Capital",   region: "London",   mark: CompassRose    },
+  { name: "House of Verse",   region: "Istanbul", mark: OpenBook       },
+  { name: "Northshore DTC",   region: "NYC",      mark: Waves          },
+  { name: "Pacific Goods",    region: "Shanghai", mark: MountainStack  },
+  { name: "Andalus Skincare", region: "Jeddah",   mark: PetalLeaf      },
+  { name: "Cedar & Stone",    region: "Dubai",    mark: Cedar          },
 ];
-
-const Monogram = ({ initials, idx }: { initials: string; idx: number }) => {
-  // Rotate the inner accent for visual variety
-  const rotation = (idx * 37) % 360;
-  return (
-    <span
-      aria-hidden
-      className="relative inline-flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full border border-current"
-    >
-      <span
-        className="absolute inset-0 rounded-full border border-current opacity-30"
-        style={{ transform: `rotate(${rotation}deg) scale(0.78)` }}
-      />
-      <span className="absolute inset-0 rounded-full opacity-20 bg-current scale-[0.2]" />
-      <span className="relative font-serif text-sm md:text-base leading-none">
-        {initials}
-      </span>
-    </span>
-  );
-};
 
 const ClientLogos = () => {
   const items = [...clients, ...clients, ...clients];
@@ -69,26 +132,24 @@ const ClientLogos = () => {
       {/* Marquee — opposite direction to LogoStrip for visual rhythm */}
       <div className="marquee-mask py-6 group">
         <div
-          className="flex w-max gap-12 group-hover:[animation-play-state:paused]"
-          style={{
-            animation: "v2-marquee-reverse 45s linear infinite",
-          }}
+          className="flex w-max gap-14 group-hover:[animation-play-state:paused]"
+          style={{ animation: "v2-marquee-reverse 50s linear infinite" }}
         >
-          {items.map((c, i) => (
-            <div
-              key={`${c.name}-${i}`}
-              className="flex items-center gap-3 text-white/30 hover:text-gold transition-all duration-500 cursor-default"
-            >
-              <Monogram initials={c.initials} idx={i} />
-              <div className="flex flex-col items-start leading-tight">
-                <span className="font-serif text-lg md:text-xl">{c.name}</span>
-                <span className="font-mono uppercase text-[0.5625rem] tracking-[0.22em] opacity-70">
-                  {c.region}
+          {items.map((c, i) => {
+            const Mark = c.mark;
+            return (
+              <div
+                key={`${c.name}-${i}`}
+                className="flex items-center gap-3 text-white/30 hover:text-gold transition-all duration-500 cursor-default"
+              >
+                <Mark size={32} />
+                <span className="font-mono uppercase text-[0.6875rem] tracking-[0.22em] whitespace-nowrap">
+                  {c.name}
                 </span>
+                <span className="text-gold/40">·</span>
               </div>
-              <span className="text-gold/40 ml-2">·</span>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
@@ -102,7 +163,6 @@ const ClientLogos = () => {
         </div>
       </div>
 
-      {/* Reverse marquee keyframe — scoped here so it ships with the component */}
       <style>{`
         @keyframes v2-marquee-reverse {
           0%   { transform: translateX(-50%); }
