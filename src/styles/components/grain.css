@@ -1,0 +1,71 @@
+/* Film grain texture — applied via .grain class on any container */
+.grain {
+  position: relative;
+  isolation: isolate;
+}
+
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.grain > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Hairline marquee for logo strip */
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+}
+
+/* Cinematic underline on hover */
+.gold-underline {
+  background-image: linear-gradient(#D4AF37, #D4AF37);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gold-underline:hover,
+.gold-underline:focus-visible {
+  background-size: 100% 1px;
+}
+
+/* Slow reveal — line by line text */
+.reveal-line {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.reveal-line > span {
+  display: inline-block;
+  transform: translateY(100%);
+  animation: reveal-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes reveal-up {
+  to {
+    transform: translateY(0);
+  }
+}

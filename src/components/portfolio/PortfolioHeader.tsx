@@ -1,41 +1,29 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 
 const PortfolioHeader = () => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.55 }}
-      className="mb-12 md:mb-16"
+      viewport={{ once: true, margin: "-120px" }}
+      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+      className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-20 md:mb-28"
     >
-      <div className="flex items-baseline gap-3 mb-4">
-        <span className="font-display font-bold text-media-purple/50 dark:text-media-cyan/60 text-2xl md:text-3xl tabular">
-          01
-        </span>
-        <span className="eyebrow text-media-purple dark:text-media-cyan">
-          Case Studies
-        </span>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
-        <h2
-          id="portfolio-heading"
-          className="text-display-lg md:col-span-7 text-media-ink dark:text-white"
-        >
-          Real campaigns.{" "}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-media-purple to-media-oceanblue">
-            Receipt-level
-          </span>{" "}
-          results.
-        </h2>
-        <p className="text-gray-600 dark:text-gray-300 md:col-span-5 text-base md:text-lg leading-relaxed">
-          Campaigns I&apos;ve built and scaled across Saudi Arabia, Egypt,
-          Kuwait, Qatar, Turkey, China, the UK and the U.S. — each with the
-          metrics that matter to a CFO, not just the agency dashboard.
+      <div className="md:col-span-3">
+        <p className="eyebrow text-gold mb-4">— 01</p>
+        <p className="font-mono uppercase text-[0.6875rem] tracking-[0.22em] text-white/40">
+          Selected Work / 2018—{new Date().getFullYear()}
         </p>
       </div>
+      <h2
+        id="portfolio-heading"
+        className="md:col-span-9 font-serif text-display-lg text-white leading-[1.02]"
+      >
+        Campaigns I&apos;ve scaled —{" "}
+        <span className="serif-italic text-gold">profitably</span> — across
+        beauty, food, fashion, and finance.
+      </h2>
     </motion.div>
   );
 };

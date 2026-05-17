@@ -1,16 +1,15 @@
 import React, { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, Send, Linkedin, Phone, MapPin, Loader2 } from "lucide-react";
+import { Send, Loader2, ArrowUpRight } from "lucide-react";
 import { trackFormSubmission, trackEvent } from "@/utils/analytics";
 import { supabase } from "@/integrations/supabase/client";
 import { useFormValidation } from "@/hooks/use-form-validation";
 import { useAnalytics } from "@/hooks/use-analytics";
 
-type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
+type FormStatus = "idle" | "submitting" | "success" | "error";
 
 interface FormData {
   name: string;
@@ -20,383 +19,316 @@ interface FormData {
 }
 
 const Contact = () => {
-  const { trackCustomEvent } = useAnalytics({ analyticsId: 'contact-section' });
+  const { trackCustomEvent } = useAnalytics({ analyticsId: "contact-section" });
   const { toast } = useToast();
-  const [formStatus, setFormStatus] = useState<FormStatus>('idle');
-  
+  const [formStatus, setFormStatus] = useState<FormStatus>("idle");
+
   const validationRules = {
-    name: (value: string) => !value.trim() ? "Name is required" : undefined,
-    email: (value: string) => {
-      if (!value.trim()) return "Email is required";
-      if (!/^\S+@\S+\.\S+$/.test(value)) return "Valid email is required";
+    name: (v: string) => (!v.trim() ? "Name is required" : undefined),
+    email: (v: string) => {
+      if (!v.trim()) return "Email is required";
+      if (!/^\S+@\S+\.\S+$/.test(v)) return "Valid email is required";
       return undefined;
     },
-    subject: (value: string) => !value.trim() ? "Subject is required" : undefined,
-    message: (value: string) => {
-      if (!value.trim()) return "Message is required";
-      if (value.trim().length < 10) return "Message must be at least 10 characters";
+    subject: (v: string) =>
+      !v.trim() ? "Subject is required" : undefined,
+    message: (v: string) => {
+      if (!v.trim()) return "Message is required";
+      if (v.trim().length < 10) return "Message must be at least 10 characters";
       return undefined;
-    }
+    },
   };
 
-  const {
-    formData,
-    errors,
-    handleChange,
-    handleBlur,
-    validateForm,
-    resetForm
-  } = useFormValidation<FormData>(
-    {
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    },
-    validationRules
-  );
+  const { formData, errors, handleChange, handleBlur, validateForm, resetForm } =
+    useFormValidation<FormData>(
+      { name: "", email: "", subject: "", message: "" },
+      validationRules
+    );
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!validateForm()) return;
-    
-    setFormStatus('submitting');
-    
-    try {
-      // First save to Supabase database
-      const { error: dbError } = await supabase
-        .from('contact_submissions')
-        .insert([{ ...formData, submission_type: 'contact' }]);
+    setFormStatus("submitting");
 
+    try {
+      const { error: dbError } = await supabase
+        .from("contact_submissions")
+        .insert([{ ...formData, submission_type: "contact" }]);
       if (dbError) throw dbError;
 
-      // Then send email notification via edge function
       try {
-        const { data, error: functionError } = await supabase.functions.invoke(
-          'send-contact-notification',
-          {
-            body: formData,
-          }
-        );
-
-        if (functionError) {
-          console.log('Email notification error:', functionError);
-          // Continue even if email fails - we've stored the message in the database
-        }
-      } catch (emailError) {
-        // Log but don't fail the whole submission just because email failed
-        console.error('Email notification error:', emailError);
+        await supabase.functions.invoke("send-contact-notification", {
+          body: formData,
+        });
+      } catch (emailErr) {
+        console.error("Email notification error:", emailErr);
       }
 
-      trackFormSubmission('contact_form', true);
-      trackCustomEvent('contact', { success: true, method: 'form' });
-      
-      setFormStatus('success');
+      trackFormSubmission("contact_form", true);
+      trackCustomEvent("contact", { success: true, method: "form" });
+      setFormStatus("success");
       toast({
-        title: "Message sent!",
-        description: "Thanks for your message! I'll get back to you soon.",
+        title: "Message received",
+        description: "I'll reply within 24h. Thank you.",
       });
-      
       resetForm();
-      
-      setTimeout(() => setFormStatus('idle'), 3000);
-    } catch (error) {
-      console.error("Form submission error:", error);
-      
-      trackFormSubmission('contact_form', false);
-      trackCustomEvent('contact', { success: false, error: error });
-      
-      setFormStatus('error');
+      setTimeout(() => setFormStatus("idle"), 4000);
+    } catch (err) {
+      console.error("Form submission error:", err);
+      trackFormSubmission("contact_form", false);
+      trackCustomEvent("contact", { success: false });
+      setFormStatus("error");
       toast({
         title: "Something went wrong",
-        description: "Please try again or contact me directly via email.",
-        variant: "destructive"
+        description: "Please email me directly at mhmd167ali@gmail.com.",
+        variant: "destructive",
       });
-      
-      setTimeout(() => setFormStatus('idle'), 3000);
+      setTimeout(() => setFormStatus("idle"), 4000);
     }
   };
 
   return (
-    <section id="contact" className="section-padding">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-12 md:mb-16">
-            <p className="eyebrow text-media-purple dark:text-media-cyan mb-3">
-              06 · Let&apos;s talk
+    <section
+      id="contact"
+      className="relative bg-obsidian text-white border-t border-white/[0.06] grain"
+      aria-labelledby="contact-heading"
+    >
+      {/* Ambient glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 right-1/4 w-[40rem] h-[40rem] bg-gold/[0.05] rounded-full filter blur-[120px]" />
+      </div>
+
+      <div className="container mx-auto px-6 lg:px-10 py-28 md:py-40 relative">
+        {/* Header */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-20 md:mb-28">
+          <div className="md:col-span-3">
+            <p className="eyebrow text-gold mb-4">— 05</p>
+            <p className="font-mono uppercase text-[0.6875rem] tracking-[0.22em] text-white/40">
+              Get in Touch / Direct
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-end">
-              <h2 className="text-display-lg md:col-span-7 text-media-ink dark:text-white">
-                Got a brand to{" "}
-                <span className="gradient-text">scale profitably</span>?
-              </h2>
-              <p className="text-gray-600 dark:text-gray-300 md:col-span-5 text-base md:text-lg leading-relaxed">
-                Tell me about your current spend, your funnel, and where it&apos;s
-                stuck. I reply within 24h with a candid view on whether I can move the needle.
+          </div>
+          <h2
+            id="contact-heading"
+            className="md:col-span-9 font-serif text-display-xl text-white leading-[0.98]"
+          >
+            Got a brand to{" "}
+            <span className="serif-italic text-gold">scale</span>?
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-20">
+          {/* Direct lines */}
+          <div className="md:col-span-5 md:order-2 space-y-12">
+            <div>
+              <p className="eyebrow text-white/40 mb-4">Direct lines</p>
+              <ul className="space-y-5">
+                <li>
+                  <a
+                    href="mailto:mhmd167ali@gmail.com"
+                    onClick={() =>
+                      trackEvent("contact_link_click", { type: "email" })
+                    }
+                    className="group block"
+                  >
+                    <p className="font-mono uppercase text-[0.5625rem] tracking-[0.22em] text-white/40 mb-1">
+                      Email
+                    </p>
+                    <p className="font-serif text-2xl md:text-3xl text-white group-hover:text-gold transition-colors gold-underline inline-flex items-center gap-2">
+                      mhmd167ali@gmail.com
+                      <ArrowUpRight size={16} className="text-gold/60" />
+                    </p>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://wa.me/+201060098267"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() =>
+                      trackEvent("contact_link_click", { type: "whatsapp" })
+                    }
+                    className="group block"
+                  >
+                    <p className="font-mono uppercase text-[0.5625rem] tracking-[0.22em] text-white/40 mb-1">
+                      WhatsApp / Phone
+                    </p>
+                    <p className="font-serif text-2xl md:text-3xl text-white group-hover:text-gold transition-colors gold-underline inline-flex items-center gap-2">
+                      +20 106 009 8267
+                      <ArrowUpRight size={16} className="text-gold/60" />
+                    </p>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.linkedin.com/in/mhmdali02/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() =>
+                      trackEvent("social_link_click", { platform: "linkedin" })
+                    }
+                    className="group block"
+                  >
+                    <p className="font-mono uppercase text-[0.5625rem] tracking-[0.22em] text-white/40 mb-1">
+                      LinkedIn
+                    </p>
+                    <p className="font-serif text-2xl md:text-3xl text-white group-hover:text-gold transition-colors gold-underline inline-flex items-center gap-2">
+                      /in/mhmdali02
+                      <ArrowUpRight size={16} className="text-gold/60" />
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div className="pt-8 border-t border-white/[0.08]">
+              <p className="eyebrow text-white/40 mb-3">Reply time</p>
+              <p className="font-serif text-xl text-white/80 italic leading-relaxed">
+                I reply to every serious inquiry within 24 hours, Sun–Thu.
               </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-            <Card className="border border-gray-200">
-              <CardContent className="p-6 md:p-8">
-                <h3 className="text-xl font-semibold mb-6">Send Me a Message</h3>
-                
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium">
-                      Name
-                    </label>
-                    <Input 
-                      id="name"
-                      name="name" 
-                      value={formData.name}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      placeholder="Your name" 
-                      required
-                      aria-required="true"
-                      aria-describedby={errors.name ? "name-error" : undefined}
-                      aria-invalid={!!errors.name}
-                      disabled={formStatus === 'submitting'}
-                      className={errors.name ? "border-red-400" : ""}
-                    />
-                    {errors.name && (
-                      <p id="name-error" className="text-xs text-red-500" role="alert">
-                        {errors.name}
-                      </p>
-                    )}
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium">
-                      Email
-                    </label>
-                    <Input 
-                      id="email"
-                      name="email" 
-                      value={formData.email}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      type="email" 
-                      placeholder="Your email" 
-                      required
-                      aria-required="true"
-                      aria-describedby={errors.email ? "email-error" : undefined}
-                      aria-invalid={!!errors.email}
-                      disabled={formStatus === 'submitting'}
-                      className={errors.email ? "border-red-400" : ""}
-                    />
-                    {errors.email && (
-                      <p id="email-error" className="text-xs text-red-500" role="alert">
-                        {errors.email}
-                      </p>
-                    )}
-                  </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label htmlFor="subject" className="text-sm font-medium">
-                      Subject
-                    </label>
-                    <Input 
-                      id="subject"
-                      name="subject" 
-                      value={formData.subject}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      placeholder="What's this regarding?" 
-                      required
-                      aria-required="true"
-                      aria-describedby={errors.subject ? "subject-error" : undefined}
-                      aria-invalid={!!errors.subject}
-                      disabled={formStatus === 'submitting'}
-                      className={errors.subject ? "border-red-400" : ""}
-                    />
-                    {errors.subject && (
-                      <p id="subject-error" className="text-xs text-red-500" role="alert">
-                        {errors.subject}
-                      </p>
-                    )}
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium">
-                      Message
-                    </label>
-                    <Textarea 
-                      id="message"
-                      name="message" 
-                      value={formData.message}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      placeholder="Tell me about your project or inquiry" 
-                      className={`min-h-[120px] ${errors.message ? "border-red-400" : ""}`}
-                      required
-                      aria-required="true"
-                      aria-describedby={errors.message ? "message-error" : undefined}
-                      aria-invalid={!!errors.message}
-                      disabled={formStatus === 'submitting'}
-                    />
-                    {errors.message && (
-                      <p id="message-error" className="text-xs text-red-500" role="alert">
-                        {errors.message}
-                      </p>
-                    )}
-                  </div>
-                  <p className="text-xs text-gray-500 mt-2">
-                    Your information will be kept confidential and used only to respond to your inquiry.
-                  </p>
-                  
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-media-purple hover:bg-media-darkpurple text-white"
-                    disabled={formStatus === 'submitting'}
-                    aria-busy={formStatus === 'submitting'}
-                  >
-                    {formStatus === 'submitting' ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="mr-2 h-4 w-4" />
-                        Send Message
-                      </>
-                    )}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-            
-            <div className="space-y-6">
-              <Card className="border border-gray-200 overflow-hidden">
-                <CardContent className="p-6 md:p-8">
-                  <h3 className="text-xl font-semibold mb-6">Contact Information</h3>
-                  
-                  <div className="space-y-5">
-                    <div className="flex items-start gap-4">
-                      <div className="bg-media-purple/10 rounded-full p-3">
-                        <Mail className="h-5 w-5 text-media-purple" aria-hidden="true" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium mb-1">Email</p>
-                        <a 
-                          href="mailto:mhmd167ali@gmail.com" 
-                          className="text-gray-600 hover:text-media-purple transition-colors"
-                          onClick={() => trackEvent('contact_link_click', { type: 'email' })}
-                        >
-                          mhmd167ali@gmail.com
-                        </a>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start gap-4">
-                      <div className="bg-media-purple/10 rounded-full p-3">
-                        <Phone className="h-5 w-5 text-media-purple" aria-hidden="true" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium mb-1">Phone</p>
-                        <a 
-                          href="tel:+201060098267" 
-                          className="text-gray-600 hover:text-media-purple transition-colors"
-                          onClick={() => trackEvent('contact_link_click', { type: 'phone' })}
-                        >
-                          +201060098267
-                        </a>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start gap-4">
-                      <div className="bg-media-purple/10 rounded-full p-3">
-                        <MapPin className="h-5 w-5 text-media-purple" aria-hidden="true" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium mb-1">Location</p>
-                        <p className="text-gray-600">Cairo, Egypt</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-8">
-                    <p className="text-sm font-medium mb-3">Connect with me</p>
-                    <div className="flex space-x-3">
-                      <a 
-                        href="https://www.linkedin.com/in/mhmdali02/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-gray-100 hover:bg-gray-200 transition-colors p-2 rounded-full"
-                        aria-label="LinkedIn Profile"
-                        onClick={() => trackEvent('social_link_click', { platform: 'linkedin' })}
-                      >
-                        <Linkedin className="h-5 w-5 text-gray-600" />
-                      </a>
-                      <a 
-                        href="https://wa.me/+201060098267"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-gray-100 hover:bg-gray-200 transition-colors p-2 rounded-full"
-                        aria-label="WhatsApp Contact"
-                        onClick={() => trackEvent('social_link_click', { platform: 'whatsapp' })}
-                      >
-                        <svg 
-                          xmlns="http://www.w3.org/2000/svg" 
-                          className="h-5 w-5 text-gray-600"
-                          viewBox="0 0 24 24" 
-                          fill="none" 
-                          stroke="currentColor" 
-                          strokeWidth="2" 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round"
-                          aria-hidden="true"
-                        >
-                          <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
-                          <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Z" />
-                          <path d="M14 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Z" />
-                          <path d="M12 14a2 2 0 0 0 2-2v-2a2 2 0 1 0-4 0v2a2 2 0 0 0 2 2Z" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="border border-gray-200 bg-gradient-to-br from-media-purple to-media-darkpurple text-white overflow-hidden">
-                <CardContent className="p-6 md:p-8">
-                  <h3 className="text-xl font-semibold mb-2">Ready to boost your campaign performance?</h3>
-                  <p className="mb-4 opacity-90">I help businesses achieve exceptional results through strategic media buying across multiple platforms and regions.</p>
-                  <div className="space-y-3">
-                    <a 
-                      href="https://wa.me/+201060098267" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      onClick={() => trackEvent('cta_click', { button: 'strategy_call' })}
-                    >
-                      <Button variant="secondary" size="sm" className="w-full">
-                        Book a Strategy Call
-                      </Button>
-                    </a>
-                    <a 
-                      href="/Mohamed_Ali_CV.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => trackEvent('cta_click', { button: 'download_cv' })}
-                    >
-                      <Button variant="outline" size="sm" className="w-full bg-white/10 border-white/30 text-white hover:bg-white/20">
-                        Download Resume
-                      </Button>
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
+          {/* Form */}
+          <form
+            onSubmit={onSubmit}
+            className="md:col-span-7 md:order-1 space-y-8"
+          >
+            <p className="eyebrow text-white/40">— Or send a brief</p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <FormField
+                id="name"
+                label="Your name"
+                error={errors.name}
+                value={formData.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                disabled={formStatus === "submitting"}
+              />
+              <FormField
+                id="email"
+                type="email"
+                label="Email"
+                error={errors.email}
+                value={formData.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                disabled={formStatus === "submitting"}
+              />
             </div>
-          </div>
+
+            <FormField
+              id="subject"
+              label="What are we talking about?"
+              error={errors.subject}
+              value={formData.subject}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              disabled={formStatus === "submitting"}
+            />
+
+            <div>
+              <label
+                htmlFor="message"
+                className="block font-mono uppercase text-[0.625rem] tracking-[0.22em] text-white/50 mb-3"
+              >
+                Tell me about your brand
+              </label>
+              <Textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="Current spend, current funnel, where it's stuck..."
+                className={`bg-transparent border-0 border-b border-white/15 rounded-none text-white placeholder:text-white/30 min-h-[120px] focus-visible:ring-0 focus-visible:border-gold/60 font-serif text-lg ${
+                  errors.message ? "border-red-500/60" : ""
+                }`}
+                required
+                aria-invalid={!!errors.message}
+                disabled={formStatus === "submitting"}
+              />
+              {errors.message && (
+                <p className="text-xs text-red-400 mt-2 font-mono uppercase tracking-[0.18em]" role="alert">
+                  {errors.message}
+                </p>
+              )}
+            </div>
+
+            <Button
+              type="submit"
+              disabled={formStatus === "submitting"}
+              className="group bg-gold text-obsidian hover:bg-champagne rounded-none px-8 py-6 transition-all"
+            >
+              {formStatus === "submitting" ? (
+                <>
+                  <Loader2 className="mr-3 h-4 w-4 animate-spin" />
+                  <span className="font-mono uppercase text-[0.6875rem] tracking-[0.22em]">
+                    Sending
+                  </span>
+                </>
+              ) : (
+                <>
+                  <Send className="mr-3 h-4 w-4" />
+                  <span className="font-mono uppercase text-[0.6875rem] tracking-[0.22em]">
+                    Send the brief
+                  </span>
+                </>
+              )}
+            </Button>
+          </form>
         </div>
       </div>
     </section>
   );
 };
+
+const FormField = ({
+  id,
+  label,
+  type = "text",
+  error,
+  value,
+  onChange,
+  onBlur,
+  disabled,
+}: {
+  id: string;
+  label: string;
+  type?: string;
+  error?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  disabled: boolean;
+}) => (
+  <div>
+    <label
+      htmlFor={id}
+      className="block font-mono uppercase text-[0.625rem] tracking-[0.22em] text-white/50 mb-3"
+    >
+      {label}
+    </label>
+    <Input
+      id={id}
+      name={id}
+      type={type}
+      value={value}
+      onChange={onChange}
+      onBlur={onBlur}
+      disabled={disabled}
+      required
+      aria-invalid={!!error}
+      className={`bg-transparent border-0 border-b border-white/15 rounded-none text-white placeholder:text-white/30 focus-visible:ring-0 focus-visible:border-gold/60 font-serif text-lg px-0 ${
+        error ? "border-red-500/60" : ""
+      }`}
+    />
+    {error && (
+      <p className="text-xs text-red-400 mt-2 font-mono uppercase tracking-[0.18em]" role="alert">
+        {error}
+      </p>
+    )}
+  </div>
+);
 
 export default Contact;

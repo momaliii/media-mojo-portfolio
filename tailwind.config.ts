@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -13,21 +12,22 @@ export default {
 	theme: {
 		container: {
 			center: true,
-			padding: '2rem',
-			screens: {
-				'2xl': '1400px'
-			}
+			padding: { DEFAULT: '1.5rem', lg: '2rem' },
+			screens: { '2xl': '1440px' }
 		},
 		extend: {
 			fontFamily: {
 				sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
-				display: ['"Space Grotesk"', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				serif: ['"Instrument Serif"', 'ui-serif', 'Georgia', 'Cambria', 'serif'],
+				mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
 			},
 			fontSize: {
-				'display-2xl': ['clamp(3rem, 6vw + 1rem, 5.25rem)', { lineHeight: '1.02', letterSpacing: '-0.035em', fontWeight: '700' }],
-				'display-xl': ['clamp(2.5rem, 5vw + 0.5rem, 4.25rem)', { lineHeight: '1.05', letterSpacing: '-0.03em', fontWeight: '700' }],
-				'display-lg': ['clamp(2rem, 4vw + 0.25rem, 3.25rem)', { lineHeight: '1.1', letterSpacing: '-0.025em', fontWeight: '700' }],
-				'eyebrow': ['0.75rem', { lineHeight: '1', letterSpacing: '0.18em', fontWeight: '600' }],
+				'masthead': ['clamp(3.5rem, 9vw + 1rem, 11rem)', { lineHeight: '0.92', letterSpacing: '-0.04em', fontWeight: '400' }],
+				'display-xl': ['clamp(2.75rem, 6vw + 0.5rem, 6.5rem)', { lineHeight: '0.98', letterSpacing: '-0.03em', fontWeight: '400' }],
+				'display-lg': ['clamp(2.25rem, 4.5vw + 0.25rem, 4.5rem)', { lineHeight: '1.02', letterSpacing: '-0.025em', fontWeight: '400' }],
+				'display-md': ['clamp(1.75rem, 3vw + 0.25rem, 2.75rem)', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '400' }],
+				'eyebrow': ['0.6875rem', { lineHeight: '1', letterSpacing: '0.22em', fontWeight: '500' }],
+				'eyebrow-lg': ['0.8125rem', { lineHeight: '1', letterSpacing: '0.2em', fontWeight: '500' }],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -73,20 +73,52 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Performance-marketing palette: deep ink + confident indigo + electric cyan signal
+				// Dark luxury palette
+				obsidian: {
+					DEFAULT: '#0A0A0A',
+					50: '#FAFAF9',
+					100: '#F5F5F4',
+					200: '#E7E5E4',
+					300: '#D6D3D1',
+					400: '#A8A29E',
+					500: '#78716C',
+					600: '#57534E',
+					700: '#292524',
+					800: '#1C1917',
+					900: '#0F0F0F',
+					950: '#0A0A0A',
+				},
+				gold: {
+					DEFAULT: '#D4AF37',
+					50: '#FBF6E2',
+					100: '#F7EDC0',
+					200: '#EFDC83',
+					300: '#E7CB46',
+					400: '#D4AF37',
+					500: '#B8941F',
+					600: '#8F7218',
+					700: '#665011',
+					800: '#3D300A',
+					900: '#141003',
+				},
+				champagne: {
+					DEFAULT: '#F5E6C8',
+					soft: '#E8D9B5',
+				},
+				// Legacy media.* tokens — remapped to luxury palette for backward compat
 				media: {
-					ink: '#0B1120',
-					navy: '#0F172A',
-					slate: '#1E293B',
-					purple: '#4F46E5',
-					darkpurple: '#3730A3',
-					vibrantpurple: '#6366F1',
-					blue: '#DBEAFE',
-					oceanblue: '#06B6D4',
-					cyan: '#22D3EE',
-					orange: '#F97316',
-					peach: '#FBBF24',
-					pink: '#EC4899',
+					ink: '#0A0A0A',
+					navy: '#18181B',
+					slate: '#27272A',
+					purple: '#D4AF37',
+					darkpurple: '#B8941F',
+					vibrantpurple: '#E7CB46',
+					blue: '#F5E6C8',
+					oceanblue: '#D4AF37',
+					cyan: '#F5E6C8',
+					orange: '#D4AF37',
+					peach: '#F5E6C8',
+					pink: '#D4AF37',
 				},
 			},
 			borderRadius: {
@@ -104,7 +136,7 @@ export default {
 					to: { height: '0' }
 				},
 				'fade-in-up': {
-					'0%': { opacity: '0', transform: 'translateY(20px)' },
+					'0%': { opacity: '0', transform: 'translateY(24px)' },
 					'100%': { opacity: '1', transform: 'translateY(0)' }
 				},
 				'fade-in': {
@@ -113,23 +145,27 @@ export default {
 				},
 				'pulse-slow': {
 					'0%, 100%': { opacity: '1' },
-					'50%': { opacity: '0.8' }
+					'50%': { opacity: '0.7' }
 				},
 				'slide-in-right': {
 					'0%': { transform: 'translateX(100%)', opacity: '0' },
 					'100%': { transform: 'translateX(0)', opacity: '1' }
 				},
-				'bounce-gentle': {
-					'0%, 100%': { transform: 'translateY(0)' },
-					'50%': { transform: 'translateY(-5px)' }
-				},
 				'float': {
 					'0%, 100%': { transform: 'translateY(0)' },
-					'50%': { transform: 'translateY(-10px)' }
+					'50%': { transform: 'translateY(-8px)' }
 				},
 				'marquee': {
 					'0%': { transform: 'translateX(0)' },
 					'100%': { transform: 'translateX(-50%)' }
+				},
+				'shimmer-gold': {
+					'0%, 100%': { backgroundPosition: '0% 50%' },
+					'50%': { backgroundPosition: '100% 50%' }
+				},
+				'bounce-gentle': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-5px)' }
 				},
 				'flip-in': {
 					'0%': { transform: 'rotateY(90deg)', opacity: '0' },
@@ -143,20 +179,21 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
-				'fade-in': 'fade-in 0.6s ease-out forwards',
-				'pulse-slow': 'pulse-slow 3s infinite ease-in-out',
-				'slide-in-right': 'slide-in-right 0.6s ease-out forwards',
+				'fade-in-up': 'fade-in-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+				'fade-in': 'fade-in 1s ease-out forwards',
+				'pulse-slow': 'pulse-slow 4s infinite ease-in-out',
+				'slide-in-right': 'slide-in-right 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+				'float': 'float 8s infinite ease-in-out',
+				'marquee': 'marquee 40s linear infinite',
+				'shimmer-gold': 'shimmer-gold 4s ease-in-out infinite',
 				'bounce-gentle': 'bounce-gentle 4s infinite ease-in-out',
-				'float': 'float 6s infinite ease-in-out',
-				'marquee': 'marquee 30s linear infinite',
-				'flip-in': 'flip-in 0.5s ease-out forwards',
-				'flip-out': 'flip-out 0.5s ease-out forwards'
+				'flip-in': 'flip-in 0.6s ease-out forwards',
+				'flip-out': 'flip-out 0.6s ease-out forwards'
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'hero-pattern': 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)',
-				'dark-hero-pattern': 'linear-gradient(135deg, #0B1120 0%, #0F172A 100%)',
+				'gold-shimmer': 'linear-gradient(90deg, #B8941F 0%, #E7CB46 50%, #B8941F 100%)',
+				'hero-pattern': 'radial-gradient(ellipse at 30% 20%, rgba(212,175,55,0.08), transparent 60%)',
 			}
 		}
 	},

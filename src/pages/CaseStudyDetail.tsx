@@ -1,530 +1,384 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Calendar, Globe, Target, TrendingUp, Users, Award, Zap, BarChart3, Share2, ChevronLeft, ChevronRight, Clock } from "lucide-react";
-import { useCaseStudyBySlug, usePublishedCaseStudies } from "@/hooks/use-case-studies";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import {
+  ArrowUpRight,
+  ChevronRight,
+  Share2,
+  ArrowLeft,
+  Loader2,
+} from "lucide-react";
+import {
+  useCaseStudyBySlug,
+  usePublishedCaseStudies,
+} from "@/hooks/use-case-studies";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import LazyImage from "@/components/ui/lazy-image";
 import MetaTags from "@/components/MetaTags";
-import { Loader2 } from "lucide-react";
+
+const titleToSlug = (title: string) =>
+  title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+const getCategoryName = (c: string): string => {
+  const map: Record<string, string> = {
+    "e-commerce": "E-commerce",
+    "f&b": "F&B",
+    ngo: "NGO",
+    branding: "Events & Branding",
+    b2b: "B2B",
+    local: "Local Business",
+    apps: "Mobile App",
+    travel: "Travel",
+  };
+  return map[c] ?? c;
+};
 
 const CaseStudyDetail = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
   const { data: caseStudy, isLoading } = useCaseStudyBySlug(slug);
   const { data: allCaseStudies = [] } = usePublishedCaseStudies();
-  
-  // Convert title to slug format for matching
-  const titleToSlug = (title: string) => 
-    title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
-        <Loader2 className="h-8 w-8 animate-spin text-media-purple" />
+      <div className="min-h-screen flex items-center justify-center bg-obsidian text-white">
+        <Loader2 className="h-6 w-6 animate-spin text-gold" />
       </div>
     );
   }
 
   if (!caseStudy) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4 text-gray-900">Case Study Not Found</h1>
-          <p className="text-gray-600 mb-6">The case study you're looking for doesn't exist or has been moved.</p>
-          <Button onClick={() => navigate('/')} className="bg-media-purple hover:bg-media-purple/90">
-            Back to Home
-          </Button>
+      <div className="min-h-screen flex items-center justify-center bg-obsidian text-white">
+        <div className="text-center max-w-md">
+          <p className="eyebrow text-gold mb-4">404 / Not Found</p>
+          <h1 className="font-serif text-display-md text-white mb-6">
+            That case study has been{" "}
+            <span className="serif-italic text-gold">withdrawn</span>.
+          </h1>
+          <button
+            onClick={() => navigate("/")}
+            className="font-mono uppercase text-[0.6875rem] tracking-[0.22em] text-gold gold-underline"
+          >
+            Back to home →
+          </button>
         </div>
       </div>
     );
   }
 
-  // Get related case studies (same category, excluding current)
-  const relatedCaseStudies = allCaseStudies.filter(study => 
-    study.category === caseStudy.category && (study.slug || titleToSlug(study.title)) !== slug
-  ).slice(0, 2);
-
-  // Share functionality
-  const shareUrl = window.location.href;
-  const shareText = `Check out this case study: ${caseStudy.title}`;
+  const related = allCaseStudies
+    .filter(
+      (s) =>
+        s.category === caseStudy.category &&
+        (s.slug || titleToSlug(s.title)) !== slug
+    )
+    .slice(0, 2);
 
   const handleShare = async () => {
+    const url = window.location.href;
     if (navigator.share) {
       try {
         await navigator.share({
           title: caseStudy.title,
-          text: shareText,
-          url: shareUrl,
+          text: `Case study — ${caseStudy.title}`,
+          url,
         });
-      } catch (err) {
-        console.log('Error sharing:', err);
+      } catch {
+        /* user cancelled */
       }
     } else {
-      // Fallback to copying to clipboard
-      navigator.clipboard.writeText(shareUrl);
-    }
-  };
-
-  const getCategoryName = (category: string): string => {
-    switch (category) {
-      case "e-commerce": return "E-commerce";
-      case "f&b": return "F&B";
-      case "ngo": return "NGO";
-      case "branding": return "Events & Branding";
-      case "b2b": return "B2B";
-      case "local": return "Local Business";
-      case "apps": return "Mobile App";
-      case "travel": return "Travel";
-      default: return category;
-    }
-  };
-
-  const getGradientClass = (category: string): string => {
-    switch (category) {
-      case "e-commerce": return "from-media-purple/90 to-media-pink/90";
-      case "f&b": return "from-media-orange/90 to-media-pink/90";
-      case "ngo": return "from-media-blue/90 to-media-oceanblue/90";
-      case "branding": return "from-emerald-500/90 to-media-oceanblue/90";
-      case "b2b": return "from-media-blue/90 to-media-oceanblue/90";
-      case "local": return "from-indigo-500/90 to-media-vibrantpurple/90";
-      case "apps": return "from-indigo-500/90 to-blue-500/90";
-      case "travel": return "from-sky-500/90 to-media-blue/90";
-      default: return "from-gray-500/90 to-gray-700/90";
+      navigator.clipboard.writeText(url);
     }
   };
 
   return (
     <>
-      <MetaTags 
-        title={`${caseStudy.title} - Case Study | Mohamed Ali`}
+      <MetaTags
+        title={`${caseStudy.title} — Case Study`}
         description={caseStudy.description}
         url={`/case-study/${slug}`}
       />
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <div className="min-h-screen bg-obsidian text-white selection:bg-gold/30">
         <Navigation />
-        
-        <div className="pt-20 pb-16">
-          <div className="container mx-auto px-4 max-w-4xl">
-            {/* Breadcrumb & Actions */}
+
+        {/* Hero */}
+        <section className="relative pt-32 md:pt-40 pb-16 md:pb-24 border-b border-white/[0.06] grain">
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-0 right-1/4 w-[36rem] h-[36rem] bg-gold/[0.05] rounded-full filter blur-[120px] -translate-y-1/2" />
+          </div>
+          <div className="container mx-auto px-6 lg:px-10 relative">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="mb-6 flex items-center justify-between"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              className="flex items-center gap-2 font-mono uppercase text-[0.625rem] tracking-[0.22em] text-white/40 mb-12 md:mb-16"
             >
-              <div className="flex items-center gap-2 text-sm text-gray-500">
-                <button onClick={() => navigate('/')} className="hover:text-gray-700">Home</button>
-                <span>/</span>
-                <button onClick={() => navigate('/#portfolio')} className="hover:text-gray-700">Portfolio</button>
-                <span>/</span>
-                <span className="text-gray-900">{caseStudy.title}</span>
-              </div>
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={handleShare}
-                className="text-gray-600 hover:text-gray-900"
-              >
-                <Share2 className="w-4 h-4 mr-2" />
-                Share
-              </Button>
+              <Link to="/" className="hover:text-gold gold-underline transition-colors">
+                Home
+              </Link>
+              <ChevronRight size={12} />
+              <Link to="/case-studies" className="hover:text-gold gold-underline transition-colors">
+                Work
+              </Link>
+              <ChevronRight size={12} />
+              <span className="text-gold">{caseStudy.title}</span>
             </motion.div>
 
-            {/* Back Button */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="mb-6"
-            >
-              <Button 
-                variant="ghost" 
-                onClick={() => navigate('/')}
-                className="text-gray-600 hover:text-gray-900"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Portfolio
-              </Button>
-            </motion.div>
-
-            {/* Hero Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-12"
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="grid grid-cols-1 md:grid-cols-12 gap-10"
             >
-              <div className="flex items-center gap-3 mb-4">
-                <Badge className="bg-white/90 text-gray-800">
+              <div className="md:col-span-3">
+                <p className="eyebrow text-gold mb-4">Case study</p>
+                <p className="font-mono uppercase text-[0.6875rem] tracking-[0.22em] text-white/40">
                   {getCategoryName(caseStudy.category)}
-                </Badge>
-                {caseStudy.industry && (
-                  <Badge variant="outline">{caseStudy.industry}</Badge>
-                )}
+                  {caseStudy.industry && ` / ${caseStudy.industry}`}
+                </p>
               </div>
-              
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              <h1 className="md:col-span-9 font-serif text-display-xl text-white leading-[0.98]">
                 {caseStudy.title}
               </h1>
-              
-              <p className="text-xl text-gray-600 mb-6 leading-relaxed">
-                {caseStudy.description}
-              </p>
-
-              <div className="flex items-center gap-4 text-sm text-gray-500">
-                <div className="flex items-center gap-1">
-                  <Globe className="w-4 h-4" />
-                  <span>Client: {caseStudy.client}</span>
-                </div>
-                {caseStudy.budgetRange && (
-                  <div className="flex items-center gap-1">
-                    <Target className="w-4 h-4" />
-                    <span>Budget: {caseStudy.budgetRange}</span>
-                  </div>
-                )}
-              </div>
             </motion.div>
 
-            {/* Key Metrics */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="mb-12"
+              transition={{ duration: 0.9, delay: 0.2 }}
+              className="md:ml-[25%] mt-10 md:mt-14 max-w-3xl font-serif text-2xl md:text-3xl text-white/75 leading-[1.3]"
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                <BarChart3 className="w-6 h-6 text-media-purple" />
-                Key Results & Performance
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {caseStudy.metrics.map((metric, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 + index * 0.1 }}
-                  >
-                    <Card className="text-center p-6 bg-white border-none shadow-lg hover:shadow-xl transition-shadow">
-                      <CardContent className="p-0">
-                        <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br ${getGradientClass(caseStudy.category)} mb-4`}>
-                          <TrendingUp className="w-8 h-8 text-white" />
-                        </div>
-                        <div className="text-3xl font-bold text-gray-900 mb-2">
-                          {metric.value}
-                        </div>
-                        <div className="text-gray-600 font-medium">
-                          {metric.label}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+              {caseStudy.description}
+            </motion.p>
 
-            {/* Project Overview */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15 }}
-              className="mb-12"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-12 flex items-center gap-8"
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                <Award className="w-6 h-6 text-media-purple" />
-                Project Overview
-              </h2>
-              <Card className="p-8 bg-white border-none shadow-lg">
-                <CardContent className="p-0">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                        <Users className="w-5 h-5 text-media-purple" />
-                        Client Information
-                      </h3>
-                      <div className="space-y-3">
-                        <div>
-                          <span className="font-medium text-gray-600">Client:</span>
-                          <span className="ml-2 text-gray-900">{caseStudy.client}</span>
-                        </div>
-                        {caseStudy.industry && (
-                          <div>
-                            <span className="font-medium text-gray-600">Industry:</span>
-                            <span className="ml-2 text-gray-900">{caseStudy.industry}</span>
-                          </div>
-                        )}
-                        <div>
-                          <span className="font-medium text-gray-600">Category:</span>
-                          <span className="ml-2 text-gray-900">{getCategoryName(caseStudy.category)}</span>
-                        </div>
-                        {caseStudy.budgetRange && (
-                          <div>
-                            <span className="font-medium text-gray-600">Budget Range:</span>
-                            <Badge variant="outline" className="ml-2">
-                              {caseStudy.budgetRange.charAt(0).toUpperCase() + caseStudy.budgetRange.slice(1)}
-                            </Badge>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                        <Zap className="w-5 h-5 text-media-purple" />
-                        Campaign Details
-                      </h3>
-                      <div className="space-y-3">
-                        <div>
-                          <span className="font-medium text-gray-600">Challenge:</span>
-                          <p className="text-gray-900 mt-1 leading-relaxed">{caseStudy.description}</p>
-                        </div>
-                        {caseStudy.platforms && caseStudy.platforms.length > 0 && (
-                          <div>
-                            <span className="font-medium text-gray-600 block mb-2">Platforms Used:</span>
-                            <div className="flex flex-wrap gap-2">
-                              {caseStudy.platforms.map((platform, index) => (
-                                <Badge key={index} variant="secondary" className="text-xs">
-                                  {platform.charAt(0).toUpperCase() + platform.slice(1)}
-                                </Badge>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Screenshots Gallery */}
-            {caseStudy.screenshot && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="mb-12"
+              <button
+                onClick={() => navigate("/case-studies")}
+                className="group inline-flex items-center gap-2 text-white/60 hover:text-gold transition-colors gold-underline font-mono uppercase text-[0.6875rem] tracking-[0.22em]"
               >
-                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                  <Globe className="w-6 h-6 text-media-purple" />
-                  Campaign Gallery
-                </h2>
-                
-                {/* Main Screenshot */}
-                <div className="rounded-2xl overflow-hidden shadow-2xl mb-8">
-                  <LazyImage
-                    src={caseStudy.screenshot}
-                    alt={`${caseStudy.title} main campaign screenshot`}
-                    className="w-full h-auto"
-                  />
-                </div>
-                
-                {/* Additional Screenshots */}
-                {caseStudy.additionalScreenshots && caseStudy.additionalScreenshots.length > 0 && (
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Additional Campaign Materials</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {caseStudy.additionalScreenshots.map((screenshot, index) => (
-                        <motion.div 
-                          key={index} 
-                          className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.3 + index * 0.1 }}
-                        >
-                          <LazyImage
-                            src={screenshot}
-                            alt={`${caseStudy.title} additional material ${index + 1}`}
-                            className="w-full h-48 object-cover hover:scale-105 transition-transform duration-300"
-                          />
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </motion.div>
-            )}
-
-            {/* Success Factors */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25 }}
-              className="mb-12"
-            >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                <Target className="w-6 h-6 text-media-purple" />
-                Success Factors
-              </h2>
-              <Card className="p-8 bg-gradient-to-br from-gray-50 to-blue-50 border-none">
-                <CardContent className="p-0">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">What Made This Campaign Successful</h3>
-                      <ul className="space-y-3 text-gray-700">
-                        {caseStudy.strategy ? (
-                          <>
-                            <li className="flex items-start gap-3">
-                              <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
-                              <span><strong>Strategy:</strong> {caseStudy.strategy}</span>
-                            </li>
-                            {caseStudy.challenge && (
-                              <li className="flex items-start gap-3">
-                                <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
-                                <span><strong>Challenge:</strong> {caseStudy.challenge}</span>
-                              </li>
-                            )}
-                            {caseStudy.results && (
-                              <li className="flex items-start gap-3">
-                                <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
-                                <span><strong>Results:</strong> {caseStudy.results}</span>
-                              </li>
-                            )}
-                            {caseStudy.tools && caseStudy.tools.length > 0 && (
-                              <li className="flex items-start gap-3">
-                                <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
-                                <span><strong>Tools:</strong> {caseStudy.tools.join(", ")}</span>
-                              </li>
-                            )}
-                          </>
-                        ) : (
-                          <>
-                            <li className="flex items-start gap-3">
-                              <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
-                              <span>Strategic audience targeting and segmentation</span>
-                            </li>
-                            <li className="flex items-start gap-3">
-                              <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
-                              <span>Data-driven optimization and continuous testing</span>
-                            </li>
-                            <li className="flex items-start gap-3">
-                              <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
-                              <span>Creative messaging aligned with brand values</span>
-                            </li>
-                            <li className="flex items-start gap-3">
-                              <div className="w-2 h-2 rounded-full bg-media-purple mt-2 flex-shrink-0"></div>
-                              <span>Multi-platform integrated approach</span>
-                            </li>
-                          </>
-                        )}
-                      </ul>
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">Key Achievements</h3>
-                      <div className="space-y-4">
-                        {caseStudy.metrics.map((metric, index) => (
-                          <div key={index} className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm">
-                            <span className="text-gray-600">{metric.label}</span>
-                            <span className="font-bold text-media-purple">{metric.value}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Related Case Studies */}
-            {relatedCaseStudies.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="mb-12"
+                <ArrowLeft size={14} />
+                Back to work
+              </button>
+              <button
+                onClick={handleShare}
+                className="group inline-flex items-center gap-2 text-white/60 hover:text-gold transition-colors gold-underline font-mono uppercase text-[0.6875rem] tracking-[0.22em]"
               >
-                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                  <Target className="w-6 h-6 text-media-purple" />
-                  Related Case Studies
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {relatedCaseStudies.map((study, index) => (
-                    <motion.div
-                      key={study.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4 + index * 0.1 }}
-                    >
-                      <Card 
-                        className="group cursor-pointer hover:shadow-xl transition-all duration-300 border-none bg-white"
-                        onClick={() => navigate(`/case-study/${study.slug || titleToSlug(study.title)}`)}
-                      >
-                        <CardContent className="p-6">
-                          <div className="flex items-center gap-2 mb-3">
-                            <Badge className="bg-gray-100 text-gray-800 text-xs">
-                              {getCategoryName(study.category)}
-                            </Badge>
-                            {study.industry && (
-                              <Badge variant="outline" className="text-xs">{study.industry}</Badge>
-                            )}
-                          </div>
-                          <h3 className="font-bold text-lg text-gray-900 mb-2 group-hover:text-media-purple transition-colors">
-                            {study.title}
-                          </h3>
-                          <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                            {study.description}
-                          </p>
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs text-gray-500">{study.client}</span>
-                            <ChevronRight className="w-4 h-4 text-media-purple opacity-0 group-hover:opacity-100 transition-opacity" />
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-
-            {/* CTA Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="text-center"
-            >
-              <Card className={`p-8 bg-gradient-to-br ${getGradientClass(caseStudy.category)} border-none`}>
-                <CardContent className="p-0">
-                  <h3 className="text-2xl font-bold text-white mb-4">
-                    Ready to achieve similar results?
-                  </h3>
-                  <p className="text-white/90 mb-6">
-                    Let's discuss how we can help your business grow with strategic digital marketing.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button 
-                      size="lg" 
-                      className="bg-white text-gray-900 hover:bg-gray-100"
-                      onClick={() => {
-                        navigate('/');
-                        setTimeout(() => {
-                          document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                        }, 100);
-                      }}
-                    >
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      Get Started Today
-                    </Button>
-                    <Button 
-                      size="lg" 
-                      variant="outline"
-                      className="bg-transparent border-white text-white hover:bg-white hover:text-gray-900"
-                      onClick={() => navigate('/#portfolio')}
-                    >
-                      View More Case Studies
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+                <Share2 size={14} />
+                Share
+              </button>
             </motion.div>
           </div>
-        </div>
+        </section>
+
+        {/* Key metrics */}
+        <section className="border-b border-white/[0.06] py-16 md:py-24">
+          <div className="container mx-auto px-6 lg:px-10">
+            <p className="eyebrow text-gold mb-10">— Results</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
+              {caseStudy.metrics.map((m, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{
+                    duration: 0.8,
+                    delay: i * 0.08,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="border-t border-white/[0.08] pt-8"
+                >
+                  <div className="font-serif text-7xl md:text-8xl text-gold tabular leading-[0.9]">
+                    {m.value}
+                  </div>
+                  <div className="mt-4 font-mono uppercase text-[0.6875rem] tracking-[0.22em] text-white/50">
+                    {m.label}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Brief / Strategy / Result */}
+        <section className="py-20 md:py-28 border-b border-white/[0.06]">
+          <div className="container mx-auto px-6 lg:px-10">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-20">
+              <div className="md:col-span-4 space-y-12">
+                <DetailBlock
+                  label="Client"
+                  value={caseStudy.client}
+                />
+                {caseStudy.budgetRange && (
+                  <DetailBlock
+                    label="Budget"
+                    value={
+                      caseStudy.budgetRange.charAt(0).toUpperCase() +
+                      caseStudy.budgetRange.slice(1)
+                    }
+                  />
+                )}
+                {caseStudy.platforms && caseStudy.platforms.length > 0 && (
+                  <DetailBlock
+                    label="Platforms"
+                    value={caseStudy.platforms
+                      .map((p) => p.charAt(0).toUpperCase() + p.slice(1))
+                      .join(" · ")}
+                  />
+                )}
+                {caseStudy.tools && caseStudy.tools.length > 0 && (
+                  <DetailBlock
+                    label="Stack"
+                    value={caseStudy.tools.join(" · ")}
+                  />
+                )}
+              </div>
+
+              <div className="md:col-span-8 space-y-16">
+                {caseStudy.challenge && (
+                  <NarrativeBlock
+                    eyebrow="— The brief"
+                    body={caseStudy.challenge}
+                  />
+                )}
+                {caseStudy.strategy && (
+                  <NarrativeBlock
+                    eyebrow="— Strategy"
+                    body={caseStudy.strategy}
+                  />
+                )}
+                {caseStudy.results && (
+                  <NarrativeBlock eyebrow="— Outcome" body={caseStudy.results} />
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Gallery */}
+        {caseStudy.screenshot && (
+          <section className="py-20 md:py-28 border-b border-white/[0.06]">
+            <div className="container mx-auto px-6 lg:px-10">
+              <p className="eyebrow text-gold mb-10">— Gallery</p>
+              <div className="overflow-hidden border border-white/[0.06]">
+                <LazyImage
+                  src={caseStudy.screenshot}
+                  alt={`${caseStudy.title} — primary asset`}
+                  className="w-full h-auto"
+                />
+              </div>
+              {caseStudy.additionalScreenshots &&
+                caseStudy.additionalScreenshots.length > 0 && (
+                  <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {caseStudy.additionalScreenshots.map((s, i) => (
+                      <div
+                        key={i}
+                        className="overflow-hidden border border-white/[0.06] aspect-[4/3] bg-obsidian-900"
+                      >
+                        <LazyImage
+                          src={s}
+                          alt={`${caseStudy.title} — supporting asset ${i + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+            </div>
+          </section>
+        )}
+
+        {/* Related */}
+        {related.length > 0 && (
+          <section className="py-20 md:py-28 border-b border-white/[0.06]">
+            <div className="container mx-auto px-6 lg:px-10">
+              <p className="eyebrow text-gold mb-10">— Related work</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {related.map((s) => (
+                  <Link
+                    key={s.title}
+                    to={`/case-study/${s.slug || titleToSlug(s.title)}`}
+                    className="group block border-t border-white/[0.08] hover:border-gold/40 transition-colors duration-700 pt-8"
+                  >
+                    <p className="font-mono uppercase text-[0.625rem] tracking-[0.22em] text-white/40 mb-3">
+                      {getCategoryName(s.category)}
+                    </p>
+                    <h3 className="font-serif text-2xl md:text-3xl text-white group-hover:text-gold transition-colors duration-500">
+                      {s.title}
+                    </h3>
+                    <p className="text-white/50 text-sm mt-3 line-clamp-2">
+                      {s.description}
+                    </p>
+                    <span className="mt-6 inline-flex items-center gap-2 text-white/60 group-hover:text-gold transition-colors font-mono uppercase text-[0.6875rem] tracking-[0.22em]">
+                      Read <ArrowUpRight size={14} />
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* CTA */}
+        <section className="py-28 md:py-40 grain">
+          <div className="container mx-auto px-6 lg:px-10 text-center max-w-4xl">
+            <p className="eyebrow text-gold mb-8">— Your turn</p>
+            <h2 className="font-serif text-display-lg text-white leading-[1.02]">
+              Got a brand to{" "}
+              <span className="serif-italic text-gold">scale profitably</span>?
+            </h2>
+            <button
+              onClick={() => navigate("/#contact")}
+              className="mt-12 group inline-flex items-center gap-3 bg-gold text-obsidian px-8 py-4 hover:bg-champagne transition-all duration-500"
+            >
+              <span className="font-mono uppercase text-[0.6875rem] tracking-[0.22em] font-medium">
+                Start a conversation
+              </span>
+              <ArrowUpRight
+                size={16}
+                className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+            </button>
+          </div>
+        </section>
 
         <Footer />
       </div>
     </>
   );
 };
+
+const DetailBlock = ({ label, value }: { label: string; value: string }) => (
+  <div>
+    <p className="font-mono uppercase text-[0.5625rem] tracking-[0.22em] text-white/40 mb-2">
+      {label}
+    </p>
+    <p className="font-serif text-xl md:text-2xl text-white leading-tight">
+      {value}
+    </p>
+  </div>
+);
+
+const NarrativeBlock = ({
+  eyebrow,
+  body,
+}: {
+  eyebrow: string;
+  body: string;
+}) => (
+  <div>
+    <p className="eyebrow text-gold mb-4">{eyebrow}</p>
+    <p className="font-serif text-xl md:text-2xl text-white/85 leading-[1.4]">
+      {body}
+    </p>
+  </div>
+);
 
 export default CaseStudyDetail;
