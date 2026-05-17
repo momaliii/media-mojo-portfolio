@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -19,6 +18,20 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+				serif: ['"Instrument Serif"', 'ui-serif', 'Georgia', 'Cambria', 'serif'],
+				mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+				display: ['"Instrument Serif"', 'ui-serif', 'Georgia', 'Cambria', 'serif'],
+			},
+			fontSize: {
+				'masthead': ['clamp(3.5rem, 9vw + 1rem, 11rem)', { lineHeight: '0.92', letterSpacing: '-0.04em', fontWeight: '400' }],
+				'display-xl': ['clamp(2.75rem, 6vw + 0.5rem, 6.5rem)', { lineHeight: '0.98', letterSpacing: '-0.03em', fontWeight: '400' }],
+				'display-lg': ['clamp(2.25rem, 4.5vw + 0.25rem, 4.5rem)', { lineHeight: '1.02', letterSpacing: '-0.025em', fontWeight: '400' }],
+				'display-md': ['clamp(1.75rem, 3vw + 0.25rem, 2.75rem)', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '400' }],
+				'eyebrow': ['0.6875rem', { lineHeight: '1', letterSpacing: '0.22em', fontWeight: '500' }],
+				'eyebrow-lg': ['0.8125rem', { lineHeight: '1', letterSpacing: '0.2em', fontWeight: '500' }],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -63,7 +76,7 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Custom colors for media buyer portfolio (v1 — Lovable)
+				// v1 — Lovable pastel palette (used by / and /case-studies)
 				media: {
 					purple: '#9b87f5',
 					darkpurple: '#7E69AB',
@@ -74,7 +87,7 @@ export default {
 					oceanblue: '#0EA5E9',
 					pink: '#D946EF',
 				},
-				// v2 — Dark luxury palette
+				// v2 — Dark luxury palette (used by /v2 and nested routes)
 				obsidian: {
 					DEFAULT: '#0A0A0A',
 					50: '#FAFAF9',
@@ -107,20 +120,6 @@ export default {
 					soft: '#E8D9B5',
 				},
 			},
-			fontFamily: {
-				sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
-				serif: ['"Instrument Serif"', 'ui-serif', 'Georgia', 'Cambria', 'serif'],
-				mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
-				display: ['"Instrument Serif"', 'ui-serif', 'Georgia', 'Cambria', 'serif'],
-			},
-			fontSize: {
-				'masthead': ['clamp(3.5rem, 9vw + 1rem, 11rem)', { lineHeight: '0.92', letterSpacing: '-0.04em', fontWeight: '400' }],
-				'display-xl': ['clamp(2.75rem, 6vw + 0.5rem, 6.5rem)', { lineHeight: '0.98', letterSpacing: '-0.03em', fontWeight: '400' }],
-				'display-lg': ['clamp(2.25rem, 4.5vw + 0.25rem, 4.5rem)', { lineHeight: '1.02', letterSpacing: '-0.025em', fontWeight: '400' }],
-				'display-md': ['clamp(1.75rem, 3vw + 0.25rem, 2.75rem)', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '400' }],
-				'eyebrow': ['0.6875rem', { lineHeight: '1', letterSpacing: '0.22em', fontWeight: '500' }],
-				'eyebrow-lg': ['0.8125rem', { lineHeight: '1', letterSpacing: '0.2em', fontWeight: '500' }],
-			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
@@ -128,72 +127,36 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
 				},
 				'fade-in-up': {
-					'0%': {
-						opacity: '0',
-						transform: 'translateY(20px)'
-					},
-					'100%': {
-						opacity: '1',
-						transform: 'translateY(0)'
-					}
+					'0%': { opacity: '0', transform: 'translateY(20px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' }
 				},
 				'fade-in': {
-					'0%': {
-						opacity: '0'
-					},
-					'100%': {
-						opacity: '1'
-					}
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' }
 				},
 				'pulse-slow': {
-					'0%, 100%': {
-						opacity: '1'
-					},
-					'50%': {
-						opacity: '0.8'
-					}
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.8' }
 				},
 				'slide-in-right': {
-					'0%': {
-						transform: 'translateX(100%)',
-						opacity: '0'
-					},
-					'100%': {
-						transform: 'translateX(0)',
-						opacity: '1'
-					}
+					'0%': { transform: 'translateX(100%)', opacity: '0' },
+					'100%': { transform: 'translateX(0)', opacity: '1' }
 				},
 				'bounce-gentle': {
-					'0%, 100%': {
-						transform: 'translateY(0)'
-					},
-					'50%': {
-						transform: 'translateY(-5px)'
-					}
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-5px)' }
 				},
 				'float': {
-					'0%, 100%': {
-						transform: 'translateY(0)'
-					},
-					'50%': {
-						transform: 'translateY(-10px)'
-					}
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' }
 				},
 				'marquee': {
 					'0%': { transform: 'translateX(0)' },
@@ -234,6 +197,7 @@ export default {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 				'hero-pattern': 'linear-gradient(135deg, #9b87f5 0%, #D3E4FD 100%)',
 				'dark-hero-pattern': 'linear-gradient(135deg, #4d3b99 0%, #1a3b6e 100%)',
+				'gold-shimmer': 'linear-gradient(90deg, #B8941F 0%, #E7CB46 50%, #D4AF37 100%)',
 			}
 		}
 	},
