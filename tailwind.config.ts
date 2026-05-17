@@ -63,7 +63,7 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Custom colors for media buyer portfolio
+				// Custom colors for media buyer portfolio (v1 — Lovable)
 				media: {
 					purple: '#9b87f5',
 					darkpurple: '#7E69AB',
@@ -74,6 +74,52 @@ export default {
 					oceanblue: '#0EA5E9',
 					pink: '#D946EF',
 				},
+				// v2 — Dark luxury palette
+				obsidian: {
+					DEFAULT: '#0A0A0A',
+					50: '#FAFAF9',
+					100: '#F5F5F4',
+					200: '#E7E5E4',
+					300: '#D6D3D1',
+					400: '#A8A29E',
+					500: '#78716C',
+					600: '#57534E',
+					700: '#292524',
+					800: '#1C1917',
+					900: '#0F0F0F',
+					950: '#0A0A0A',
+				},
+				gold: {
+					DEFAULT: '#D4AF37',
+					50: '#FBF6E2',
+					100: '#F7EDC0',
+					200: '#EFDC83',
+					300: '#E7CB46',
+					400: '#D4AF37',
+					500: '#B8941F',
+					600: '#8F7218',
+					700: '#665011',
+					800: '#3D300A',
+					900: '#141003',
+				},
+				champagne: {
+					DEFAULT: '#F5E6C8',
+					soft: '#E8D9B5',
+				},
+			},
+			fontFamily: {
+				sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+				serif: ['"Instrument Serif"', 'ui-serif', 'Georgia', 'Cambria', 'serif'],
+				mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+				display: ['"Instrument Serif"', 'ui-serif', 'Georgia', 'Cambria', 'serif'],
+			},
+			fontSize: {
+				'masthead': ['clamp(3.5rem, 9vw + 1rem, 11rem)', { lineHeight: '0.92', letterSpacing: '-0.04em', fontWeight: '400' }],
+				'display-xl': ['clamp(2.75rem, 6vw + 0.5rem, 6.5rem)', { lineHeight: '0.98', letterSpacing: '-0.03em', fontWeight: '400' }],
+				'display-lg': ['clamp(2.25rem, 4.5vw + 0.25rem, 4.5rem)', { lineHeight: '1.02', letterSpacing: '-0.025em', fontWeight: '400' }],
+				'display-md': ['clamp(1.75rem, 3vw + 0.25rem, 2.75rem)', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '400' }],
+				'eyebrow': ['0.6875rem', { lineHeight: '1', letterSpacing: '0.22em', fontWeight: '500' }],
+				'eyebrow-lg': ['0.8125rem', { lineHeight: '1', letterSpacing: '0.2em', fontWeight: '500' }],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -149,6 +195,10 @@ export default {
 						transform: 'translateY(-10px)'
 					}
 				},
+				'marquee': {
+					'0%': { transform: 'translateX(0)' },
+					'100%': { transform: 'translateX(-50%)' }
+				},
 				'number-count': {
 					'0%': { 'content': '"0"' },
 					'20%': { 'content': '"1"' },
@@ -175,6 +225,7 @@ export default {
 				'slide-in-right': 'slide-in-right 0.6s ease-out forwards',
 				'bounce-gentle': 'bounce-gentle 4s infinite ease-in-out',
 				'float': 'float 6s infinite ease-in-out',
+				'marquee': 'marquee 40s linear infinite',
 				'number-count': 'number-count 2s ease-out forwards',
 				'flip-in': 'flip-in 0.5s ease-out forwards',
 				'flip-out': 'flip-out 0.5s ease-out forwards'

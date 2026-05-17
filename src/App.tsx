@@ -15,6 +15,9 @@ import NotFound from "./pages/NotFound";
 import CaseStudyDetail from "./pages/CaseStudyDetail";
 import CaseStudies from "./pages/CaseStudies";
 import Auth from "./pages/Auth";
+import IndexV2 from "./pages/v2/Index";
+import CaseStudiesV2 from "./pages/v2/CaseStudies";
+import CaseStudyDetailV2 from "./pages/v2/CaseStudyDetail";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { AuthProvider } from "./hooks/use-auth";
 import { trackPageView } from "./utils/analytics";
@@ -152,6 +155,22 @@ const App = () => (
                   <Route path="/case-study/:slug" element={
                     <LazyComponent>
                       <CaseStudyDetail />
+                    </LazyComponent>
+                  } />
+                  {/* v2 — Dark luxury edition */}
+                  <Route path="/v2" element={
+                    <LazyComponent>
+                      <IndexV2 />
+                    </LazyComponent>
+                  } />
+                  <Route path="/v2/case-studies" element={
+                    <LazyComponent>
+                      <CaseStudiesV2 />
+                    </LazyComponent>
+                  } />
+                  <Route path="/v2/case-study/:slug" element={
+                    <LazyComponent>
+                      <CaseStudyDetailV2 />
                     </LazyComponent>
                   } />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
