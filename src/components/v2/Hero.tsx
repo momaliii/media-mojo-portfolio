@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Counter, Magnetic, RevealText, Spotlight } from "./_motion";
 
 const Hero = () => {
   return (
@@ -9,11 +10,42 @@ const Hero = () => {
       className="relative min-h-[100vh] min-h-[100dvh] flex flex-col justify-between overflow-hidden bg-obsidian text-white grain"
       aria-labelledby="hero-heading"
     >
-      {/* Ambient gold glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[60rem] h-[60rem] bg-gold/[0.06] rounded-full filter blur-[120px] -translate-y-1/2" />
-        <div className="absolute bottom-0 right-0 w-[40rem] h-[40rem] bg-gold/[0.04] rounded-full filter blur-[100px] translate-y-1/2" />
+      {/* Animated gradient mesh */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          className="absolute top-[-20%] left-[-10%] w-[80rem] h-[80rem] rounded-full"
+          style={{
+            background:
+              "radial-gradient(closest-side, rgba(212,175,55,0.16), transparent 70%)",
+            filter: "blur(60px)",
+          }}
+          animate={{ x: [0, 60, -40, 0], y: [0, 40, -30, 0] }}
+          transition={{ duration: 28, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-[-30%] right-[-15%] w-[70rem] h-[70rem] rounded-full"
+          style={{
+            background:
+              "radial-gradient(closest-side, rgba(245,230,200,0.08), transparent 70%)",
+            filter: "blur(80px)",
+          }}
+          animate={{ x: [0, -50, 30, 0], y: [0, -30, 20, 0] }}
+          transition={{ duration: 34, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute top-[40%] left-[55%] w-[35rem] h-[35rem] rounded-full"
+          style={{
+            background:
+              "radial-gradient(closest-side, rgba(184,148,31,0.18), transparent 70%)",
+            filter: "blur(70px)",
+          }}
+          animate={{ x: [0, 30, -20, 0], y: [0, -40, 30, 0] }}
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+        />
       </div>
+
+      {/* Cursor-following spotlight */}
+      <Spotlight color="rgba(212,175,55,0.22)" size={520} />
 
       {/* Hairline grid */}
       <div
@@ -29,7 +61,6 @@ const Hero = () => {
       />
 
       <div className="relative z-10 container mx-auto px-6 lg:px-10 pt-32 md:pt-40 pb-16">
-        {/* Eyebrow row */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -47,46 +78,22 @@ const Hero = () => {
           </span>
         </motion.div>
 
-        {/* Display H1 */}
-        <motion.h1
+        <h1
           id="hero-heading"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.2, delay: 0.15 }}
           className="font-serif text-display-xl md:text-masthead text-white leading-[0.92]"
         >
-          <motion.span
-            initial={{ y: 80, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="block"
-          >
-            Paid media,
-          </motion.span>
-          <motion.span
-            initial={{ y: 80, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="block"
-          >
-            <span className="serif-italic text-gold">crafted</span>{" "}
-            <span className="text-white/70">for</span>
-          </motion.span>
-          <motion.span
-            initial={{ y: 80, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="block"
-          >
-            ambitious brands.
-          </motion.span>
-        </motion.h1>
+          <RevealText as="span" text="Paid media," className="block" />
+          <span className="block">
+            <RevealText as="span" text="crafted" className="serif-italic text-gold" delay={0.12} />{" "}
+            <RevealText as="span" text="for" className="text-white/70" delay={0.32} />
+          </span>
+          <RevealText as="span" text="ambitious brands." className="block" delay={0.5} />
+        </h1>
 
-        {/* Sub-row */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.9, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="mt-16 md:mt-24 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-end"
         >
           <p className="md:col-span-6 text-white/70 text-lg md:text-xl leading-relaxed max-w-xl">
@@ -96,22 +103,24 @@ const Hero = () => {
           </p>
 
           <div className="md:col-span-6 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-10">
-            <button
-              onClick={() =>
-                document
-                  .getElementById("work")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
-              className="group inline-flex items-center gap-3 bg-gold text-obsidian px-7 py-4 hover:bg-champagne transition-all duration-500"
-            >
-              <span className="font-mono uppercase text-[0.6875rem] tracking-[0.22em] font-medium">
-                View Selected Work
-              </span>
-              <ArrowRight
-                size={16}
-                className="transition-transform group-hover:translate-x-1"
-              />
-            </button>
+            <Magnetic strength={0.2}>
+              <button
+                onClick={() =>
+                  document
+                    .getElementById("work")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="group inline-flex items-center gap-3 bg-gold text-obsidian px-7 py-4 hover:bg-champagne transition-all duration-500 relative overflow-hidden"
+              >
+                <span className="relative font-mono uppercase text-[0.6875rem] tracking-[0.22em] font-medium">
+                  View Selected Work
+                </span>
+                <ArrowRight
+                  size={16}
+                  className="relative transition-transform group-hover:translate-x-1"
+                />
+              </button>
+            </Magnetic>
 
             <a
               href="/Mohamed_Ali_CV.pdf"
@@ -130,53 +139,63 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Marquee strip — selected numbers */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.2, delay: 1.3 }}
+        transition={{ duration: 1.2, delay: 1.4 }}
         className="relative z-10 border-t border-white/[0.06] py-8"
       >
         <div className="container mx-auto px-6 lg:px-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-6">
-            {[
-              { value: "8.4×", label: "Peak ROAS", ctx: "Beauty DTC · Meta" },
-              { value: "95K+", label: "Orders generated", ctx: "Last 24 mo" },
-              { value: "10", label: "Countries served", ctx: "MENA · EU · US" },
-              { value: "6yr+", label: "Senior tenure", ctx: "Performance media" },
-            ].map((stat) => (
-              <div key={stat.label} className="flex items-baseline gap-4">
-                <div className="font-serif text-4xl md:text-5xl text-gold tabular leading-none">
-                  {stat.value}
-                </div>
-                <div>
-                  <div className="text-sm text-white/80 leading-tight">
-                    {stat.label}
-                  </div>
-                  <div className="font-mono uppercase text-[0.625rem] tracking-[0.18em] text-white/40 mt-1">
-                    {stat.ctx}
-                  </div>
-                </div>
-              </div>
-            ))}
+            <StatCounter value={8.4} suffix="×" label="Peak ROAS" ctx="Beauty DTC · Meta" />
+            <StatCounter value={95} suffix="K+" label="Orders generated" ctx="Last 24 mo" />
+            <StatCounter value={10} label="Countries served" ctx="MENA · EU · US" />
+            <StatCounter value={6} suffix="yr+" label="Senior tenure" ctx="Performance media" />
           </div>
         </div>
       </motion.div>
 
-      {/* Scroll cue */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.5, delay: 1.6 }}
+        transition={{ duration: 1.5, delay: 1.7 }}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-2 text-white/40"
       >
         <span className="font-mono uppercase text-[0.5625rem] tracking-[0.3em]">
           Scroll
         </span>
-        <span className="block h-8 w-px bg-gradient-to-b from-gold/60 to-transparent" />
+        <motion.span
+          className="block h-8 w-px bg-gradient-to-b from-gold/60 to-transparent"
+          animate={{ scaleY: [1, 0.4, 1], opacity: [1, 0.4, 1] }}
+          transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+        />
       </motion.div>
     </section>
   );
 };
+
+const StatCounter = ({
+  value,
+  suffix = "",
+  label,
+  ctx,
+}: {
+  value: number;
+  suffix?: string;
+  label: string;
+  ctx: string;
+}) => (
+  <div className="flex items-baseline gap-4 group">
+    <div className="font-serif text-4xl md:text-5xl text-gold tabular leading-none transition-transform duration-500 group-hover:scale-[1.04]">
+      <Counter to={value} suffix={suffix} />
+    </div>
+    <div>
+      <div className="text-sm text-white/80 leading-tight">{label}</div>
+      <div className="font-mono uppercase text-[0.625rem] tracking-[0.18em] text-white/40 mt-1">
+        {ctx}
+      </div>
+    </div>
+  </div>
+);
 
 export default Hero;

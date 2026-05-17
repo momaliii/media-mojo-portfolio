@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Quote } from "lucide-react";
 
 const testimonials = [
   {
@@ -8,6 +9,7 @@ const testimonials = [
     role: "Marketing Director",
     company: "Beauty DTC brand",
     region: "Riyadh, KSA",
+    accent: "from-gold/20 to-transparent",
   },
   {
     quote:
@@ -15,6 +17,7 @@ const testimonials = [
     role: "Founder",
     company: "F&B e-commerce",
     region: "Cairo / Kuwait City",
+    accent: "from-emerald-500/10 to-transparent",
   },
   {
     quote:
@@ -22,6 +25,7 @@ const testimonials = [
     role: "Head of Growth",
     company: "Apparel DTC",
     region: "London, UK",
+    accent: "from-rose-500/10 to-transparent",
   },
 ];
 
@@ -29,10 +33,34 @@ const Testimonials = () => {
   return (
     <section
       id="testimonials"
-      className="relative bg-obsidian text-white grain border-t border-white/[0.06]"
+      className="relative bg-obsidian text-white grain border-t border-white/[0.06] overflow-hidden"
       aria-labelledby="testimonials-heading"
     >
-      <div className="container mx-auto px-6 lg:px-10 py-28 md:py-40">
+      {/* Ambient mesh — emerald tint for variation */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          className="absolute top-[20%] right-[-15%] w-[55rem] h-[55rem] rounded-full"
+          style={{
+            background:
+              "radial-gradient(closest-side, rgba(16,185,129,0.05), transparent 70%)",
+            filter: "blur(90px)",
+          }}
+          animate={{ x: [0, -40, 20, 0], y: [0, 30, -20, 0] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-[5%] left-[-10%] w-[45rem] h-[45rem] rounded-full"
+          style={{
+            background:
+              "radial-gradient(closest-side, rgba(212,175,55,0.08), transparent 70%)",
+            filter: "blur(70px)",
+          }}
+          animate={{ x: [0, 40, -20, 0], y: [0, -30, 20, 0] }}
+          transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
+      <div className="container mx-auto px-6 lg:px-10 py-28 md:py-40 relative">
         {/* Header */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-20 md:mb-28">
           <div className="md:col-span-3">
@@ -56,21 +84,32 @@ const Testimonials = () => {
           {testimonials.map((t, i) => (
             <motion.figure
               key={i}
-              initial={{ opacity: 0, y: 32 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-120px" }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start"
+              className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start group"
             >
               <div className="md:col-span-2 flex md:flex-col items-baseline md:items-start gap-3">
                 <span className="font-mono uppercase text-[0.625rem] tracking-[0.22em] text-gold tabular">
                   No. {String(i + 1).padStart(2, "0")}
                 </span>
-                <span aria-hidden className="font-serif text-7xl text-gold/30 leading-none -mt-2">
-                  &ldquo;
-                </span>
+                <motion.div
+                  aria-hidden
+                  initial={{ rotate: -8, opacity: 0.2 }}
+                  whileInView={{ rotate: 0, opacity: 0.3 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.2, delay: 0.2 }}
+                  className="text-gold/30"
+                >
+                  <Quote size={64} strokeWidth={1} />
+                </motion.div>
               </div>
-              <div className="md:col-span-10">
+              <div className="md:col-span-10 relative">
+                <div
+                  aria-hidden
+                  className={`absolute -inset-x-8 -inset-y-6 -z-10 bg-gradient-to-r ${t.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-2xl`}
+                />
                 <blockquote className="font-serif text-3xl md:text-4xl text-white/95 leading-[1.18] max-w-4xl">
                   {t.quote}
                 </blockquote>

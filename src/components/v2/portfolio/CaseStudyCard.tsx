@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { CaseStudy } from "@/data/caseStudies";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 interface CaseStudyCardProps {
@@ -29,9 +29,25 @@ const getCategoryName = (c: string): string => {
 const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
   const navigate = useNavigate();
   const slug = study.slug || titleToSlug(study.title);
+  const rowRef = useRef<HTMLElement>(null);
+  const [hover, setHover] = useState(false);
+
+  // Cursor-follow position for the thumbnail
+  const tx = useMotionValue(0);
+  const ty = useMotionValue(0);
+  const stx = useSpring(tx, { stiffness: 200, damping: 25, mass: 0.4 });
+  const sty = useSpring(ty, { stiffness: 200, damping: 25, mass: 0.4 });
+
+  const onMove = (e: React.MouseEvent) => {
+    if (!rowRef.current) return;
+    const r = rowRef.current.getBoundingClientRect();
+    tx.set(e.clientX - r.left);
+    ty.set(e.clientY - r.top);
+  };
 
   return (
     <motion.article
+      ref={rowRef}
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
@@ -41,17 +57,36 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
         ease: [0.16, 1, 0.3, 1],
       }}
       onClick={() => navigate(`/v2/case-study/${slug}`)}
-      className="group cursor-pointer border-t border-white/[0.08] py-10 md:py-14 hover:border-gold/40 transition-colors duration-700"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      onMouseMove={onMove}
+      className="group relative cursor-pointer border-t border-white/[0.08] py-10 md:py-14 hover:border-gold/40 transition-colors duration-700"
     >
+      {/* Hover thumbnail (follows cursor) */}
+      {study.screenshot && (
+        <motion.div
+          aria-hidden
+          style={{ x: stx, y: sty, opacity: hover ? 1 : 0, scale: hover ? 1 : 0.85 }}
+          transition={{ opacity: { duration: 0.4 }, scale: { duration: 0.5 } }}
+          className="pointer-events-none hidden md:block absolute z-30 -translate-x-1/2 -translate-y-1/2 w-72 h-52 overflow-hidden shadow-2xl ring-1 ring-gold/30"
+        >
+          <img
+            src={study.screenshot}
+            alt=""
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-obsidian/40 via-transparent to-transparent" />
+        </motion.div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
-        {/* Index numeral */}
         <div className="md:col-span-1">
           <span className="font-mono uppercase text-[0.625rem] tracking-[0.22em] text-gold/70 tabular">
             {String(index + 1).padStart(2, "0")}
           </span>
         </div>
 
-        {/* Title + meta */}
         <div className="md:col-span-5">
           <div className="flex items-center gap-3 mb-3">
             <span className="font-mono uppercase text-[0.625rem] tracking-[0.22em] text-white/40">
@@ -66,7 +101,7 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
               </>
             )}
           </div>
-          <h3 className="font-serif text-3xl md:text-5xl text-white leading-[1.05] tracking-tight group-hover:text-gold transition-colors duration-500">
+          <h3 className="font-serif text-3xl md:text-5xl text-white leading-[1.05] tracking-tight transition-all duration-500 group-hover:text-gold group-hover:translate-x-1">
             {study.title}
           </h3>
           <p className="text-white/40 text-sm mt-3 font-mono uppercase tracking-[0.15em]">
@@ -74,17 +109,15 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
           </p>
         </div>
 
-        {/* Description */}
         <p className="md:col-span-3 text-white/60 text-sm md:text-base leading-relaxed">
           {study.description}
         </p>
 
-        {/* Metrics + cta */}
         <div className="md:col-span-3 flex flex-col items-start md:items-end gap-4">
           <div className="flex gap-x-6 gap-y-2 flex-wrap md:justify-end">
             {study.metrics.slice(0, 2).map((m, i) => (
               <div key={i} className="text-left md:text-right">
-                <div className="font-serif text-3xl md:text-4xl text-gold tabular leading-none">
+                <div className="font-serif text-3xl md:text-4xl text-gold tabular leading-none transition-transform duration-500 group-hover:scale-110">
                   {m.value}
                 </div>
                 <div className="font-mono uppercase text-[0.5625rem] tracking-[0.2em] text-white/40 mt-1.5">

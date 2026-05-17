@@ -9,6 +9,7 @@ import Services from "@/components/v2/Services";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import LogoStrip from "@/components/v2/social-proof/LogoStrip";
 import Testimonials from "@/components/v2/social-proof/Testimonials";
+import { ScrollProgress } from "@/components/v2/_motion";
 import { useScrollObserver } from "@/hooks/use-scroll-observer";
 import { trackPageView } from "@/utils/analytics";
 
@@ -22,6 +23,7 @@ const IndexV2 = () => {
 
   return (
     <div className="v2-theme dark min-h-screen bg-obsidian text-white selection:bg-gold/30">
+      <ScrollProgress />
       <Navigation activeSection={activeSection} />
       <main id="main-content" tabIndex={-1} aria-label="Main content">
         <ErrorBoundary>
