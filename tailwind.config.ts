@@ -119,6 +119,31 @@ export default {
 					DEFAULT: '#F5E6C8',
 					soft: '#E8D9B5',
 				},
+				// v3 — Y2K / retro-future palette
+				midnight: {
+					DEFAULT: '#0A0F2E',
+					950: '#060920',
+					900: '#0A0F2E',
+					800: '#131845',
+					700: '#1E2660',
+					600: '#2D3680',
+				},
+				chrome: {
+					50: '#F8FAFC',
+					100: '#F1F5F9',
+					200: '#E2E8F0',
+					300: '#CBD5E1',
+					400: '#94A3B8',
+					500: '#64748B',
+					600: '#475569',
+					700: '#334155',
+					800: '#1E293B',
+				},
+				holo: {
+					cyan: '#22D3EE',
+					magenta: '#EC4899',
+					violet: '#A78BFA',
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

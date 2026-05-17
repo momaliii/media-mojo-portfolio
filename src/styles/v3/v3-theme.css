@@ -1,0 +1,322 @@
+/* v3 theme — Y2K / retro-future, scoped to .v3-theme wrapper */
+
+.v3-theme {
+  --v3-bg: #0A0F2E;
+  --v3-bg-2: #060920;
+  --v3-bg-3: #131845;
+  --v3-cyan: #22D3EE;
+  --v3-magenta: #EC4899;
+  --v3-chrome-1: #F1F5F9;
+  --v3-chrome-2: #94A3B8;
+  --v3-chrome-3: #475569;
+  --v3-text: #F8FAFC;
+
+  /* Override shadcn CSS vars for components nested inside */
+  --background: 230 60% 10%;
+  --foreground: 210 40% 98%;
+  --card: 230 50% 14%;
+  --card-foreground: 210 40% 98%;
+  --popover: 230 50% 14%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 188 86% 53%;
+  --primary-foreground: 230 60% 10%;
+  --secondary: 230 40% 22%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 230 40% 22%;
+  --muted-foreground: 210 20% 70%;
+  --accent: 330 85% 60%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 70% 50%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 230 40% 28%;
+  --input: 230 40% 22%;
+  --ring: 188 86% 53%;
+  --radius: 0;
+
+  font-family: 'Space Grotesk', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  background-color: var(--v3-bg);
+  color: var(--v3-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.v3-theme h1,
+.v3-theme h2,
+.v3-theme h3,
+.v3-theme h4,
+.v3-theme h5,
+.v3-theme h6 {
+  font-family: 'Anybody', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  font-variation-settings: 'wdth' 85;
+}
+
+.v3-theme ::selection {
+  background: var(--v3-cyan);
+  color: var(--v3-bg);
+}
+
+/* ─── Utilities scoped to v3 ─────────────────────────────────────────── */
+
+.v3-theme .y2k-mono {
+  font-family: 'VT323', 'JetBrains Mono', ui-monospace, monospace;
+  letter-spacing: 0.04em;
+}
+
+.v3-theme .y2k-display {
+  font-family: 'Anybody', 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-variation-settings: 'wdth' 75;
+  letter-spacing: -0.04em;
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+
+.v3-theme .y2k-display-wide {
+  font-family: 'Anybody', 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-variation-settings: 'wdth' 150;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.v3-theme .tabular {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* ─── Chrome / iridescent treatments ─────────────────────────────────── */
+
+.v3-theme .chrome-text {
+  background: linear-gradient(
+    180deg,
+    #F1F5F9 0%,
+    #CBD5E1 35%,
+    #64748B 50%,
+    #CBD5E1 65%,
+    #F1F5F9 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.v3-theme .holo-text {
+  background: linear-gradient(
+    100deg,
+    #22D3EE 0%,
+    #A78BFA 25%,
+    #EC4899 50%,
+    #A78BFA 75%,
+    #22D3EE 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: v3-holo-pan 6s linear infinite;
+}
+
+@keyframes v3-holo-pan {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+.v3-theme .chrome-border {
+  position: relative;
+  background: var(--v3-bg-2);
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+.v3-theme .chrome-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  background: linear-gradient(135deg, #F1F5F9, #475569 35%, #94A3B8 50%, #475569 65%, #F1F5F9);
+  background-size: 200% 200%;
+}
+
+.v3-theme .holo-border {
+  position: relative;
+  background: var(--v3-bg-2);
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+.v3-theme .holo-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  background: linear-gradient(135deg, #22D3EE, #A78BFA, #EC4899, #A78BFA, #22D3EE);
+  background-size: 300% 100%;
+  animation: v3-holo-pan 6s linear infinite;
+}
+
+/* ─── Scan-line overlay ──────────────────────────────────────────────── */
+
+.v3-theme .scanlines {
+  position: relative;
+}
+.v3-theme .scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2px,
+    rgba(255, 255, 255, 0.03) 2px,
+    rgba(255, 255, 255, 0.03) 3px
+  );
+  z-index: 1;
+}
+
+/* ─── Grid pattern ───────────────────────────────────────────────────── */
+
+.v3-theme .v3-grid {
+  background-image:
+    linear-gradient(to right, rgba(34, 211, 238, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(34, 211, 238, 0.06) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.v3-theme .v3-grid-fine {
+  background-image:
+    linear-gradient(to right, rgba(34, 211, 238, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(34, 211, 238, 0.08) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* ─── Glitch text ────────────────────────────────────────────────────── */
+
+.v3-theme .glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.v3-theme .glitch::before,
+.v3-theme .glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.v3-theme .glitch::before { color: #22D3EE; transform: translate(-2px, 0); }
+.v3-theme .glitch::after  { color: #EC4899; transform: translate( 2px, 0); }
+
+.v3-theme .glitch:hover::before,
+.v3-theme .glitch:hover::after {
+  opacity: 0.8;
+}
+
+.v3-theme .glitch:hover::before {
+  animation: v3-glitch-1 0.4s steps(2) infinite;
+}
+.v3-theme .glitch:hover::after {
+  animation: v3-glitch-2 0.4s steps(2) infinite;
+}
+
+@keyframes v3-glitch-1 {
+  0%   { transform: translate(-2px, 0); clip-path: inset(0 0 70% 0); }
+  50%  { transform: translate(-3px, 1px); clip-path: inset(30% 0 40% 0); }
+  100% { transform: translate(-2px, 0); clip-path: inset(60% 0 10% 0); }
+}
+@keyframes v3-glitch-2 {
+  0%   { transform: translate(2px, 0);  clip-path: inset(0 0 60% 0); }
+  50%  { transform: translate(3px, -1px); clip-path: inset(40% 0 30% 0); }
+  100% { transform: translate(2px, 0);  clip-path: inset(70% 0 0   0); }
+}
+
+/* ─── Marquee ────────────────────────────────────────────────────────── */
+
+.v3-theme .marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+@keyframes v3-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes v3-marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.v3-theme .animate-v3-marquee {
+  animation: v3-marquee 40s linear infinite;
+}
+.v3-theme .animate-v3-marquee-reverse {
+  animation: v3-marquee-reverse 50s linear infinite;
+}
+
+/* ─── Window chrome ──────────────────────────────────────────────────── */
+
+.v3-theme .window-chrome {
+  border: 1px solid rgba(241, 245, 249, 0.2);
+  background: linear-gradient(180deg, rgba(20, 28, 70, 0.85), rgba(10, 15, 46, 0.85));
+}
+
+.v3-theme .window-chrome-bar {
+  background: linear-gradient(180deg, #475569 0%, #1E293B 100%);
+  border-bottom: 1px solid rgba(241, 245, 249, 0.15);
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.v3-theme .window-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+/* ─── CRT vignette ───────────────────────────────────────────────────── */
+
+.v3-theme .crt-vignette {
+  position: relative;
+}
+.v3-theme .crt-vignette::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.35) 100%);
+  z-index: 2;
+}
+
+/* ─── Pulsing scan beam ──────────────────────────────────────────────── */
+
+@keyframes v3-beam {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(2000%); opacity: 0; }
+}
+
+.v3-theme .scan-beam {
+  position: absolute;
+  inset-inline: 0;
+  height: 80px;
+  background: linear-gradient(180deg, transparent, rgba(34, 211, 238, 0.18), transparent);
+  pointer-events: none;
+  animation: v3-beam 7s linear infinite;
+}
+
+/* ─── Input reset for v3 ─────────────────────────────────────────────── */
+
+.v3-theme input,
+.v3-theme textarea {
+  border-radius: 0;
+}
