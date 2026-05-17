@@ -1,28 +1,27 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Quote } from "lucide-react";
 
 const testimonials = [
   {
     quote:
       "Mohamed turned a stagnant Meta account into our most reliable channel. Within two quarters we were running profitably at 5×+ ROAS and scaling spend monthly.",
-    name: "Marketing Director",
-    role: "Beauty DTC brand",
-    region: "Saudi Arabia",
+    role: "Marketing Director",
+    company: "Beauty DTC brand",
+    region: "Riyadh, KSA",
   },
   {
     quote:
-      "He treats budget like it's his own. Tight CAC targets, creative testing on a real cadence, and weekly reporting that an exec can actually read.",
-    name: "Founder",
-    role: "F&B e-commerce",
-    region: "Egypt / Kuwait",
+      "He treats the ad budget like it's his own. Tight CAC targets, real creative cadence, and weekly reporting an exec can actually read.",
+    role: "Founder",
+    company: "F&B e-commerce",
+    region: "Cairo / Kuwait City",
   },
   {
     quote:
       "Rare to find a media buyer who's equally strong on Meta and TikTok and who understands the funnel from CTR to LTV. He delivered.",
-    name: "Head of Growth",
-    role: "Apparel DTC",
-    region: "UK",
+    role: "Head of Growth",
+    company: "Apparel DTC",
+    region: "London, UK",
   },
 ];
 
@@ -30,55 +29,69 @@ const Testimonials = () => {
   return (
     <section
       id="testimonials"
-      className="section-padding bg-white dark:bg-gray-950 relative"
+      className="relative bg-obsidian text-white grain border-t border-white/[0.06]"
       aria-labelledby="testimonials-heading"
     >
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-2xl mb-12 md:mb-14">
-          <p className="eyebrow text-media-purple mb-3">02 · What clients say</p>
+      <div className="container mx-auto px-6 lg:px-10 py-28 md:py-40">
+        {/* Header */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-20 md:mb-28">
+          <div className="md:col-span-3">
+            <p className="eyebrow text-gold mb-4">— 03</p>
+            <p className="font-mono uppercase text-[0.6875rem] tracking-[0.22em] text-white/40">
+              Voices / Receipts
+            </p>
+          </div>
           <h2
             id="testimonials-heading"
-            className="text-display-lg text-media-ink dark:text-white"
+            className="md:col-span-9 font-serif text-display-lg text-white leading-[1.02]"
           >
             Trusted with{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-media-purple to-media-oceanblue">
-              7-figure budgets
-            </span>{" "}
-            across DTC, F&amp;B and B2B.
+            <span className="serif-italic text-gold">seven-figure</span>{" "}
+            budgets — and with the brands behind them.
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        {/* Quotes */}
+        <div className="space-y-20 md:space-y-32">
           {testimonials.map((t, i) => (
             <motion.figure
               key={i}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="relative rounded-2xl border border-gray-200/70 dark:border-white/10 bg-gradient-to-br from-white to-gray-50/60 dark:from-media-navy dark:to-media-slate p-7 shadow-sm hover:shadow-md transition-shadow"
+              viewport={{ once: true, margin: "-120px" }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start"
             >
-              <Quote
-                aria-hidden
-                className="absolute top-5 right-5 h-7 w-7 text-media-purple/15 dark:text-media-cyan/20"
-              />
-              <blockquote className="text-gray-800 dark:text-gray-100 leading-relaxed">
-                &ldquo;{t.quote}&rdquo;
-              </blockquote>
-              <figcaption className="mt-6 pt-4 border-t border-gray-100 dark:border-white/10">
-                <div className="text-sm font-semibold text-media-ink dark:text-white">
-                  {t.name}
-                </div>
-                <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                  {t.role} · {t.region}
-                </div>
-              </figcaption>
+              <div className="md:col-span-2 flex md:flex-col items-baseline md:items-start gap-3">
+                <span className="font-mono uppercase text-[0.625rem] tracking-[0.22em] text-gold tabular">
+                  No. {String(i + 1).padStart(2, "0")}
+                </span>
+                <span aria-hidden className="font-serif text-7xl text-gold/30 leading-none -mt-2">
+                  &ldquo;
+                </span>
+              </div>
+              <div className="md:col-span-10">
+                <blockquote className="font-serif text-3xl md:text-4xl text-white/95 leading-[1.18] max-w-4xl">
+                  {t.quote}
+                </blockquote>
+                <figcaption className="mt-10 pt-6 border-t border-white/[0.08] flex flex-wrap items-baseline gap-x-6 gap-y-2">
+                  <span className="font-mono uppercase text-[0.75rem] tracking-[0.22em] text-white/80">
+                    {t.role}
+                  </span>
+                  <span className="font-serif italic text-base text-white/60">
+                    {t.company}
+                  </span>
+                  <span className="font-mono uppercase text-[0.625rem] tracking-[0.22em] text-white/40">
+                    {t.region}
+                  </span>
+                </figcaption>
+              </div>
             </motion.figure>
           ))}
         </div>
 
-        <p className="text-xs text-gray-400 dark:text-gray-500 mt-8 max-w-2xl">
-          Client names withheld under NDA — references and full case studies
+        <p className="mt-24 max-w-2xl text-sm text-white/40 leading-relaxed">
+          Client names withheld under NDA. References and full case studies
           available on request.
         </p>
       </div>

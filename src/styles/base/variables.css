@@ -1,45 +1,47 @@
-/* CSS Variables for theming */
-:root {
-  --background: 0 0% 100%;
-  --foreground: 222 47% 11%;
-  --card: 0 0% 100%;
-  --card-foreground: 222 47% 11%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 222 47% 11%;
-  --primary: 239 67% 59%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222 47% 11%;
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215 16% 47%;
-  --accent: 187 92% 49%;
-  --accent-foreground: 222 47% 11%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 239 67% 59%;
-  --radius: 0.75rem;
+/* Dark luxury — defaults to dark (obsidian + champagne + gold) */
+:root,
+.dark {
+  --background: 0 0% 4%;
+  --foreground: 40 40% 96%;
+  --card: 0 0% 7%;
+  --card-foreground: 40 40% 96%;
+  --popover: 0 0% 7%;
+  --popover-foreground: 40 40% 96%;
+  --primary: 44 65% 53%;
+  --primary-foreground: 0 0% 7%;
+  --secondary: 0 0% 12%;
+  --secondary-foreground: 40 40% 96%;
+  --muted: 0 0% 10%;
+  --muted-foreground: 40 10% 65%;
+  --accent: 44 65% 53%;
+  --accent-foreground: 0 0% 7%;
+  --destructive: 0 70% 50%;
+  --destructive-foreground: 40 40% 96%;
+  --border: 0 0% 14%;
+  --input: 0 0% 12%;
+  --ring: 44 65% 53%;
+  --radius: 0.25rem;
 }
 
-.dark {
-  --background: 222 47% 7%;
-  --foreground: 210 40% 98%;
-  --card: 222 47% 11%;
-  --card-foreground: 210 40% 98%;
-  --popover: 222 47% 11%;
-  --popover-foreground: 210 40% 98%;
-  --primary: 239 84% 67%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 217 32% 18%;
-  --secondary-foreground: 210 40% 98%;
-  --muted: 217 32% 18%;
-  --muted-foreground: 215 20% 75%;
-  --accent: 187 92% 49%;
-  --accent-foreground: 222 47% 11%;
-  --destructive: 0 62.8% 50.6%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 217 32% 22%;
-  --input: 217 32% 22%;
-  --ring: 239 84% 67%;
+/* Light theme override (kept minimal, used in admin) */
+.light {
+  --background: 40 40% 98%;
+  --foreground: 0 0% 7%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 7%;
+  --primary: 44 65% 40%;
+  --primary-foreground: 40 40% 98%;
+  --secondary: 40 10% 95%;
+  --secondary-foreground: 0 0% 7%;
+  --muted: 40 10% 95%;
+  --muted-foreground: 0 0% 40%;
+  --accent: 44 65% 40%;
+  --accent-foreground: 40 40% 98%;
+  --destructive: 0 70% 50%;
+  --destructive-foreground: 40 40% 98%;
+  --border: 40 10% 90%;
+  --input: 40 10% 90%;
+  --ring: 44 65% 40%;
 }

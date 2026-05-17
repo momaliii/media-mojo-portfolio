@@ -6,7 +6,6 @@ import Portfolio from "@/components/Portfolio";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Services from "@/components/Services";
-import GlobalPresence from "@/components/countries/GlobalPresence";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import LogoStrip from "@/components/social-proof/LogoStrip";
 import Testimonials from "@/components/social-proof/Testimonials";
@@ -23,16 +22,11 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950">
+    <div className="min-h-screen bg-obsidian text-white selection:bg-gold/30">
       <MetaTags />
       <StructuredData />
       <Navigation activeSection={activeSection} />
-      <main
-        id="main-content"
-        className="overflow-hidden"
-        tabIndex={-1}
-        aria-label="Main content"
-      >
+      <main id="main-content" tabIndex={-1} aria-label="Main content">
         <ErrorBoundary>
           <Hero />
         </ErrorBoundary>
@@ -42,39 +36,23 @@ const Index = () => {
         </ErrorBoundary>
 
         <ErrorBoundary>
-          <div id="portfolio-section">
-            <Portfolio />
-          </div>
+          <Portfolio />
         </ErrorBoundary>
 
         <ErrorBoundary>
-          <div id="services-section">
-            <Services />
-          </div>
+          <Services />
         </ErrorBoundary>
 
         <ErrorBoundary>
-          <div id="testimonials-section">
-            <Testimonials />
-          </div>
+          <Testimonials />
         </ErrorBoundary>
 
         <ErrorBoundary>
-          <div id="about-section">
-            <About />
-          </div>
+          <About />
         </ErrorBoundary>
 
         <ErrorBoundary>
-          <div id="countries-section">
-            <GlobalPresence />
-          </div>
-        </ErrorBoundary>
-
-        <ErrorBoundary>
-          <div id="contact-section">
-            <Contact />
-          </div>
+          <Contact />
         </ErrorBoundary>
       </main>
       <Footer />
