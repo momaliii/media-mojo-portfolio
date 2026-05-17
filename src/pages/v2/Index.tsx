@@ -8,6 +8,7 @@ import Footer from "@/components/v2/Footer";
 import Services from "@/components/v2/Services";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import LogoStrip from "@/components/v2/social-proof/LogoStrip";
+import ClientLogos from "@/components/v2/social-proof/ClientLogos";
 import Testimonials from "@/components/v2/social-proof/Testimonials";
 import { ScrollProgress } from "@/components/v2/_motion";
 import { useScrollObserver } from "@/hooks/use-scroll-observer";
@@ -32,6 +33,10 @@ const IndexV2 = () => {
 
         <ErrorBoundary>
           <LogoStrip />
+        </ErrorBoundary>
+
+        <ErrorBoundary>
+          <ClientLogos />
         </ErrorBoundary>
 
         <ErrorBoundary>
