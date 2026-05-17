@@ -14,7 +14,6 @@ import {
 import { motion } from "framer-motion";
 import Navigation from "@/components/v2/Navigation";
 import Footer from "@/components/v2/Footer";
-import LazyImage from "@/components/ui/lazy-image";
 import MetaTags from "@/components/MetaTags";
 
 const titleToSlug = (title: string) =>
@@ -262,38 +261,40 @@ const CaseStudyDetail = () => {
           </div>
         </section>
 
-        {/* Gallery */}
-        {caseStudy.screenshot && (
-          <section className="py-20 md:py-28 border-b border-white/[0.06]">
-            <div className="container mx-auto px-6 lg:px-10">
-              <p className="eyebrow text-gold mb-10">— Gallery</p>
-              <div className="overflow-hidden border border-white/[0.06]">
-                <LazyImage
-                  src={caseStudy.screenshot}
-                  alt={`${caseStudy.title} — primary asset`}
-                  className="w-full h-auto"
-                />
-              </div>
-              {caseStudy.additionalScreenshots &&
-                caseStudy.additionalScreenshots.length > 0 && (
-                  <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {caseStudy.additionalScreenshots.map((s, i) => (
-                      <div
-                        key={i}
-                        className="overflow-hidden border border-white/[0.06] aspect-[4/3] bg-obsidian-900"
-                      >
-                        <LazyImage
-                          src={s}
-                          alt={`${caseStudy.title} — supporting asset ${i + 1}`}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                )}
+        {/* Stylized gallery — abstract category-based panels (creative under NDA) */}
+        <section className="py-20 md:py-28 border-b border-white/[0.06]">
+          <div className="container mx-auto px-6 lg:px-10">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+              <p className="eyebrow text-gold">— Creative direction</p>
+              <p className="font-mono uppercase text-[0.625rem] tracking-[0.22em] text-white/40">
+                Live ad creative under NDA · references on request
+              </p>
             </div>
-          </section>
-        )}
+
+            {/* Hero panel */}
+            <StylizedPanel
+              category={caseStudy.category}
+              title={caseStudy.title}
+              metric={caseStudy.metrics?.[0]}
+              tall
+            />
+
+            {/* Secondary panels — one per remaining metric */}
+            {caseStudy.metrics && caseStudy.metrics.length > 1 && (
+              <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {caseStudy.metrics.slice(1).map((m, i) => (
+                  <StylizedPanel
+                    key={i}
+                    category={caseStudy.category}
+                    label={`Asset ${String(i + 2).padStart(2, "0")}`}
+                    metric={m}
+                    seed={i + 1}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
 
         {/* Related */}
         {related.length > 0 && (
@@ -352,6 +353,98 @@ const CaseStudyDetail = () => {
         <Footer />
       </div>
     </>
+  );
+};
+
+// Category gradient palette — same family as the hover preview
+const PANEL_GRADIENTS: Record<string, string> = {
+  "e-commerce": "from-amber-500/55 via-gold/40 to-rose-500/40",
+  "f&b": "from-orange-500/55 via-rose-400/40 to-amber-500/40",
+  ngo: "from-emerald-500/55 via-teal-500/40 to-cyan-500/40",
+  branding: "from-violet-500/55 via-fuchsia-500/40 to-rose-500/40",
+  b2b: "from-blue-500/55 via-cyan-500/40 to-teal-500/40",
+  local: "from-indigo-500/55 via-violet-500/40 to-purple-500/40",
+  apps: "from-sky-500/55 via-blue-500/40 to-indigo-500/40",
+  travel: "from-sky-400/55 via-cyan-400/40 to-emerald-400/40",
+};
+
+const StylizedPanel = ({
+  category,
+  title,
+  metric,
+  label,
+  tall = false,
+  seed = 0,
+}: {
+  category: string;
+  title?: string;
+  metric?: { label: string; value: string };
+  label?: string;
+  tall?: boolean;
+  seed?: number;
+}) => {
+  const gradient = PANEL_GRADIENTS[category] ?? "from-gold/55 via-amber-500/40 to-rose-500/40";
+  const direction = seed % 2 === 0 ? "bg-gradient-to-br" : "bg-gradient-to-tr";
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.8, delay: seed * 0.06, ease: [0.16, 1, 0.3, 1] }}
+      className={`relative overflow-hidden ring-1 ring-white/[0.06] hover:ring-gold/40 transition-all duration-700 group ${
+        tall ? "aspect-[16/8]" : "aspect-[4/3]"
+      }`}
+    >
+      <div className="absolute inset-0 bg-obsidian" />
+      <motion.div
+        className={`absolute inset-0 ${direction} ${gradient}`}
+        animate={{ backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"] }}
+        transition={{ duration: 18 + seed * 2, repeat: Infinity, ease: "easeInOut" }}
+        style={{ backgroundSize: "200% 200%" }}
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-[0.16] mix-blend-overlay"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+        }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-obsidian/85 via-obsidian/20 to-transparent" />
+      {/* Corner marks */}
+      <span aria-hidden className="absolute top-3 left-3 w-3 h-3 border-t border-l border-gold/50" />
+      <span aria-hidden className="absolute top-3 right-3 w-3 h-3 border-t border-r border-gold/50" />
+      <span aria-hidden className="absolute bottom-3 left-3 w-3 h-3 border-b border-l border-gold/50" />
+      <span aria-hidden className="absolute bottom-3 right-3 w-3 h-3 border-b border-r border-gold/50" />
+      {/* Content */}
+      <div className={`relative h-full p-6 md:p-8 flex flex-col justify-between ${tall ? "" : ""}`}>
+        <div className="flex items-center justify-between">
+          <span className="font-mono uppercase text-[0.625rem] tracking-[0.22em] text-white/80 bg-obsidian/40 backdrop-blur-sm px-2.5 py-1">
+            {label ?? "Primary asset"}
+          </span>
+          <span className="font-mono uppercase text-[0.625rem] tracking-[0.22em] text-gold">
+            Under NDA
+          </span>
+        </div>
+        <div>
+          {title && (
+            <p className={`font-serif text-white leading-[1.05] mb-3 ${tall ? "text-4xl md:text-6xl" : "text-2xl md:text-3xl line-clamp-2"}`}>
+              {title}
+            </p>
+          )}
+          {metric && (
+            <div className="flex items-baseline gap-3 mt-2">
+              <span className={`font-serif text-gold tabular leading-none ${tall ? "text-6xl md:text-8xl" : "text-3xl md:text-4xl"}`}>
+                {metric.value}
+              </span>
+              <span className="font-mono uppercase text-[0.625rem] tracking-[0.22em] text-white/70">
+                {metric.label}
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+    </motion.div>
   );
 };
 
