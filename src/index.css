@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import './styles/base/variables.css';
 @import './styles/base/typography.css';
 @import './styles/base/reset.css';
@@ -13,8 +17,7 @@
 @import './styles/components/buttons.css';
 @import './styles/components/cards.css';
 @import './styles/components/patterns.css';
+@import './styles/components/voice-agent.css';
 @import './styles/components/grain.css';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import './styles/v2/v2-theme.css';

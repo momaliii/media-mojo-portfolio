@@ -1,101 +1,195 @@
+
 import React from "react";
-import { Linkedin } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import { 
+  Linkedin, 
+  ArrowUp 
+} from "lucide-react";
 
 const Footer = () => {
-  const year = new Date().getFullYear();
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
-    <footer className="bg-obsidian border-t border-white/[0.06] grain">
-      <div className="container mx-auto px-6 lg:px-10 py-20 md:py-28">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 mb-20">
-          <div className="md:col-span-5">
-            <p className="eyebrow text-gold mb-6">Mohamed Ali</p>
-            <p className="font-serif text-3xl md:text-4xl text-white leading-[1.15] mb-8 max-w-md">
-              Performance marketing,
-              <br />
-              <span className="serif-italic text-gold">crafted</span> — not
-              configured.
+    <footer className="bg-gray-50 py-12">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Footer Top Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12">
+          <div>
+            <div className="text-xl font-bold mb-4">
+              <span className="gradient-text">Mohamed Ali</span>
+            </div>
+            <p className="text-gray-600 mb-6">
+              Strategic media buying for businesses seeking exceptional results and maximum ROI.
             </p>
-            <p className="text-white/60 text-sm leading-relaxed max-w-md">
-              Senior media buyer for ambitious DTC, e-commerce, and B2B brands.
-              Based in Cairo, working across 10 countries.
-            </p>
-          </div>
-
-          <div className="md:col-span-4">
-            <p className="eyebrow text-white/40 mb-6">Direct</p>
-            <ul className="space-y-4 text-white/80">
-              <li>
-                <a
-                  href="mailto:mhmd167ali@gmail.com"
-                  className="font-serif text-2xl md:text-3xl gold-underline hover:text-gold transition-colors"
+            <div className="flex space-x-3">
+              <a 
+                href="https://www.linkedin.com/in/mhmdali02/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gray-200 hover:bg-gray-300 transition-colors p-2 rounded-full"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-4 w-4 text-gray-700" />
+              </a>
+              <a 
+                href="https://wa.me/+201060098267" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gray-200 hover:bg-gray-300 transition-colors p-2 rounded-full"
+                aria-label="WhatsApp"
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  className="h-4 w-4 text-gray-700"
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
                 >
-                  mhmd167ali@gmail.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://wa.me/+201060098267"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-serif text-2xl md:text-3xl gold-underline hover:text-gold transition-colors"
-                >
-                  +20 106 009 8267
-                </a>
-              </li>
-            </ul>
+                  <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+                  <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Z" />
+                  <path d="M14 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Z" />
+                  <path d="M12 14a2 2 0 0 0 2-2v-2a2 2 0 1 0-4 0v2a2 2 0 0 0 2 2Z" />
+                </svg>
+              </a>
+            </div>
           </div>
-
-          <div className="md:col-span-3">
-            <p className="eyebrow text-white/40 mb-6">Elsewhere</p>
+          
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-wider mb-4">
+              Services
+            </h3>
             <ul className="space-y-3">
               <li>
-                <a
-                  href="https://www.linkedin.com/in/mhmdali02/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-white/70 hover:text-gold transition-colors gold-underline"
-                >
-                  <Linkedin size={14} />
-                  <span className="font-mono uppercase text-[0.6875rem] tracking-[0.22em]">
-                    LinkedIn
-                  </span>
+                <a href="#" className="text-gray-600 hover:text-media-purple transition-colors text-sm">
+                  Paid Social Media
                 </a>
               </li>
               <li>
-                <a
-                  href="/Mohamed_Ali_CV.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/70 hover:text-gold transition-colors gold-underline font-mono uppercase text-[0.6875rem] tracking-[0.22em]"
-                >
-                  Resume (PDF) ↓
+                <a href="#" className="text-gray-600 hover:text-media-purple transition-colors text-sm">
+                  Search Engine Marketing
                 </a>
               </li>
-              <li className="font-mono uppercase text-[0.6875rem] tracking-[0.22em] text-white/40">
-                Cairo · GMT+2
+              <li>
+                <a href="#" className="text-gray-600 hover:text-media-purple transition-colors text-sm">
+                  Programmatic Display
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-600 hover:text-media-purple transition-colors text-sm">
+                  Performance Analysis
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-600 hover:text-media-purple transition-colors text-sm">
+                  Media Planning
+                </a>
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-wider mb-4">
+              Quick Links
+            </h3>
+            <ul className="space-y-3">
+              <li>
+                <a 
+                  href="#" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('about')?.scrollIntoView({behavior: 'smooth'});
+                  }}
+                  className="text-gray-600 hover:text-media-purple transition-colors text-sm"
+                >
+                  About
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('services')?.scrollIntoView({behavior: 'smooth'});
+                  }}
+                  className="text-gray-600 hover:text-media-purple transition-colors text-sm"
+                >
+                  Services
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('portfolio')?.scrollIntoView({behavior: 'smooth'});
+                  }}
+                  className="text-gray-600 hover:text-media-purple transition-colors text-sm"
+                >
+                  Portfolio
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('contact')?.scrollIntoView({behavior: 'smooth'});
+                  }}
+                  className="text-gray-600 hover:text-media-purple transition-colors text-sm"
+                >
+                  Contact
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-600 hover:text-media-purple transition-colors text-sm">
+                  Privacy Policy
+                </a>
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-wider mb-4">
+              Contact
+            </h3>
+            <ul className="space-y-3">
+              <li className="text-gray-600 text-sm">
+                mhmd167ali@gmail.com
+              </li>
+              <li className="text-gray-600 text-sm">
+                <a href="https://wa.me/+201060098267" className="hover:text-media-purple transition-colors">
+                  Schedule a consultation call
+                </a>
+              </li>
+              <li className="text-gray-600 text-sm">
+                Sunday - Thursday: 9am - 5pm
               </li>
             </ul>
           </div>
         </div>
-
-        {/* Big mark */}
-        <div
-          aria-hidden
-          className="font-serif text-[clamp(5rem,18vw,16rem)] leading-none text-white/[0.04] tracking-tighter select-none mb-16 -mx-6 lg:-mx-10 text-center overflow-hidden whitespace-nowrap"
-        >
-          Mohamed Ali
-        </div>
-
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-8 border-t border-white/[0.06]">
-          <p className="font-mono uppercase text-[0.625rem] tracking-[0.22em] text-white/40">
-            © {year} Mohamed Ali · All rights reserved
+        
+        <Separator className="my-6" />
+        
+        {/* Footer Bottom */}
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          <p className="text-gray-500 text-sm">
+            © {new Date().getFullYear()} MDZ. All rights reserved.
           </p>
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="font-mono uppercase text-[0.625rem] tracking-[0.22em] text-white/40 hover:text-gold transition-colors flex items-center gap-2"
+          
+          <button 
+            onClick={scrollToTop}
+            className="flex items-center gap-2 text-gray-500 hover:text-media-purple text-sm mt-4 md:mt-0 group"
+            aria-label="Back to top"
           >
-            ↑ Back to top
+            <span>Back to top</span>
+            <div className="bg-gray-200 group-hover:bg-media-purple/20 p-1 rounded-full transition-colors">
+              <ArrowUp className="h-4 w-4 group-hover:text-media-purple transition-colors" />
+            </div>
           </button>
         </div>
       </div>

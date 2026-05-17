@@ -1,0 +1,137 @@
+/* v2 theme — scoped to .v2-theme wrapper, overrides shadcn CSS vars for dark luxury */
+
+.v2-theme {
+  --background: 0 0% 4%;
+  --foreground: 40 40% 96%;
+  --card: 0 0% 7%;
+  --card-foreground: 40 40% 96%;
+  --popover: 0 0% 7%;
+  --popover-foreground: 40 40% 96%;
+  --primary: 44 65% 53%;
+  --primary-foreground: 0 0% 7%;
+  --secondary: 0 0% 12%;
+  --secondary-foreground: 40 40% 96%;
+  --muted: 0 0% 10%;
+  --muted-foreground: 40 10% 65%;
+  --accent: 44 65% 53%;
+  --accent-foreground: 0 0% 7%;
+  --destructive: 0 70% 50%;
+  --destructive-foreground: 40 40% 96%;
+  --border: 0 0% 14%;
+  --input: 0 0% 12%;
+  --ring: 44 65% 53%;
+  --radius: 0.25rem;
+
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background-color: #0A0A0A;
+  color: #F5E6C8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.v2-theme h1,
+.v2-theme h2,
+.v2-theme h3,
+.v2-theme h4,
+.v2-theme h5,
+.v2-theme h6 {
+  font-family: 'Instrument Serif', ui-serif, Georgia, Cambria, serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.v2-theme ::selection {
+  background: rgba(212, 175, 55, 0.35);
+  color: #F5E6C8;
+}
+
+/* Utility classes (scoped) */
+.v2-theme .eyebrow {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  font-weight: 500;
+  color: #D4AF37;
+  line-height: 1;
+}
+
+.v2-theme .eyebrow-lg {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  text-transform: uppercase;
+  font-size: 0.8125rem;
+  letter-spacing: 0.2em;
+  font-weight: 500;
+  color: #D4AF37;
+  line-height: 1;
+}
+
+.v2-theme .tabular {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+.v2-theme .serif-italic {
+  font-family: 'Instrument Serif', ui-serif, Georgia, Cambria, serif;
+  font-style: italic;
+}
+
+.v2-theme .gold-text {
+  color: #D4AF37;
+}
+
+.v2-theme .gradient-text {
+  color: #F5E6C8;
+  background: none;
+  -webkit-text-fill-color: #F5E6C8;
+}
+
+/* Gold-underline hover (already in grain.css — but rescope to v2) */
+.v2-theme .gold-underline {
+  background-image: linear-gradient(#D4AF37, #D4AF37);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.v2-theme .gold-underline:hover,
+.v2-theme .gold-underline:focus-visible {
+  background-size: 100% 1px;
+}
+
+/* Marquee */
+.v2-theme .marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+@keyframes v2-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.v2-theme .animate-marquee {
+  animation: v2-marquee 40s linear infinite;
+}
+
+/* Grain texture */
+.v2-theme .grain {
+  position: relative;
+  isolation: isolate;
+}
+.v2-theme .grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.v2-theme .grain > * {
+  position: relative;
+  z-index: 2;
+}
