@@ -118,7 +118,7 @@ const ClientLogos = () => {
               hidden: {},
               show: { transition: { staggerChildren: 0.08, delayChildren: 0.2 } },
             }}
-            className="flex flex-wrap justify-center gap-4 md:gap-6"
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 max-w-5xl mx-auto"
           >
             {sorted.map((logo, i) => (
               <LogoTile key={logo.id} logo={logo} index={i} animateIn />
@@ -143,18 +143,29 @@ const tileVariants = {
 
 const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
   const inner = (
-    <div className="group relative flex items-center justify-center h-24 w-44 md:h-28 md:w-52 rounded-2xl border border-gray-200/70 dark:border-gray-800/70 bg-white/80 dark:bg-gray-900/40 backdrop-blur-sm shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_30px_-12px_rgba(124,58,237,0.25)] hover:border-media-purple/40 hover:-translate-y-1 transition-all duration-500 ease-out overflow-hidden">
+    <div className="group relative flex flex-col items-center justify-between h-40 md:h-44 w-full md:min-w-[200px] p-5 rounded-2xl border border-gray-200/70 dark:border-gray-800/70 bg-white/80 dark:bg-gray-900/40 backdrop-blur-sm shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_30px_-12px_rgba(124,58,237,0.25)] hover:border-media-purple/40 hover:-translate-y-1 transition-all duration-500 ease-out overflow-hidden">
       {/* Shimmer sweep on hover */}
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1100ms] ease-out bg-gradient-to-r from-transparent via-white/50 dark:via-white/10 to-transparent"
       />
-      <img
-        src={logo.logo_url}
-        alt={`${logo.name} logo`}
-        loading="lazy"
-        className="relative max-h-14 md:max-h-16 max-w-[80%] object-contain grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 ease-out"
-      />
+
+      {/* Logo area — fixed height keeps every card aligned */}
+      <div className="relative flex-1 w-full flex items-center justify-center">
+        <img
+          src={logo.logo_url}
+          alt={`${logo.name} logo`}
+          loading="lazy"
+          className="max-h-14 md:max-h-16 max-w-[85%] object-contain grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 ease-out"
+        />
+      </div>
+
+      {/* Brand name */}
+      <div className="relative w-full pt-3 mt-2 border-t border-gray-100 dark:border-gray-800/60">
+        <p className="text-center text-[13px] md:text-sm font-medium tracking-tight text-gray-700 dark:text-gray-200 truncate">
+          {logo.name}
+        </p>
+      </div>
     </div>
   );
 
@@ -167,7 +178,7 @@ const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
     <Wrapper
       {...wrapperProps}
       title={logo.name}
-      className="flex-shrink-0"
+      className="block w-full"
       {...(animateIn
         ? { variants: tileVariants }
         : {
