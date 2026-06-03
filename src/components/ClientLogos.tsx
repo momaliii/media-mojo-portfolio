@@ -102,7 +102,7 @@ const ClientLogos = () => {
             }}
           >
             <div
-              className="flex gap-6 md:gap-8 w-max animate-[marquee_40s_linear_infinite] group-hover/marquee:[animation-play-state:paused]"
+              className="flex gap-6 md:gap-8 w-max animate-marquee group-hover/marquee:[animation-play-state:paused]"
             >
               {marqueeLogos.map((logo, idx) => (
                 <LogoTile key={`${logo.id}-${idx}`} logo={logo} index={idx} animateIn={false} />
