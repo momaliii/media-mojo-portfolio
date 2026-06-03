@@ -18,9 +18,9 @@ const BASE_URL = typeof window !== 'undefined'
   : "https://mediamojomarketing.com";
 
 const MetaTags = ({
-  title = "Mohamed Ali | Senior Media Buyer & Digital Marketing Specialist",
-  description = "Senior Media Buyer with 6+ years of experience driving exceptional results across 10+ countries. Specializing in Meta Ads, Google Ads, TikTok, and Snapchat with proven ROAS of 8x+ and 95K+ orders generated. Available for remote consultation and campaign management.",
-  imageUrl = "/lovable-uploads/e7da6e3c-66cf-4166-9955-98eb4097a88f.png",
+  title = "Mohamed Ali | Senior Media Buyer",
+  description = "Senior Media Buyer with 6+ years driving 8x+ ROAS and 95K+ orders across Meta, Google, TikTok and Snapchat in 10+ countries.",
+  imageUrl = "https://media-mojo-portfolio.lovable.app/lovable-uploads/e7da6e3c-66cf-4166-9955-98eb4097a88f.png",
   url,
   type = "website",
   author = "Mohamed Ali",

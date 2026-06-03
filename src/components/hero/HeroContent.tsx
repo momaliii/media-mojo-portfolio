@@ -48,7 +48,7 @@ const HeroContent = () => {
             variants={item}
             className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight"
           >
-            Mohamed <span className="gradient-text">Ali</span>
+            Mohamed <span className="gradient-text">Ali</span> — Senior Media Buyer
           </motion.h1>
           
           <motion.p 

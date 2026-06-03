@@ -98,6 +98,19 @@ const CaseStudyDetail = () => {
     }
   };
 
+  const caseStudyJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "headline": caseStudy.title,
+    "name": caseStudy.title,
+    "description": caseStudy.description,
+    "image": caseStudy.screenshot,
+    "author": { "@type": "Person", "name": "Mohamed Ali" },
+    "creator": { "@type": "Person", "name": "Mohamed Ali" },
+    "about": caseStudy.industry || caseStudy.category,
+    "url": `https://media-mojo-portfolio.lovable.app/case-study/${slug}`,
+  };
+
   return (
     <>
       <MetaTags 
@@ -105,8 +118,13 @@ const CaseStudyDetail = () => {
         description={caseStudy.description}
         url={`/case-study/${slug}`}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudyJsonLd) }}
+      />
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
         <Navigation />
+        
         
         <div className="pt-20 pb-16">
           <div className="container mx-auto px-4 max-w-4xl">
