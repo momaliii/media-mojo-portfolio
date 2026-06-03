@@ -2,8 +2,10 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://mediamojomarketing.com/sitemap.xml
+Sitemap: https://media-mojo-portfolio.lovable.app/sitemap.xml
 
 # Disallow admin/auth pages
 Disallow: /auth
+Disallow: /admin
+Disallow: /profile
 Disallow: /api/
