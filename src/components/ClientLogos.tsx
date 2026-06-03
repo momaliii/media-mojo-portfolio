@@ -1,6 +1,8 @@
 import React from "react";
 import { motion, type Variants } from "framer-motion";
+import { Star } from "lucide-react";
 import { useVisibleClientLogos } from "@/hooks/use-client-logos";
+import { cn } from "@/lib/utils";
 
 const ClientLogos = () => {
   const { data: logos = [], isLoading } = useVisibleClientLogos();
@@ -131,7 +133,7 @@ const ClientLogos = () => {
 };
 
 interface LogoTileProps {
-  logo: { name: string; logo_url: string; website_url: string | null };
+  logo: { name: string; logo_url: string; website_url: string | null; featured: boolean };
   index: number;
   animateIn: boolean;
 }
@@ -143,16 +145,33 @@ const tileVariants: Variants = {
 
 const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
   const isLink = Boolean(logo.website_url);
+  const isFeatured = logo.featured;
 
   const inner = (
     <div
-      className="group relative flex flex-col items-center justify-between h-40 md:h-44 w-full md:min-w-[200px] p-5 rounded-2xl border border-gray-200/70 dark:border-gray-800/70 bg-white/80 dark:bg-gray-900/40 backdrop-blur-sm shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_30px_-12px_rgba(124,58,237,0.25)] focus-visible:shadow-[0_10px_30px_-12px_rgba(124,58,237,0.25)] hover:border-media-purple/40 focus-visible:border-media-purple/40 hover:-translate-y-1 focus-visible:-translate-y-1 transition-all duration-500 ease-out overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-media-purple/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      className={cn(
+        "group relative flex flex-col items-center justify-between h-40 md:h-44 w-full md:min-w-[200px] p-5 rounded-2xl border backdrop-blur-sm overflow-hidden transition-all duration-500 ease-out",
+        isFeatured
+          ? "border-gold-400/50 dark:border-gold-400/40 bg-gradient-to-b from-gold-50/50 via-white/80 to-white/80 dark:from-gold-900/15 dark:via-gray-900/50 dark:to-gray-900/40 shadow-[0_2px_8px_rgba(212,175,55,0.10)] hover:shadow-[0_10px_30px_-12px_rgba(212,175,55,0.30)] focus-visible:shadow-[0_10px_30px_-12px_rgba(212,175,55,0.30)] hover:border-gold-400/80 focus-visible:border-gold-400/80 hover:-translate-y-1 focus-visible:-translate-y-1"
+          : "border-gray-200/70 dark:border-gray-800/70 bg-white/80 dark:bg-gray-900/40 shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_30px_-12px_rgba(124,58,237,0.25)] focus-visible:shadow-[0_10px_30px_-12px_rgba(124,58,237,0.25)] hover:border-media-purple/40 focus-visible:border-media-purple/40 hover:-translate-y-1 focus-visible:-translate-y-1"
+      )}
     >
       {/* Shimmer sweep on hover */}
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1100ms] ease-out bg-gradient-to-r from-transparent via-white/50 dark:via-white/10 to-transparent"
       />
+
+      {/* Featured badge */}
+      {isFeatured && (
+        <span
+          aria-hidden
+          className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-gold-400/15 dark:bg-gold-400/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-gold-600 dark:text-gold-300"
+        >
+          <Star className="w-3 h-3 fill-gold-400 text-gold-400" />
+          Featured
+        </span>
+      )}
 
       {/* Logo area — fixed height keeps every card aligned */}
       <div className="relative flex-1 w-full flex items-center justify-center">
@@ -165,8 +184,18 @@ const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
       </div>
 
       {/* Brand name */}
-      <div className="relative w-full pt-3 mt-2 border-t border-gray-100 dark:border-gray-800/60">
-        <p className="text-center text-[13px] md:text-sm font-medium tracking-tight text-gray-700 dark:text-gray-200 truncate">
+      <div className={cn(
+        "relative w-full pt-3 mt-2 border-t",
+        isFeatured
+          ? "border-gold-200/60 dark:border-gold-800/40"
+          : "border-gray-100 dark:border-gray-800/60"
+      )}>
+        <p className={cn(
+          "text-center text-[13px] md:text-sm tracking-tight truncate",
+          isFeatured
+            ? "font-semibold text-gray-900 dark:text-gold-100"
+            : "font-medium text-gray-700 dark:text-gray-200"
+        )}>
           {logo.name}
         </p>
       </div>
