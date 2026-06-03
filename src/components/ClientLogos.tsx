@@ -118,7 +118,7 @@ const ClientLogos = () => {
               hidden: {},
               show: { transition: { staggerChildren: 0.08, delayChildren: 0.2 } },
             }}
-            className="flex flex-wrap justify-center gap-4 md:gap-6"
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 max-w-5xl mx-auto"
           >
             {sorted.map((logo, i) => (
               <LogoTile key={logo.id} logo={logo} index={i} animateIn />
