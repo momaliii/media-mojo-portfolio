@@ -11,22 +11,18 @@ const ResetPassword = () => {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [loading, setLoading] = useState(false);
-  const [ready, setReady] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
-    // Supabase auto-handles the recovery token in the URL hash and creates a session.
-    const { data: sub } = supabase.auth.onAuthStateChange((event) => {
-      if (event === "PASSWORD_RECOVERY" || event === "SIGNED_IN") {
-        setReady(true);
-      }
-    });
-    // Also check if a session already exists (in case event fired before mount)
-    supabase.auth.getSession().then(({ data }) => {
-      if (data.session) setReady(true);
-    });
-    return () => sub.subscription.unsubscribe();
+    // Handle PKCE-style recovery links: ?code=...
+    const url = new URL(window.location.href);
+    const code = url.searchParams.get("code");
+    if (code) {
+      supabase.auth.exchangeCodeForSession(code).catch(() => {
+        // ignore — user will see error on submit if session missing
+      });
+    }
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -37,6 +33,12 @@ const ResetPassword = () => {
     }
     setLoading(true);
     try {
+      const { data: sessionData } = await supabase.auth.getSession();
+      if (!sessionData.session) {
+        throw new Error(
+          "Reset link is invalid or expired. Please request a new one."
+        );
+      }
       const { error } = await supabase.auth.updateUser({ password });
       if (error) throw error;
       toast({ title: "Password updated", description: "You can now sign in." });
@@ -55,9 +57,7 @@ const ResetPassword = () => {
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">Set a new password</CardTitle>
           <CardDescription className="text-center">
-            {ready
-              ? "Choose a new password for your account."
-              : "Validating reset link..."}
+            Choose a new password for your account.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -72,7 +72,7 @@ const ResetPassword = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 minLength={6}
-                disabled={loading || !ready}
+                disabled={loading}
               />
             </div>
             <div className="space-y-2">
@@ -85,10 +85,10 @@ const ResetPassword = () => {
                 onChange={(e) => setConfirm(e.target.value)}
                 required
                 minLength={6}
-                disabled={loading || !ready}
+                disabled={loading}
               />
             </div>
-            <Button type="submit" className="w-full" disabled={loading || !ready}>
+            <Button type="submit" className="w-full" disabled={loading}>
               {loading ? (
                 <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Updating</>
               ) : (
