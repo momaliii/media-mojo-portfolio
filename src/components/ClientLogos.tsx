@@ -49,7 +49,7 @@ const ClientLogos = () => {
                 "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
             }}
           >
-            <div className="flex gap-12 md:gap-16 animate-logo-marquee w-max">
+            <div className="flex gap-12 md:gap-16 animate-marquee w-max">
               {marqueeLogos.map((logo, idx) => (
                 <LogoItem key={`${logo.id}-${idx}`} logo={logo} size="lg" />
               ))}
