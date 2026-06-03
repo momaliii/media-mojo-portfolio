@@ -24,18 +24,21 @@ const ClientLogos = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="text-center mb-14 md:mb-16"
         >
-          <p className="text-xs uppercase tracking-[0.25em] text-media-purple font-semibold mb-3">
+          <p className="text-[11px] md:text-xs uppercase tracking-[0.32em] text-media-purple font-semibold mb-4">
             Trusted by
           </p>
           <h2
             id="clients-heading"
-            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100"
+            className="text-[28px] md:text-[44px] leading-[1.1] font-semibold tracking-tight text-gray-900 dark:text-gray-100"
           >
             Brands I've worked with
           </h2>
-          <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-gradient-to-r from-media-purple to-media-oceanblue" />
+          <p className="mt-4 text-base md:text-lg leading-relaxed text-gray-500 dark:text-gray-400 max-w-xl mx-auto font-normal">
+            A selection of ambitious teams I've partnered with across the MENA region.
+          </p>
+          <div className="mx-auto mt-6 h-px w-12 bg-gradient-to-r from-transparent via-media-purple to-transparent" />
         </motion.div>
 
         {useMarquee ? (
