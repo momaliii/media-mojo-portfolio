@@ -1,6 +1,8 @@
 import React from "react";
 import { motion, type Variants } from "framer-motion";
+import { Star } from "lucide-react";
 import { useVisibleClientLogos } from "@/hooks/use-client-logos";
+import { cn } from "@/lib/utils";
 
 const ClientLogos = () => {
   const { data: logos = [], isLoading } = useVisibleClientLogos();
