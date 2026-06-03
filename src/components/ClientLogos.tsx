@@ -136,9 +136,9 @@ interface LogoTileProps {
   animateIn: boolean;
 }
 
-const tileVariants = {
+const tileVariants: Variants = {
   hidden: { opacity: 0, y: 24, scale: 0.92 },
-  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: "easeOut" } },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
 };
 
 const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
