@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound";
 import CaseStudyDetail from "./pages/CaseStudyDetail";
 import CaseStudies from "./pages/CaseStudies";
 import Auth from "./pages/Auth";
+import ResetPassword from "./pages/ResetPassword";
 import IndexV2 from "./pages/v2/Index";
 import CaseStudiesV2 from "./pages/v2/CaseStudies";
 import CaseStudyDetailV2 from "./pages/v2/CaseStudyDetail";
@@ -103,6 +104,7 @@ const App = () => (
                 <RouteTracker />
                 <Routes>
                   <Route path="/auth" element={<Auth />} />
+                  <Route path="/reset-password" element={<ResetPassword />} />
                   <Route
                     path="/profile"
                     element={
