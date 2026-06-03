@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { useVisibleClientLogos } from "@/hooks/use-client-logos";
 
 const ClientLogos = () => {
