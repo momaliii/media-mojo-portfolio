@@ -38,7 +38,7 @@ const HeroContent = () => {
         <div>
           <motion.span 
             variants={item}
-            className="inline-block py-1.5 px-4 rounded-full bg-gradient-to-r from-media-purple/20 to-media-oceanblue/20 text-media-purple font-medium text-sm mb-4 shadow-sm"
+            className="inline-block py-1 px-3.5 rounded-full bg-gradient-to-r from-media-purple/15 to-media-oceanblue/15 text-media-purple font-medium text-[11px] uppercase tracking-[0.18em] mb-5 shadow-sm"
           >
             Senior Media Buyer
           </motion.span>
@@ -46,16 +46,19 @@ const HeroContent = () => {
           <motion.h1 
             id="hero-heading"
             variants={item}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight"
+            className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-gray-900 dark:text-gray-50"
           >
-            Mohamed <span className="gradient-text">Ali</span> — Senior Media Buyer
+            Mohamed <span className="gradient-text">Ali</span>
+            <span className="block text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-gray-500 dark:text-gray-400 mt-3">
+              Senior Media Buyer
+            </span>
           </motion.h1>
           
           <motion.p 
             variants={item}
-            className="mt-6 text-lg text-gray-600 max-w-2xl"
+            className="mt-6 text-base md:text-lg leading-[1.7] text-gray-600 dark:text-gray-300 max-w-xl"
           >
-            Senior Media Buyer with 6+ years of experience optimizing campaigns across Meta, LinkedIn, TikTok, Snapchat, and Google Ads. Delivering exceptional results and measurable ROI.
+            Senior Media Buyer with 7+ years of experience optimizing campaigns across Meta, LinkedIn, TikTok, Snapchat, and Google Ads. Delivering exceptional results and measurable ROI.
           </motion.p>
           
           <motion.div 
