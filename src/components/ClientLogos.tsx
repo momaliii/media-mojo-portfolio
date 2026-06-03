@@ -133,7 +133,7 @@ const ClientLogos = () => {
 };
 
 interface LogoTileProps {
-  logo: { name: string; logo_url: string; website_url: string | null };
+  logo: { name: string; logo_url: string; website_url: string | null; featured: boolean };
   index: number;
   animateIn: boolean;
 }
