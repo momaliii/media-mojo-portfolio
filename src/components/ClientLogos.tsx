@@ -168,7 +168,12 @@ const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
           aria-hidden
           className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-gold-400/15 dark:bg-gold-400/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-gold-600 dark:text-gold-300"
         >
-          <Star className="w-3 h-3 fill-gold-400 text-gold-400" />
+          <motion.span
+            animate={{ scale: [1, 1.15, 1], opacity: [1, 0.7, 1] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Star className="w-3 h-3 fill-gold-400 text-gold-400" />
+          </motion.span>
           Featured
         </span>
       )}
