@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Portfolio from "@/components/Portfolio";
+import ClientLogos from "@/components/ClientLogos";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Services from "@/components/Services";
@@ -78,6 +79,11 @@ const Index = () => {
       <main id="main-content" className="overflow-hidden" tabIndex={-1} aria-label="Main content">
         <ErrorBoundary>
           <Hero />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <AnimatedSection id="clients-section">
+            <ClientLogos />
+          </AnimatedSection>
         </ErrorBoundary>
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50/50 to-white dark:from-gray-950 dark:via-gray-900/50 dark:to-gray-950 pointer-events-none" />

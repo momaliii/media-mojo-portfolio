@@ -30,7 +30,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { LayoutDashboard, FileText, Mail, User, BarChart3 } from "lucide-react";
+import { LayoutDashboard, FileText, Mail, User, BarChart3, Image as ImageIcon } from "lucide-react";
 
 interface AdminLayoutProps {
   title: string;
@@ -49,6 +49,7 @@ export default function AdminLayout({ title, children }: AdminLayoutProps) {
       { to: "/admin", label: "Dashboard", icon: LayoutDashboard },
       { to: "/admin/analytics", label: "Analytics", icon: BarChart3 },
       { to: "/admin/case-studies", label: "Case Studies", icon: FileText },
+      { to: "/admin/client-logos", label: "Client Logos", icon: ImageIcon },
       { to: "/admin/submissions", label: "Submissions", icon: Mail },
       ...base,
     ];

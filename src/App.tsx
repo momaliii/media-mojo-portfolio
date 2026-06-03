@@ -29,6 +29,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./pages/Profile";
 import AdminSubmissions from "./pages/AdminSubmissions";
 import AdminAnalytics from "./pages/AdminAnalytics";
+import AdminClientLogos from "./pages/AdminClientLogos";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -139,6 +140,14 @@ const App = () => (
                     element={
                       <AdminRoute>
                         <AdminCaseStudies />
+                      </AdminRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/client-logos"
+                    element={
+                      <AdminRoute>
+                        <AdminClientLogos />
                       </AdminRoute>
                     }
                   />
