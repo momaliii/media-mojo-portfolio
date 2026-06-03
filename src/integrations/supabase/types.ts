@@ -83,6 +83,42 @@ export type Database = {
         }
         Relationships: []
       }
+      client_logos: {
+        Row: {
+          created_at: string
+          featured: boolean
+          id: string
+          logo_url: string
+          name: string
+          sort_order: number
+          updated_at: string
+          visible: boolean
+          website_url: string | null
+        }
+        Insert: {
+          created_at?: string
+          featured?: boolean
+          id?: string
+          logo_url: string
+          name: string
+          sort_order?: number
+          updated_at?: string
+          visible?: boolean
+          website_url?: string | null
+        }
+        Update: {
+          created_at?: string
+          featured?: boolean
+          id?: string
+          logo_url?: string
+          name?: string
+          sort_order?: number
+          updated_at?: string
+          visible?: boolean
+          website_url?: string | null
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string
