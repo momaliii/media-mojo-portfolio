@@ -6,7 +6,7 @@ const HeroStats = () => {
     <div className="pt-6 grid grid-cols-2 md:grid-cols-3 gap-4">
       <div className="flex items-center gap-2">
         <div className="w-2 h-2 rounded-full bg-media-purple"></div>
-        <p className="text-sm text-gray-600">5+ Years Experience</p>
+        <p className="text-sm text-gray-600">7+ Years Experience</p>
       </div>
       <div className="flex items-center gap-2">
         <div className="w-2 h-2 rounded-full bg-media-oceanblue"></div>
