@@ -87,16 +87,18 @@ const Auth = () => {
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">
-            {isLogin ? "Sign In" : "Create Account"}
+            {isForgot ? "Reset Password" : isLogin ? "Sign In" : "Create Account"}
           </CardTitle>
           <CardDescription className="text-center">
-            {isLogin
+            {isForgot
+              ? "Enter your email and we'll send you a reset link"
+              : isLogin
               ? "Enter your credentials to access your account"
               : "Enter your email and password to create an account"}
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={isForgot ? handleForgot : handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <label htmlFor="email" className="text-sm font-medium">
                 Email
@@ -111,27 +113,43 @@ const Auth = () => {
                 disabled={loading}
               />
             </div>
-            <div className="space-y-2">
-              <label htmlFor="password" className="text-sm font-medium">
-                Password
-              </label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                disabled={loading}
-                minLength={6}
-              />
-            </div>
+            {!isForgot && (
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <label htmlFor="password" className="text-sm font-medium">
+                    Password
+                  </label>
+                  {isLogin && (
+                    <button
+                      type="button"
+                      onClick={() => setIsForgot(true)}
+                      className="text-xs text-media-purple hover:underline"
+                      disabled={loading}
+                    >
+                      Forgot password?
+                    </button>
+                  )}
+                </div>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  disabled={loading}
+                  minLength={6}
+                />
+              </div>
+            )}
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Please wait
                 </>
+              ) : isForgot ? (
+                "Send reset link"
               ) : isLogin ? (
                 "Sign In"
               ) : (
@@ -140,16 +158,27 @@ const Auth = () => {
             </Button>
           </form>
           <div className="mt-4 text-center text-sm">
-            <button
-              type="button"
-              onClick={() => setIsLogin(!isLogin)}
-              className="text-media-purple hover:underline"
-              disabled={loading}
-            >
-              {isLogin
-                ? "Don't have an account? Sign up"
-                : "Already have an account? Sign in"}
-            </button>
+            {isForgot ? (
+              <button
+                type="button"
+                onClick={() => setIsForgot(false)}
+                className="text-media-purple hover:underline"
+                disabled={loading}
+              >
+                Back to sign in
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setIsLogin(!isLogin)}
+                className="text-media-purple hover:underline"
+                disabled={loading}
+              >
+                {isLogin
+                  ? "Don't have an account? Sign up"
+                  : "Already have an account? Sign in"}
+              </button>
+            )}
           </div>
         </CardContent>
       </Card>
