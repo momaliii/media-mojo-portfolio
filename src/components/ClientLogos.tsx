@@ -9,8 +9,8 @@ const ClientLogos = () => {
 
   const sorted = [...logos].sort((a, b) => Number(b.featured) - Number(a.featured));
   const useMarquee = sorted.length >= 5;
-  // Triple the row for a seamless infinite loop
-  const marqueeLogos = useMarquee ? [...sorted, ...sorted, ...sorted] : sorted;
+  // Duplicate once for seamless -50% loop
+  const marqueeLogos = useMarquee ? [...sorted, ...sorted] : sorted;
 
   return (
     <section
