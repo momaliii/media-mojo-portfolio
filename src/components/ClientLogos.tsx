@@ -142,8 +142,12 @@ const tileVariants = {
 };
 
 const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
+  const isLink = Boolean(logo.website_url);
+
   const inner = (
-    <div className="group relative flex flex-col items-center justify-between h-40 md:h-44 w-full md:min-w-[200px] p-5 rounded-2xl border border-gray-200/70 dark:border-gray-800/70 bg-white/80 dark:bg-gray-900/40 backdrop-blur-sm shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_30px_-12px_rgba(124,58,237,0.25)] hover:border-media-purple/40 hover:-translate-y-1 transition-all duration-500 ease-out overflow-hidden">
+    <div
+      className="group relative flex flex-col items-center justify-between h-40 md:h-44 w-full md:min-w-[200px] p-5 rounded-2xl border border-gray-200/70 dark:border-gray-800/70 bg-white/80 dark:bg-gray-900/40 backdrop-blur-sm shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_30px_-12px_rgba(124,58,237,0.25)] focus-visible:shadow-[0_10px_30px_-12px_rgba(124,58,237,0.25)] hover:border-media-purple/40 focus-visible:border-media-purple/40 hover:-translate-y-1 focus-visible:-translate-y-1 transition-all duration-500 ease-out overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-media-purple/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+    >
       {/* Shimmer sweep on hover */}
       <span
         aria-hidden
@@ -154,7 +158,7 @@ const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
       <div className="relative flex-1 w-full flex items-center justify-center">
         <img
           src={logo.logo_url}
-          alt={`${logo.name} logo`}
+          alt=""
           loading="lazy"
           className="max-h-14 md:max-h-16 max-w-[85%] object-contain grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 ease-out"
         />
@@ -169,15 +173,31 @@ const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
     </div>
   );
 
-  const Wrapper: React.ElementType = logo.website_url ? motion.a : motion.div;
-  const wrapperProps = logo.website_url
-    ? { href: logo.website_url, target: "_blank", rel: "noopener noreferrer" }
-    : {};
+  if (isLink) {
+    return (
+      <motion.a
+        href={logo.website_url!}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Visit ${logo.name} website (opens in a new tab)`}
+        className="block w-full"
+        {...(animateIn
+          ? { variants: tileVariants }
+          : {
+              initial: { opacity: 0 },
+              animate: { opacity: 1 },
+              transition: { duration: 0.4 },
+            })}
+      >
+        {inner}
+      </motion.a>
+    );
+  }
 
   return (
-    <Wrapper
-      {...wrapperProps}
-      title={logo.name}
+    <motion.div
+      role="listitem"
+      aria-label={logo.name}
       className="block w-full"
       {...(animateIn
         ? { variants: tileVariants }
@@ -188,7 +208,7 @@ const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
           })}
     >
       {inner}
-    </Wrapper>
+    </motion.div>
   );
 };
 
