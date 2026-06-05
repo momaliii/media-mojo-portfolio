@@ -33,22 +33,23 @@ const AboutStats = () => {
       {stats.map((stat, index) => (
         <motion.div
           key={index}
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: index * 0.1, duration: 0.5 }}
+          transition={{ delay: index * 0.08, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
         >
-          <Card className="border-gray-100/50 bg-gradient-to-br from-white to-gray-50/50 hover:border-media-purple/30 transition-all duration-300 group hover:shadow-lg">
+          <Card className="relative border border-gray-200/60 dark:border-gray-800/60 bg-gradient-to-br from-white via-white to-gray-50/60 dark:from-gray-900/60 dark:via-gray-900/40 dark:to-gray-950/60 hover:border-media-purple/40 hover:-translate-y-1 transition-all duration-500 group hover:shadow-[0_20px_50px_-20px_rgba(124,58,237,0.35)] rounded-2xl overflow-hidden">
+            <span className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-media-purple/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             <CardContent className="p-6 text-center relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-gray-50 to-transparent rounded-full -translate-y-16 translate-x-16 transform opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-media-purple/5 to-transparent rounded-full -translate-y-16 translate-x-16 transform opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative">
-                <div className="mx-auto w-12 h-12 flex items-center justify-center bg-white rounded-xl shadow-sm mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="mx-auto w-14 h-14 flex items-center justify-center bg-white dark:bg-gray-900 rounded-2xl shadow-md ring-1 ring-gray-100 dark:ring-gray-800 mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                   {stat.icon}
                 </div>
-                <h3 className="text-3xl font-bold mb-1 bg-gradient-to-r from-media-purple to-media-oceanblue bg-clip-text text-transparent">
+                <h3 className="text-4xl font-bold mb-1 tracking-tight bg-gradient-to-r from-media-purple to-media-oceanblue bg-clip-text text-transparent">
                   {stat.value}
                 </h3>
-                <p className="text-gray-600 text-sm font-medium">{stat.label}</p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm font-medium tracking-wide">{stat.label}</p>
               </div>
             </CardContent>
           </Card>
