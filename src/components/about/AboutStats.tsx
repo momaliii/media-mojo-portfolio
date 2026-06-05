@@ -8,7 +8,7 @@ const AboutStats = () => {
   const stats = [
     { 
       icon: <BarChart3 className="text-media-purple h-6 w-6" />, 
-      value: "6+", 
+      value: "7+", 
       label: "Years Experience" 
     },
     { 
@@ -18,7 +18,7 @@ const AboutStats = () => {
     },
     { 
       icon: <LayoutGrid className="text-media-orange h-6 w-6" />, 
-      value: "6+", 
+      value: "7+", 
       label: "Platforms Mastered" 
     },
     { 
