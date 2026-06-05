@@ -111,14 +111,18 @@ const CaseStudies = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="mb-6"
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="mb-8"
               >
-                <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full border border-media-purple/20 bg-media-purple/10 backdrop-blur-sm text-media-purple text-xs font-semibold uppercase tracking-[0.18em] mb-5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-media-purple animate-pulse" aria-hidden="true" />
+                  Portfolio
+                </span>
+                <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-5">
                   <span className="gradient-text">Case Studies</span>
                 </h1>
-                <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed">
-                  Explore proven digital marketing strategies and campaign results across diverse industries
+                <p className="text-lg md:text-2xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+                  Explore proven digital marketing strategies and campaign results across diverse industries.
                 </p>
               </motion.div>
 
@@ -127,31 +131,30 @@ const CaseStudies = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12"
+                className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-12"
               >
-                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200/50 dark:border-gray-700/50 shadow-sm">
-                  <div className="flex items-center justify-center mb-2">
-                    <Briefcase className="h-8 w-8 text-media-purple dark:text-media-blue" />
+                {[
+                  { icon: Briefcase, value: `${totalProjects}+`, label: "Successful Projects" },
+                  { icon: Users, value: `${totalClients}+`, label: "Happy Clients" },
+                  { icon: Trophy, value: `${totalIndustries}+`, label: "Industries Served" },
+                ].map((s) => (
+                  <div
+                    key={s.label}
+                    className="group relative bg-card border border-border hover:border-media-purple/40 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-[0_10px_30px_-12px_rgba(124,58,237,0.25)] transition-all"
+                  >
+                    <span
+                      aria-hidden
+                      className="pointer-events-none absolute inset-x-6 -top-px h-px bg-gradient-to-r from-transparent via-media-purple/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+                    />
+                    <div className="flex items-center justify-center mb-3">
+                      <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-media-purple/10 text-media-purple">
+                        <s.icon className="h-6 w-6" aria-hidden="true" />
+                      </span>
+                    </div>
+                    <h3 className="text-3xl font-bold tracking-tight">{s.value}</h3>
+                    <p className="text-sm text-muted-foreground mt-1">{s.label}</p>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{totalProjects}+</h3>
-                  <p className="text-gray-600 dark:text-gray-400">Successful Projects</p>
-                </div>
-                
-                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200/50 dark:border-gray-700/50 shadow-sm">
-                  <div className="flex items-center justify-center mb-2">
-                    <Users className="h-8 w-8 text-media-purple dark:text-media-blue" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{totalClients}+</h3>
-                  <p className="text-gray-600 dark:text-gray-400">Happy Clients</p>
-                </div>
-                
-                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200/50 dark:border-gray-700/50 shadow-sm">
-                  <div className="flex items-center justify-center mb-2">
-                    <Trophy className="h-8 w-8 text-media-purple dark:text-media-blue" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{totalIndustries}+</h3>
-                  <p className="text-gray-600 dark:text-gray-400">Industries Served</p>
-                </div>
+                ))}
               </motion.div>
 
               {/* Action Buttons */}
