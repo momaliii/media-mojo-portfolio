@@ -24,7 +24,7 @@ const CaseStudyDetail = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
+      <div className="min-h-dvh flex items-center justify-center bg-gradient-to-b from-background via-muted/40 to-background">
         <Loader2 className="h-8 w-8 animate-spin text-media-purple" />
       </div>
     );
@@ -32,11 +32,11 @@ const CaseStudyDetail = () => {
 
   if (!caseStudy) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
+      <div className="min-h-dvh flex items-center justify-center bg-gradient-to-b from-background via-muted/40 to-background">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4 text-gray-900">Case Study Not Found</h1>
-          <p className="text-gray-600 mb-6">The case study you're looking for doesn't exist or has been moved.</p>
-          <Button onClick={() => navigate('/')} className="bg-media-purple hover:bg-media-purple/90">
+          <h1 className="text-2xl font-bold mb-4">Case study not found</h1>
+          <p className="text-muted-foreground mb-6">The case study you're looking for doesn't exist or has been moved.</p>
+          <Button onClick={() => navigate('/')} className="bg-media-purple hover:bg-media-darkpurple text-white">
             Back to Home
           </Button>
         </div>
@@ -122,7 +122,7 @@ const CaseStudyDetail = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudyJsonLd) }}
       />
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <div className="min-h-dvh bg-gradient-to-b from-background via-muted/40 to-background">
         <Navigation />
         
         
@@ -134,20 +134,20 @@ const CaseStudyDetail = () => {
               animate={{ opacity: 1, x: 0 }}
               className="mb-6 flex items-center justify-between"
             >
-              <div className="flex items-center gap-2 text-sm text-gray-500">
-                <button onClick={() => navigate('/')} className="hover:text-gray-700">Home</button>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <button onClick={() => navigate('/')} className="hover:text-foreground transition-colors">Home</button>
                 <span>/</span>
-                <button onClick={() => navigate('/#portfolio')} className="hover:text-gray-700">Portfolio</button>
+                <button onClick={() => navigate('/#portfolio')} className="hover:text-foreground transition-colors">Portfolio</button>
                 <span>/</span>
-                <span className="text-gray-900">{caseStudy.title}</span>
+                <span className="text-foreground truncate max-w-[180px] md:max-w-none">{caseStudy.title}</span>
               </div>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 size="sm"
                 onClick={handleShare}
-                className="text-gray-600 hover:text-gray-900"
+                className="hover:border-media-purple/50 hover:bg-media-purple/10 hover:text-media-purple transition-colors"
               >
-                <Share2 className="w-4 h-4 mr-2" />
+                <Share2 className="w-4 h-4 mr-2" aria-hidden="true" />
                 Share
               </Button>
             </motion.div>
@@ -158,12 +158,12 @@ const CaseStudyDetail = () => {
               animate={{ opacity: 1, x: 0 }}
               className="mb-6"
             >
-              <Button 
-                variant="ghost" 
+              <Button
+                variant="ghost"
                 onClick={() => navigate('/')}
-                className="text-gray-600 hover:text-gray-900"
+                className="text-muted-foreground hover:text-foreground"
               >
-                <ArrowLeft className="w-4 h-4 mr-2" />
+                <ArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" />
                 Back to Portfolio
               </Button>
             </motion.div>
@@ -174,32 +174,32 @@ const CaseStudyDetail = () => {
               animate={{ opacity: 1, y: 0 }}
               className="mb-12"
             >
-              <div className="flex items-center gap-3 mb-4">
-                <Badge className="bg-white/90 text-gray-800">
+              <div className="flex items-center gap-3 mb-4 flex-wrap">
+                <Badge className="bg-media-purple/10 text-media-purple border border-media-purple/20 hover:bg-media-purple/15">
                   {getCategoryName(caseStudy.category)}
                 </Badge>
                 {caseStudy.industry && (
                   <Badge variant="outline">{caseStudy.industry}</Badge>
                 )}
               </div>
-              
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+
+              <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-5 leading-[1.05]">
                 {caseStudy.title}
               </h1>
-              
-              <p className="text-xl text-gray-600 mb-6 leading-relaxed">
+
+              <p className="text-lg md:text-xl text-muted-foreground mb-6 leading-relaxed max-w-3xl">
                 {caseStudy.description}
               </p>
 
-              <div className="flex items-center gap-4 text-sm text-gray-500">
-                <div className="flex items-center gap-1">
-                  <Globe className="w-4 h-4" />
-                  <span>Client: {caseStudy.client}</span>
+              <div className="flex items-center gap-5 text-sm text-muted-foreground flex-wrap">
+                <div className="flex items-center gap-1.5">
+                  <Globe className="w-4 h-4" aria-hidden="true" />
+                  <span>Client: <span className="text-foreground font-medium">{caseStudy.client}</span></span>
                 </div>
                 {caseStudy.budgetRange && (
-                  <div className="flex items-center gap-1">
-                    <Target className="w-4 h-4" />
-                    <span>Budget: {caseStudy.budgetRange}</span>
+                  <div className="flex items-center gap-1.5">
+                    <Target className="w-4 h-4" aria-hidden="true" />
+                    <span>Budget: <span className="text-foreground font-medium">{caseStudy.budgetRange}</span></span>
                   </div>
                 )}
               </div>
@@ -212,7 +212,7 @@ const CaseStudyDetail = () => {
               transition={{ delay: 0.1 }}
               className="mb-12"
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
                 <BarChart3 className="w-6 h-6 text-media-purple" />
                 Key Results & Performance
               </h2>
@@ -224,15 +224,15 @@ const CaseStudyDetail = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 + index * 0.1 }}
                   >
-                    <Card className="text-center p-6 bg-white border-none shadow-lg hover:shadow-xl transition-shadow">
+                    <Card className="text-center p-6 bg-card border border-border shadow-lg hover:shadow-xl transition-shadow">
                       <CardContent className="p-0">
                         <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br ${getGradientClass(caseStudy.category)} mb-4`}>
                           <TrendingUp className="w-8 h-8 text-white" />
                         </div>
-                        <div className="text-3xl font-bold text-gray-900 mb-2">
+                        <div className="text-3xl font-bold text-foreground mb-2">
                           {metric.value}
                         </div>
-                        <div className="text-gray-600 font-medium">
+                        <div className="text-muted-foreground font-medium">
                           {metric.label}
                         </div>
                       </CardContent>
@@ -249,36 +249,36 @@ const CaseStudyDetail = () => {
               transition={{ delay: 0.15 }}
               className="mb-12"
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
                 <Award className="w-6 h-6 text-media-purple" />
                 Project Overview
               </h2>
-              <Card className="p-8 bg-white border-none shadow-lg">
+              <Card className="p-8 bg-card border border-border shadow-lg">
                 <CardContent className="p-0">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                      <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
                         <Users className="w-5 h-5 text-media-purple" />
                         Client Information
                       </h3>
                       <div className="space-y-3">
                         <div>
-                          <span className="font-medium text-gray-600">Client:</span>
-                          <span className="ml-2 text-gray-900">{caseStudy.client}</span>
+                          <span className="font-medium text-muted-foreground">Client:</span>
+                          <span className="ml-2 text-foreground">{caseStudy.client}</span>
                         </div>
                         {caseStudy.industry && (
                           <div>
-                            <span className="font-medium text-gray-600">Industry:</span>
-                            <span className="ml-2 text-gray-900">{caseStudy.industry}</span>
+                            <span className="font-medium text-muted-foreground">Industry:</span>
+                            <span className="ml-2 text-foreground">{caseStudy.industry}</span>
                           </div>
                         )}
                         <div>
-                          <span className="font-medium text-gray-600">Category:</span>
-                          <span className="ml-2 text-gray-900">{getCategoryName(caseStudy.category)}</span>
+                          <span className="font-medium text-muted-foreground">Category:</span>
+                          <span className="ml-2 text-foreground">{getCategoryName(caseStudy.category)}</span>
                         </div>
                         {caseStudy.budgetRange && (
                           <div>
-                            <span className="font-medium text-gray-600">Budget Range:</span>
+                            <span className="font-medium text-muted-foreground">Budget Range:</span>
                             <Badge variant="outline" className="ml-2">
                               {caseStudy.budgetRange.charAt(0).toUpperCase() + caseStudy.budgetRange.slice(1)}
                             </Badge>
@@ -288,18 +288,18 @@ const CaseStudyDetail = () => {
                     </div>
                     
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                      <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
                         <Zap className="w-5 h-5 text-media-purple" />
                         Campaign Details
                       </h3>
                       <div className="space-y-3">
                         <div>
-                          <span className="font-medium text-gray-600">Challenge:</span>
-                          <p className="text-gray-900 mt-1 leading-relaxed">{caseStudy.description}</p>
+                          <span className="font-medium text-muted-foreground">Challenge:</span>
+                          <p className="text-foreground mt-1 leading-relaxed">{caseStudy.description}</p>
                         </div>
                         {caseStudy.platforms && caseStudy.platforms.length > 0 && (
                           <div>
-                            <span className="font-medium text-gray-600 block mb-2">Platforms Used:</span>
+                            <span className="font-medium text-muted-foreground block mb-2">Platforms Used:</span>
                             <div className="flex flex-wrap gap-2">
                               {caseStudy.platforms.map((platform, index) => (
                                 <Badge key={index} variant="secondary" className="text-xs">
@@ -324,7 +324,7 @@ const CaseStudyDetail = () => {
                 transition={{ delay: 0.2 }}
                 className="mb-12"
               >
-                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
                   <Globe className="w-6 h-6 text-media-purple" />
                   Campaign Gallery
                 </h2>
@@ -341,7 +341,7 @@ const CaseStudyDetail = () => {
                 {/* Additional Screenshots */}
                 {caseStudy.additionalScreenshots && caseStudy.additionalScreenshots.length > 0 && (
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Additional Campaign Materials</h3>
+                    <h3 className="text-lg font-semibold text-foreground mb-4">Additional Campaign Materials</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {caseStudy.additionalScreenshots.map((screenshot, index) => (
                         <motion.div 
@@ -371,16 +371,16 @@ const CaseStudyDetail = () => {
               transition={{ delay: 0.25 }}
               className="mb-12"
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
                 <Target className="w-6 h-6 text-media-purple" />
                 Success Factors
               </h2>
-              <Card className="p-8 bg-gradient-to-br from-gray-50 to-blue-50 border-none">
+              <Card className="p-8 bg-gradient-to-br from-muted/40 via-muted/20 to-muted/40 border-none">
                 <CardContent className="p-0">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">What Made This Campaign Successful</h3>
-                      <ul className="space-y-3 text-gray-700">
+                      <h3 className="text-lg font-semibold text-foreground mb-4">What Made This Campaign Successful</h3>
+                      <ul className="space-y-3 text-foreground/90">
                         {caseStudy.strategy ? (
                           <>
                             <li className="flex items-start gap-3">
@@ -429,11 +429,11 @@ const CaseStudyDetail = () => {
                       </ul>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">Key Achievements</h3>
+                      <h3 className="text-lg font-semibold text-foreground mb-4">Key Achievements</h3>
                       <div className="space-y-4">
                         {caseStudy.metrics.map((metric, index) => (
-                          <div key={index} className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm">
-                            <span className="text-gray-600">{metric.label}</span>
+                          <div key={index} className="flex items-center justify-between p-3 bg-muted/40 rounded-lg shadow-sm">
+                            <span className="text-muted-foreground">{metric.label}</span>
                             <span className="font-bold text-media-purple">{metric.value}</span>
                           </div>
                         ))}
@@ -452,7 +452,7 @@ const CaseStudyDetail = () => {
                 transition={{ delay: 0.3 }}
                 className="mb-12"
               >
-                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
                   <Target className="w-6 h-6 text-media-purple" />
                   Related Case Studies
                 </h2>
@@ -465,26 +465,26 @@ const CaseStudyDetail = () => {
                       transition={{ delay: 0.4 + index * 0.1 }}
                     >
                       <Card 
-                        className="group cursor-pointer hover:shadow-xl transition-all duration-300 border-none bg-white"
+                        className="group cursor-pointer hover:shadow-xl transition-all duration-300 border border-border bg-card"
                         onClick={() => navigate(`/case-study/${study.slug || titleToSlug(study.title)}`)}
                       >
                         <CardContent className="p-6">
                           <div className="flex items-center gap-2 mb-3">
-                            <Badge className="bg-gray-100 text-gray-800 text-xs">
+                            <Badge className="bg-muted text-foreground text-xs">
                               {getCategoryName(study.category)}
                             </Badge>
                             {study.industry && (
                               <Badge variant="outline" className="text-xs">{study.industry}</Badge>
                             )}
                           </div>
-                          <h3 className="font-bold text-lg text-gray-900 mb-2 group-hover:text-media-purple transition-colors">
+                          <h3 className="font-bold text-lg text-foreground mb-2 group-hover:text-media-purple transition-colors">
                             {study.title}
                           </h3>
-                          <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                          <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
                             {study.description}
                           </p>
                           <div className="flex items-center justify-between">
-                            <span className="text-xs text-gray-500">{study.client}</span>
+                            <span className="text-xs text-muted-foreground">{study.client}</span>
                             <ChevronRight className="w-4 h-4 text-media-purple opacity-0 group-hover:opacity-100 transition-opacity" />
                           </div>
                         </CardContent>
@@ -513,7 +513,7 @@ const CaseStudyDetail = () => {
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Button 
                       size="lg" 
-                      className="bg-white text-gray-900 hover:bg-gray-100"
+                      className="bg-white text-gray-900 hover:bg-white/90"
                       onClick={() => {
                         navigate('/');
                         setTimeout(() => {

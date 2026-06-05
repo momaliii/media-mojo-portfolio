@@ -159,26 +159,24 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
               transition={{ delay: 0.4, duration: 0.5 }}
             >
               {isHomePage ? (
-                <div className="flex items-center gap-2">
-                  <Button
-                    onClick={() => scrollToSection("contact")}
-                    className="bg-purple-700 dark:bg-blue-600 hover:bg-purple-800 dark:hover:bg-blue-700 text-white shadow-md hover:shadow-lg transition-all font-semibold"
-                  >
-                    Work With Me <ChevronRight className="ml-1 h-4 w-4" aria-hidden="true" />
-                  </Button>
-                </div>
+                <Button
+                  onClick={() => scrollToSection("contact")}
+                  className="bg-gradient-to-r from-purple-700 to-media-darkpurple dark:from-blue-600 dark:to-blue-700 hover:opacity-95 text-white shadow-[0_10px_30px_-12px_rgba(124,58,237,0.55)] font-semibold focus-visible:ring-2 focus-visible:ring-media-purple"
+                >
+                  Work With Me <ChevronRight className="ml-1 h-4 w-4" aria-hidden="true" />
+                </Button>
               ) : (
-                <Link 
+                <Link
                   to="/#contact"
                   onClick={(e) => {
-                    if (location.pathname !== '/') {
+                    if (location.pathname !== "/") {
                       e.preventDefault();
-                      navigate('/#contact');
+                      navigate("/#contact");
                     }
                   }}
                 >
                   <Button
-                    className="bg-media-purple dark:bg-media-blue hover:bg-media-darkpurple dark:hover:bg-blue-600 text-white shadow-md hover:shadow-lg transition-all"
+                    className="bg-gradient-to-r from-purple-700 to-media-darkpurple dark:from-blue-600 dark:to-blue-700 hover:opacity-95 text-white shadow-[0_10px_30px_-12px_rgba(124,58,237,0.55)] font-semibold focus-visible:ring-2 focus-visible:ring-media-purple"
                   >
                     Work With Me <ChevronRight className="ml-1 h-4 w-4" aria-hidden="true" />
                   </Button>
@@ -187,8 +185,8 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
             </motion.div>
           </div>
 
-          {/* Mobile Menu Button and Theme Toggle */}
-          <div className="md:hidden flex items-center space-x-2">
+          {/* Mobile right cluster */}
+          <div className="md:hidden flex items-center gap-0.5">
             <ReducedMotionToggle />
             <ThemeToggle />
             <Button
@@ -198,7 +196,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
-              className="focus:ring-0"
+              className="focus-visible:ring-2 focus-visible:ring-media-purple"
             >
               {mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
             </Button>
