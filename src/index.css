@@ -9,6 +9,7 @@
 @import './styles/animations/transitions.css';
 @import './styles/animations/keyframes.css';
 @import './styles/animations/hover.css';
+@import './styles/animations/reduced-motion.css';
 
 @import './styles/sections/layout.css';
 @import './styles/sections/hero.css';

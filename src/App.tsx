@@ -31,6 +31,7 @@ import Profile from "./pages/Profile";
 import AdminSubmissions from "./pages/AdminSubmissions";
 import AdminAnalytics from "./pages/AdminAnalytics";
 import AdminClientLogos from "./pages/AdminClientLogos";
+import { ReducedMotionProvider } from "./hooks/use-reduced-motion-pref";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -93,6 +94,7 @@ const App = () => (
   <HelmetProvider>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
+          <ReducedMotionProvider>
           <ErrorBoundary>
             <Toaster />
             <Sonner />
@@ -190,6 +192,7 @@ const App = () => (
               </AuthProvider>
             </BrowserRouter>
           </ErrorBoundary>
+          </ReducedMotionProvider>
         </TooltipProvider>
       </QueryClientProvider>
   </HelmetProvider>
