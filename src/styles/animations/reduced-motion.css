@@ -1,0 +1,38 @@
+/*
+  Reduced-motion overrides.
+  Triggers when:
+   - The OS reports `prefers-reduced-motion: reduce`, OR
+   - The user has toggled the in-app preference, which sets
+     `data-reduced-motion="true"` on the <html> element.
+
+  framer-motion animations are softened automatically via <MotionConfig
+  reducedMotion="always">. The rules below additionally tame CSS
+  keyframe animations, transitions, and smooth-scroll so the whole
+  experience feels calm without breaking layout-dependent transforms.
+*/
+
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-reduced-motion="false"]) {
+    scroll-behavior: auto !important;
+  }
+  html:not([data-reduced-motion="false"]) *,
+  html:not([data-reduced-motion="false"]) *::before,
+  html:not([data-reduced-motion="false"]) *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html[data-reduced-motion="true"] {
+  scroll-behavior: auto !important;
+}
+html[data-reduced-motion="true"] *,
+html[data-reduced-motion="true"] *::before,
+html[data-reduced-motion="true"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}

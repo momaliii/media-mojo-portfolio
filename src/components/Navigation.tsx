@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { trackEvent } from "@/utils/analytics";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
+import ReducedMotionToggle from "./ReducedMotionToggle";
 
 interface NavigationProps {
   activeSection?: string;
@@ -150,6 +151,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
                 </Link>
               </div>
             )}
+            <ReducedMotionToggle />
             <ThemeToggle />
             <motion.div
               initial={{ y: -20, opacity: 0 }}
@@ -187,6 +189,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
 
           {/* Mobile Menu Button and Theme Toggle */}
           <div className="md:hidden flex items-center space-x-2">
+            <ReducedMotionToggle />
             <ThemeToggle />
             <Button
               variant="ghost"
