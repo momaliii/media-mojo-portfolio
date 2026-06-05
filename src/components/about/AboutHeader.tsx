@@ -19,6 +19,7 @@ const AboutHeader = () => {
       </motion.div>
       
       <motion.h2 
+        id="about-heading"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}

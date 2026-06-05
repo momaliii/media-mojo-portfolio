@@ -10,6 +10,7 @@ const AboutVisual = () => {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
       className="relative h-[300px] md:h-[400px]"
+      aria-hidden="true"
     >
       <div className="absolute inset-0 grid grid-cols-2 gap-4">
         <div className="space-y-4">
