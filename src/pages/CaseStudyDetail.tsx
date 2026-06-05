@@ -24,7 +24,7 @@ const CaseStudyDetail = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
+      <div className="min-h-dvh flex items-center justify-center bg-gradient-to-b from-background via-muted/40 to-background">
         <Loader2 className="h-8 w-8 animate-spin text-media-purple" />
       </div>
     );
@@ -32,11 +32,11 @@ const CaseStudyDetail = () => {
 
   if (!caseStudy) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
+      <div className="min-h-dvh flex items-center justify-center bg-gradient-to-b from-background via-muted/40 to-background">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4 text-gray-900">Case Study Not Found</h1>
-          <p className="text-gray-600 mb-6">The case study you're looking for doesn't exist or has been moved.</p>
-          <Button onClick={() => navigate('/')} className="bg-media-purple hover:bg-media-purple/90">
+          <h1 className="text-2xl font-bold mb-4">Case study not found</h1>
+          <p className="text-muted-foreground mb-6">The case study you're looking for doesn't exist or has been moved.</p>
+          <Button onClick={() => navigate('/')} className="bg-media-purple hover:bg-media-darkpurple text-white">
             Back to Home
           </Button>
         </div>
@@ -122,7 +122,7 @@ const CaseStudyDetail = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudyJsonLd) }}
       />
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <div className="min-h-dvh bg-gradient-to-b from-background via-muted/40 to-background">
         <Navigation />
         
         
@@ -134,20 +134,20 @@ const CaseStudyDetail = () => {
               animate={{ opacity: 1, x: 0 }}
               className="mb-6 flex items-center justify-between"
             >
-              <div className="flex items-center gap-2 text-sm text-gray-500">
-                <button onClick={() => navigate('/')} className="hover:text-gray-700">Home</button>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <button onClick={() => navigate('/')} className="hover:text-foreground transition-colors">Home</button>
                 <span>/</span>
-                <button onClick={() => navigate('/#portfolio')} className="hover:text-gray-700">Portfolio</button>
+                <button onClick={() => navigate('/#portfolio')} className="hover:text-foreground transition-colors">Portfolio</button>
                 <span>/</span>
-                <span className="text-gray-900">{caseStudy.title}</span>
+                <span className="text-foreground truncate max-w-[180px] md:max-w-none">{caseStudy.title}</span>
               </div>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 size="sm"
                 onClick={handleShare}
-                className="text-gray-600 hover:text-gray-900"
+                className="hover:border-media-purple/50 hover:bg-media-purple/10 hover:text-media-purple transition-colors"
               >
-                <Share2 className="w-4 h-4 mr-2" />
+                <Share2 className="w-4 h-4 mr-2" aria-hidden="true" />
                 Share
               </Button>
             </motion.div>
@@ -158,12 +158,12 @@ const CaseStudyDetail = () => {
               animate={{ opacity: 1, x: 0 }}
               className="mb-6"
             >
-              <Button 
-                variant="ghost" 
+              <Button
+                variant="ghost"
                 onClick={() => navigate('/')}
-                className="text-gray-600 hover:text-gray-900"
+                className="text-muted-foreground hover:text-foreground"
               >
-                <ArrowLeft className="w-4 h-4 mr-2" />
+                <ArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" />
                 Back to Portfolio
               </Button>
             </motion.div>
@@ -174,32 +174,32 @@ const CaseStudyDetail = () => {
               animate={{ opacity: 1, y: 0 }}
               className="mb-12"
             >
-              <div className="flex items-center gap-3 mb-4">
-                <Badge className="bg-white/90 text-gray-800">
+              <div className="flex items-center gap-3 mb-4 flex-wrap">
+                <Badge className="bg-media-purple/10 text-media-purple border border-media-purple/20 hover:bg-media-purple/15">
                   {getCategoryName(caseStudy.category)}
                 </Badge>
                 {caseStudy.industry && (
                   <Badge variant="outline">{caseStudy.industry}</Badge>
                 )}
               </div>
-              
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+
+              <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-5 leading-[1.05]">
                 {caseStudy.title}
               </h1>
-              
-              <p className="text-xl text-gray-600 mb-6 leading-relaxed">
+
+              <p className="text-lg md:text-xl text-muted-foreground mb-6 leading-relaxed max-w-3xl">
                 {caseStudy.description}
               </p>
 
-              <div className="flex items-center gap-4 text-sm text-gray-500">
-                <div className="flex items-center gap-1">
-                  <Globe className="w-4 h-4" />
-                  <span>Client: {caseStudy.client}</span>
+              <div className="flex items-center gap-5 text-sm text-muted-foreground flex-wrap">
+                <div className="flex items-center gap-1.5">
+                  <Globe className="w-4 h-4" aria-hidden="true" />
+                  <span>Client: <span className="text-foreground font-medium">{caseStudy.client}</span></span>
                 </div>
                 {caseStudy.budgetRange && (
-                  <div className="flex items-center gap-1">
-                    <Target className="w-4 h-4" />
-                    <span>Budget: {caseStudy.budgetRange}</span>
+                  <div className="flex items-center gap-1.5">
+                    <Target className="w-4 h-4" aria-hidden="true" />
+                    <span>Budget: <span className="text-foreground font-medium">{caseStudy.budgetRange}</span></span>
                   </div>
                 )}
               </div>
