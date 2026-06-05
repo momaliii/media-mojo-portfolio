@@ -46,7 +46,7 @@ const AboutStats = () => {
                 <div className="mx-auto w-14 h-14 flex items-center justify-center bg-white dark:bg-gray-900 rounded-2xl shadow-md ring-1 ring-gray-100 dark:ring-gray-800 mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                   {stat.icon}
                 </div>
-                <h3 className="text-4xl font-bold mb-1 tracking-tight bg-gradient-to-r from-media-purple to-media-oceanblue bg-clip-text text-transparent">
+                <h3 className="text-3xl sm:text-4xl font-bold mb-1 tracking-tight tabular-nums leading-none bg-gradient-to-r from-media-purple to-media-oceanblue bg-clip-text text-transparent">
                   {stat.value}
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400 text-sm font-medium tracking-wide">{stat.label}</p>
