@@ -71,10 +71,10 @@ const HeroContent = () => {
               target="_blank" 
               rel="noopener noreferrer"
               aria-label="Connect with Mohamed Ali on LinkedIn (opens in a new tab)"
-              className="inline-flex items-center gap-2 text-media-purple bg-white px-3 py-2 rounded-md shadow-sm hover:shadow-md transition-all hover:bg-media-purple/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-media-purple focus-visible:ring-offset-2"
+              className="inline-flex items-center gap-2 text-purple-700 dark:text-purple-300 bg-white px-3 py-2 rounded-md shadow-sm hover:shadow-md transition-all hover:bg-purple-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-700 focus-visible:ring-offset-2"
             >
               <Linkedin className="h-5 w-5" aria-hidden="true" />
-              <span className="text-sm font-medium">Connect on LinkedIn</span>
+              <span className="text-sm font-semibold">Connect on LinkedIn</span>
             </a>
             
             <a 
@@ -82,10 +82,10 @@ const HeroContent = () => {
               target="_blank" 
               rel="noopener noreferrer"
               aria-label="Download Mohamed Ali's CV as PDF (opens in a new tab)"
-              className="inline-flex items-center gap-2 text-media-purple bg-white px-3 py-2 rounded-md shadow-sm hover:shadow-md transition-all hover:bg-media-purple/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-media-purple focus-visible:ring-offset-2"
+              className="inline-flex items-center gap-2 text-purple-700 dark:text-purple-300 bg-white px-3 py-2 rounded-md shadow-sm hover:shadow-md transition-all hover:bg-purple-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-700 focus-visible:ring-offset-2"
             >
               <FileText className="h-5 w-5" aria-hidden="true" />
-              <span className="text-sm font-medium">Download CV</span>
+              <span className="text-sm font-semibold">Download CV</span>
             </a>
           </motion.div>
         </div>

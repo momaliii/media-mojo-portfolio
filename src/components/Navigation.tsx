@@ -160,7 +160,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
                 <div className="flex items-center gap-2">
                   <Button
                     onClick={() => scrollToSection("contact")}
-                    className="bg-media-purple dark:bg-media-blue hover:bg-media-darkpurple dark:hover:bg-blue-600 text-white shadow-md hover:shadow-lg transition-all"
+                    className="bg-purple-700 dark:bg-blue-600 hover:bg-purple-800 dark:hover:bg-blue-700 text-white shadow-md hover:shadow-lg transition-all font-semibold"
                   >
                     Work With Me <ChevronRight className="ml-1 h-4 w-4" aria-hidden="true" />
                   </Button>
