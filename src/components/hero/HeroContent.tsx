@@ -95,16 +95,16 @@ const HeroContent = () => {
           >
         <Button 
           onClick={() => document.getElementById('portfolio')?.scrollIntoView({behavior: 'smooth'})}
-          className="bg-media-purple hover:bg-media-darkpurple text-white shadow-md hover:shadow-lg transition-all"
+          className="relative overflow-hidden bg-gradient-to-r from-media-purple to-media-darkpurple hover:from-media-darkpurple hover:to-media-purple text-white shadow-[0_10px_30px_-10px_rgba(124,58,237,0.55)] hover:shadow-[0_18px_40px_-12px_rgba(124,58,237,0.7)] transition-all duration-300 hover:-translate-y-0.5 rounded-xl px-7"
           size="lg"
         >
-          View My Work
+          View My Work →
         </Button>
         <Button 
           onClick={() => document.getElementById('contact')?.scrollIntoView({behavior: 'smooth'})}
           variant="outline"
           size="lg"
-          className="border-media-purple/30 text-media-purple hover:bg-media-purple/5 hover:border-media-purple/50 shadow-sm hover:shadow-md transition-all"
+          className="border-2 border-media-purple/30 text-media-purple hover:bg-media-purple/5 hover:border-media-purple transition-all duration-300 hover:-translate-y-0.5 rounded-xl px-7 backdrop-blur-sm"
         >
           Work With Me
         </Button>
