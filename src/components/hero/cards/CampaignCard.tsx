@@ -8,7 +8,7 @@ const CampaignCard = () => {
     <Card className="overflow-hidden shadow-md border-0 hover:shadow-lg transition-all bg-white rounded-xl">
       <CardContent className="p-5 sm:p-6">
         <div className="flex justify-between items-center mb-5">
-          <h3 className="font-semibold text-gray-800 text-lg">Campaign</h3>
+          <h2 className="font-semibold text-gray-800 text-lg">Campaign</h2>
           <div className="p-2 rounded-full bg-sky-100">
             <LineChart size={20} className="text-sky-600" />
           </div>

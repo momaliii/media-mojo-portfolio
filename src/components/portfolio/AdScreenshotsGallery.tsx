@@ -132,6 +132,7 @@ const AdScreenshotsGallery: React.FC = () => {
           aria-label="Ad campaign screenshots carousel"
         >
           <Carousel 
+            aria-label="Ad campaign screenshots"
             opts={{
               align: "start",
               loop: true,

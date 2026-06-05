@@ -20,7 +20,7 @@ export function TopProgressBar() {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50">
-      <Progress value={progress} className="h-1 rounded-none bg-gray-200 dark:bg-gray-700" />
+      <Progress value={progress} aria-label="Page scroll progress" className="h-1 rounded-none bg-gray-200 dark:bg-gray-700" />
     </div>
   );
 }

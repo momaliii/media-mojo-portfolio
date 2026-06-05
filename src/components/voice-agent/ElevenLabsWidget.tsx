@@ -20,11 +20,14 @@ const ElevenLabsWidget: React.FC = () => {
   }, []);
 
   return (
-    <div className="hidden md:block fixed bottom-4 right-4 z-[9999]">
+    <aside
+      aria-label="AI voice assistant"
+      className="hidden md:block fixed bottom-4 right-4 z-[9999]"
+    >
       <elevenlabs-convai 
         agent-id="agent_4501k15nq9xjemnshg4w9yfr0tmk"
       />
-    </div>
+    </aside>
   );
 };
 
