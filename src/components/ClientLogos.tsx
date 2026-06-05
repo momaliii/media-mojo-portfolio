@@ -214,6 +214,7 @@ const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
   if (isLink) {
     return (
       <motion.a
+        role="listitem"
         href={logo.website_url!}
         target="_blank"
         rel="noopener noreferrer"
