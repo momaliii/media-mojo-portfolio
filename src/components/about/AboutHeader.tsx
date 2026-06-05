@@ -12,7 +12,8 @@ const AboutHeader = () => {
         transition={{ duration: 0.5 }}
         className="inline-flex items-center justify-center mb-5"
       >
-        <span className="inline-block py-1.5 px-4 rounded-full bg-gradient-to-r from-media-purple/20 to-media-oceanblue/20 text-media-purple font-medium text-sm shadow-sm">
+        <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full border border-media-purple/20 bg-gradient-to-r from-media-purple/10 to-media-oceanblue/10 text-media-purple font-semibold text-[11px] uppercase tracking-[0.22em] shadow-sm backdrop-blur-sm">
+          <span className="w-1.5 h-1.5 rounded-full bg-media-purple" />
           About Me
         </span>
       </motion.div>
@@ -21,8 +22,8 @@ const AboutHeader = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        className="text-4xl md:text-5xl font-bold mb-6 tracking-tight"
+        transition={{ duration: 0.6, delay: 0.1 }}
+        className="text-4xl md:text-6xl font-bold mb-6 tracking-[-0.03em] leading-[1.02]"
       >
         Delivering <span className="gradient-text">Data-Driven</span> Excellence
       </motion.h2>
@@ -32,7 +33,7 @@ const AboutHeader = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="text-gray-600 max-w-2xl mx-auto text-lg"
+        className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-lg leading-[1.7]"
       >
         Senior Media Buyer specializing in optimizing paid media campaigns across platforms, driving growth and engagement across diverse industries internationally.
       </motion.p>
