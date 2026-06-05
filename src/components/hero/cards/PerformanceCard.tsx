@@ -10,18 +10,18 @@ const PerformanceCard = () => {
     <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-all border-0 bg-white rounded-xl group hover:-translate-y-1 duration-300">
       <CardContent className="p-5 sm:p-6">
         <div className="flex justify-between items-center mb-5">
-          <h3 className="font-semibold text-gray-800 text-lg">Performance</h3>
+          <h2 className="font-semibold text-gray-800 text-lg">Performance</h2>
           <motion.div 
             className="p-2 rounded-full bg-green-100"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
-            <TrendingUp size={20} className="text-green-600" />
+            <TrendingUp size={20} className="text-green-600" aria-hidden="true" />
           </motion.div>
         </div>
         
         <div className="mt-3">
-          <Progress value={88} className="h-3 bg-gray-100 overflow-hidden" />
+          <Progress value={88} aria-label="Campaign performance: 88 percent" className="h-3 bg-gray-100 overflow-hidden" />
           
           <div className="mt-3 flex justify-between text-sm text-gray-500">
             <span>0%</span>

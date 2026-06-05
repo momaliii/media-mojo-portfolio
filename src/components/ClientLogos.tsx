@@ -104,6 +104,8 @@ const ClientLogos = () => {
             }}
           >
             <div
+              role="list"
+              aria-label="Client brands"
               className="flex gap-6 md:gap-8 w-max animate-marquee group-hover/marquee:[animation-play-state:paused]"
             >
               {marqueeLogos.map((logo, idx) => (
@@ -113,6 +115,8 @@ const ClientLogos = () => {
           </motion.div>
         ) : (
           <motion.div
+            role="list"
+            aria-label="Client brands"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-50px" }}
@@ -210,6 +214,7 @@ const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
   if (isLink) {
     return (
       <motion.a
+        role="listitem"
         href={logo.website_url!}
         target="_blank"
         rel="noopener noreferrer"

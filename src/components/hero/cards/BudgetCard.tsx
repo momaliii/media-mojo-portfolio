@@ -8,7 +8,7 @@ const BudgetCard = () => {
     <Card className="overflow-hidden shadow-md border-0 hover:shadow-lg transition-all bg-white rounded-xl">
       <CardContent className="p-5 sm:p-6">
         <div className="flex justify-between items-center mb-5">
-          <h3 className="font-semibold text-[#221F26] text-lg">Budget</h3>
+          <h2 className="font-semibold text-[#221F26] text-lg">Budget</h2>
           <div className="p-2 rounded-full bg-[#7E69AB]/10">
             <DollarSign size={20} className="text-[#7E69AB]" />
           </div>
