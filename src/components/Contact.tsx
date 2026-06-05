@@ -119,14 +119,14 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="section-padding">
+    <section id="contact" aria-labelledby="contact-heading" className="section-padding">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12 md:mb-16">
             <span className="inline-block py-1 px-3 rounded-full bg-media-purple/10 text-media-purple font-medium text-sm mb-4">
               Get in Touch
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 id="contact-heading" className="text-3xl md:text-4xl font-bold mb-4">
               Let's Discuss Your <span className="gradient-text">Media Strategy</span>
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">

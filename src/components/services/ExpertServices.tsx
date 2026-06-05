@@ -19,7 +19,7 @@ const ExpertServices = () => {
           <span className="w-1.5 h-1.5 rounded-full bg-media-purple" />
           What I Do
         </span>
-        <h2 className="text-4xl md:text-6xl font-bold mb-5 tracking-[-0.03em] leading-[1.02] text-gray-900 dark:text-gray-100">
+        <h2 id="services-heading" className="text-4xl md:text-6xl font-bold mb-5 tracking-[-0.03em] leading-[1.02] text-gray-900 dark:text-gray-100">
           My <span className="gradient-text">Expertise</span>
         </h2>
         <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto px-4 text-lg leading-[1.7]">

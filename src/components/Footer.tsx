@@ -12,14 +12,14 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-50 py-12">
+    <footer className="bg-gray-50 py-12" aria-labelledby="footer-heading">
       <div className="container mx-auto px-4 md:px-6">
         {/* Footer Top Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12">
           <div>
-            <div className="text-xl font-bold mb-4">
+            <h2 id="footer-heading" className="text-xl font-bold mb-4">
               <span className="gradient-text">Mohamed Ali</span>
-            </div>
+            </h2>
             <p className="text-gray-600 mb-6">
               Strategic media buying for businesses seeking exceptional results and maximum ROI.
             </p>
