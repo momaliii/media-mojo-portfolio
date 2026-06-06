@@ -47,9 +47,9 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
           : "hover:ring-1 hover:ring-[var(--v3-lime)]/25"
       }`}
     >
-      {/* Screenshot frame */}
+      {/* Screenshot frame — fixed 4:3 ratio at every breakpoint, top-anchored cover */}
       <div
-        className="relative h-56 sm:h-64 md:h-72 lg:h-80 overflow-hidden bg-[var(--v3-bg-2)]"
+        className="relative w-full aspect-[4/3] overflow-hidden bg-[var(--v3-bg-2)]"
         onContextMenu={preventCtx}
         style={{ userSelect: "none" }}
         role="img"
@@ -60,7 +60,8 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
           alt={`${s.industry} ${s.platform || "ad"} campaign by ${s.client}`}
           loading="lazy"
           draggable={false}
-          className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-110 select-none"
+          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 85vw"
+          className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105 select-none"
           style={{ pointerEvents: "none" }}
         />
 
