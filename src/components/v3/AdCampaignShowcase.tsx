@@ -47,9 +47,9 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
           : "hover:ring-1 hover:ring-[var(--v3-lime)]/25"
       }`}
     >
-      {/* Screenshot frame — fixed 4:3 ratio at every breakpoint, top-anchored cover */}
+      {/* Screenshot frame — full screenshot visible, no zoom-in cropping */}
       <div
-        className="relative w-full aspect-[4/3] overflow-hidden bg-[var(--v3-bg-2)]"
+        className="relative w-full aspect-[16/10] overflow-hidden bg-[var(--v3-bg-2)] flex items-center justify-center p-3 sm:p-4"
         onContextMenu={preventCtx}
         style={{ userSelect: "none" }}
         role="img"
@@ -61,25 +61,24 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
           loading="lazy"
           draggable={false}
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 85vw"
-          className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105 select-none"
+          className="relative z-0 max-w-full max-h-full w-auto h-auto object-contain rounded-lg shadow-[0_10px_30px_rgba(0,0,0,.45)] transition-transform duration-700 ease-out group-hover:scale-[1.02] select-none"
           style={{ pointerEvents: "none" }}
         />
 
-        {/* Top fade for legibility */}
-        <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/60 to-transparent pointer-events-none" />
-        {/* Bottom fade */}
-        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
+        {/* Soft top/bottom vignette only at edges so the screenshot stays readable */}
+        <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/40 to-transparent pointer-events-none z-10" />
+        <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/40 to-transparent pointer-events-none z-10" />
 
-        {/* Watermark */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <span className="px-6 py-2 -rotate-[22deg] text-white/70 text-base md:text-lg font-bold tracking-[0.3em] bg-black/15 backdrop-blur-[1px]">
+        {/* Subtle watermark — diagonal, low opacity, no blur backdrop */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+          <span className="-rotate-[22deg] text-white/15 text-sm md:text-base font-bold tracking-[0.35em] whitespace-nowrap">
             MOHAMED ALI · MEDIA BUYER
           </span>
         </div>
 
         {/* Platform chip top-left */}
         {platform && (
-          <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 px-2.5 py-1 text-[10px] uppercase tracking-[0.16em] font-bold text-white">
+          <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 rounded-full bg-black/70 backdrop-blur-md border border-white/10 px-2.5 py-1 text-[10px] uppercase tracking-[0.16em] font-bold text-white">
             <platform.Icon size={12} aria-hidden />
             <span>{platform.label}</span>
           </div>
@@ -87,19 +86,19 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
 
         {/* Lock top-right */}
         <div
-          className="absolute top-3 right-3 grid place-items-center h-7 w-7 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white/80"
+          className="absolute top-3 right-3 z-20 grid place-items-center h-7 w-7 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-white/80"
           aria-hidden
         >
           <Lock size={12} />
         </div>
 
         {/* Index numeral */}
-        <div className="absolute bottom-3 left-3 v3-numeral text-xs font-bold text-white/60">
+        <div className="absolute bottom-3 left-3 z-20 v3-numeral text-xs font-bold text-white/70">
           {String(index + 1).padStart(2, "0")} / {adCampaignScreenshots.length}
         </div>
 
         {/* Industry chip bottom-right */}
-        <div className="absolute bottom-3 right-3 rounded-full bg-[var(--v3-lime)] text-[var(--v3-bg)] px-3 py-1 text-[10px] uppercase tracking-[0.16em] font-bold">
+        <div className="absolute bottom-3 right-3 z-20 rounded-full bg-[var(--v3-lime)] text-[var(--v3-bg)] px-3 py-1 text-[10px] uppercase tracking-[0.16em] font-bold">
           {s.industry}
         </div>
       </div>
