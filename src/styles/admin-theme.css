@@ -1,45 +1,45 @@
 /* Admin Midnight Indigo theme — scoped to .admin-shell only */
 .admin-shell {
-  /* Midnight Indigo palette in HSL */
-  --background: 240 47% 6%;          /* #0a0a1a */
-  --foreground: 220 20% 92%;
+  /* Refined slate + indigo palette — lower saturation, higher contrast */
+  --background: 222 28% 8%;          /* deep slate */
+  --foreground: 210 25% 96%;
 
-  --card: 240 47% 14%;               /* #141432 */
-  --card-foreground: 220 20% 96%;
+  --card: 222 24% 12%;
+  --card-foreground: 210 25% 97%;
 
-  --popover: 240 47% 12%;
-  --popover-foreground: 220 20% 96%;
+  --popover: 222 26% 11%;
+  --popover-foreground: 210 25% 97%;
 
-  --primary: 243 75% 59%;            /* #4f46e5 */
+  --primary: 235 85% 65%;            /* vivid indigo */
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 240 56% 23%;          /* #1e1e5a */
-  --secondary-foreground: 220 20% 96%;
+  --secondary: 222 18% 18%;
+  --secondary-foreground: 210 25% 96%;
 
-  --muted: 240 47% 12%;
-  --muted-foreground: 220 13% 60%;
+  --muted: 222 20% 14%;
+  --muted-foreground: 218 14% 65%;
 
-  --accent: 243 75% 59%;
+  --accent: 235 85% 65%;
   --accent-foreground: 0 0% 100%;
 
-  --destructive: 0 70% 55%;
+  --destructive: 0 72% 58%;
   --destructive-foreground: 0 0% 100%;
 
-  --border: 240 56% 23%;             /* #1e1e5a */
-  --input: 240 56% 23%;
-  --ring: 243 75% 59%;
+  --border: 222 18% 20%;
+  --input: 222 18% 20%;
+  --ring: 235 85% 65%;
 
   --radius: 0.75rem;
 
   /* Sidebar tokens */
-  --sidebar-background: 240 47% 9%;
-  --sidebar-foreground: 220 20% 88%;
-  --sidebar-primary: 243 75% 59%;
+  --sidebar-background: 222 30% 6%;
+  --sidebar-foreground: 215 18% 78%;
+  --sidebar-primary: 235 85% 65%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 240 56% 23%;
-  --sidebar-accent-foreground: 0 0% 100%;
-  --sidebar-border: 240 56% 18%;
-  --sidebar-ring: 243 75% 59%;
+  --sidebar-accent: 222 22% 14%;
+  --sidebar-accent-foreground: 210 25% 97%;
+  --sidebar-border: 222 22% 14%;
+  --sidebar-ring: 235 85% 65%;
 
   /* Typography */
   font-family: 'Figtree', system-ui, -apple-system, sans-serif;
@@ -47,14 +47,14 @@
   background: hsl(var(--background));
 
   /* Custom utilities */
-  --admin-surface: 240 47% 11%;
-  --admin-surface-elevated: 240 47% 14%;
-  --admin-border-soft: 240 30% 22%;
-  --admin-success: 152 76% 44%;
-  --admin-warning: 38 95% 56%;
-  --admin-danger: 354 78% 62%;
-  --shadow-admin: 0 10px 40px -10px hsl(240 60% 4% / 0.6);
-  --shadow-admin-glow: 0 0 0 1px hsl(243 75% 59% / 0.2), 0 12px 40px -8px hsl(243 75% 59% / 0.25);
+  --admin-surface: 222 24% 11%;
+  --admin-surface-elevated: 222 22% 13%;
+  --admin-border-soft: 222 18% 22%;
+  --admin-success: 152 64% 50%;
+  --admin-warning: 35 92% 60%;
+  --admin-danger: 354 75% 62%;
+  --shadow-admin: 0 12px 40px -16px hsl(222 50% 2% / 0.7);
+  --shadow-admin-glow: 0 0 0 1px hsl(235 85% 65% / 0.25), 0 16px 50px -12px hsl(235 85% 65% / 0.3);
 }
 
 .admin-shell .font-display {
