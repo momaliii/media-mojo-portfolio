@@ -14,6 +14,13 @@ import '@fontsource/sora/700.css';
 import '@fontsource/manrope/400.css';
 import '@fontsource/manrope/500.css';
 import '@fontsource/manrope/700.css';
+import '@fontsource/outfit/500.css';
+import '@fontsource/outfit/600.css';
+import '@fontsource/outfit/700.css';
+import '@fontsource/figtree/400.css';
+import '@fontsource/figtree/500.css';
+import '@fontsource/figtree/600.css';
+import './styles/admin-theme.css';
 import { ThemeProvider } from './components/ThemeProvider';
 
 const RootComponent = () => (
