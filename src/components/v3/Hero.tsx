@@ -1,97 +1,173 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowDown } from "lucide-react";
+import { ArrowRight, BarChart3, CheckCircle2, Play, TrendingUp } from "lucide-react";
 
 const Hero = () => {
+  const bars = [72, 88, 64, 96, 79, 91, 68];
+
   return (
     <section
       id="hero"
-      className="relative min-h-[100dvh] flex flex-col justify-between pt-28 md:pt-36 pb-10 overflow-hidden v3-grain"
+      className="relative min-h-[100dvh] overflow-hidden pt-28 md:pt-32 pb-12"
       aria-labelledby="v3-hero-h1"
     >
-      {/* Top meta strip */}
-      <div className="max-w-[1400px] mx-auto w-full px-6 lg:px-10">
-        <div className="flex items-center justify-between v3-eyebrow text-[var(--v3-muted)] border-b v3-rule pb-4">
-          <span>Issue №07 · MMXXVI</span>
-          <span className="hidden sm:inline">Cairo ⟶ Riyadh ⟶ Muscat</span>
-          <span>Paid Media · Vol. I</span>
-        </div>
-      </div>
+      <div className="absolute inset-0 v3-grid-bg" aria-hidden="true" />
+      <div className="absolute -top-48 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-[var(--v3-cyan)]/20 blur-[120px]" aria-hidden="true" />
+      <div className="absolute top-1/3 -right-32 h-[32rem] w-[32rem] rounded-full bg-[var(--v3-lime)]/10 blur-[140px]" aria-hidden="true" />
 
-      {/* Masthead */}
-      <div className="max-w-[1400px] mx-auto w-full px-6 lg:px-10 flex-1 flex flex-col justify-center py-12">
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="v3-eyebrow text-[var(--v3-accent)] mb-8"
-        >
-          — Senior Media Buyer & Growth Architect
-        </motion.p>
-
-        <h1
-          id="v3-hero-h1"
-          className="v3-serif tracking-[-0.03em] leading-[0.88] text-[clamp(3.5rem,11vw,11rem)]"
-        >
-          {["Performance.", "Pixel-perfect.", "Profitable."].map((w, i) => (
-            <motion.span
-              key={w}
-              initial={{ y: 80, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.15 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-              className={`block ${i === 1 ? "v3-italic v3-accent pl-[8vw]" : ""}`}
+      <div className="relative z-10 max-w-[1400px] mx-auto px-5 md:px-8 lg:px-10">
+        <div className="grid lg:grid-cols-[1.02fr_.98fr] gap-10 xl:gap-16 items-center">
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className="inline-flex items-center gap-3 v3-pill rounded-full px-4 py-2 mb-7"
             >
-              {w}
-            </motion.span>
-          ))}
-        </h1>
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--v3-lime)] opacity-60" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--v3-lime)]" />
+              </span>
+              <span className="v3-eyebrow v3-soft">Available for 2 growth partners</span>
+            </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="mt-14 md:mt-20 grid grid-cols-12 gap-8 items-end"
-        >
-          <div className="col-span-12 md:col-span-5 md:col-start-2">
-            <p className="text-base md:text-lg leading-[1.7] text-[var(--v3-ink-2)] max-w-md">
-              I'm <span className="v3-italic">Mohamed Ali</span> — 7+ years engineering
-              paid-media systems for ambitious MENA brands. Eight-figure spend, receipt-level
-              ROAS, zero filler.
-            </p>
+            <motion.h1
+              id="v3-hero-h1"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+              className="v3-display text-[clamp(3.1rem,7vw,7.7rem)] font-bold leading-[0.94] tracking-[-0.055em]"
+            >
+              Paid media that <span className="v3-glow-text">prints signal</span>, not noise.
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, delay: 0.18 }}
+              className="mt-7 max-w-2xl text-lg md:text-xl leading-[1.7] v3-soft"
+            >
+              I’m Mohamed Ali — a 7+ year senior media buyer scaling Meta, TikTok,
+              Google, LinkedIn and Snapchat campaigns for MENA brands that need profitable growth.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, delay: 0.28 }}
+              className="mt-8 flex flex-col sm:flex-row gap-3"
+            >
+              <a
+                href="#work"
+                className="group inline-flex items-center justify-center gap-3 rounded-2xl bg-[var(--v3-lime)] px-6 py-4 font-bold text-[var(--v3-bg)] hover:shadow-[0_0_42px_rgba(182,255,77,.35)] transition-shadow"
+              >
+                See performance proof
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a
+                href="/Mohamed_Ali_CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-3 rounded-2xl v3-shell px-6 py-4 font-bold text-[var(--v3-text)]"
+              >
+                Download CV
+              </a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.42 }}
+              className="mt-10 grid grid-cols-3 gap-3 max-w-2xl"
+            >
+              {[
+                ["7+", "Years"],
+                ["95K+", "Orders"],
+                ["8×", "ROAS"],
+              ].map(([value, label]) => (
+                <div key={label} className="v3-shell rounded-2xl p-4">
+                  <div className="v3-numeral text-3xl md:text-4xl font-bold leading-none">{value}</div>
+                  <div className="v3-eyebrow v3-muted mt-2">{label}</div>
+                </div>
+              ))}
+            </motion.div>
           </div>
 
-          <div className="col-span-12 md:col-span-5 md:col-start-8 flex flex-col gap-4">
-            <a
-              href="#work"
-              className="group inline-flex items-center justify-between gap-6 px-6 py-5 border border-[var(--v3-ink)] hover:bg-[var(--v3-ink)] hover:text-[var(--v3-paper)] transition-colors"
-            >
-              <span className="v3-eyebrow">View selected work</span>
-              <ArrowDown size={18} className="group-hover:translate-y-1 transition-transform" />
-            </a>
-            <a
-              href="#contact"
-              className="v3-eyebrow text-[var(--v3-muted)] hover:text-[var(--v3-accent)] transition-colors self-end"
-            >
-              or commission a strategy →
-            </a>
-          </div>
-        </motion.div>
-      </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96, y: 22 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            className="relative"
+          >
+            <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-[var(--v3-lime)]/18 via-[var(--v3-cyan)]/12 to-transparent blur-2xl" />
+            <div className="relative v3-shell rounded-[2rem] p-4 md:p-5 overflow-hidden">
+              <div className="flex items-center justify-between border-b v3-rule pb-4 mb-5">
+                <div className="flex items-center gap-3">
+                  <img
+                    src="/lovable-uploads/900c6176-4030-4244-a97a-62a4c235d53f.png"
+                    alt="Mohamed Ali"
+                    className="h-12 w-12 rounded-2xl object-cover border border-white/15"
+                  />
+                  <div>
+                    <div className="font-bold">Mohamed Ali</div>
+                    <div className="text-sm v3-muted">Senior Media Buyer</div>
+                  </div>
+                </div>
+                <div className="hidden sm:flex items-center gap-2 rounded-full bg-[var(--v3-lime)]/12 px-3 py-1.5 text-[var(--v3-lime)]">
+                  <TrendingUp size={15} />
+                  <span className="text-sm font-bold">Live growth</span>
+                </div>
+              </div>
 
-      {/* Bottom stat ribbon */}
-      <div className="max-w-[1400px] mx-auto w-full px-6 lg:px-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 border-t border-b v3-rule divide-x divide-[var(--v3-rule)]">
-          {[
-            { k: "7+", v: "Years senior" },
-            { k: "8×", v: "Peak ROAS" },
-            { k: "95K", v: "Orders shipped" },
-            { k: "10", v: "Countries served" },
-          ].map((s) => (
-            <div key={s.v} className="py-6 px-4 md:px-8 flex flex-col gap-1">
-              <span className="v3-numeral text-4xl md:text-6xl leading-none">{s.k}</span>
-              <span className="v3-eyebrow text-[var(--v3-muted)]">{s.v}</span>
+              <div className="grid grid-cols-12 gap-4">
+                <div className="col-span-12 md:col-span-7 rounded-3xl bg-[var(--v3-bg-2)] border v3-rule p-5">
+                  <div className="flex items-center justify-between mb-6">
+                    <div>
+                      <p className="v3-eyebrow v3-muted">Blended ROAS</p>
+                      <p className="v3-numeral text-5xl font-bold mt-2">8.4×</p>
+                    </div>
+                    <BarChart3 className="text-[var(--v3-cyan)]" size={34} />
+                  </div>
+                  <div className="flex items-end gap-2 h-36">
+                    {bars.map((h, i) => (
+                      <span
+                        key={i}
+                        className="flex-1 rounded-t-xl bg-gradient-to-t from-[var(--v3-cyan)] to-[var(--v3-lime)] opacity-90"
+                        style={{ height: `${h}%` }}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                <div className="col-span-12 md:col-span-5 grid gap-4">
+                  <div className="rounded-3xl bg-[var(--v3-panel-2)] border v3-rule p-5">
+                    <p className="v3-eyebrow v3-muted">Spend managed</p>
+                    <p className="v3-numeral text-4xl font-bold mt-2">8 fig.</p>
+                    <p className="text-sm v3-soft mt-3">Meta · TikTok · Google</p>
+                  </div>
+                  <div className="rounded-3xl bg-[var(--v3-panel-2)] border v3-rule p-5">
+                    <div className="flex items-center gap-2 text-[var(--v3-lime)] font-bold">
+                      <CheckCircle2 size={18} /> Verified systems
+                    </div>
+                    <p className="text-sm v3-soft mt-3">CAPI, GTM, funnels, creative tests, reporting.</p>
+                  </div>
+                </div>
+
+                <div className="col-span-12 rounded-3xl bg-[var(--v3-panel-2)] border v3-rule p-4 flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[var(--v3-orange)] text-white">
+                      <Play size={18} fill="currentColor" />
+                    </span>
+                    <div>
+                      <div className="font-bold">90-day scale sprint</div>
+                      <div className="text-sm v3-muted">Audit → rebuild → test → scale</div>
+                    </div>
+                  </div>
+                  <span className="v3-eyebrow v3-lime">+24% MER</span>
+                </div>
+              </div>
             </div>
-          ))}
+          </motion.div>
         </div>
       </div>
     </section>

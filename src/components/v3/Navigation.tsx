@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, Sparkles, X } from "lucide-react";
 
 const links = [
   { href: "#work", label: "Work" },
@@ -22,36 +22,40 @@ const Navigation = ({ activeSection }: { activeSection?: string }) => {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-        scrolled ? "backdrop-blur-md bg-[var(--v3-paper)]/85 border-b v3-rule" : "bg-transparent"
-      }`}
+      className="fixed top-0 inset-x-0 z-50 px-3 pt-3"
     >
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 h-16 md:h-20 flex items-center justify-between">
-        <Link to="/v3" className="flex items-baseline gap-2">
-          <span className="v3-serif text-2xl md:text-3xl leading-none">Mohamed</span>
-          <span className="v3-italic text-2xl md:text-3xl leading-none v3-accent">Ali</span>
+      <div
+        className={`max-w-[1400px] mx-auto px-4 md:px-5 h-16 flex items-center justify-between rounded-2xl transition-all duration-500 ${
+          scrolled ? "v3-shell" : "bg-transparent border border-transparent"
+        }`}
+      >
+        <Link to="/v3" className="flex items-center gap-3">
+          <span className="grid h-10 w-10 place-items-center rounded-xl bg-[var(--v3-lime)] text-[var(--v3-bg)] shadow-[0_0_30px_rgba(182,255,77,.25)]">
+            <Sparkles size={18} />
+          </span>
+          <span className="leading-tight">
+            <span className="block v3-display font-bold text-base md:text-lg">Mohamed Ali</span>
+            <span className="block text-[0.65rem] uppercase tracking-[0.16em] text-[var(--v3-muted)]">Media buying OS</span>
+          </span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-10" aria-label="Primary">
-          {links.map((l, i) => (
+          {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="group flex items-baseline gap-2 text-sm hover:text-[var(--v3-accent)] transition-colors"
+              className="v3-link text-sm font-semibold"
             >
-              <span className="v3-eyebrow text-[var(--v3-muted)] group-hover:text-[var(--v3-accent)]">
-                0{i + 1}
-              </span>
-              <span className="v3-link">{l.label}</span>
+              {l.label}
             </a>
           ))}
         </nav>
 
         <a
           href="#contact"
-          className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 border border-[var(--v3-ink)] rounded-full text-xs uppercase tracking-[0.22em] font-medium hover:bg-[var(--v3-ink)] hover:text-[var(--v3-paper)] transition-colors"
+          className="hidden md:inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[var(--v3-lime)] text-[var(--v3-bg)] text-xs uppercase tracking-[0.14em] font-bold hover:shadow-[0_0_36px_rgba(182,255,77,.35)] transition-shadow"
         >
-          Start a project
+          Scale with me
         </a>
 
         <button
@@ -64,14 +68,14 @@ const Navigation = ({ activeSection }: { activeSection?: string }) => {
       </div>
 
       {open && (
-        <div className="md:hidden border-t v3-rule bg-[var(--v3-paper)]">
+        <div className="md:hidden mt-2 rounded-2xl v3-shell overflow-hidden">
           <nav className="px-6 py-6 flex flex-col gap-5" aria-label="Mobile">
             {links.map((l, i) => (
               <a
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="flex items-baseline gap-3 v3-serif text-2xl"
+                className="flex items-baseline gap-3 v3-display text-2xl font-bold"
               >
                 <span className="v3-eyebrow text-[var(--v3-muted)]">0{i + 1}</span>
                 {l.label}

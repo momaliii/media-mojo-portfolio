@@ -41,44 +41,43 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="relative py-24 md:py-36 bg-[var(--v3-paper-2)]">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-        <div className="grid grid-cols-12 gap-8 mb-16 md:mb-24">
+    <section id="services" className="relative py-20 md:py-28 bg-[rgba(255,255,255,0.025)] border-y v3-rule">
+      <div className="max-w-[1400px] mx-auto px-5 md:px-8 lg:px-10">
+        <div className="grid grid-cols-12 gap-8 mb-12 md:mb-16">
           <div className="col-span-12 md:col-span-4">
-            <p className="v3-eyebrow text-[var(--v3-accent)] mb-4">§ 02 — Services</p>
-            <h2 className="v3-serif text-5xl md:text-7xl leading-[0.95] tracking-[-0.02em] sticky top-28">
-              What I <span className="v3-italic">do</span>.
+            <p className="v3-eyebrow v3-cyan mb-4">Growth modules</p>
+            <h2 className="v3-display text-4xl md:text-6xl font-bold leading-[1] tracking-[-0.05em] sticky top-28">
+              Built like an ad account operating system.
             </h2>
           </div>
           <div className="col-span-12 md:col-span-7 md:col-start-6 self-end">
-            <p className="text-lg md:text-xl leading-[1.7] text-[var(--v3-ink-2)] max-w-xl">
-              Six capabilities, one operator. I run them in-house or alongside your team —
-              senior hands on the dials, not a junior with a deck.
+            <p className="text-lg md:text-xl leading-[1.7] v3-soft max-w-xl">
+              Strategy, execution, attribution and creative iteration in one loop — built for founders and teams that care about payback, not vanity metrics.
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l v3-rule">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {services.map((s) => (
             <article
               key={s.n}
-              className="group p-8 md:p-10 border-r border-b v3-rule hover:bg-[var(--v3-paper)] transition-colors min-h-[280px] flex flex-col"
+              className="group v3-shell v3-card-hover rounded-[1.7rem] p-6 md:p-7 min-h-[300px] flex flex-col"
             >
               <div className="flex items-baseline justify-between mb-6">
-                <span className="v3-numeral text-2xl text-[var(--v3-muted)]">{s.n}</span>
-                <span className="v3-eyebrow text-[var(--v3-muted)] group-hover:text-[var(--v3-accent)]">
-                  Service
+                <span className="v3-numeral text-3xl font-bold v3-muted">{s.n}</span>
+                <span className="v3-eyebrow v3-muted group-hover:text-[var(--v3-lime)]">
+                  Module
                 </span>
               </div>
-              <h3 className="v3-serif text-3xl md:text-4xl leading-tight tracking-[-0.015em] mb-4 group-hover:v3-italic group-hover:text-[var(--v3-accent)] transition-all">
+              <h3 className="v3-display text-2xl md:text-3xl font-bold leading-tight tracking-[-0.04em] mb-4 group-hover:text-[var(--v3-lime)] transition-colors">
                 {s.title}
               </h3>
-              <p className="text-[var(--v3-ink-2)] leading-relaxed flex-1">{s.body}</p>
+              <p className="v3-soft leading-relaxed flex-1">{s.body}</p>
               <div className="flex flex-wrap gap-2 mt-6 pt-6 border-t v3-rule">
                 {s.tags.map((t) => (
                   <span
                     key={t}
-                    className="text-[0.7rem] uppercase tracking-[0.18em] px-2 py-1 border v3-rule text-[var(--v3-muted)]"
+                    className="text-[0.68rem] uppercase tracking-[0.14em] px-2.5 py-1.5 rounded-full bg-white/5 text-[var(--v3-soft)]"
                   >
                     {t}
                   </span>
