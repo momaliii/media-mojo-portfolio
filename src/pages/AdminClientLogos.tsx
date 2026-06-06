@@ -134,37 +134,42 @@ export default function AdminClientLogos() {
     <AdminLayout title="Client Logos">
       <div className="space-y-6">
         {/* Add new logo */}
-        <Card>
-          <CardHeader className="pb-4">
-            <CardTitle className="flex items-center gap-2 text-base">
-              <Plus className="h-4 w-4" /> Add new logo
+        <Card className="border-dashed">
+          <CardHeader className="pb-3 border-b bg-muted/30">
+            <CardTitle className="flex items-center gap-2 text-sm font-semibold">
+              <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-primary/10 text-primary">
+                <Plus className="h-4 w-4" />
+              </span>
+              Add new logo
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-5">
             <div className="grid gap-4 md:grid-cols-[1fr_1fr_1fr_auto] md:items-end">
               <div className="space-y-1.5">
-                <Label htmlFor="logo-name" className="text-xs font-medium">Client name</Label>
+                <Label htmlFor="logo-name" className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Client name</Label>
                 <Input
                   id="logo-name"
                   value={newName}
                   onChange={(e) => setNewName(e.target.value)}
                   placeholder="Acme Corp"
+                  className="h-10"
                 />
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="logo-website" className="text-xs font-medium">Website (optional)</Label>
+                <Label htmlFor="logo-website" className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Website <span className="font-normal normal-case">(optional)</span></Label>
                 <Input
                   id="logo-website"
                   value={newWebsite}
                   onChange={(e) => setNewWebsite(e.target.value)}
                   placeholder="https://acme.com"
+                  className="h-10"
                 />
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="logo-file" className="text-xs font-medium">Logo image (PNG/SVG)</Label>
-                <Input id="logo-file" ref={fileRef} type="file" accept="image/*" className="file:mr-2 file:text-xs" />
+                <Label htmlFor="logo-file" className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Logo image <span className="font-normal normal-case">(PNG / SVG)</span></Label>
+                <Input id="logo-file" ref={fileRef} type="file" accept="image/*" className="h-10 file:mr-2 file:text-xs cursor-pointer" />
               </div>
-              <Button onClick={handleCreate} disabled={uploading} className="md:w-auto w-full">
+              <Button onClick={handleCreate} disabled={uploading} size="lg" className="md:w-auto w-full h-10 px-5">
                 {uploading ? (
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
                 ) : (
@@ -178,19 +183,25 @@ export default function AdminClientLogos() {
 
         {/* Manage logos */}
         <Card>
-          <CardHeader className="pb-4 flex flex-row items-center justify-between gap-3 flex-wrap">
-            <CardTitle className="text-base">Manage logos</CardTitle>
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-muted">
-                <strong className="text-foreground">{logos.length}</strong> total
+          <CardHeader className="pb-4 flex flex-row items-center justify-between gap-3 flex-wrap border-b">
+            <div>
+              <CardTitle className="text-base">Manage logos</CardTitle>
+              <p className="text-xs text-muted-foreground mt-0.5">Reorder, edit, and toggle visibility for every client logo.</p>
+            </div>
+            <div className="flex items-center gap-1.5 text-xs">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border bg-background">
+                <span className="font-semibold text-foreground tabular-nums">{logos.length}</span>
+                <span className="text-muted-foreground">total</span>
               </span>
-              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-muted">
-                <Eye className="h-3 w-3 text-green-600" />
-                <strong className="text-foreground">{visibleCount}</strong> visible
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border bg-background">
+                <Eye className="h-3.5 w-3.5 text-green-600" />
+                <span className="font-semibold text-foreground tabular-nums">{visibleCount}</span>
+                <span className="text-muted-foreground">visible</span>
               </span>
-              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-muted">
-                <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                <strong className="text-foreground">{featuredCount}</strong> featured
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border bg-background">
+                <Star className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />
+                <span className="font-semibold text-foreground tabular-nums">{featuredCount}</span>
+                <span className="text-muted-foreground">featured</span>
               </span>
             </div>
           </CardHeader>
@@ -281,7 +292,16 @@ function LogoRow({
   const replaceRef = useRef<HTMLInputElement | null>(null);
 
   return (
-    <div className="grid grid-cols-[auto_56px_1fr] md:grid-cols-[44px_56px_minmax(0,1.1fr)_minmax(0,1.3fr)_120px_112px] gap-x-3 gap-y-2 items-center px-4 py-3 hover:bg-accent/30 transition-colors">
+    <div
+      className={`relative grid grid-cols-[auto_56px_1fr] md:grid-cols-[44px_56px_minmax(0,1.1fr)_minmax(0,1.3fr)_120px_112px] gap-x-3 gap-y-2 items-center px-4 py-3 transition-colors ${
+        logo.featured ? "bg-yellow-50/40 dark:bg-yellow-500/5 hover:bg-yellow-50/70 dark:hover:bg-yellow-500/10" : "hover:bg-accent/30"
+      } ${!logo.visible ? "opacity-60" : ""}`}
+    >
+      {/* Featured accent bar */}
+      {logo.featured && (
+        <span aria-hidden className="absolute left-0 top-2 bottom-2 w-0.5 rounded-r bg-yellow-400" />
+      )}
+
       {/* Order arrows */}
       <div className="flex md:flex-col gap-0.5 row-span-2 md:row-span-1 self-center">
         <Button size="icon" variant="ghost" className="h-6 w-6" disabled={isFirst} onClick={onMoveUp}>
@@ -293,7 +313,15 @@ function LogoRow({
       </div>
 
       {/* Preview */}
-      <div className="w-14 h-14 flex items-center justify-center bg-muted/40 rounded-md border shrink-0 overflow-hidden">
+      <div
+        className="w-14 h-14 flex items-center justify-center rounded-md border shrink-0 overflow-hidden"
+        style={{
+          backgroundImage:
+            "linear-gradient(45deg, hsl(var(--muted)) 25%, transparent 25%), linear-gradient(-45deg, hsl(var(--muted)) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, hsl(var(--muted)) 75%), linear-gradient(-45deg, transparent 75%, hsl(var(--muted)) 75%)",
+          backgroundSize: "10px 10px",
+          backgroundPosition: "0 0, 0 5px, 5px -5px, -5px 0",
+        }}
+      >
         <img
           src={logo.logo_url}
           alt={logo.name}
@@ -311,7 +339,7 @@ function LogoRow({
             if (name.trim() && name !== logo.name) onRename(name.trim());
           }}
           placeholder="Client name"
-          className="h-9 text-sm"
+          className="h-9 text-sm font-medium"
         />
       </div>
 
@@ -325,27 +353,51 @@ function LogoRow({
             if (website !== (logo.website_url ?? "")) onWebsiteChange(website.trim());
           }}
           placeholder="https://..."
-          className="h-9 text-sm"
+          className="h-9 text-sm font-mono text-xs"
         />
       </div>
 
-      {/* Toggles */}
-      <div className="col-span-3 md:col-span-1 flex items-center justify-start md:justify-center gap-3">
-        <label className="flex items-center gap-1.5 cursor-pointer" title="Featured">
+      {/* Toggles — single icon button per flag */}
+      <div className="col-span-3 md:col-span-1 flex items-center justify-start md:justify-center gap-1">
+        <Button
+          type="button"
+          size="icon"
+          variant="ghost"
+          onClick={() => onToggleFeatured(!logo.featured)}
+          title={logo.featured ? "Unfeature" : "Mark as featured"}
+          aria-pressed={logo.featured}
+          className={`h-8 w-8 rounded-md ${
+            logo.featured
+              ? "bg-yellow-100 hover:bg-yellow-200 dark:bg-yellow-500/20 dark:hover:bg-yellow-500/30"
+              : "hover:bg-muted"
+          }`}
+        >
           <Star
-            className={`h-3.5 w-3.5 ${logo.featured ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground"}`}
+            className={`h-4 w-4 ${logo.featured ? "fill-yellow-400 text-yellow-500" : "text-muted-foreground"}`}
           />
-          <Switch checked={logo.featured} onCheckedChange={onToggleFeatured} />
-        </label>
-        <label className="flex items-center gap-1.5 cursor-pointer" title="Visible">
+        </Button>
+        <Button
+          type="button"
+          size="icon"
+          variant="ghost"
+          onClick={() => onToggleVisible(!logo.visible)}
+          title={logo.visible ? "Hide from site" : "Show on site"}
+          aria-pressed={logo.visible}
+          className={`h-8 w-8 rounded-md ${
+            logo.visible
+              ? "bg-green-100 hover:bg-green-200 dark:bg-green-500/20 dark:hover:bg-green-500/30"
+              : "hover:bg-muted"
+          }`}
+        >
           {logo.visible ? (
-            <Eye className="h-3.5 w-3.5 text-green-600" />
+            <Eye className="h-4 w-4 text-green-600 dark:text-green-400" />
           ) : (
-            <EyeOff className="h-3.5 w-3.5 text-muted-foreground" />
+            <EyeOff className="h-4 w-4 text-muted-foreground" />
           )}
-          <Switch checked={logo.visible} onCheckedChange={onToggleVisible} />
-        </label>
+        </Button>
       </div>
+
+
 
       {/* Actions */}
       <div className="col-span-3 md:col-span-1 flex gap-0.5 justify-end">
