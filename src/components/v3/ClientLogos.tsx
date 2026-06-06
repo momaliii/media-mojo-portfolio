@@ -71,13 +71,12 @@ const LogoTile = ({
           Featured
         </span>
       )}
-      <div className="flex-1 w-full flex items-center justify-center">
+      <div className="flex-1 w-full flex items-center justify-center bg-white/95 rounded-xl p-2">
         <img
           src={logo.logo_url}
-          alt=""
+          alt={logo.name}
           loading="lazy"
-          className="max-h-12 md:max-h-14 max-w-[80%] object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-500"
-          style={{ filter: "brightness(0) invert(1)" }}
+          className="max-h-12 md:max-h-14 max-w-[85%] object-contain transition-transform duration-500 group-hover:scale-105"
         />
       </div>
       <p className="w-full text-center text-[11px] md:text-xs font-semibold tracking-tight v3-soft truncate pt-2 border-t v3-rule">
