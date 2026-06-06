@@ -11,8 +11,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/figtree": "^5.2.10",
     "@fontsource/instrument-serif": "^5.2.8",
     "@fontsource/manrope": "^5.2.8",
+    "@fontsource/outfit": "^5.2.8",
     "@fontsource/sora": "^5.2.8",
     "@fontsource/work-sans": "^5.2.8",
     "@hookform/resolvers": "^3.9.0",
