@@ -512,7 +512,7 @@ export default function AdminAnalytics() {
     <AdminLayout title="Analytics">
       <div className="flex items-start justify-between gap-4 mb-6">
         <div>
-          <p className="text-gray-600 dark:text-gray-300">
+          <p className="text-muted-foreground">
             Quick overview of submissions and content performance.
           </p>
         </div>
@@ -531,7 +531,7 @@ export default function AdminAnalytics() {
             size="sm"
             variant={rangeDays === d ? "default" : "outline"}
             onClick={() => setRangeDays(d as 7 | 30 | 90)}
-            className={rangeDays === d ? "bg-media-purple hover:bg-media-darkpurple text-white" : ""}
+            className={rangeDays === d ? "bg-primary hover:bg-primary/90 text-primary-foreground" : ""}
           >
             Last {d} days
           </Button>
@@ -539,18 +539,18 @@ export default function AdminAnalytics() {
       </div>
 
       {overviewQuery.isLoading ? (
-        <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
+        <div className="flex items-center gap-2 text-muted-foreground">
           <Loader2 className="h-4 w-4 animate-spin" /> Loading…
         </div>
       ) : overviewQuery.isError ? (
-        <div className="text-sm text-red-600">Failed to load analytics.</div>
+        <div className="text-sm text-destructive">Failed to load analytics.</div>
       ) : (
         <div className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Mail className="h-5 w-5 text-media-purple" />
+                  <Mail className="h-5 w-5 text-primary" />
                   Submissions (all time)
                 </CardTitle>
               </CardHeader>
@@ -572,7 +572,7 @@ export default function AdminAnalytics() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <FileText className="h-5 w-5 text-media-purple" />
+                  <FileText className="h-5 w-5 text-primary" />
                   Case Studies (all time)
                 </CardTitle>
               </CardHeader>
@@ -600,7 +600,7 @@ export default function AdminAnalytics() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Layers className="h-5 w-5 text-media-purple" />
+                  <Layers className="h-5 w-5 text-primary" />
                   Submissions trend (last {rangeDays} days)
                 </CardTitle>
               </CardHeader>
@@ -640,7 +640,7 @@ export default function AdminAnalytics() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <PieChart className="h-5 w-5 text-media-purple" />
+                  <PieChart className="h-5 w-5 text-primary" />
                   Submission types (last {rangeDays} days)
                 </CardTitle>
               </CardHeader>
@@ -666,7 +666,7 @@ export default function AdminAnalytics() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Clock className="h-5 w-5 text-media-purple" />
+                  <Clock className="h-5 w-5 text-primary" />
                   Handling speed (last {rangeDays} days)
                 </CardTitle>
               </CardHeader>
@@ -692,7 +692,7 @@ export default function AdminAnalytics() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <PieChart className="h-5 w-5 text-media-purple" />
+                  <PieChart className="h-5 w-5 text-primary" />
                   Case studies status (last {rangeDays} days created)
                 </CardTitle>
               </CardHeader>
@@ -714,7 +714,7 @@ export default function AdminAnalytics() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <BarChart3 className="h-5 w-5 text-media-purple" />
+                  <BarChart3 className="h-5 w-5 text-primary" />
                   Categories (last {rangeDays} days created)
                 </CardTitle>
               </CardHeader>
@@ -761,7 +761,7 @@ export default function AdminAnalytics() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-base">
-                    <BarChart3 className="h-4 w-4 text-media-purple" />
+                    <BarChart3 className="h-4 w-4 text-primary" />
                     Page Views
                   </CardTitle>
                 </CardHeader>
@@ -774,7 +774,7 @@ export default function AdminAnalytics() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-base">
-                    <Users className="h-4 w-4 text-media-purple" />
+                    <Users className="h-4 w-4 text-primary" />
                     Unique Visitors
                   </CardTitle>
                 </CardHeader>
@@ -789,7 +789,7 @@ export default function AdminAnalytics() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-base">
-                    <TrendingUp className="h-4 w-4 text-media-purple" />
+                    <TrendingUp className="h-4 w-4 text-primary" />
                     Returning Visitors
                   </CardTitle>
                 </CardHeader>
@@ -807,7 +807,7 @@ export default function AdminAnalytics() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-base">
-                    <Globe className="h-4 w-4 text-media-purple" />
+                    <Globe className="h-4 w-4 text-primary" />
                     New Visitors
                   </CardTitle>
                 </CardHeader>
@@ -823,7 +823,7 @@ export default function AdminAnalytics() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <PieChart className="h-5 w-5 text-media-purple" />
+                    <PieChart className="h-5 w-5 text-primary" />
                     Traffic Sources (last {rangeDays} days)
                   </CardTitle>
                 </CardHeader>
@@ -854,7 +854,7 @@ export default function AdminAnalytics() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <BarChart3 className="h-5 w-5 text-media-purple" />
+                    <BarChart3 className="h-5 w-5 text-primary" />
                     Top Pages (last {rangeDays} days)
                   </CardTitle>
                 </CardHeader>
@@ -892,7 +892,7 @@ export default function AdminAnalytics() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Globe className="h-5 w-5 text-media-purple" />
+                    <Globe className="h-5 w-5 text-primary" />
                     Top Referrer Domains
                   </CardTitle>
                 </CardHeader>
@@ -927,7 +927,7 @@ export default function AdminAnalytics() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <BarChart3 className="h-5 w-5 text-media-purple" />
+                    <BarChart3 className="h-5 w-5 text-primary" />
                     Top UTM Sources
                   </CardTitle>
                 </CardHeader>
@@ -965,7 +965,7 @@ export default function AdminAnalytics() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <TrendingUp className="h-5 w-5 text-media-purple" />
+                    <TrendingUp className="h-5 w-5 text-primary" />
                     Visitor Trends (last {rangeDays} days)
                   </CardTitle>
                 </CardHeader>
@@ -1013,7 +1013,7 @@ export default function AdminAnalytics() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Users className="h-5 w-5 text-media-purple" />
+                    <Users className="h-5 w-5 text-primary" />
                     Most Active Visitors
                   </CardTitle>
                 </CardHeader>

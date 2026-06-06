@@ -136,7 +136,7 @@ function KpiTile({
 }) {
   const deltaColor =
     tone === "success"
-      ? "text-emerald-400"
+      ? "text-[hsl(var(--admin-success))]"
       : tone === "info"
         ? "text-primary"
         : "text-muted-foreground";

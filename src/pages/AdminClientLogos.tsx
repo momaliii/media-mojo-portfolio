@@ -194,12 +194,12 @@ export default function AdminClientLogos() {
                 <span className="text-muted-foreground">total</span>
               </span>
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border bg-background">
-                <Eye className="h-3.5 w-3.5 text-green-600" />
+                <Eye className="h-3.5 w-3.5 text-[hsl(var(--admin-success))]" />
                 <span className="font-semibold text-foreground tabular-nums">{visibleCount}</span>
                 <span className="text-muted-foreground">visible</span>
               </span>
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border bg-background">
-                <Star className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />
+                <Star className="h-3.5 w-3.5 fill-primary text-primary" />
                 <span className="font-semibold text-foreground tabular-nums">{featuredCount}</span>
                 <span className="text-muted-foreground">featured</span>
               </span>
@@ -294,12 +294,12 @@ function LogoRow({
   return (
     <div
       className={`relative grid grid-cols-[auto_56px_1fr] md:grid-cols-[44px_56px_minmax(0,1.1fr)_minmax(0,1.3fr)_120px_112px] gap-x-3 gap-y-2 items-center px-4 py-3 transition-colors ${
-        logo.featured ? "bg-yellow-50/40 dark:bg-yellow-500/5 hover:bg-yellow-50/70 dark:hover:bg-yellow-500/10" : "hover:bg-accent/30"
+        logo.featured ? "bg-primary/5 hover:bg-primary/10" : "hover:bg-accent/30"
       } ${!logo.visible ? "opacity-60" : ""}`}
     >
       {/* Featured accent bar */}
       {logo.featured && (
-        <span aria-hidden className="absolute left-0 top-2 bottom-2 w-0.5 rounded-r bg-yellow-400" />
+        <span aria-hidden className="absolute left-0 top-2 bottom-2 w-0.5 rounded-r bg-primary" />
       )}
 
       {/* Order arrows */}
@@ -368,12 +368,12 @@ function LogoRow({
           aria-pressed={logo.featured}
           className={`h-8 w-8 rounded-md ${
             logo.featured
-              ? "bg-yellow-100 hover:bg-yellow-200 dark:bg-yellow-500/20 dark:hover:bg-yellow-500/30"
+              ? "bg-primary/15 hover:bg-primary/25"
               : "hover:bg-muted"
           }`}
         >
           <Star
-            className={`h-4 w-4 ${logo.featured ? "fill-yellow-400 text-yellow-500" : "text-muted-foreground"}`}
+            className={`h-4 w-4 ${logo.featured ? "fill-primary text-primary" : "text-muted-foreground"}`}
           />
         </Button>
         <Button
@@ -385,12 +385,12 @@ function LogoRow({
           aria-pressed={logo.visible}
           className={`h-8 w-8 rounded-md ${
             logo.visible
-              ? "bg-green-100 hover:bg-green-200 dark:bg-green-500/20 dark:hover:bg-green-500/30"
+              ? "bg-[hsl(var(--admin-success))/0.15] hover:bg-[hsl(var(--admin-success))/0.25]"
               : "hover:bg-muted"
           }`}
         >
           {logo.visible ? (
-            <Eye className="h-4 w-4 text-green-600 dark:text-green-400" />
+            <Eye className="h-4 w-4 text-[hsl(var(--admin-success))]" />
           ) : (
             <EyeOff className="h-4 w-4 text-muted-foreground" />
           )}
