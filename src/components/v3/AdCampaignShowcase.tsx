@@ -31,12 +31,7 @@ const platformStyle: Record<
   Instagram: { label: "Instagram", Icon: Facebook, dot: "#ff7a1a" },
 };
 
-const maskToInitials = (name: string) =>
-  name
-    .split(/\s+/)
-    .filter(Boolean)
-    .map((w) => (/^[A-Za-z]/.test(w) ? w[0].toUpperCase() + "." : "•"))
-    .join(" ");
+const maskToInitials = (name: string) => name;
 
 const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }> = ({
   s,
