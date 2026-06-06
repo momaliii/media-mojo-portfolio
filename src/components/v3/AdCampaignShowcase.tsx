@@ -49,7 +49,7 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
     >
       {/* Screenshot frame */}
       <div
-        className="relative h-64 md:h-72 lg:h-80 overflow-hidden bg-[var(--v3-bg-2)]"
+        className="relative h-56 sm:h-64 md:h-72 lg:h-80 overflow-hidden bg-[var(--v3-bg-2)]"
         onContextMenu={preventCtx}
         style={{ userSelect: "none" }}
         role="img"
