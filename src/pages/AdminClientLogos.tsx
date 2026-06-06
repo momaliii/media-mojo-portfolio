@@ -127,40 +127,44 @@ export default function AdminClientLogos() {
     }
   };
 
+  const visibleCount = logos.filter((l) => l.visible).length;
+  const featuredCount = logos.filter((l) => l.featured).length;
+
   return (
     <AdminLayout title="Client Logos">
       <div className="space-y-6">
+        {/* Add new logo */}
         <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Plus className="h-5 w-5" /> Add new logo
+          <CardHeader className="pb-4">
+            <CardTitle className="flex items-center gap-2 text-base">
+              <Plus className="h-4 w-4" /> Add new logo
             </CardTitle>
           </CardHeader>
-          <CardContent className="grid gap-4 md:grid-cols-4">
-            <div className="md:col-span-1">
-              <Label htmlFor="logo-name">Client name</Label>
-              <Input
-                id="logo-name"
-                value={newName}
-                onChange={(e) => setNewName(e.target.value)}
-                placeholder="Acme Corp"
-              />
-            </div>
-            <div className="md:col-span-1">
-              <Label htmlFor="logo-website">Website (optional)</Label>
-              <Input
-                id="logo-website"
-                value={newWebsite}
-                onChange={(e) => setNewWebsite(e.target.value)}
-                placeholder="https://acme.com"
-              />
-            </div>
-            <div className="md:col-span-1">
-              <Label htmlFor="logo-file">Logo image (PNG/SVG)</Label>
-              <Input id="logo-file" ref={fileRef} type="file" accept="image/*" />
-            </div>
-            <div className="md:col-span-1 flex items-end">
-              <Button onClick={handleCreate} disabled={uploading} className="w-full">
+          <CardContent>
+            <div className="grid gap-4 lg:grid-cols-[1fr_1fr_1fr_auto] lg:items-end">
+              <div className="space-y-1.5">
+                <Label htmlFor="logo-name" className="text-xs font-medium">Client name</Label>
+                <Input
+                  id="logo-name"
+                  value={newName}
+                  onChange={(e) => setNewName(e.target.value)}
+                  placeholder="Acme Corp"
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="logo-website" className="text-xs font-medium">Website (optional)</Label>
+                <Input
+                  id="logo-website"
+                  value={newWebsite}
+                  onChange={(e) => setNewWebsite(e.target.value)}
+                  placeholder="https://acme.com"
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="logo-file" className="text-xs font-medium">Logo image (PNG/SVG)</Label>
+                <Input id="logo-file" ref={fileRef} type="file" accept="image/*" className="file:mr-2 file:text-xs" />
+              </div>
+              <Button onClick={handleCreate} disabled={uploading} className="lg:w-auto w-full">
                 {uploading ? (
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
                 ) : (
@@ -172,9 +176,23 @@ export default function AdminClientLogos() {
           </CardContent>
         </Card>
 
+        {/* Manage logos */}
         <Card>
-          <CardHeader>
-            <CardTitle>Manage logos ({logos.length})</CardTitle>
+          <CardHeader className="pb-4 flex flex-row items-center justify-between gap-3 flex-wrap">
+            <CardTitle className="text-base">Manage logos</CardTitle>
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-muted">
+                <strong className="text-foreground">{logos.length}</strong> total
+              </span>
+              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-muted">
+                <Eye className="h-3 w-3 text-green-600" />
+                <strong className="text-foreground">{visibleCount}</strong> visible
+              </span>
+              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-muted">
+                <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                <strong className="text-foreground">{featuredCount}</strong> featured
+              </span>
+            </div>
           </CardHeader>
           <CardContent>
             {isLoading ? (
@@ -186,32 +204,43 @@ export default function AdminClientLogos() {
                 No logos yet. Add one above to see it appear on the homepage.
               </p>
             ) : (
-              <div className="space-y-2">
-                {logos.map((logo, idx) => (
-                  <LogoRow
-                    key={logo.id}
-                    logo={logo}
-                    isFirst={idx === 0}
-                    isLast={idx === logos.length - 1}
-                    onMoveUp={() => move(idx, -1)}
-                    onMoveDown={() => move(idx, 1)}
-                    onToggleVisible={(v) =>
-                      update.mutate({ id: logo.id, patch: { visible: v } })
-                    }
-                    onToggleFeatured={(v) =>
-                      update.mutate({ id: logo.id, patch: { featured: v } })
-                    }
-                    onRename={(name) => update.mutate({ id: logo.id, patch: { name } })}
-                    onWebsiteChange={(website_url) =>
-                      update.mutate({ id: logo.id, patch: { website_url: website_url || null } })
-                    }
-                    onReplaceFile={(file) => replaceLogoFile(logo, file)}
-                    onDelete={() => {
-                      if (confirm(`Delete "${logo.name}"?`)) remove.mutate(logo.id);
-                    }}
-                  />
-                ))}
-              </div>
+              <>
+                {/* Desktop header row */}
+                <div className="hidden lg:grid grid-cols-[40px_72px_minmax(0,1.2fr)_minmax(0,1.5fr)_auto_auto] gap-3 px-3 pb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                  <span>Order</span>
+                  <span>Logo</span>
+                  <span>Name</span>
+                  <span>Website</span>
+                  <span className="text-center">Flags</span>
+                  <span className="text-right">Actions</span>
+                </div>
+                <div className="space-y-2">
+                  {logos.map((logo, idx) => (
+                    <LogoRow
+                      key={logo.id}
+                      logo={logo}
+                      isFirst={idx === 0}
+                      isLast={idx === logos.length - 1}
+                      onMoveUp={() => move(idx, -1)}
+                      onMoveDown={() => move(idx, 1)}
+                      onToggleVisible={(v) =>
+                        update.mutate({ id: logo.id, patch: { visible: v } })
+                      }
+                      onToggleFeatured={(v) =>
+                        update.mutate({ id: logo.id, patch: { featured: v } })
+                      }
+                      onRename={(name) => update.mutate({ id: logo.id, patch: { name } })}
+                      onWebsiteChange={(website_url) =>
+                        update.mutate({ id: logo.id, patch: { website_url: website_url || null } })
+                      }
+                      onReplaceFile={(file) => replaceLogoFile(logo, file)}
+                      onDelete={() => {
+                        if (confirm(`Delete "${logo.name}"?`)) remove.mutate(logo.id);
+                      }}
+                    />
+                  ))}
+                </div>
+              </>
             )}
           </CardContent>
         </Card>
@@ -252,28 +281,29 @@ function LogoRow({
   const replaceRef = useRef<HTMLInputElement | null>(null);
 
   return (
-    <div className="flex flex-col md:flex-row md:items-center gap-3 p-3 border rounded-lg bg-card">
+    <div className="grid grid-cols-[auto_72px_1fr] lg:grid-cols-[40px_72px_minmax(0,1.2fr)_minmax(0,1.5fr)_auto_auto] gap-3 lg:gap-3 items-center p-3 border rounded-lg bg-card hover:bg-accent/30 transition-colors">
       {/* Order arrows */}
-      <div className="flex md:flex-col gap-1">
-        <Button size="icon" variant="ghost" disabled={isFirst} onClick={onMoveUp}>
-          <ArrowUp className="h-4 w-4" />
+      <div className="flex lg:flex-col gap-0.5 row-span-2 lg:row-span-1">
+        <Button size="icon" variant="ghost" className="h-7 w-7" disabled={isFirst} onClick={onMoveUp}>
+          <ArrowUp className="h-3.5 w-3.5" />
         </Button>
-        <Button size="icon" variant="ghost" disabled={isLast} onClick={onMoveDown}>
-          <ArrowDown className="h-4 w-4" />
+        <Button size="icon" variant="ghost" className="h-7 w-7" disabled={isLast} onClick={onMoveDown}>
+          <ArrowDown className="h-3.5 w-3.5" />
         </Button>
       </div>
 
       {/* Preview */}
-      <div className="w-24 h-16 flex items-center justify-center bg-muted/40 rounded shrink-0">
+      <div className="w-[72px] h-[72px] flex items-center justify-center bg-muted/40 rounded-md border shrink-0 overflow-hidden">
         <img
           src={logo.logo_url}
           alt={logo.name}
-          className="max-h-12 max-w-20 object-contain"
+          className="max-h-14 max-w-14 object-contain"
         />
       </div>
 
-      {/* Fields */}
-      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-2 min-w-0">
+      {/* Name (mobile: takes remaining; desktop: own column) */}
+      <div className="min-w-0 col-start-3 lg:col-start-auto">
+        <Label className="lg:hidden text-[10px] uppercase tracking-wider text-muted-foreground">Name</Label>
         <Input
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -281,7 +311,13 @@ function LogoRow({
             if (name.trim() && name !== logo.name) onRename(name.trim());
           }}
           placeholder="Client name"
+          className="h-9"
         />
+      </div>
+
+      {/* Website */}
+      <div className="min-w-0 col-span-3 lg:col-span-1 lg:col-start-auto">
+        <Label className="lg:hidden text-[10px] uppercase tracking-wider text-muted-foreground">Website</Label>
         <Input
           value={website}
           onChange={(e) => setWebsite(e.target.value)}
@@ -289,29 +325,30 @@ function LogoRow({
             if (website !== (logo.website_url ?? "")) onWebsiteChange(website.trim());
           }}
           placeholder="https://..."
+          className="h-9"
         />
       </div>
 
       {/* Toggles */}
-      <div className="flex items-center gap-4 md:gap-3">
-        <label className="flex items-center gap-1.5 text-xs cursor-pointer" title="Featured (shows in scrolling strip)">
+      <div className="col-span-3 lg:col-span-1 flex items-center justify-start lg:justify-center gap-4 px-1">
+        <label className="flex items-center gap-1.5 text-xs cursor-pointer" title="Featured">
           <Star
-            className={`h-4 w-4 ${logo.featured ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground"}`}
+            className={`h-3.5 w-3.5 ${logo.featured ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground"}`}
           />
           <Switch checked={logo.featured} onCheckedChange={onToggleFeatured} />
         </label>
-        <label className="flex items-center gap-1.5 text-xs cursor-pointer" title="Visible on site">
+        <label className="flex items-center gap-1.5 text-xs cursor-pointer" title="Visible">
           {logo.visible ? (
-            <Eye className="h-4 w-4 text-green-600" />
+            <Eye className="h-3.5 w-3.5 text-green-600" />
           ) : (
-            <EyeOff className="h-4 w-4 text-muted-foreground" />
+            <EyeOff className="h-3.5 w-3.5 text-muted-foreground" />
           )}
           <Switch checked={logo.visible} onCheckedChange={onToggleVisible} />
         </label>
       </div>
 
       {/* Actions */}
-      <div className="flex gap-1">
+      <div className="col-span-3 lg:col-span-1 flex gap-0.5 justify-end">
         <input
           ref={replaceRef}
           type="file"
@@ -326,20 +363,21 @@ function LogoRow({
         <Button
           size="icon"
           variant="ghost"
+          className="h-8 w-8"
           title="Replace image"
           onClick={() => replaceRef.current?.click()}
         >
-          <Upload className="h-4 w-4" />
+          <Upload className="h-3.5 w-3.5" />
         </Button>
         {logo.website_url && (
-          <Button size="icon" variant="ghost" asChild title="Open website">
+          <Button size="icon" variant="ghost" className="h-8 w-8" asChild title="Open website">
             <a href={logo.website_url} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="h-4 w-4" />
+              <ExternalLink className="h-3.5 w-3.5" />
             </a>
           </Button>
         )}
-        <Button size="icon" variant="ghost" onClick={onDelete} title="Delete">
-          <Trash2 className="h-4 w-4 text-destructive" />
+        <Button size="icon" variant="ghost" className="h-8 w-8" onClick={onDelete} title="Delete">
+          <Trash2 className="h-3.5 w-3.5 text-destructive" />
         </Button>
       </div>
     </div>
