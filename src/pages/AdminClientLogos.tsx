@@ -281,29 +281,29 @@ function LogoRow({
   const replaceRef = useRef<HTMLInputElement | null>(null);
 
   return (
-    <div className="grid grid-cols-[auto_72px_1fr] md:grid-cols-[36px_64px_minmax(0,1.1fr)_minmax(0,1.3fr)_auto_auto] gap-3 md:gap-3 items-center p-3 border rounded-lg bg-card hover:bg-accent/30 transition-colors">
+    <div className="grid grid-cols-[auto_56px_1fr] md:grid-cols-[44px_56px_minmax(0,1.1fr)_minmax(0,1.3fr)_120px_112px] gap-x-3 gap-y-2 items-center px-4 py-3 hover:bg-accent/30 transition-colors">
       {/* Order arrows */}
-      <div className="flex md:flex-col gap-0.5 row-span-2 md:row-span-1">
-        <Button size="icon" variant="ghost" className="h-7 w-7" disabled={isFirst} onClick={onMoveUp}>
+      <div className="flex md:flex-col gap-0.5 row-span-2 md:row-span-1 self-center">
+        <Button size="icon" variant="ghost" className="h-6 w-6" disabled={isFirst} onClick={onMoveUp}>
           <ArrowUp className="h-3.5 w-3.5" />
         </Button>
-        <Button size="icon" variant="ghost" className="h-7 w-7" disabled={isLast} onClick={onMoveDown}>
+        <Button size="icon" variant="ghost" className="h-6 w-6" disabled={isLast} onClick={onMoveDown}>
           <ArrowDown className="h-3.5 w-3.5" />
         </Button>
       </div>
 
       {/* Preview */}
-      <div className="w-[72px] h-[72px] flex items-center justify-center bg-muted/40 rounded-md border shrink-0 overflow-hidden">
+      <div className="w-14 h-14 flex items-center justify-center bg-muted/40 rounded-md border shrink-0 overflow-hidden">
         <img
           src={logo.logo_url}
           alt={logo.name}
-          className="max-h-14 max-w-14 object-contain"
+          className="max-h-11 max-w-11 object-contain"
         />
       </div>
 
-      {/* Name (mobile: takes remaining; desktop: own column) */}
-      <div className="min-w-0 col-start-3 md:col-start-auto">
-        <Label className="md:hidden text-[10px] uppercase tracking-wider text-muted-foreground">Name</Label>
+      {/* Name */}
+      <div className="min-w-0 col-start-3 md:col-start-auto space-y-1">
+        <Label className="md:hidden text-[10px] font-medium uppercase tracking-wider text-muted-foreground">Name</Label>
         <Input
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -311,13 +311,13 @@ function LogoRow({
             if (name.trim() && name !== logo.name) onRename(name.trim());
           }}
           placeholder="Client name"
-          className="h-9"
+          className="h-9 text-sm"
         />
       </div>
 
       {/* Website */}
-      <div className="min-w-0 col-span-3 md:col-span-1 md:col-start-auto">
-        <Label className="md:hidden text-[10px] uppercase tracking-wider text-muted-foreground">Website</Label>
+      <div className="min-w-0 col-span-3 md:col-span-1 md:col-start-auto space-y-1">
+        <Label className="md:hidden text-[10px] font-medium uppercase tracking-wider text-muted-foreground">Website</Label>
         <Input
           value={website}
           onChange={(e) => setWebsite(e.target.value)}
@@ -325,19 +325,19 @@ function LogoRow({
             if (website !== (logo.website_url ?? "")) onWebsiteChange(website.trim());
           }}
           placeholder="https://..."
-          className="h-9"
+          className="h-9 text-sm"
         />
       </div>
 
       {/* Toggles */}
-      <div className="col-span-3 md:col-span-1 flex items-center justify-start md:justify-center gap-4 px-1">
-        <label className="flex items-center gap-1.5 text-xs cursor-pointer" title="Featured">
+      <div className="col-span-3 md:col-span-1 flex items-center justify-start md:justify-center gap-3">
+        <label className="flex items-center gap-1.5 cursor-pointer" title="Featured">
           <Star
             className={`h-3.5 w-3.5 ${logo.featured ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground"}`}
           />
           <Switch checked={logo.featured} onCheckedChange={onToggleFeatured} />
         </label>
-        <label className="flex items-center gap-1.5 text-xs cursor-pointer" title="Visible">
+        <label className="flex items-center gap-1.5 cursor-pointer" title="Visible">
           {logo.visible ? (
             <Eye className="h-3.5 w-3.5 text-green-600" />
           ) : (
@@ -349,6 +349,7 @@ function LogoRow({
 
       {/* Actions */}
       <div className="col-span-3 md:col-span-1 flex gap-0.5 justify-end">
+
         <input
           ref={replaceRef}
           type="file"
