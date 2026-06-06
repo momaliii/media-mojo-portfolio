@@ -14,9 +14,9 @@ const Contact = () => {
       const { error } = await supabase.from("contact_submissions").insert({
         name: form.name,
         email: form.email,
-        company: form.company || null,
+        subject: form.company ? `[v3] ${form.company}` : "[v3] Inquiry",
         message: form.message,
-        source: "v3",
+        submission_type: "contact",
       });
       if (error) throw error;
       toast({ title: "Sent.", description: "I'll be in touch within 24 hours." });
