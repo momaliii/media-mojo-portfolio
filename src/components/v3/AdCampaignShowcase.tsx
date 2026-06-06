@@ -47,9 +47,9 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
           : "hover:ring-1 hover:ring-[var(--v3-lime)]/25"
       }`}
     >
-      {/* Screenshot frame — fixed 4:3 ratio at every breakpoint, top-anchored cover */}
+      {/* Screenshot frame — full screenshot visible, no zoom-in cropping */}
       <div
-        className="relative w-full aspect-[4/3] overflow-hidden bg-[var(--v3-bg-2)]"
+        className="relative w-full aspect-[16/10] overflow-hidden bg-[var(--v3-bg-2)] flex items-center justify-center p-3 sm:p-4"
         onContextMenu={preventCtx}
         style={{ userSelect: "none" }}
         role="img"
@@ -61,7 +61,7 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
           loading="lazy"
           draggable={false}
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 85vw"
-          className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105 select-none"
+          className="relative z-0 max-w-full max-h-full w-auto h-auto object-contain rounded-lg shadow-[0_10px_30px_rgba(0,0,0,.45)] transition-transform duration-700 ease-out group-hover:scale-[1.02] select-none"
           style={{ pointerEvents: "none" }}
         />
 
