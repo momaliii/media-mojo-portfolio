@@ -65,14 +65,13 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
           style={{ pointerEvents: "none" }}
         />
 
-        {/* Top fade for legibility */}
-        <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/60 to-transparent pointer-events-none" />
-        {/* Bottom fade */}
-        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
+        {/* Soft top/bottom vignette only at edges so the screenshot stays readable */}
+        <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/40 to-transparent pointer-events-none z-10" />
+        <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/40 to-transparent pointer-events-none z-10" />
 
-        {/* Watermark */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <span className="px-6 py-2 -rotate-[22deg] text-white/70 text-base md:text-lg font-bold tracking-[0.3em] bg-black/15 backdrop-blur-[1px]">
+        {/* Subtle watermark — diagonal, low opacity, no blur backdrop */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+          <span className="-rotate-[22deg] text-white/15 text-sm md:text-base font-bold tracking-[0.35em] whitespace-nowrap">
             MOHAMED ALI · MEDIA BUYER
           </span>
         </div>
