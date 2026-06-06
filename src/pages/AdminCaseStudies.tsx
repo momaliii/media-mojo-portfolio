@@ -570,7 +570,7 @@ export default function AdminCaseStudies() {
                       className={`w-full text-left p-3 rounded-xl border transition-colors ${
                         selectedId === cs.id
                           ? "border-primary bg-primary/10"
-                          : "border-border hover:bg-gray-50 dark:hover:bg-muted/40"
+                          : "border-border hover:bg-muted/40"
                       }`}
                     >
                       <div className="flex items-center justify-between gap-3">
