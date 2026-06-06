@@ -1,6 +1,7 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import Navigation from "@/components/v3/Navigation";
 import Hero from "@/components/v3/Hero";
+import ClientLogos from "@/components/v3/ClientLogos";
 import Work from "@/components/v3/Work";
 import Services from "@/components/v3/Services";
 import About from "@/components/v3/About";
@@ -25,6 +26,7 @@ const IndexV3 = () => {
       <Navigation activeSection={activeSection} />
       <main id="main-content" tabIndex={-1} aria-label="Main content">
         <ErrorBoundary><Hero /></ErrorBoundary>
+        <ErrorBoundary><ClientLogos /></ErrorBoundary>
         <ErrorBoundary><Work /></ErrorBoundary>
         <ErrorBoundary><Services /></ErrorBoundary>
         <ErrorBoundary><About /></ErrorBoundary>
