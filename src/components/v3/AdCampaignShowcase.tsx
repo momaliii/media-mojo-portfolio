@@ -49,7 +49,7 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
     >
       {/* Screenshot frame */}
       <div
-        className="relative h-64 md:h-72 lg:h-80 overflow-hidden bg-[var(--v3-bg-2)]"
+        className="relative h-56 sm:h-64 md:h-72 lg:h-80 overflow-hidden bg-[var(--v3-bg-2)]"
         onContextMenu={preventCtx}
         style={{ userSelect: "none" }}
         role="img"
@@ -163,76 +163,78 @@ const AdCampaignShowcase: React.FC = () => {
   return (
     <section
       id="ad-showcase"
-      className="relative py-20 md:py-28 scroll-mt-24"
+      className="relative py-14 sm:py-20 md:py-28 scroll-mt-24"
       aria-labelledby="ad-showcase-heading"
     >
-      <div className="max-w-[1400px] mx-auto px-5 md:px-8 lg:px-10">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-5 md:px-8 lg:px-10">
         {/* Header */}
-        <div className="grid md:grid-cols-12 gap-8 md:gap-10 items-end mb-12 md:mb-16">
+        <div className="grid md:grid-cols-12 gap-6 sm:gap-8 md:gap-10 items-start md:items-end mb-10 sm:mb-12 md:mb-16">
           <div className="md:col-span-7">
-            <p className="v3-eyebrow v3-lime mb-4">Receipts · Live ad accounts</p>
+            <p className="v3-eyebrow v3-lime mb-3 sm:mb-4">Receipts · Live ad accounts</p>
             <h2
               id="ad-showcase-heading"
-              className="v3-display text-4xl md:text-6xl font-bold leading-[1] tracking-[-0.05em]"
+              className="v3-display text-3xl sm:text-4xl md:text-6xl font-bold leading-[1.05] md:leading-[1] tracking-[-0.04em] md:tracking-[-0.05em]"
             >
               Ad campaign <span className="v3-glow-text">showcase.</span>
             </h2>
-            <p className="mt-5 max-w-xl v3-soft leading-relaxed">
+            <p className="mt-4 sm:mt-5 max-w-xl v3-soft leading-relaxed text-sm sm:text-base">
               Real screenshots from Meta, LinkedIn, Lightfunnel & analytics
               dashboards across MENA & global accounts. Watermarked, never mocked.
             </p>
           </div>
 
-          <div className="md:col-span-5 flex flex-col gap-5">
-            <div className="grid grid-cols-3 gap-3">
+          <div className="md:col-span-5 flex flex-col gap-4 sm:gap-5">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
               {stats.map((s) => (
                 <div
                   key={s.label}
-                  className="v3-shell rounded-2xl px-3 py-4 text-center"
+                  className="v3-shell rounded-xl sm:rounded-2xl px-2 sm:px-3 py-3 sm:py-4 text-center"
                 >
-                  <div className="v3-numeral text-lg md:text-xl font-bold text-[var(--v3-lime)]">
+                  <div className="v3-numeral text-sm sm:text-lg md:text-xl font-bold text-[var(--v3-lime)] leading-tight">
                     {s.value}
                   </div>
-                  <div className="v3-eyebrow v3-muted mt-1 text-[0.6rem]">
+                  <div className="v3-eyebrow v3-muted mt-1 text-[0.55rem] sm:text-[0.6rem]">
                     {s.label}
                   </div>
                 </div>
               ))}
             </div>
-            <div className="flex items-center justify-end gap-2">
+            <div className="flex items-center justify-between md:justify-end gap-2">
               <button
                 onClick={togglePlay}
-                className="inline-flex items-center gap-2 rounded-2xl v3-shell px-4 py-3 text-xs font-bold uppercase tracking-[0.14em] v3-link"
+                className="inline-flex items-center gap-2 rounded-xl sm:rounded-2xl v3-shell px-3 sm:px-4 py-2.5 sm:py-3 text-[11px] sm:text-xs font-bold uppercase tracking-[0.14em] v3-link"
                 aria-label={playing ? "Pause autoplay" : "Play autoplay"}
               >
                 {playing ? <Pause size={14} /> : <Play size={14} />}
                 {playing ? "Pause" : "Play"}
               </button>
-              <button
-                onClick={() => embla?.scrollPrev()}
-                className="grid h-11 w-11 place-items-center rounded-xl v3-shell v3-link"
-                aria-label="Previous"
-              >
-                <ArrowLeft size={16} />
-              </button>
-              <button
-                onClick={() => embla?.scrollNext()}
-                className="grid h-11 w-11 place-items-center rounded-xl v3-shell v3-link"
-                aria-label="Next"
-              >
-                <ArrowRight size={16} />
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => embla?.scrollPrev()}
+                  className="grid h-10 w-10 sm:h-11 sm:w-11 place-items-center rounded-xl v3-shell v3-link"
+                  aria-label="Previous"
+                >
+                  <ArrowLeft size={16} />
+                </button>
+                <button
+                  onClick={() => embla?.scrollNext()}
+                  className="grid h-10 w-10 sm:h-11 sm:w-11 place-items-center rounded-xl v3-shell v3-link"
+                  aria-label="Next"
+                >
+                  <ArrowRight size={16} />
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Carousel */}
         <div className="overflow-hidden" ref={emblaRef}>
-          <div className="flex -ml-5">
+          <div className="flex -ml-4 sm:-ml-5">
             {adCampaignScreenshots.map((s, i) => (
               <div
                 key={i}
-                className="pl-5 shrink-0 grow-0 basis-full sm:basis-1/2 lg:basis-1/3 transition-opacity duration-500"
+                className="pl-4 sm:pl-5 shrink-0 grow-0 basis-[85%] sm:basis-1/2 lg:basis-1/3 transition-opacity duration-500"
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`Slide ${i + 1} of ${adCampaignScreenshots.length}`}
