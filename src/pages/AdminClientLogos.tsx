@@ -204,17 +204,17 @@ export default function AdminClientLogos() {
                 No logos yet. Add one above to see it appear on the homepage.
               </p>
             ) : (
-              <>
+              <div className="overflow-hidden rounded-lg border bg-card">
                 {/* Desktop header row */}
-                <div className="hidden md:grid grid-cols-[36px_64px_minmax(0,1.1fr)_minmax(0,1.3fr)_auto_auto] gap-3 px-3 pb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                <div className="hidden md:grid grid-cols-[44px_56px_minmax(0,1.1fr)_minmax(0,1.3fr)_120px_112px] gap-3 items-center px-4 py-2.5 bg-muted/40 border-b text-[10.5px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
                   <span>Order</span>
                   <span>Logo</span>
                   <span>Name</span>
                   <span>Website</span>
                   <span className="text-center">Flags</span>
-                  <span className="text-right">Actions</span>
+                  <span className="text-right pr-1">Actions</span>
                 </div>
-                <div className="space-y-2">
+                <div className="divide-y">
                   {logos.map((logo, idx) => (
                     <LogoRow
                       key={logo.id}
@@ -240,7 +240,7 @@ export default function AdminClientLogos() {
                     />
                   ))}
                 </div>
-              </>
+              </div>
             )}
           </CardContent>
         </Card>
