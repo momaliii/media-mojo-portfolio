@@ -141,7 +141,7 @@ export default function AdminClientLogos() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-4 lg:grid-cols-[1fr_1fr_1fr_auto] lg:items-end">
+            <div className="grid gap-4 md:grid-cols-[1fr_1fr_1fr_auto] md:items-end">
               <div className="space-y-1.5">
                 <Label htmlFor="logo-name" className="text-xs font-medium">Client name</Label>
                 <Input
@@ -164,7 +164,7 @@ export default function AdminClientLogos() {
                 <Label htmlFor="logo-file" className="text-xs font-medium">Logo image (PNG/SVG)</Label>
                 <Input id="logo-file" ref={fileRef} type="file" accept="image/*" className="file:mr-2 file:text-xs" />
               </div>
-              <Button onClick={handleCreate} disabled={uploading} className="lg:w-auto w-full">
+              <Button onClick={handleCreate} disabled={uploading} className="md:w-auto w-full">
                 {uploading ? (
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
                 ) : (
@@ -206,7 +206,7 @@ export default function AdminClientLogos() {
             ) : (
               <>
                 {/* Desktop header row */}
-                <div className="hidden lg:grid grid-cols-[40px_72px_minmax(0,1.2fr)_minmax(0,1.5fr)_auto_auto] gap-3 px-3 pb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                <div className="hidden md:grid grid-cols-[36px_64px_minmax(0,1.1fr)_minmax(0,1.3fr)_auto_auto] gap-3 px-3 pb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
                   <span>Order</span>
                   <span>Logo</span>
                   <span>Name</span>
@@ -281,9 +281,9 @@ function LogoRow({
   const replaceRef = useRef<HTMLInputElement | null>(null);
 
   return (
-    <div className="grid grid-cols-[auto_72px_1fr] lg:grid-cols-[40px_72px_minmax(0,1.2fr)_minmax(0,1.5fr)_auto_auto] gap-3 lg:gap-3 items-center p-3 border rounded-lg bg-card hover:bg-accent/30 transition-colors">
+    <div className="grid grid-cols-[auto_72px_1fr] md:grid-cols-[36px_64px_minmax(0,1.1fr)_minmax(0,1.3fr)_auto_auto] gap-3 md:gap-3 items-center p-3 border rounded-lg bg-card hover:bg-accent/30 transition-colors">
       {/* Order arrows */}
-      <div className="flex lg:flex-col gap-0.5 row-span-2 lg:row-span-1">
+      <div className="flex md:flex-col gap-0.5 row-span-2 md:row-span-1">
         <Button size="icon" variant="ghost" className="h-7 w-7" disabled={isFirst} onClick={onMoveUp}>
           <ArrowUp className="h-3.5 w-3.5" />
         </Button>
@@ -302,8 +302,8 @@ function LogoRow({
       </div>
 
       {/* Name (mobile: takes remaining; desktop: own column) */}
-      <div className="min-w-0 col-start-3 lg:col-start-auto">
-        <Label className="lg:hidden text-[10px] uppercase tracking-wider text-muted-foreground">Name</Label>
+      <div className="min-w-0 col-start-3 md:col-start-auto">
+        <Label className="md:hidden text-[10px] uppercase tracking-wider text-muted-foreground">Name</Label>
         <Input
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -316,8 +316,8 @@ function LogoRow({
       </div>
 
       {/* Website */}
-      <div className="min-w-0 col-span-3 lg:col-span-1 lg:col-start-auto">
-        <Label className="lg:hidden text-[10px] uppercase tracking-wider text-muted-foreground">Website</Label>
+      <div className="min-w-0 col-span-3 md:col-span-1 md:col-start-auto">
+        <Label className="md:hidden text-[10px] uppercase tracking-wider text-muted-foreground">Website</Label>
         <Input
           value={website}
           onChange={(e) => setWebsite(e.target.value)}
@@ -330,7 +330,7 @@ function LogoRow({
       </div>
 
       {/* Toggles */}
-      <div className="col-span-3 lg:col-span-1 flex items-center justify-start lg:justify-center gap-4 px-1">
+      <div className="col-span-3 md:col-span-1 flex items-center justify-start md:justify-center gap-4 px-1">
         <label className="flex items-center gap-1.5 text-xs cursor-pointer" title="Featured">
           <Star
             className={`h-3.5 w-3.5 ${logo.featured ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground"}`}
@@ -348,7 +348,7 @@ function LogoRow({
       </div>
 
       {/* Actions */}
-      <div className="col-span-3 lg:col-span-1 flex gap-0.5 justify-end">
+      <div className="col-span-3 md:col-span-1 flex gap-0.5 justify-end">
         <input
           ref={replaceRef}
           type="file"
