@@ -11,24 +11,24 @@ const Work = () => {
   const items = caseStudies.slice(0, 6);
 
   return (
-    <section id="work" className="relative py-24 md:py-36">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-        <div className="flex items-end justify-between border-b v3-rule pb-8 mb-12 md:mb-20 gap-6">
+    <section id="work" className="relative py-20 md:py-28">
+      <div className="max-w-[1400px] mx-auto px-5 md:px-8 lg:px-10">
+        <div className="flex items-end justify-between gap-6 mb-10 md:mb-14">
           <div>
-            <p className="v3-eyebrow text-[var(--v3-accent)] mb-4">§ 01 — Selected Work</p>
-            <h2 className="v3-serif text-5xl md:text-7xl leading-[0.95] tracking-[-0.02em]">
-              Campaigns that <span className="v3-italic">earned</span> their budget.
+            <p className="v3-eyebrow v3-lime mb-4">Selected proof</p>
+            <h2 className="v3-display text-4xl md:text-6xl font-bold leading-[1] tracking-[-0.05em]">
+              Case studies with <span className="v3-glow-text">numbers attached.</span>
             </h2>
           </div>
           <Link
             to="/v3/case-studies"
-            className="hidden md:inline-flex items-center gap-2 v3-eyebrow hover:text-[var(--v3-accent)] transition-colors whitespace-nowrap"
+            className="hidden md:inline-flex items-center gap-2 rounded-2xl v3-shell px-5 py-3 text-sm font-bold v3-link whitespace-nowrap"
           >
             All Case Studies <ArrowUpRight size={14} />
           </Link>
         </div>
 
-        <ul className="divide-y v3-rule border-t border-b v3-rule">
+        <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           {items.map((cs, i) => {
             const slug = cs.slug || slugify(cs.title);
             return (
@@ -41,31 +41,35 @@ const Work = () => {
               >
                 <Link
                   to={`/v3/case-study/${slug}`}
-                  className="group grid grid-cols-12 gap-4 md:gap-8 items-center py-8 md:py-12 hover:bg-[var(--v3-paper-2)] -mx-4 px-4 md:-mx-6 md:px-6 transition-colors"
+                  className="group block v3-shell v3-card-hover rounded-[1.7rem] p-5 md:p-6 min-h-[330px]"
                 >
-                  <span className="v3-numeral text-2xl md:text-3xl text-[var(--v3-muted)] col-span-1">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div className="col-span-11 md:col-span-5">
-                    <h3 className="v3-serif text-2xl md:text-4xl leading-tight tracking-[-0.015em] group-hover:v3-italic group-hover:text-[var(--v3-accent)] transition-all">
+                  <div className="flex items-center justify-between mb-8">
+                    <span className="v3-eyebrow v3-muted">0{i + 1}</span>
+                    <span className="rounded-full bg-[var(--v3-cyan)]/10 px-3 py-1 text-xs font-bold text-[var(--v3-cyan)]">
+                      {cs.category}
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="v3-display text-2xl md:text-3xl font-bold leading-tight tracking-[-0.04em] group-hover:text-[var(--v3-lime)] transition-colors">
                       {cs.title}
                     </h3>
-                    <p className="v3-eyebrow text-[var(--v3-muted)] mt-2">
+                    <p className="mt-4 v3-soft leading-relaxed line-clamp-3">
+                      {cs.description}
+                    </p>
+                    <p className="v3-eyebrow v3-muted mt-5">
                       {cs.industry || cs.category}
                     </p>
                   </div>
-                  <div className="hidden md:flex col-span-4 gap-6">
+                  <div className="mt-8 pt-6 border-t v3-rule flex gap-5">
                     {cs.metrics.slice(0, 2).map((m) => (
                       <div key={m.label}>
-                        <div className="v3-numeral text-3xl leading-none">{m.value}</div>
-                        <div className="v3-eyebrow text-[var(--v3-muted)] mt-1">{m.label}</div>
+                        <div className="v3-numeral text-3xl font-bold leading-none">{m.value}</div>
+                        <div className="v3-eyebrow v3-muted mt-1">{m.label}</div>
                       </div>
                     ))}
-                  </div>
-                  <div className="hidden md:flex col-span-2 justify-end">
                     <ArrowUpRight
-                      size={28}
-                      className="text-[var(--v3-muted)] group-hover:text-[var(--v3-accent)] group-hover:rotate-12 transition-all"
+                      size={26}
+                      className="ml-auto text-[var(--v3-muted)] group-hover:text-[var(--v3-lime)] group-hover:rotate-12 transition-all"
                     />
                   </div>
                 </Link>
