@@ -78,7 +78,7 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
 
         {/* Platform chip top-left */}
         {platform && (
-          <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 px-2.5 py-1 text-[10px] uppercase tracking-[0.16em] font-bold text-white">
+          <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 rounded-full bg-black/70 backdrop-blur-md border border-white/10 px-2.5 py-1 text-[10px] uppercase tracking-[0.16em] font-bold text-white">
             <platform.Icon size={12} aria-hidden />
             <span>{platform.label}</span>
           </div>
@@ -86,19 +86,19 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
 
         {/* Lock top-right */}
         <div
-          className="absolute top-3 right-3 grid place-items-center h-7 w-7 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white/80"
+          className="absolute top-3 right-3 z-20 grid place-items-center h-7 w-7 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-white/80"
           aria-hidden
         >
           <Lock size={12} />
         </div>
 
         {/* Index numeral */}
-        <div className="absolute bottom-3 left-3 v3-numeral text-xs font-bold text-white/60">
+        <div className="absolute bottom-3 left-3 z-20 v3-numeral text-xs font-bold text-white/70">
           {String(index + 1).padStart(2, "0")} / {adCampaignScreenshots.length}
         </div>
 
         {/* Industry chip bottom-right */}
-        <div className="absolute bottom-3 right-3 rounded-full bg-[var(--v3-lime)] text-[var(--v3-bg)] px-3 py-1 text-[10px] uppercase tracking-[0.16em] font-bold">
+        <div className="absolute bottom-3 right-3 z-20 rounded-full bg-[var(--v3-lime)] text-[var(--v3-bg)] px-3 py-1 text-[10px] uppercase tracking-[0.16em] font-bold">
           {s.industry}
         </div>
       </div>
