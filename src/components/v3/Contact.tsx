@@ -29,32 +29,29 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="relative py-24 md:py-36 bg-[var(--v3-ink)] text-[var(--v3-paper)]">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+    <section id="contact" className="relative py-20 md:py-28">
+      <div className="max-w-[1400px] mx-auto px-5 md:px-8 lg:px-10">
+        <div className="v3-shell rounded-[2rem] p-5 md:p-10 lg:p-12">
         <div className="grid grid-cols-12 gap-8 md:gap-16">
           <div className="col-span-12 md:col-span-6">
-            <p className="v3-eyebrow text-[var(--v3-accent-2)] mb-6">§ 04 — Commission</p>
-            <h2 className="v3-serif text-6xl md:text-8xl leading-[0.92] tracking-[-0.025em]">
-              Let's make <br />
-              <span className="v3-italic" style={{ color: "var(--v3-accent-2)" }}>
-                numbers
-              </span>{" "}
-              move.
+            <p className="v3-eyebrow v3-lime mb-6">Growth request</p>
+            <h2 className="v3-display text-4xl md:text-6xl font-bold leading-[1] tracking-[-0.05em]">
+              Ready to turn spend into <span className="v3-glow-text">signal?</span>
             </h2>
-            <p className="mt-10 text-lg opacity-70 max-w-md leading-relaxed">
+            <p className="mt-7 text-lg v3-soft max-w-md leading-relaxed">
               Brief me on the brand, the budget, and the bottleneck. I reply personally
               within one business day.
             </p>
 
-            <div className="mt-12 space-y-6 border-t border-white/15 pt-8">
+            <div className="mt-10 grid gap-3">
               {[
                 ["Email", "hello@mhmdali.site"],
                 ["WhatsApp", "+20 ··· available on request"],
                 ["LinkedIn", "linkedin.com/in/mhmdali02"],
               ].map(([k, v]) => (
-                <div key={k} className="flex justify-between items-baseline gap-4">
-                  <span className="v3-eyebrow opacity-50">{k}</span>
-                  <span className="v3-serif text-xl">{v}</span>
+                <div key={k} className="rounded-2xl bg-white/5 border v3-rule p-4 flex justify-between items-baseline gap-4">
+                  <span className="v3-eyebrow v3-muted">{k}</span>
+                  <span className="font-bold text-right">{v}</span>
                 </div>
               ))}
             </div>
@@ -66,26 +63,26 @@ const Contact = () => {
               { k: "email", label: "Email", type: "email", required: true },
               { k: "company", label: "Company (optional)", type: "text", required: false },
             ].map((f) => (
-              <div key={f.k} className="border-b border-white/20 pb-2">
-                <label className="v3-eyebrow opacity-50 block mb-2">{f.label}</label>
+              <div key={f.k} className="rounded-2xl bg-[var(--v3-bg)]/70 border v3-rule p-4">
+                <label className="v3-eyebrow v3-muted block mb-2">{f.label}</label>
                 <input
                   type={f.type}
                   required={f.required}
                   value={(form as any)[f.k]}
                   onChange={(e) => setForm({ ...form, [f.k]: e.target.value })}
-                  className="w-full bg-transparent v3-serif text-2xl outline-none placeholder:opacity-30 focus:border-[var(--v3-accent-2)]"
+                  className="w-full bg-transparent text-lg font-bold outline-none placeholder:opacity-30"
                 />
               </div>
             ))}
 
-            <div className="border-b border-white/20 pb-2">
-              <label className="v3-eyebrow opacity-50 block mb-2">The brief</label>
+            <div className="rounded-2xl bg-[var(--v3-bg)]/70 border v3-rule p-4">
+              <label className="v3-eyebrow v3-muted block mb-2">The brief</label>
               <textarea
                 required
                 rows={4}
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="w-full bg-transparent v3-serif text-xl outline-none resize-none"
+                className="w-full bg-transparent text-base font-semibold outline-none resize-none placeholder:text-[var(--v3-muted)]"
                 placeholder="Brand, budget range, goal…"
               />
             </div>
@@ -93,12 +90,13 @@ const Contact = () => {
             <button
               type="submit"
               disabled={loading}
-              className="group inline-flex items-center justify-between w-full mt-8 px-6 py-5 bg-[var(--v3-accent)] text-[var(--v3-paper)] hover:bg-[var(--v3-accent-2)] hover:text-[var(--v3-ink)] transition-colors disabled:opacity-60"
+              className="group inline-flex items-center justify-between w-full mt-8 px-6 py-5 rounded-2xl bg-[var(--v3-lime)] text-[var(--v3-bg)] hover:shadow-[0_0_42px_rgba(182,255,77,.35)] transition-shadow disabled:opacity-60"
             >
               <span className="v3-eyebrow">{loading ? "Sending…" : "Send the brief"}</span>
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </form>
+        </div>
         </div>
       </div>
     </section>
