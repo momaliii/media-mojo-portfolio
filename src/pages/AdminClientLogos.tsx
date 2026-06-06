@@ -134,37 +134,42 @@ export default function AdminClientLogos() {
     <AdminLayout title="Client Logos">
       <div className="space-y-6">
         {/* Add new logo */}
-        <Card>
-          <CardHeader className="pb-4">
-            <CardTitle className="flex items-center gap-2 text-base">
-              <Plus className="h-4 w-4" /> Add new logo
+        <Card className="border-dashed">
+          <CardHeader className="pb-3 border-b bg-muted/30">
+            <CardTitle className="flex items-center gap-2 text-sm font-semibold">
+              <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-primary/10 text-primary">
+                <Plus className="h-4 w-4" />
+              </span>
+              Add new logo
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-5">
             <div className="grid gap-4 md:grid-cols-[1fr_1fr_1fr_auto] md:items-end">
               <div className="space-y-1.5">
-                <Label htmlFor="logo-name" className="text-xs font-medium">Client name</Label>
+                <Label htmlFor="logo-name" className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Client name</Label>
                 <Input
                   id="logo-name"
                   value={newName}
                   onChange={(e) => setNewName(e.target.value)}
                   placeholder="Acme Corp"
+                  className="h-10"
                 />
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="logo-website" className="text-xs font-medium">Website (optional)</Label>
+                <Label htmlFor="logo-website" className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Website <span className="font-normal normal-case">(optional)</span></Label>
                 <Input
                   id="logo-website"
                   value={newWebsite}
                   onChange={(e) => setNewWebsite(e.target.value)}
                   placeholder="https://acme.com"
+                  className="h-10"
                 />
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="logo-file" className="text-xs font-medium">Logo image (PNG/SVG)</Label>
-                <Input id="logo-file" ref={fileRef} type="file" accept="image/*" className="file:mr-2 file:text-xs" />
+                <Label htmlFor="logo-file" className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Logo image <span className="font-normal normal-case">(PNG / SVG)</span></Label>
+                <Input id="logo-file" ref={fileRef} type="file" accept="image/*" className="h-10 file:mr-2 file:text-xs cursor-pointer" />
               </div>
-              <Button onClick={handleCreate} disabled={uploading} className="md:w-auto w-full">
+              <Button onClick={handleCreate} disabled={uploading} size="lg" className="md:w-auto w-full h-10 px-5">
                 {uploading ? (
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
                 ) : (
