@@ -59,7 +59,7 @@ const Hero = () => {
             >
               <a
                 href="#work"
-                className="group inline-flex items-center justify-center gap-3 rounded-2xl bg-[var(--v3-lime)] px-6 py-4 font-bold text-[var(--v3-bg)] hover:shadow-[0_0_42px_rgba(182,255,77,.35)] transition-shadow"
+                className="v3-cta group inline-flex items-center justify-center gap-3 rounded-2xl bg-[var(--v3-lime)] px-6 py-4 font-bold text-[var(--v3-bg)] hover:shadow-[0_10px_42px_rgba(182,255,77,.4)]"
               >
                 See performance proof
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -68,7 +68,7 @@ const Hero = () => {
                 href="/Mohamed_Ali_CV.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 rounded-2xl v3-shell px-6 py-4 font-bold text-[var(--v3-text)]"
+                className="v3-cta inline-flex items-center justify-center gap-3 rounded-2xl v3-shell px-6 py-4 font-bold text-[var(--v3-text)] hover:border-[var(--v3-cyan)]/40"
               >
                 Download CV
               </a>
