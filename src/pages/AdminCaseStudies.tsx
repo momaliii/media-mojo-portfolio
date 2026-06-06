@@ -396,7 +396,7 @@ export default function AdminCaseStudies() {
               <CardHeader className="cursor-pointer hover:bg-muted/40 transition-colors">
                 <div className="flex items-center justify-between">
                   <CardTitle className="flex items-center gap-2">
-                    <Sparkles className="h-5 w-5 text-media-purple" />
+                    <Sparkles className="h-5 w-5 text-primary" />
                     Generate Case Study with AI
                   </CardTitle>
                   <Badge variant="outline">Beta</Badge>
@@ -569,8 +569,8 @@ export default function AdminCaseStudies() {
                       onClick={() => setSelectedId(cs.id)}
                       className={`w-full text-left p-3 rounded-xl border transition-colors ${
                         selectedId === cs.id
-                          ? "border-media-purple bg-media-purple/5"
-                          : "border-border hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-900"
+                          ? "border-primary bg-primary/10"
+                          : "border-border hover:bg-gray-50 dark:hover:bg-muted/40"
                       }`}
                     >
                       <div className="flex items-center justify-between gap-3">
@@ -948,7 +948,7 @@ export default function AdminCaseStudies() {
                                 key={idx}
                                 className="rounded-xl border border-border p-4 text-center"
                               >
-                                <div className="text-xl font-bold text-media-purple">
+                                <div className="text-xl font-bold text-primary">
                                   {m?.value || "—"}
                                 </div>
                                 <div className="text-xs text-muted-foreground mt-1">
