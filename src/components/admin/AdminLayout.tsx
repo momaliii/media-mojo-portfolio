@@ -98,23 +98,28 @@ export default function AdminLayout({ title, children }: AdminLayoutProps) {
   return (
     <SidebarProvider
       defaultOpen
-      className="min-h-screen w-full bg-gradient-to-b from-white via-gray-50/50 to-white dark:from-gray-950 dark:via-gray-900/50 dark:to-gray-950"
+      className="admin-shell min-h-screen w-full"
     >
-      <Sidebar variant="inset" collapsible="icon">
-        <SidebarHeader className="px-4 py-4 border-b border-sidebar-border">
-          <Link to="/" className="font-semibold text-lg leading-none">
-            <span className="gradient-text">Mohamed Ali</span>
+      <Sidebar variant="inset" collapsible="icon" className="border-r border-sidebar-border">
+        <SidebarHeader className="px-4 py-5 border-b border-sidebar-border">
+          <Link to="/" className="flex items-center gap-3 group">
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground font-display font-bold text-sm shadow-[0_8px_24px_-6px_hsl(var(--primary)/0.6)] group-hover:scale-105 transition-transform">
+              MH
+            </span>
+            <span className="flex flex-col leading-tight group-data-[collapsible=icon]:hidden">
+              <span className="font-display font-bold text-base text-sidebar-foreground">Mohamed Ali</span>
+              <span className="text-[10px] uppercase tracking-[0.18em] text-primary/80 font-semibold">Admin Panel</span>
+            </span>
           </Link>
-          <div className="text-xs text-muted-foreground">Admin Panel</div>
         </SidebarHeader>
 
-        <SidebarContent className="px-2 py-2">
+        <SidebarContent className="px-2 py-3">
           <SidebarGroup>
-            <SidebarGroupLabel className="px-2 text-[11px] uppercase tracking-wider text-muted-foreground">
+            <SidebarGroupLabel className="px-3 text-[10px] uppercase tracking-[0.18em] text-muted-foreground font-bold">
               Manage
             </SidebarGroupLabel>
             <SidebarGroupContent>
-              <SidebarMenu>
+              <SidebarMenu className="gap-0.5">
                 {items.map((item) => (
                   <AdminNavItem
                     key={item.to}
@@ -139,25 +144,26 @@ export default function AdminLayout({ title, children }: AdminLayoutProps) {
 
       <SidebarInset className="bg-transparent">
         {/* Top bar */}
-        <div className="sticky top-0 z-40 border-b bg-white/90 dark:bg-gray-950/90 backdrop-blur">
-          <div className="h-14 px-4 md:px-6 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <SidebarTrigger />
-              <div className="flex flex-col leading-tight">
+        <header className="sticky top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-xl">
+          <div className="h-16 px-4 md:px-8 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3 min-w-0">
+              <SidebarTrigger className="text-muted-foreground hover:text-foreground" />
+              <div className="hidden md:block h-6 w-px bg-border/60" />
+              <div className="flex flex-col leading-tight min-w-0">
                 <Breadcrumb className="hidden sm:block">
-                  <BreadcrumbList>
+                  <BreadcrumbList className="text-[11px] font-medium">
                     <BreadcrumbItem>
-                      <BreadcrumbLink asChild>
+                      <BreadcrumbLink asChild className="text-muted-foreground hover:text-foreground">
                         <Link to={crumbs.base.to}>{crumbs.base.label}</Link>
                       </BreadcrumbLink>
                     </BreadcrumbItem>
-                    <BreadcrumbSeparator />
+                    <BreadcrumbSeparator className="text-muted-foreground/60" />
                     <BreadcrumbItem>
-                      <BreadcrumbPage>{crumbs.currentLabel}</BreadcrumbPage>
+                      <BreadcrumbPage className="text-primary font-semibold">{crumbs.currentLabel}</BreadcrumbPage>
                     </BreadcrumbItem>
                   </BreadcrumbList>
                 </Breadcrumb>
-                <h1 className="font-semibold">{title}</h1>
+                <h1 className="font-display font-bold text-lg tracking-tight text-foreground truncate">{title}</h1>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -165,11 +171,11 @@ export default function AdminLayout({ title, children }: AdminLayoutProps) {
               <UserMenu />
             </div>
           </div>
-        </div>
+        </header>
 
         {/* Page content */}
-        <div className="px-4 md:px-6 py-8">
-          <div className="mx-auto w-full max-w-6xl">{children}</div>
+        <div className="px-4 md:px-8 py-8">
+          <div className="mx-auto w-full max-w-7xl">{children}</div>
         </div>
       </SidebarInset>
     </SidebarProvider>
