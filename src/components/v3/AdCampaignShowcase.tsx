@@ -31,6 +31,13 @@ const platformStyle: Record<
   Instagram: { label: "Instagram", Icon: Facebook, dot: "#ff7a1a" },
 };
 
+const maskToInitials = (name: string) =>
+  name
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((w) => (/^[A-Za-z]/.test(w) ? w[0].toUpperCase() + "." : "•"))
+    .join(" ");
+
 const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }> = ({
   s,
   index,
@@ -38,6 +45,7 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
 }) => {
   const platform = s.platform ? platformStyle[s.platform] : undefined;
   const preventCtx = useCallback((e: React.MouseEvent) => e.preventDefault(), []);
+  const maskedClient = maskToInitials(s.client);
 
   return (
     <article
@@ -61,7 +69,7 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
           loading="lazy"
           draggable={false}
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 85vw"
-          className="relative z-0 max-w-full max-h-full w-auto h-auto object-contain rounded-lg shadow-[0_10px_30px_rgba(0,0,0,.45)] transition-all duration-700 ease-out group-hover:scale-[1.02] blur-[3px] sm:blur-[4px] group-hover:blur-[2px] select-none"
+          className="relative z-0 max-w-full max-h-full w-auto h-auto object-contain rounded-lg shadow-[0_10px_30px_rgba(0,0,0,.45)] transition-transform duration-700 ease-out group-hover:scale-[1.02] select-none"
           style={{ pointerEvents: "none" }}
         />
 
@@ -105,8 +113,12 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
 
       {/* Content */}
       <div className="flex-1 flex flex-col gap-3 p-5 md:p-6">
-        <h3 className="v3-display text-lg md:text-xl font-bold leading-tight tracking-[-0.03em] text-white group-hover:text-[var(--v3-lime)] transition-colors">
-          {s.client}
+        <h3
+          className="v3-display text-lg md:text-xl font-bold leading-tight tracking-[-0.03em] text-white group-hover:text-[var(--v3-lime)] transition-colors v3-numeral"
+          aria-label={`${s.industry} client (name masked for confidentiality)`}
+          title="Client name masked for confidentiality"
+        >
+          {maskedClient}
         </h3>
         {s.details && (
           <p className="v3-numeral text-sm font-semibold v3-soft leading-relaxed">
