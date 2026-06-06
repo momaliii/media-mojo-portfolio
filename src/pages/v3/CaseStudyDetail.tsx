@@ -29,9 +29,9 @@ const CaseStudyDetailV3 = () => {
     return (
       <div className="v3-theme min-h-screen">
         <Navigation />
-        <main className="pt-40 pb-24 max-w-[1400px] mx-auto px-6 lg:px-10 text-center">
-          <p className="v3-eyebrow text-[var(--v3-muted)] mb-4">404</p>
-          <h1 className="v3-serif text-5xl md:text-7xl">Case study not found.</h1>
+        <main className="pt-40 pb-24 max-w-[1400px] mx-auto px-5 md:px-8 lg:px-10 text-center">
+          <p className="v3-eyebrow v3-muted mb-4">404</p>
+          <h1 className="v3-display text-5xl md:text-7xl font-bold">Case study not found.</h1>
           <Link to="/v3/case-studies" className="v3-link mt-8 inline-block">
             ← Back to the archive
           </Link>
@@ -44,40 +44,36 @@ const CaseStudyDetailV3 = () => {
   return (
     <div className="v3-theme min-h-screen">
       <Navigation />
-      <main className="pt-28 md:pt-36 pb-24">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+      <main className="relative pt-28 md:pt-36 pb-24 overflow-hidden">
+        <div className="absolute inset-0 v3-grid-bg" aria-hidden="true" />
+        <div className="relative z-10 max-w-[1400px] mx-auto px-5 md:px-8 lg:px-10">
           <Link
             to="/v3/case-studies"
-            className="inline-flex items-center gap-2 v3-eyebrow text-[var(--v3-muted)] hover:text-[var(--v3-accent)] mb-12"
+            className="inline-flex items-center gap-2 rounded-full v3-shell px-4 py-2 text-sm font-bold v3-link mb-8"
           >
-            <ArrowLeft size={14} /> The Archive
+            <ArrowLeft size={14} /> Archive
           </Link>
 
-          <header className="border-b v3-rule pb-12 mb-16">
-            <div className="flex flex-wrap gap-4 v3-eyebrow text-[var(--v3-muted)] mb-6">
+          <header className="v3-shell rounded-[2rem] p-6 md:p-10 mb-8 md:mb-12">
+            <div className="flex flex-wrap gap-4 v3-eyebrow v3-muted mb-6">
               <span>{study.category}</span>
               {study.industry && <span>· {study.industry}</span>}
               <span>· {study.client}</span>
             </div>
-            <h1 className="v3-serif text-5xl md:text-8xl leading-[0.92] tracking-[-0.025em]">
-              {study.title.split(" ").map((w, i, arr) => (
-                <span key={i} className={i === arr.length - 1 ? "v3-italic v3-accent" : ""}>
-                  {w}
-                  {i < arr.length - 1 ? " " : ""}
-                </span>
-              ))}
+            <h1 className="v3-display text-4xl md:text-7xl font-bold leading-[0.98] tracking-[-0.055em]">
+              {study.title}
             </h1>
-            <p className="mt-8 max-w-2xl text-xl leading-relaxed text-[var(--v3-ink-2)]">
+            <p className="mt-7 max-w-2xl text-xl leading-relaxed v3-soft">
               {study.description}
             </p>
           </header>
 
           {/* Metrics ribbon */}
-          <div className="grid grid-cols-2 md:grid-cols-3 border-t border-b v3-rule divide-x divide-[var(--v3-rule)] mb-20">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12 md:mb-16">
             {study.metrics.map((m) => (
-              <div key={m.label} className="py-8 px-6">
-                <div className="v3-numeral text-5xl md:text-7xl leading-none">{m.value}</div>
-                <div className="v3-eyebrow text-[var(--v3-muted)] mt-3">{m.label}</div>
+              <div key={m.label} className="v3-shell rounded-[1.5rem] p-5 md:p-7">
+                <div className="v3-numeral text-4xl md:text-6xl font-bold leading-none">{m.value}</div>
+                <div className="v3-eyebrow v3-muted mt-3">{m.label}</div>
               </div>
             ))}
           </div>
@@ -87,7 +83,7 @@ const CaseStudyDetailV3 = () => {
               <img
                 src={study.screenshot}
                 alt={study.title}
-                className="w-full h-auto border v3-rule"
+                className="w-full h-auto rounded-[1.7rem] border v3-rule shadow-2xl"
                 loading="lazy"
               />
             </figure>
@@ -96,15 +92,15 @@ const CaseStudyDetailV3 = () => {
           <div className="grid grid-cols-12 gap-8 md:gap-16">
             <aside className="col-span-12 md:col-span-3 md:sticky md:top-28 self-start space-y-8">
               {study.budgetRange && (
-                <div className="border-t v3-rule pt-4">
-                  <p className="v3-eyebrow text-[var(--v3-muted)]">Budget</p>
-                  <p className="v3-serif text-2xl mt-2">{study.budgetRange}</p>
+                <div className="v3-shell rounded-2xl p-5">
+                  <p className="v3-eyebrow v3-muted">Budget</p>
+                  <p className="text-2xl font-bold mt-2">{study.budgetRange}</p>
                 </div>
               )}
               {study.platforms && (
-                <div className="border-t v3-rule pt-4">
-                  <p className="v3-eyebrow text-[var(--v3-muted)]">Platforms</p>
-                  <ul className="mt-2 space-y-1 v3-serif text-xl">
+                <div className="v3-shell rounded-2xl p-5">
+                  <p className="v3-eyebrow v3-muted">Platforms</p>
+                  <ul className="mt-3 space-y-1 font-bold">
                     {study.platforms.map((p) => (
                       <li key={p}>{p}</li>
                     ))}
@@ -112,13 +108,13 @@ const CaseStudyDetailV3 = () => {
                 </div>
               )}
               {study.tools && (
-                <div className="border-t v3-rule pt-4">
-                  <p className="v3-eyebrow text-[var(--v3-muted)]">Stack</p>
+                <div className="v3-shell rounded-2xl p-5">
+                  <p className="v3-eyebrow v3-muted">Stack</p>
                   <ul className="mt-2 flex flex-wrap gap-2">
                     {study.tools.map((t) => (
                       <li
                         key={t}
-                        className="text-xs uppercase tracking-[0.18em] px-2 py-1 border v3-rule"
+                        className="text-xs uppercase tracking-[0.14em] px-2 py-1 rounded-full bg-white/5"
                       >
                         {t}
                       </li>
@@ -128,40 +124,39 @@ const CaseStudyDetailV3 = () => {
               )}
             </aside>
 
-            <article className="col-span-12 md:col-span-8 md:col-start-5 space-y-12 text-lg leading-[1.75] text-[var(--v3-ink-2)]">
+            <article className="col-span-12 md:col-span-8 md:col-start-5 space-y-5 text-lg leading-[1.75] v3-soft">
               {study.challenge && (
-                <section>
-                  <p className="v3-eyebrow text-[var(--v3-accent)] mb-3">§ The Challenge</p>
-                  <p className="v3-serif text-2xl md:text-3xl leading-snug text-[var(--v3-ink)]">
+                <section className="v3-shell rounded-[1.7rem] p-6 md:p-8">
+                  <p className="v3-eyebrow v3-orange mb-3">The Challenge</p>
+                  <p className="v3-display text-2xl md:text-3xl font-bold leading-snug text-[var(--v3-text)] tracking-[-0.04em]">
                     {study.challenge}
                   </p>
                 </section>
               )}
               {study.strategy && (
-                <section>
-                  <p className="v3-eyebrow text-[var(--v3-accent)] mb-3">§ The Strategy</p>
+                <section className="v3-shell rounded-[1.7rem] p-6 md:p-8">
+                  <p className="v3-eyebrow v3-cyan mb-3">The Strategy</p>
                   <p>{study.strategy}</p>
                 </section>
               )}
               {study.results && (
-                <section>
-                  <p className="v3-eyebrow text-[var(--v3-accent)] mb-3">§ The Results</p>
+                <section className="v3-shell rounded-[1.7rem] p-6 md:p-8">
+                  <p className="v3-eyebrow v3-lime mb-3">The Results</p>
                   <p>{study.results}</p>
                 </section>
               )}
             </article>
           </div>
 
-          <div className="mt-24 pt-12 border-t v3-rule flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-            <p className="v3-serif text-3xl md:text-4xl max-w-xl">
-              Got a brand that needs <span className="v3-italic v3-accent">numbers</span> like
-              these?
+          <div className="mt-20 v3-shell rounded-[1.7rem] p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <p className="v3-display text-2xl md:text-4xl font-bold max-w-xl tracking-[-0.04em]">
+              Need numbers like these?
             </p>
             <Link
               to="/v3#contact"
-              className="group inline-flex items-center gap-3 px-6 py-4 bg-[var(--v3-ink)] text-[var(--v3-paper)] hover:bg-[var(--v3-accent)] transition-colors"
+              className="group inline-flex items-center gap-3 rounded-2xl px-6 py-4 bg-[var(--v3-lime)] text-[var(--v3-bg)] font-bold hover:shadow-[0_0_42px_rgba(182,255,77,.35)] transition-shadow"
             >
-              <span className="v3-eyebrow">Commission a strategy</span>
+              <span>Commission a strategy</span>
               <ArrowUpRight size={18} className="group-hover:rotate-12 transition-transform" />
             </Link>
           </div>
