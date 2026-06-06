@@ -110,8 +110,6 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
       <div className="flex-1 flex flex-col gap-3 p-5 md:p-6">
         <h3
           className="v3-display text-lg md:text-xl font-bold leading-tight tracking-[-0.03em] text-white group-hover:text-[var(--v3-lime)] transition-colors v3-numeral"
-          aria-label={`${s.industry} client (name masked for confidentiality)`}
-          title="Client name masked for confidentiality"
         >
           {maskedClient}
         </h3>
