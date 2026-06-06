@@ -183,19 +183,25 @@ export default function AdminClientLogos() {
 
         {/* Manage logos */}
         <Card>
-          <CardHeader className="pb-4 flex flex-row items-center justify-between gap-3 flex-wrap">
-            <CardTitle className="text-base">Manage logos</CardTitle>
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-muted">
-                <strong className="text-foreground">{logos.length}</strong> total
+          <CardHeader className="pb-4 flex flex-row items-center justify-between gap-3 flex-wrap border-b">
+            <div>
+              <CardTitle className="text-base">Manage logos</CardTitle>
+              <p className="text-xs text-muted-foreground mt-0.5">Reorder, edit, and toggle visibility for every client logo.</p>
+            </div>
+            <div className="flex items-center gap-1.5 text-xs">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border bg-background">
+                <span className="font-semibold text-foreground tabular-nums">{logos.length}</span>
+                <span className="text-muted-foreground">total</span>
               </span>
-              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-muted">
-                <Eye className="h-3 w-3 text-green-600" />
-                <strong className="text-foreground">{visibleCount}</strong> visible
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border bg-background">
+                <Eye className="h-3.5 w-3.5 text-green-600" />
+                <span className="font-semibold text-foreground tabular-nums">{visibleCount}</span>
+                <span className="text-muted-foreground">visible</span>
               </span>
-              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-muted">
-                <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                <strong className="text-foreground">{featuredCount}</strong> featured
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border bg-background">
+                <Star className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />
+                <span className="font-semibold text-foreground tabular-nums">{featuredCount}</span>
+                <span className="text-muted-foreground">featured</span>
               </span>
             </div>
           </CardHeader>
