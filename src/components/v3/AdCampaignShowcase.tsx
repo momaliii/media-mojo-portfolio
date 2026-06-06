@@ -61,7 +61,7 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
           loading="lazy"
           draggable={false}
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 85vw"
-          className="relative z-0 max-w-full max-h-full w-auto h-auto object-contain rounded-lg shadow-[0_10px_30px_rgba(0,0,0,.45)] transition-transform duration-700 ease-out group-hover:scale-[1.02] select-none"
+          className="relative z-0 max-w-full max-h-full w-auto h-auto object-contain rounded-lg shadow-[0_10px_30px_rgba(0,0,0,.45)] transition-all duration-700 ease-out group-hover:scale-[1.02] blur-[3px] sm:blur-[4px] group-hover:blur-[2px] select-none"
           style={{ pointerEvents: "none" }}
         />
 
