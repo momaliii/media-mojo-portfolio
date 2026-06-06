@@ -188,12 +188,12 @@ const AdCampaignShowcase: React.FC = () => {
               {stats.map((s) => (
                 <div
                   key={s.label}
-                  className="v3-shell rounded-xl sm:rounded-2xl px-2 sm:px-3 py-3 sm:py-4 text-center"
+                  className="v3-shell rounded-xl sm:rounded-2xl px-2 py-3 sm:py-4 text-center min-w-0"
                 >
-                  <div className="v3-numeral text-sm sm:text-lg md:text-xl font-bold text-[var(--v3-lime)] leading-tight">
+                  <div className="v3-numeral text-sm sm:text-base lg:text-xl font-bold text-[var(--v3-lime)] leading-tight whitespace-nowrap">
                     {s.value}
                   </div>
-                  <div className="v3-eyebrow v3-muted mt-1 text-[0.55rem] sm:text-[0.6rem]">
+                  <div className="v3-eyebrow v3-muted mt-1 text-[0.5rem] sm:text-[0.55rem] lg:text-[0.6rem] leading-tight break-words">
                     {s.label}
                   </div>
                 </div>
