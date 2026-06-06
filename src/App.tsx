@@ -9,6 +9,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { TopProgressBar } from "@/components/ui/progress-bar";
 import { ScrollToTopButton } from "@/components/ui/scroll-to-top";
 import SkipToContent from "@/components/SkipToContent";
+import UnderDevelopmentNotice from "@/components/UnderDevelopmentNotice";
 import { LoadingSkeleton } from "@/components/ui/loading-skeleton";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -107,6 +108,7 @@ const App = () => (
             <BrowserRouter>
               <AuthProvider>
                 <RouteTracker />
+                <UnderDevelopmentNotice />
                 <Routes>
                   <Route path="/auth" element={<Auth />} />
                   <Route path="/reset-password" element={<ResetPassword />} />
