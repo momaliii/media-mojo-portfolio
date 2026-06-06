@@ -81,7 +81,7 @@ const Work = () => {
         <div className="mt-12 md:hidden">
           <Link
             to="/v3/case-studies"
-            className="inline-flex items-center gap-2 v3-eyebrow hover:text-[var(--v3-accent)]"
+            className="inline-flex items-center gap-2 v3-eyebrow v3-link"
           >
             All Case Studies <ArrowUpRight size={14} />
           </Link>
