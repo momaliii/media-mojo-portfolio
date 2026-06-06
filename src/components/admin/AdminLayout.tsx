@@ -169,6 +169,40 @@ export default function AdminLayout({ title, children }: AdminLayoutProps) {
               </div>
             </div>
             <div className="flex items-center gap-2">
+              <Popover>
+                <PopoverTrigger asChild>
+                  <button
+                    type="button"
+                    aria-label="Notifications"
+                    className="relative inline-flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                  >
+                    <Bell className="h-4 w-4" />
+                    <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-primary ring-2 ring-background" />
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent align="end" className="w-80 p-0 overflow-hidden">
+                  <div className="px-4 py-3 border-b border-border flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Bell className="h-4 w-4 text-primary" />
+                      <span className="text-sm font-semibold text-foreground">Notifications</span>
+                    </div>
+                    <Badge variant="secondary" className="text-[10px] uppercase tracking-wider">
+                      Beta
+                    </Badge>
+                  </div>
+                  <div className="px-4 py-8 flex flex-col items-center text-center gap-3">
+                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                      <Wrench className="h-5 w-5" />
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-sm font-semibold text-foreground">Under development</p>
+                      <p className="text-xs text-muted-foreground leading-relaxed">
+                        The notifications center is being built. You'll get real-time alerts here soon.
+                      </p>
+                    </div>
+                  </div>
+                </PopoverContent>
+              </Popover>
               <ThemeToggle />
               <UserMenu />
             </div>
