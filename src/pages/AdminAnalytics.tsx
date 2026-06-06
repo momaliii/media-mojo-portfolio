@@ -512,7 +512,7 @@ export default function AdminAnalytics() {
     <AdminLayout title="Analytics">
       <div className="flex items-start justify-between gap-4 mb-6">
         <div>
-          <p className="text-gray-600 dark:text-gray-300">
+          <p className="text-muted-foreground">
             Quick overview of submissions and content performance.
           </p>
         </div>
@@ -531,7 +531,7 @@ export default function AdminAnalytics() {
             size="sm"
             variant={rangeDays === d ? "default" : "outline"}
             onClick={() => setRangeDays(d as 7 | 30 | 90)}
-            className={rangeDays === d ? "bg-media-purple hover:bg-media-darkpurple text-white" : ""}
+            className={rangeDays === d ? "bg-primary hover:bg-primary/90 text-primary-foreground" : ""}
           >
             Last {d} days
           </Button>
@@ -539,11 +539,11 @@ export default function AdminAnalytics() {
       </div>
 
       {overviewQuery.isLoading ? (
-        <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
+        <div className="flex items-center gap-2 text-muted-foreground">
           <Loader2 className="h-4 w-4 animate-spin" /> Loading…
         </div>
       ) : overviewQuery.isError ? (
-        <div className="text-sm text-red-600">Failed to load analytics.</div>
+        <div className="text-sm text-destructive">Failed to load analytics.</div>
       ) : (
         <div className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

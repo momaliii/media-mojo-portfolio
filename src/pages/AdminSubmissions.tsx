@@ -135,7 +135,7 @@ export default function AdminSubmissions() {
     <AdminLayout title="Contact Submissions">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
           <div>
-            <p className="text-gray-600 dark:text-gray-300">
+            <p className="text-muted-foreground">
               View messages submitted from your site (admin-only).
             </p>
           </div>
@@ -153,7 +153,7 @@ export default function AdminSubmissions() {
           <CardTitle className="text-lg">Inbox</CardTitle>
           <div className="flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
             <div className="relative w-full md:max-w-md">
-              <Search className="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Search className="h-4 w-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2" />
               <Input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
@@ -166,7 +166,7 @@ export default function AdminSubmissions() {
                 type="button"
                 variant={typeFilter === "all" ? "default" : "outline"}
                 onClick={() => setTypeFilter("all")}
-                className={typeFilter === "all" ? "bg-media-purple hover:bg-media-darkpurple text-white" : ""}
+                className={typeFilter === "all" ? "bg-primary hover:bg-primary/90 text-primary-foreground" : ""}
               >
                 All
               </Button>
@@ -174,7 +174,7 @@ export default function AdminSubmissions() {
                 type="button"
                 variant={typeFilter === "contact" ? "default" : "outline"}
                 onClick={() => setTypeFilter("contact")}
-                className={typeFilter === "contact" ? "bg-media-purple hover:bg-media-darkpurple text-white" : ""}
+                className={typeFilter === "contact" ? "bg-primary hover:bg-primary/90 text-primary-foreground" : ""}
               >
                 Contact
               </Button>
@@ -182,7 +182,7 @@ export default function AdminSubmissions() {
                 type="button"
                 variant={typeFilter === "newsletter" ? "default" : "outline"}
                 onClick={() => setTypeFilter("newsletter")}
-                className={typeFilter === "newsletter" ? "bg-media-purple hover:bg-media-darkpurple text-white" : ""}
+                className={typeFilter === "newsletter" ? "bg-primary hover:bg-primary/90 text-primary-foreground" : ""}
               >
                 Newsletter
               </Button>
@@ -191,15 +191,15 @@ export default function AdminSubmissions() {
         </CardHeader>
         <CardContent>
             {submissionsQuery.isLoading ? (
-              <div className="flex items-center gap-2 text-gray-600">
+              <div className="flex items-center gap-2 text-muted-foreground">
                 <Loader2 className="h-4 w-4 animate-spin" /> Loading…
               </div>
             ) : submissionsQuery.isError ? (
-              <div className="text-sm text-red-600">
+              <div className="text-sm text-destructive">
                 Failed to load submissions. {(submissionsQuery.error as any)?.message ?? ""}
               </div>
             ) : filtered.length === 0 ? (
-              <div className="text-sm text-gray-600 dark:text-gray-300">
+              <div className="text-sm text-muted-foreground">
                 No submissions found.
               </div>
             ) : (
@@ -239,7 +239,7 @@ export default function AdminSubmissions() {
                       <TableCell className="max-w-[220px] truncate">{s.email}</TableCell>
                       <TableCell className="max-w-[220px] truncate">{s.subject || "—"}</TableCell>
                       <TableCell className="max-w-[420px]">
-                        <div className="line-clamp-3 whitespace-pre-wrap text-sm text-gray-700 dark:text-gray-300">
+                        <div className="line-clamp-3 whitespace-pre-wrap text-sm text-muted-foreground">
                           {s.message || "—"}
                         </div>
                       </TableCell>
@@ -285,7 +285,7 @@ export default function AdminSubmissions() {
               </div>
 
               <div className="space-y-2">
-                <div className="text-xs text-gray-500">Email</div>
+                <div className="text-xs text-muted-foreground">Email</div>
                 <div className="flex items-center justify-between gap-2">
                   <a className="font-medium underline" href={`mailto:${selected.email}`}>
                     {selected.email}
@@ -297,17 +297,17 @@ export default function AdminSubmissions() {
               </div>
 
               <div className="space-y-2">
-                <div className="text-xs text-gray-500">Name</div>
+                <div className="text-xs text-muted-foreground">Name</div>
                 <div className="font-medium">{selected.name || "—"}</div>
               </div>
 
               <div className="space-y-2">
-                <div className="text-xs text-gray-500">Subject</div>
+                <div className="text-xs text-muted-foreground">Subject</div>
                 <div className="font-medium">{selected.subject || "—"}</div>
               </div>
 
               <div className="space-y-2">
-                <div className="text-xs text-gray-500">Message</div>
+                <div className="text-xs text-muted-foreground">Message</div>
                 <div className="whitespace-pre-wrap rounded-xl border p-3 text-sm">
                   {selected.message || "—"}
                 </div>

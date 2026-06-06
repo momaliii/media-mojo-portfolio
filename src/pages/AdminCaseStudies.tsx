@@ -362,7 +362,7 @@ export default function AdminCaseStudies() {
     <AdminLayout title="Case Studies">
       <div className="flex items-center justify-between gap-4 mb-6">
         <div>
-          <p className="text-gray-600 dark:text-gray-300">
+          <p className="text-muted-foreground">
             Create, edit, preview and publish case studies shown on the site.
           </p>
         </div>
@@ -383,7 +383,7 @@ export default function AdminCaseStudies() {
               </>
             )}
           </Button>
-          <Button onClick={onNew} className="bg-media-purple hover:bg-media-darkpurple text-white">
+          <Button onClick={onNew} className="bg-primary hover:bg-primary/90 text-primary-foreground">
             <Plus className="h-4 w-4 mr-2" /> New
           </Button>
         </div>
@@ -393,7 +393,7 @@ export default function AdminCaseStudies() {
         <Collapsible open={aiOpen} onOpenChange={setAiOpen} className="mb-6">
           <Card>
             <CollapsibleTrigger asChild>
-              <CardHeader className="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors">
+              <CardHeader className="cursor-pointer hover:bg-muted/40 transition-colors">
                 <div className="flex items-center justify-between">
                   <CardTitle className="flex items-center gap-2">
                     <Sparkles className="h-5 w-5 text-media-purple" />
@@ -413,7 +413,7 @@ export default function AdminCaseStudies() {
                     placeholder="Describe your campaign: goals, target audience, budget, platforms used, key results, challenges faced, strategies implemented..."
                     className="min-h-[120px]"
                   />
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-muted-foreground">
                     Provide as much detail as possible. Include metrics, platforms, tools, and outcomes.
                   </p>
                 </div>
@@ -485,7 +485,7 @@ export default function AdminCaseStudies() {
                       )}
                     </Button>
                     {aiImageUrls.length > 0 && (
-                      <span className="text-sm text-gray-600">
+                      <span className="text-sm text-muted-foreground">
                         {aiImageUrls.length} image(s) ready
                       </span>
                     )}
@@ -498,7 +498,7 @@ export default function AdminCaseStudies() {
                           <button
                             type="button"
                             onClick={() => setAiImageUrls(aiImageUrls.filter((_, i) => i !== idx))}
-                            className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity"
+                            className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity"
                           >
                             ×
                           </button>
@@ -524,7 +524,7 @@ export default function AdminCaseStudies() {
                     type="button"
                     onClick={() => generateAIMutation.mutate()}
                     disabled={generateAIMutation.isPending || !aiDetails.trim() || aiDetails.trim().length < 10}
-                    className="bg-media-purple hover:bg-media-darkpurple text-white"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground"
                   >
                     {generateAIMutation.isPending ? (
                       <>
@@ -549,17 +549,17 @@ export default function AdminCaseStudies() {
             </CardHeader>
             <CardContent>
               {listQuery.isLoading ? (
-                <div className="flex items-center gap-2 text-gray-600">
+                <div className="flex items-center gap-2 text-muted-foreground">
                   <Loader2 className="h-4 w-4 animate-spin" /> Loading…
                 </div>
               ) : listQuery.isError ? (
-                <div className="text-sm text-red-600">
+                <div className="text-sm text-destructive">
                   Failed to load case studies. {(listQuery.error as any)?.message ?? ""}
                 </div>
               ) : (
                 <div className="space-y-2">
                   {(listQuery.data ?? []).length === 0 && (
-                    <div className="text-sm text-gray-600 dark:text-gray-300">
+                    <div className="text-sm text-muted-foreground">
                       No case studies yet in Supabase. Click <span className="font-medium">Import existing</span> to bring in the ones from your codebase.
                     </div>
                   )}
@@ -570,18 +570,18 @@ export default function AdminCaseStudies() {
                       className={`w-full text-left p-3 rounded-xl border transition-colors ${
                         selectedId === cs.id
                           ? "border-media-purple bg-media-purple/5"
-                          : "border-gray-200 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-900"
+                          : "border-border hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-900"
                       }`}
                     >
                       <div className="flex items-center justify-between gap-3">
-                        <div className="font-medium text-gray-900 dark:text-gray-100 line-clamp-1">
+                        <div className="font-medium text-foreground line-clamp-1">
                           {cs.title}
                         </div>
                         <Badge variant={cs.published ? "default" : "secondary"}>
                           {cs.published ? "Published" : "Draft"}
                         </Badge>
                       </div>
-                      <div className="text-xs text-gray-500 mt-1 flex items-center gap-2">
+                      <div className="text-xs text-muted-foreground mt-1 flex items-center gap-2">
                         <span className="uppercase">{cs.category}</span>
                         <span>•</span>
                         <span className="line-clamp-1">{cs.client}</span>
@@ -605,7 +605,7 @@ export default function AdminCaseStudies() {
                     <TabsTrigger value="preview">Preview</TabsTrigger>
                   </TabsList>
                 </div>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
+                <p className="text-sm text-muted-foreground">
                   Use <span className="font-medium">Preview</span> to see changes live before publishing.
                 </p>
               </CardHeader>
@@ -629,7 +629,7 @@ export default function AdminCaseStudies() {
                       placeholder="Beauty Brand E-commerce Success"
                     />
                     {form.formState.errors.title && (
-                      <p className="text-xs text-red-500">{form.formState.errors.title.message}</p>
+                      <p className="text-xs text-destructive">{form.formState.errors.title.message}</p>
                     )}
                   </div>
 
@@ -640,7 +640,7 @@ export default function AdminCaseStudies() {
                       placeholder="beauty-brand-ecommerce-success"
                     />
                     {form.formState.errors.slug && (
-                      <p className="text-xs text-red-500">{form.formState.errors.slug.message}</p>
+                      <p className="text-xs text-destructive">{form.formState.errors.slug.message}</p>
                     )}
                   </div>
 
@@ -677,7 +677,7 @@ export default function AdminCaseStudies() {
                         checked={form.watch("published")}
                         onChange={(e) => form.setValue("published", e.target.checked)}
                       />
-                      <span className="text-sm text-gray-600 dark:text-gray-300">
+                      <span className="text-sm text-muted-foreground">
                         {form.watch("published") ? "Visible on site" : "Hidden (draft)"}
                       </span>
                     </div>
@@ -805,7 +805,7 @@ export default function AdminCaseStudies() {
                           )}
                         </Button>
                       </div>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs text-muted-foreground">
                         Uploads go to Supabase Storage bucket <span className="font-medium">{BUCKET}</span>.
                       </p>
                     </div>
@@ -827,11 +827,11 @@ export default function AdminCaseStudies() {
                     {metricsArray.fields.map((field, index) => (
                       <div key={field.id} className="grid grid-cols-1 md:grid-cols-5 gap-3 items-end">
                         <div className="md:col-span-2 space-y-1">
-                          <label className="text-xs text-gray-500">Label</label>
+                          <label className="text-xs text-muted-foreground">Label</label>
                           <Input {...form.register(`metrics.${index}.label` as const)} />
                         </div>
                         <div className="md:col-span-2 space-y-1">
-                          <label className="text-xs text-gray-500">Value</label>
+                          <label className="text-xs text-muted-foreground">Value</label>
                           <Input {...form.register(`metrics.${index}.value` as const)} />
                         </div>
                         <Button
@@ -860,7 +860,7 @@ export default function AdminCaseStudies() {
                   )}
                   <Button
                     type="submit"
-                    className="bg-media-purple hover:bg-media-darkpurple text-white"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground"
                     disabled={upsertMutation.isPending}
                   >
                     {upsertMutation.isPending ? (
@@ -883,7 +883,7 @@ export default function AdminCaseStudies() {
                       <Badge variant={preview.published ? "default" : "secondary"}>
                         {preview.published ? "Published" : "Draft preview"}
                       </Badge>
-                      <span className="text-sm text-gray-500">
+                      <span className="text-sm text-muted-foreground">
                         Updates live as you edit.
                       </span>
                     </div>
@@ -892,7 +892,7 @@ export default function AdminCaseStudies() {
                         type="button"
                         variant={previewDevice === "desktop" ? "default" : "outline"}
                         onClick={() => setPreviewDevice("desktop")}
-                        className={previewDevice === "desktop" ? "bg-media-purple hover:bg-media-darkpurple text-white" : ""}
+                        className={previewDevice === "desktop" ? "bg-primary hover:bg-primary/90 text-primary-foreground" : ""}
                       >
                         <Monitor className="h-4 w-4 mr-2" /> Desktop
                       </Button>
@@ -900,7 +900,7 @@ export default function AdminCaseStudies() {
                         type="button"
                         variant={previewDevice === "mobile" ? "default" : "outline"}
                         onClick={() => setPreviewDevice("mobile")}
-                        className={previewDevice === "mobile" ? "bg-media-purple hover:bg-media-darkpurple text-white" : ""}
+                        className={previewDevice === "mobile" ? "bg-primary hover:bg-primary/90 text-primary-foreground" : ""}
                       >
                         <Smartphone className="h-4 w-4 mr-2" /> Mobile
                       </Button>
@@ -908,7 +908,7 @@ export default function AdminCaseStudies() {
                   </div>
 
                   <div
-                    className={`mx-auto rounded-2xl border bg-white dark:bg-gray-950 overflow-hidden ${
+                    className={`mx-auto rounded-2xl border bg-card overflow-hidden ${
                       previewDevice === "mobile" ? "max-w-[390px]" : "w-full"
                     }`}
                   >
@@ -916,22 +916,22 @@ export default function AdminCaseStudies() {
                       <div className="space-y-3">
                         <div className="flex flex-wrap items-center gap-2">
                           {preview.category && (
-                            <Badge className="bg-gray-100 text-gray-800 hover:bg-gray-100">
+                            <Badge className="bg-muted text-foreground hover:bg-muted">
                               {preview.category}
                             </Badge>
                           )}
                           {preview.industry && <Badge variant="outline">{preview.industry}</Badge>}
                         </div>
 
-                        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100">
+                        <h2 className="text-2xl md:text-3xl font-bold text-foreground">
                           {preview.title || "Untitled case study"}
                         </h2>
-                        <p className="text-gray-600 dark:text-gray-300">
+                        <p className="text-muted-foreground">
                           {preview.description || "Add a description to see it here."}
                         </p>
 
-                        <div className="text-sm text-gray-500">
-                          <span className="font-medium text-gray-700 dark:text-gray-200">Client:</span>{" "}
+                        <div className="text-sm text-muted-foreground">
+                          <span className="font-medium text-foreground">Client:</span>{" "}
                           {preview.client || "—"}
                         </div>
                       </div>
@@ -939,19 +939,19 @@ export default function AdminCaseStudies() {
                       {/* Key metrics */}
                       {Array.isArray(preview.metrics) && preview.metrics.length > 0 && (
                         <div className="space-y-3">
-                          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                          <h3 className="text-lg font-semibold text-foreground">
                             Key results
                           </h3>
                           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             {preview.metrics.slice(0, 6).map((m: any, idx: number) => (
                               <div
                                 key={idx}
-                                className="rounded-xl border border-gray-200 dark:border-gray-800 p-4 text-center"
+                                className="rounded-xl border border-border p-4 text-center"
                               >
                                 <div className="text-xl font-bold text-media-purple">
                                   {m?.value || "—"}
                                 </div>
-                                <div className="text-xs text-gray-500 mt-1">
+                                <div className="text-xs text-muted-foreground mt-1">
                                   {m?.label || "Metric"}
                                 </div>
                               </div>
@@ -963,26 +963,26 @@ export default function AdminCaseStudies() {
                       {/* Narrative sections */}
                       <div className="space-y-4">
                         <div>
-                          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                          <h3 className="text-lg font-semibold text-foreground mb-2">
                             Challenge
                           </h3>
-                          <p className="text-gray-600 dark:text-gray-300 whitespace-pre-wrap">
+                          <p className="text-muted-foreground whitespace-pre-wrap">
                             {preview.challenge || "Add the challenge to preview it here."}
                           </p>
                         </div>
                         <div>
-                          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                          <h3 className="text-lg font-semibold text-foreground mb-2">
                             Strategy
                           </h3>
-                          <p className="text-gray-600 dark:text-gray-300 whitespace-pre-wrap">
+                          <p className="text-muted-foreground whitespace-pre-wrap">
                             {preview.strategy || "Add the strategy to preview it here."}
                           </p>
                         </div>
                         <div>
-                          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                          <h3 className="text-lg font-semibold text-foreground mb-2">
                             Results
                           </h3>
-                          <p className="text-gray-600 dark:text-gray-300 whitespace-pre-wrap">
+                          <p className="text-muted-foreground whitespace-pre-wrap">
                             {preview.results || "Add results to preview it here."}
                           </p>
                         </div>
@@ -991,7 +991,7 @@ export default function AdminCaseStudies() {
                       {/* Platforms & tools */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                          <h4 className="font-medium text-gray-900 dark:text-gray-100">Platforms</h4>
+                          <h4 className="font-medium text-foreground">Platforms</h4>
                           <div className="flex flex-wrap gap-2">
                             {splitList(preview.platforms_text).length > 0
                               ? splitList(preview.platforms_text).map((p) => (
@@ -999,11 +999,11 @@ export default function AdminCaseStudies() {
                                     {p}
                                   </Badge>
                                 ))
-                              : <span className="text-sm text-gray-500">—</span>}
+                              : <span className="text-sm text-muted-foreground">—</span>}
                           </div>
                         </div>
                         <div className="space-y-2">
-                          <h4 className="font-medium text-gray-900 dark:text-gray-100">Tools</h4>
+                          <h4 className="font-medium text-foreground">Tools</h4>
                           <div className="flex flex-wrap gap-2">
                             {splitList(preview.tools_text).length > 0
                               ? splitList(preview.tools_text).map((t) => (
@@ -1011,7 +1011,7 @@ export default function AdminCaseStudies() {
                                     {t}
                                   </Badge>
                                 ))
-                              : <span className="text-sm text-gray-500">—</span>}
+                              : <span className="text-sm text-muted-foreground">—</span>}
                           </div>
                         </div>
                       </div>
@@ -1019,7 +1019,7 @@ export default function AdminCaseStudies() {
                       {/* Images */}
                       {(preview.screenshot || splitList(preview.additional_screenshots_text).length > 0) && (
                         <div className="space-y-3">
-                          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                          <h3 className="text-lg font-semibold text-foreground">
                             Gallery
                           </h3>
                           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -1031,7 +1031,7 @@ export default function AdminCaseStudies() {
                                   key={`${url}-${idx}`}
                                   src={url as string}
                                   alt={`Preview screenshot ${idx + 1}`}
-                                  className="w-full h-28 object-cover rounded-xl border border-gray-200 dark:border-gray-800"
+                                  className="w-full h-28 object-cover rounded-xl border border-border"
                                   loading="lazy"
                                 />
                               ))}
