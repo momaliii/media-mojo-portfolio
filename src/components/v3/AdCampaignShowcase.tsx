@@ -17,9 +17,11 @@ import {
 import { adCampaignScreenshots, type AdScreenshot } from "@/data/adScreenshots";
 import { trackEvent } from "@/utils/analytics";
 
+import type { LucideIcon } from "lucide-react";
+
 const platformStyle: Record<
   string,
-  { label: string; Icon: React.ComponentType<{ size?: number; className?: string }>; dot: string }
+  { label: string; Icon: LucideIcon; dot: string }
 > = {
   LinkedIn: { label: "LinkedIn", Icon: Linkedin, dot: "#38d8ff" },
   META: { label: "Meta Ads", Icon: Facebook, dot: "#b6ff4d" },
