@@ -194,7 +194,7 @@ export default function AdminClientLogos() {
               </span>
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-3 md:p-4">
             {isLoading ? (
               <div className="flex justify-center py-8">
                 <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
