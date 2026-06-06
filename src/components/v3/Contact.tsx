@@ -90,7 +90,7 @@ const Contact = () => {
             <button
               type="submit"
               disabled={loading}
-              className="group inline-flex items-center justify-between w-full mt-8 px-6 py-5 rounded-2xl bg-[var(--v3-lime)] text-[var(--v3-bg)] hover:shadow-[0_0_42px_rgba(182,255,77,.35)] transition-shadow disabled:opacity-60"
+              className="v3-cta group inline-flex items-center justify-between w-full mt-8 px-6 py-5 rounded-2xl bg-[var(--v3-lime)] text-[var(--v3-bg)] hover:shadow-[0_10px_42px_rgba(182,255,77,.4)] disabled:opacity-60 disabled:cursor-not-allowed"
             >
               <span className="v3-eyebrow">{loading ? "Sending…" : "Send the brief"}</span>
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />

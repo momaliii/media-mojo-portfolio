@@ -8,6 +8,7 @@ import About from "@/components/v3/About";
 import Contact from "@/components/v3/Contact";
 import Footer from "@/components/v3/Footer";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import Reveal from "@/components/v3/Reveal";
 import { useScrollObserver } from "@/hooks/use-scroll-observer";
 import { trackPageView } from "@/utils/analytics";
 import "@/styles/v3/v3-theme.css";
@@ -26,11 +27,11 @@ const IndexV3 = () => {
       <Navigation activeSection={activeSection} />
       <main id="main-content" tabIndex={-1} aria-label="Main content">
         <ErrorBoundary><Hero /></ErrorBoundary>
-        <ErrorBoundary><ClientLogos /></ErrorBoundary>
-        <ErrorBoundary><Work /></ErrorBoundary>
-        <ErrorBoundary><Services /></ErrorBoundary>
-        <ErrorBoundary><About /></ErrorBoundary>
-        <ErrorBoundary><Contact /></ErrorBoundary>
+        <Reveal><ErrorBoundary><ClientLogos /></ErrorBoundary></Reveal>
+        <Reveal delay={0.05}><ErrorBoundary><Work /></ErrorBoundary></Reveal>
+        <Reveal delay={0.05}><ErrorBoundary><Services /></ErrorBoundary></Reveal>
+        <Reveal delay={0.05}><ErrorBoundary><About /></ErrorBoundary></Reveal>
+        <Reveal delay={0.05}><ErrorBoundary><Contact /></ErrorBoundary></Reveal>
       </main>
       <Footer />
       <ErrorBoundary>
