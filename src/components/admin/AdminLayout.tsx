@@ -30,7 +30,9 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { LayoutDashboard, FileText, Mail, User, BarChart3, Image as ImageIcon } from "lucide-react";
+import { LayoutDashboard, FileText, Mail, User, BarChart3, Image as ImageIcon, Bell, Wrench } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Badge } from "@/components/ui/badge";
 
 interface AdminLayoutProps {
   title: string;
