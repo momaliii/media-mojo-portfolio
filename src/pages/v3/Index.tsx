@@ -30,6 +30,7 @@ const IndexV3 = () => {
         <ErrorBoundary><Hero /></ErrorBoundary>
         <Reveal><ErrorBoundary><ClientLogos /></ErrorBoundary></Reveal>
         <Reveal delay={0.05}><ErrorBoundary><Work /></ErrorBoundary></Reveal>
+        <Reveal delay={0.05}><ErrorBoundary><AdCampaignShowcase /></ErrorBoundary></Reveal>
         <Reveal delay={0.05}><ErrorBoundary><Services /></ErrorBoundary></Reveal>
         <Reveal delay={0.05}><ErrorBoundary><About /></ErrorBoundary></Reveal>
         <Reveal delay={0.05}><ErrorBoundary><Contact /></ErrorBoundary></Reveal>
