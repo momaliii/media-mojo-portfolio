@@ -31,6 +31,13 @@ const platformStyle: Record<
   Instagram: { label: "Instagram", Icon: Facebook, dot: "#ff7a1a" },
 };
 
+const maskToInitials = (name: string) =>
+  name
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((w) => (/^[A-Za-z]/.test(w) ? w[0].toUpperCase() + "." : "•"))
+    .join(" ");
+
 const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }> = ({
   s,
   index,
@@ -38,6 +45,7 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
 }) => {
   const platform = s.platform ? platformStyle[s.platform] : undefined;
   const preventCtx = useCallback((e: React.MouseEvent) => e.preventDefault(), []);
+  const maskedClient = maskToInitials(s.client);
 
   return (
     <article
