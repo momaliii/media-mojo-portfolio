@@ -24,7 +24,7 @@ const IndexV3 = () => {
   }, []);
 
   return (
-    <div className="v3-theme min-h-screen">
+    <div className="v3-theme min-h-screen overflow-x-clip">
       <Navigation activeSection={activeSection} />
       <main id="main-content" tabIndex={-1} aria-label="Main content">
         <ErrorBoundary><Hero /></ErrorBoundary>
