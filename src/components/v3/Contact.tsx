@@ -32,8 +32,8 @@ const Contact = () => {
     <section id="contact" className="relative py-20 md:py-28">
       <div className="max-w-[1400px] mx-auto px-5 md:px-8 lg:px-10">
         <div className="v3-shell rounded-[2rem] p-5 md:p-10 lg:p-12">
-        <div className="grid grid-cols-12 gap-8 md:gap-16">
-          <div className="col-span-12 md:col-span-6">
+        <div className="grid grid-cols-12 gap-8 md:gap-16 min-w-0">
+          <div className="col-span-12 md:col-span-6 min-w-0">
             <p className="v3-eyebrow v3-lime mb-6">Growth request</p>
             <h2 className="v3-display text-4xl md:text-6xl font-bold leading-[1] tracking-[-0.05em]">
               Ready to turn spend into <span className="v3-glow-text">signal?</span>
@@ -49,15 +49,15 @@ const Contact = () => {
                 ["WhatsApp", "+20 ··· available on request"],
                 ["LinkedIn", "linkedin.com/in/mhmdali02"],
               ].map(([k, v]) => (
-                <div key={k} className="rounded-2xl bg-white/5 border v3-rule p-4 flex justify-between items-baseline gap-4">
-                  <span className="v3-eyebrow v3-muted">{k}</span>
-                  <span className="font-bold text-right">{v}</span>
+                <div key={k} className="rounded-2xl bg-white/5 border v3-rule p-4 flex justify-between items-baseline gap-3 min-w-0">
+                  <span className="v3-eyebrow v3-muted shrink-0">{k}</span>
+                  <span className="font-bold text-right break-all min-w-0">{v}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <form onSubmit={onSubmit} className="col-span-12 md:col-span-5 md:col-start-8 space-y-6">
+          <form onSubmit={onSubmit} className="col-span-12 md:col-span-5 md:col-start-8 space-y-6 min-w-0">
             {[
               { k: "name", label: "Your name", type: "text", required: true },
               { k: "email", label: "Email", type: "email", required: true },
