@@ -79,6 +79,17 @@ const CaseStudyDetailV3 = () => {
 
   return (
     <div className="v3-theme min-h-screen">
+      <MetaTags
+        title={`${study.title} · Case Study — Mohamed Ali`}
+        description={study.description}
+        url={canonicalPath}
+        type="article"
+        imageUrl={study.screenshot || undefined}
+      />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+      </Helmet>
       <Navigation />
       <main className="relative pt-28 md:pt-36 pb-24 overflow-hidden">
         <div className="absolute inset-0 v3-grid-bg" aria-hidden="true" />
