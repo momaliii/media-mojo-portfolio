@@ -30,7 +30,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { LayoutDashboard, FileText, Mail, User, BarChart3, Image as ImageIcon, Bell, Wrench } from "lucide-react";
+import { LayoutDashboard, FileText, Mail, User, BarChart3, Image as ImageIcon, Bell, Wrench, Camera } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Badge } from "@/components/ui/badge";
 
@@ -52,6 +52,7 @@ export default function AdminLayout({ title, children }: AdminLayoutProps) {
       { to: "/admin/analytics", label: "Analytics", icon: BarChart3 },
       { to: "/admin/case-studies", label: "Case Studies", icon: FileText },
       { to: "/admin/client-logos", label: "Client Logos", icon: ImageIcon },
+      { to: "/admin/ad-screenshots", label: "Ad Screenshots", icon: Camera },
       { to: "/admin/submissions", label: "Submissions", icon: Mail },
       ...base,
     ];

@@ -35,6 +35,8 @@ import Profile from "./pages/Profile";
 import AdminSubmissions from "./pages/AdminSubmissions";
 import AdminAnalytics from "./pages/AdminAnalytics";
 import AdminClientLogos from "./pages/AdminClientLogos";
+import AdminAdScreenshots from "./pages/AdminAdScreenshots";
+import AdminAdScreenshotEditor from "./pages/AdminAdScreenshotEditor";
 import { ReducedMotionProvider } from "./hooks/use-reduced-motion-pref";
 
 const queryClient = new QueryClient({
@@ -157,6 +159,22 @@ const App = () => (
                     element={
                       <AdminRoute>
                         <AdminClientLogos />
+                      </AdminRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/ad-screenshots"
+                    element={
+                      <AdminRoute>
+                        <AdminAdScreenshots />
+                      </AdminRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/ad-screenshots/:id"
+                    element={
+                      <AdminRoute>
+                        <AdminAdScreenshotEditor />
                       </AdminRoute>
                     }
                   />
