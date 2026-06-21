@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://media-mojo-portfolio.lovable.app/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://media-mojo-portfolio.lovable.app/case-studies</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <url><loc>https://media-mojo-portfolio.lovable.app/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://media-mojo-portfolio.lovable.app/case-studies</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://media-mojo-portfolio.lovable.app/v3</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://media-mojo-portfolio.lovable.app/v3/case-studies</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://media-mojo-portfolio.lovable.app/v3/case-study/beauty-brand-e-commerce-success</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://media-mojo-portfolio.lovable.app/v3/case-study/islamic-economy-events</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://media-mojo-portfolio.lovable.app/v3/case-study/restaurant-chain-growth</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://media-mojo-portfolio.lovable.app/v3/case-study/entertainment-venue-marketing</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://media-mojo-portfolio.lovable.app/v3/case-study/multi-brand-f-b-expansion</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://media-mojo-portfolio.lovable.app/v3/case-study/education-platform-launch</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://media-mojo-portfolio.lovable.app/v3/case-study/smart-home-solutions</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://media-mojo-portfolio.lovable.app/v3/case-study/multi-branch-restaurant-expansion</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://media-mojo-portfolio.lovable.app/v3/case-study/premium-education-academy-growth</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://media-mojo-portfolio.lovable.app/v3/case-study/strategic-consulting-services</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

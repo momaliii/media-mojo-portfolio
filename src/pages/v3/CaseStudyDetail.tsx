@@ -1,14 +1,18 @@
 import React, { useEffect, useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import Navigation from "@/components/v3/Navigation";
 import Footer from "@/components/v3/Footer";
+import MetaTags from "@/components/MetaTags";
 import { caseStudies } from "@/data/caseStudies";
 import { trackPageView } from "@/utils/analytics";
 import "@/styles/v3/v3-theme.css";
 
 const slugify = (s: string) =>
   s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+const SITE = "https://media-mojo-portfolio.lovable.app";
 
 const CaseStudyDetailV3 = () => {
   const { slug } = useParams();
@@ -20,14 +24,20 @@ const CaseStudyDetailV3 = () => {
 
   useEffect(() => {
     if (study) {
-      document.title = `${study.title} · Case Study — v3`;
-      trackPageView(`/v3/case-study/${slug}`, document.title);
+      trackPageView(`/v3/case-study/${slug}`, `${study.title} · Case Study`);
     }
   }, [study, slug]);
+
 
   if (!study) {
     return (
       <div className="v3-theme min-h-screen">
+        <MetaTags
+          title="Case study not found · Mohamed Ali"
+          description="This case study could not be found. Browse the full archive of media buying case studies."
+          url={`/v3/case-study/${slug ?? ""}`}
+        />
+        <Helmet><meta name="robots" content="noindex, follow" /></Helmet>
         <Navigation />
         <main className="pt-40 pb-24 max-w-[1400px] mx-auto px-5 md:px-8 lg:px-10 text-center">
           <p className="v3-eyebrow v3-muted mb-4">404</p>
@@ -41,8 +51,45 @@ const CaseStudyDetailV3 = () => {
     );
   }
 
+  const canonicalPath = `/v3/case-study/${slug}`;
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: study.title,
+    description: study.description,
+    image: study.screenshot ? `${SITE}${study.screenshot}` : undefined,
+    author: { "@type": "Person", name: "Mohamed Ali" },
+    publisher: {
+      "@type": "Organization",
+      name: "Mohamed Ali Media Buyer",
+    },
+    mainEntityOfPage: `${SITE}${canonicalPath}`,
+    about: study.industry || study.category,
+  };
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/v3` },
+      { "@type": "ListItem", position: 2, name: "Case Studies", item: `${SITE}/v3/case-studies` },
+      { "@type": "ListItem", position: 3, name: study.title, item: `${SITE}${canonicalPath}` },
+    ],
+  };
+
+
   return (
     <div className="v3-theme min-h-screen">
+      <MetaTags
+        title={`${study.title} · Case Study — Mohamed Ali`}
+        description={study.description}
+        url={canonicalPath}
+        type="article"
+        imageUrl={study.screenshot || undefined}
+      />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+      </Helmet>
       <Navigation />
       <main className="relative pt-28 md:pt-36 pb-24 overflow-hidden">
         <div className="absolute inset-0 v3-grid-bg" aria-hidden="true" />
