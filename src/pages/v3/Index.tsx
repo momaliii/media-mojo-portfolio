@@ -8,6 +8,7 @@ import About from "@/components/v3/About";
 import Contact from "@/components/v3/Contact";
 import Footer from "@/components/v3/Footer";
 import AdCampaignShowcase from "@/components/v3/AdCampaignShowcase";
+import ProofDeck from "@/components/v3/ProofDeck";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Reveal from "@/components/v3/Reveal";
 import { useScrollObserver } from "@/hooks/use-scroll-observer";
@@ -31,6 +32,7 @@ const IndexV3 = () => {
         <Reveal><ErrorBoundary><ClientLogos /></ErrorBoundary></Reveal>
         <Reveal delay={0.05}><ErrorBoundary><Work /></ErrorBoundary></Reveal>
         <Reveal delay={0.05}><ErrorBoundary><AdCampaignShowcase /></ErrorBoundary></Reveal>
+        <Reveal delay={0.05}><ErrorBoundary><ProofDeck /></ErrorBoundary></Reveal>
         <Reveal delay={0.05}><ErrorBoundary><Services /></ErrorBoundary></Reveal>
         <Reveal delay={0.05}><ErrorBoundary><About /></ErrorBoundary></Reveal>
         <Reveal delay={0.05}><ErrorBoundary><Contact /></ErrorBoundary></Reveal>
