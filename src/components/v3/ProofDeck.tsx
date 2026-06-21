@@ -57,7 +57,6 @@ const ProofCard: React.FC<{
       onDragEnd={onDragEnd}
       whileTap={active ? { cursor: "grabbing" } : undefined}
       onContextMenu={preventCtx}
-      onDragStart={preventDrag}
       aria-hidden={!active}
     >
       <div className="relative w-full aspect-[16/10] bg-[var(--v3-bg-2)] flex items-center justify-center p-3 sm:p-4">
