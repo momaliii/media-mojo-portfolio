@@ -1,14 +1,18 @@
 import React, { useEffect, useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import Navigation from "@/components/v3/Navigation";
 import Footer from "@/components/v3/Footer";
+import MetaTags from "@/components/MetaTags";
 import { caseStudies } from "@/data/caseStudies";
 import { trackPageView } from "@/utils/analytics";
 import "@/styles/v3/v3-theme.css";
 
 const slugify = (s: string) =>
   s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+const SITE = "https://media-mojo-portfolio.lovable.app";
 
 const CaseStudyDetailV3 = () => {
   const { slug } = useParams();
@@ -20,10 +24,10 @@ const CaseStudyDetailV3 = () => {
 
   useEffect(() => {
     if (study) {
-      document.title = `${study.title} · Case Study — v3`;
-      trackPageView(`/v3/case-study/${slug}`, document.title);
+      trackPageView(`/v3/case-study/${slug}`, `${study.title} · Case Study`);
     }
   }, [study, slug]);
+
 
   if (!study) {
     return (
