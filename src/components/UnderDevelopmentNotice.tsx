@@ -35,11 +35,34 @@ export default function UnderDevelopmentNotice() {
       aria-live="polite"
       className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 z-[60] sm:max-w-sm animate-in fade-in slide-in-from-bottom-4 duration-500"
     >
-      <div className="relative overflow-hidden rounded-xl border border-primary/30 bg-background/90 backdrop-blur-xl shadow-2xl shadow-primary/10">
-        <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent" />
+      <style>{`
+        @keyframes wrench-wiggle {
+          0%, 100% { transform: rotate(-8deg); }
+          50% { transform: rotate(8deg); }
+        }
+        @keyframes shimmer-sweep {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        @keyframes gentle-bob {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-4px); }
+        }
+      `}</style>
+      <div
+        className="relative overflow-hidden rounded-xl border border-primary/30 bg-background/90 backdrop-blur-xl shadow-2xl shadow-primary/10"
+        style={{ animation: 'gentle-bob 4s ease-in-out infinite' }}
+      >
+        <div className="absolute inset-x-0 top-0 h-0.5 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary to-transparent" />
+          <div
+            className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+            style={{ animation: 'shimmer-sweep 2.5s ease-in-out infinite' }}
+          />
+        </div>
         <div className="flex items-start gap-3 p-4 pr-10">
           <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary">
-            <Wrench className="h-5 w-5" />
+            <Wrench className="h-5 w-5" style={{ animation: 'wrench-wiggle 3s ease-in-out infinite' }} />
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-0.5">
