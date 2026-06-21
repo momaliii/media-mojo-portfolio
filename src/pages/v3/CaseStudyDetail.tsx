@@ -32,6 +32,12 @@ const CaseStudyDetailV3 = () => {
   if (!study) {
     return (
       <div className="v3-theme min-h-screen">
+        <MetaTags
+          title="Case study not found · Mohamed Ali"
+          description="This case study could not be found. Browse the full archive of media buying case studies."
+          url={`/v3/case-study/${slug ?? ""}`}
+        />
+        <Helmet><meta name="robots" content="noindex, follow" /></Helmet>
         <Navigation />
         <main className="pt-40 pb-24 max-w-[1400px] mx-auto px-5 md:px-8 lg:px-10 text-center">
           <p className="v3-eyebrow v3-muted mb-4">404</p>
@@ -44,6 +50,32 @@ const CaseStudyDetailV3 = () => {
       </div>
     );
   }
+
+  const canonicalPath = `/v3/case-study/${slug}`;
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: study.title,
+    description: study.description,
+    image: study.screenshot ? `${SITE}${study.screenshot}` : undefined,
+    author: { "@type": "Person", name: "Mohamed Ali" },
+    publisher: {
+      "@type": "Organization",
+      name: "Mohamed Ali Media Buyer",
+    },
+    mainEntityOfPage: `${SITE}${canonicalPath}`,
+    about: study.industry || study.category,
+  };
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/v3` },
+      { "@type": "ListItem", position: 2, name: "Case Studies", item: `${SITE}/v3/case-studies` },
+      { "@type": "ListItem", position: 3, name: study.title, item: `${SITE}${canonicalPath}` },
+    ],
+  };
+
 
   return (
     <div className="v3-theme min-h-screen">
