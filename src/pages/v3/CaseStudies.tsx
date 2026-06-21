@@ -33,6 +33,12 @@ const CaseStudiesV3 = () => {
 
   return (
     <div className="v3-theme min-h-screen">
+      <MetaTags
+        title="Case Studies · Mohamed Ali — Senior Media Buyer"
+        description="A working archive of selected media buying engagements — what was spent, what was learned, what was earned. 8x+ ROAS across 10+ countries."
+        url="/v3/case-studies"
+        type="website"
+      />
       <Navigation />
       <main className="relative pt-28 md:pt-36 pb-24 overflow-hidden">
         <div className="absolute inset-0 v3-grid-bg" aria-hidden="true" />
