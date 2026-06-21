@@ -14,7 +14,8 @@ import {
   Play,
   ShieldCheck,
 } from "lucide-react";
-import { adCampaignScreenshots, type AdScreenshot } from "@/data/adScreenshots";
+import { adCampaignScreenshots as fallbackScreenshots, type AdScreenshot } from "@/data/adScreenshots";
+import { useAdScreenshots } from "@/hooks/use-ad-screenshots";
 import { trackEvent } from "@/utils/analytics";
 
 import type { LucideIcon } from "lucide-react";
@@ -33,9 +34,10 @@ const platformStyle: Record<
 
 const maskToInitials = (name: string) => name;
 
-const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }> = ({
+const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; total: number; active: boolean }> = ({
   s,
   index,
+  total,
   active,
 }) => {
   const platform = s.platform ? platformStyle[s.platform] : undefined;
@@ -134,7 +136,7 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
 
         {/* Index numeral */}
         <div className="absolute bottom-3 left-3 z-40 v3-numeral text-xs font-bold text-white/70">
-          {String(index + 1).padStart(2, "0")} / {adCampaignScreenshots.length}
+          {String(index + 1).padStart(2, "0")} / {total}
         </div>
 
         {/* Industry chip bottom-right */}
@@ -168,6 +170,20 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
 };
 
 const AdCampaignShowcase: React.FC = () => {
+  const { data: dbRows } = useAdScreenshots();
+  const screenshots: AdScreenshot[] = React.useMemo(() => {
+    if (dbRows && dbRows.length > 0) {
+      return dbRows.map((r) => ({
+        url: r.image_url,
+        industry: r.industry,
+        client: r.client,
+        platform: (r.platform as AdScreenshot["platform"]) || undefined,
+        details: r.details || undefined,
+      }));
+    }
+    return fallbackScreenshots;
+  }, [dbRows]);
+
   const autoplay = useRef(
     Autoplay({ delay: 3600, stopOnInteraction: false, stopOnMouseEnter: true })
   );
@@ -188,6 +204,11 @@ const AdCampaignShowcase: React.FC = () => {
     };
   }, [embla]);
 
+  // Reset embla when source data changes
+  useEffect(() => {
+    embla?.reInit();
+  }, [embla, screenshots.length]);
+
   const togglePlay = () => {
     const ap = autoplay.current;
     if (!ap) return;
@@ -200,7 +221,7 @@ const AdCampaignShowcase: React.FC = () => {
   const stats = [
     { value: "EGP 18M+", label: "Tracked revenue" },
     { value: "5", label: "Ad platforms" },
-    { value: "22", label: "Live screenshots" },
+    { value: String(screenshots.length), label: "Live screenshots" },
   ];
 
   return (
@@ -274,15 +295,15 @@ const AdCampaignShowcase: React.FC = () => {
         {/* Carousel */}
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex -ml-4 sm:-ml-5">
-            {adCampaignScreenshots.map((s, i) => (
+            {screenshots.map((s, i) => (
               <div
                 key={i}
                 className="pl-4 sm:pl-5 shrink-0 grow-0 basis-[85%] sm:basis-1/2 lg:basis-1/3 transition-opacity duration-500"
                 role="group"
                 aria-roledescription="slide"
-                aria-label={`Slide ${i + 1} of ${adCampaignScreenshots.length}`}
+                aria-label={`Slide ${i + 1} of ${screenshots.length}`}
               >
-                <ShowcaseCard s={s} index={i} active={selected === i} />
+                <ShowcaseCard s={s} index={i} total={screenshots.length} active={selected === i} />
               </div>
             ))}
           </div>
@@ -290,7 +311,7 @@ const AdCampaignShowcase: React.FC = () => {
 
         {/* Progress dots */}
         <div className="mt-10 flex items-center justify-center gap-2">
-          {adCampaignScreenshots.map((_, i) => (
+          {screenshots.map((_, i) => (
             <button
               key={i}
               onClick={() => embla?.scrollTo(i)}
