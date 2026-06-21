@@ -42,6 +42,15 @@ const Hero = () => {
             </motion.h1>
 
             <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.12 }}
+              className="mt-5 max-w-2xl text-lg md:text-xl leading-[1.65] v3-soft"
+            >
+              No pitch decks. No vanity metrics. Just real dashboards, real ROAS, and screenshots that do the talking.
+            </motion.p>
+
+            <motion.p
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.75, delay: 0.18 }}
