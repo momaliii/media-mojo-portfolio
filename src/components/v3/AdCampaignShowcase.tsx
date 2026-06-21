@@ -40,7 +40,13 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
 }) => {
   const platform = s.platform ? platformStyle[s.platform] : undefined;
   const preventCtx = useCallback((e: React.MouseEvent) => e.preventDefault(), []);
+  const preventDrag = useCallback((e: React.DragEvent) => e.preventDefault(), []);
   const maskedClient = maskToInitials(s.client);
+
+  // Build a tiled diagonal watermark via repeating SVG background
+  const wmText = "MOHAMED ALI · MEDIA BUYER · PROTECTED";
+  const wmSvg = `<svg xmlns='http://www.w3.org/2000/svg' width='520' height='220' viewBox='0 0 520 220'><text x='0' y='130' fill='rgba(255,255,255,0.16)' font-family='Inter, Arial, sans-serif' font-size='22' font-weight='800' letter-spacing='4' transform='rotate(-22 260 110)'>${wmText}</text></svg>`;
+  const wmUrl = `url("data:image/svg+xml;utf8,${encodeURIComponent(wmSvg)}")`;
 
   return (
     <article
@@ -49,12 +55,16 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
           ? "ring-1 ring-[var(--v3-lime)]/40 shadow-[0_30px_80px_-20px_rgba(182,255,77,.25)]"
           : "hover:ring-1 hover:ring-[var(--v3-lime)]/25"
       }`}
+      onContextMenu={preventCtx}
+      onDragStart={preventDrag}
+      style={{ userSelect: "none", WebkitUserSelect: "none", WebkitTouchCallout: "none" }}
     >
       {/* Screenshot frame — full screenshot visible, no zoom-in cropping */}
       <div
         className="relative w-full aspect-[16/10] overflow-hidden bg-[var(--v3-bg-2)] flex items-center justify-center p-3 sm:p-4"
         onContextMenu={preventCtx}
-        style={{ userSelect: "none" }}
+        onDragStart={preventDrag}
+        style={{ userSelect: "none", WebkitUserSelect: "none", WebkitTouchCallout: "none" }}
         role="img"
         aria-label={`${s.client} ${s.platform || ""} campaign for ${s.industry}`}
       >
@@ -63,25 +73,52 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
           alt={`${s.industry} ${s.platform || "ad"} campaign by ${s.client}`}
           loading="lazy"
           draggable={false}
+          onContextMenu={preventCtx}
+          onDragStart={preventDrag}
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 85vw"
           className="relative z-0 max-w-full max-h-full w-auto h-auto object-contain rounded-lg shadow-[0_10px_30px_rgba(0,0,0,.45)] transition-transform duration-700 ease-out group-hover:scale-[1.02] select-none"
-          style={{ pointerEvents: "none" }}
+          style={{
+            pointerEvents: "none",
+            WebkitUserSelect: "none",
+            userSelect: "none",
+            WebkitTouchCallout: "none",
+            WebkitUserDrag: "none",
+          } as React.CSSProperties}
         />
 
         {/* Soft top/bottom vignette only at edges so the screenshot stays readable */}
         <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/40 to-transparent pointer-events-none z-10" />
         <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/40 to-transparent pointer-events-none z-10" />
 
-        {/* Subtle watermark — diagonal, low opacity, no blur backdrop */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-          <span className="-rotate-[22deg] text-white/15 text-sm md:text-base font-bold tracking-[0.35em] whitespace-nowrap">
+        {/* Tiled diagonal watermark across the entire screenshot */}
+        <div
+          className="absolute inset-0 pointer-events-none z-20 mix-blend-overlay"
+          style={{
+            backgroundImage: wmUrl,
+            backgroundRepeat: "repeat",
+            backgroundSize: "260px 110px",
+          }}
+          aria-hidden
+        />
+        {/* Center signature watermark for extra protection */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+          <span className="-rotate-[22deg] text-white/25 text-base md:text-lg font-extrabold tracking-[0.35em] whitespace-nowrap drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]">
             MOHAMED ALI · MEDIA BUYER
           </span>
         </div>
 
+        {/* Transparent overlay to block long-press save on mobile */}
+        <div
+          className="absolute inset-0 z-30"
+          onContextMenu={preventCtx}
+          onDragStart={preventDrag}
+          style={{ WebkitTouchCallout: "none", userSelect: "none" }}
+          aria-hidden
+        />
+
         {/* Platform chip top-left */}
         {platform && (
-          <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 rounded-full bg-black/70 backdrop-blur-md border border-white/10 px-2.5 py-1 text-[10px] uppercase tracking-[0.16em] font-bold text-white">
+          <div className="absolute top-3 left-3 z-40 flex items-center gap-1.5 rounded-full bg-black/70 backdrop-blur-md border border-white/10 px-2.5 py-1 text-[10px] uppercase tracking-[0.16em] font-bold text-white">
             <platform.Icon size={12} aria-hidden />
             <span>{platform.label}</span>
           </div>
@@ -89,22 +126,23 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
 
         {/* Lock top-right */}
         <div
-          className="absolute top-3 right-3 z-20 grid place-items-center h-7 w-7 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-white/80"
+          className="absolute top-3 right-3 z-40 grid place-items-center h-7 w-7 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-white/80"
           aria-hidden
         >
           <Lock size={12} />
         </div>
 
         {/* Index numeral */}
-        <div className="absolute bottom-3 left-3 z-20 v3-numeral text-xs font-bold text-white/70">
+        <div className="absolute bottom-3 left-3 z-40 v3-numeral text-xs font-bold text-white/70">
           {String(index + 1).padStart(2, "0")} / {adCampaignScreenshots.length}
         </div>
 
         {/* Industry chip bottom-right */}
-        <div className="absolute bottom-3 right-3 z-20 rounded-full bg-[var(--v3-lime)] text-[var(--v3-bg)] px-3 py-1 text-[10px] uppercase tracking-[0.16em] font-bold">
+        <div className="absolute bottom-3 right-3 z-40 rounded-full bg-[var(--v3-lime)] text-[var(--v3-bg)] px-3 py-1 text-[10px] uppercase tracking-[0.16em] font-bold">
           {s.industry}
         </div>
       </div>
+
 
       {/* Content */}
       <div className="flex-1 flex flex-col gap-3 p-5 md:p-6">
