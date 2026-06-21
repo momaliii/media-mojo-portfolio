@@ -14,7 +14,8 @@ import {
   Play,
   ShieldCheck,
 } from "lucide-react";
-import { adCampaignScreenshots, type AdScreenshot } from "@/data/adScreenshots";
+import { adCampaignScreenshots as fallbackScreenshots, type AdScreenshot } from "@/data/adScreenshots";
+import { useAdScreenshots } from "@/hooks/use-ad-screenshots";
 import { trackEvent } from "@/utils/analytics";
 
 import type { LucideIcon } from "lucide-react";
@@ -168,6 +169,20 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
 };
 
 const AdCampaignShowcase: React.FC = () => {
+  const { data: dbRows } = useAdScreenshots();
+  const screenshots: AdScreenshot[] = React.useMemo(() => {
+    if (dbRows && dbRows.length > 0) {
+      return dbRows.map((r) => ({
+        url: r.image_url,
+        industry: r.industry,
+        client: r.client,
+        platform: (r.platform as AdScreenshot["platform"]) || undefined,
+        details: r.details || undefined,
+      }));
+    }
+    return fallbackScreenshots;
+  }, [dbRows]);
+
   const autoplay = useRef(
     Autoplay({ delay: 3600, stopOnInteraction: false, stopOnMouseEnter: true })
   );
@@ -188,6 +203,11 @@ const AdCampaignShowcase: React.FC = () => {
     };
   }, [embla]);
 
+  // Reset embla when source data changes
+  useEffect(() => {
+    embla?.reInit();
+  }, [embla, screenshots.length]);
+
   const togglePlay = () => {
     const ap = autoplay.current;
     if (!ap) return;
@@ -200,7 +220,7 @@ const AdCampaignShowcase: React.FC = () => {
   const stats = [
     { value: "EGP 18M+", label: "Tracked revenue" },
     { value: "5", label: "Ad platforms" },
-    { value: "22", label: "Live screenshots" },
+    { value: String(screenshots.length), label: "Live screenshots" },
   ];
 
   return (
