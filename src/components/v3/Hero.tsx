@@ -149,7 +149,7 @@ const Hero = () => {
                     <div className="flex items-center gap-2 text-[var(--v3-lime)] font-bold">
                       <CheckCircle2 size={18} /> Verified systems
                     </div>
-                    <p className="text-sm v3-soft mt-3">CAPI, GTM, funnels, creative tests, reporting.</p>
+                    <p className="text-sm text-white mt-3">CAPI, GTM, funnels, creative tests, reporting.</p>
                   </div>
                 </div>
 
