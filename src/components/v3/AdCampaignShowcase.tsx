@@ -34,9 +34,10 @@ const platformStyle: Record<
 
 const maskToInitials = (name: string) => name;
 
-const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }> = ({
+const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; total: number; active: boolean }> = ({
   s,
   index,
+  total,
   active,
 }) => {
   const platform = s.platform ? platformStyle[s.platform] : undefined;
@@ -135,7 +136,7 @@ const ShowcaseCard: React.FC<{ s: AdScreenshot; index: number; active: boolean }
 
         {/* Index numeral */}
         <div className="absolute bottom-3 left-3 z-40 v3-numeral text-xs font-bold text-white/70">
-          {String(index + 1).padStart(2, "0")} / {adCampaignScreenshots.length}
+          {String(index + 1).padStart(2, "0")} / {total}
         </div>
 
         {/* Industry chip bottom-right */}
@@ -294,15 +295,15 @@ const AdCampaignShowcase: React.FC = () => {
         {/* Carousel */}
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex -ml-4 sm:-ml-5">
-            {adCampaignScreenshots.map((s, i) => (
+            {screenshots.map((s, i) => (
               <div
                 key={i}
                 className="pl-4 sm:pl-5 shrink-0 grow-0 basis-[85%] sm:basis-1/2 lg:basis-1/3 transition-opacity duration-500"
                 role="group"
                 aria-roledescription="slide"
-                aria-label={`Slide ${i + 1} of ${adCampaignScreenshots.length}`}
+                aria-label={`Slide ${i + 1} of ${screenshots.length}`}
               >
-                <ShowcaseCard s={s} index={i} active={selected === i} />
+                <ShowcaseCard s={s} index={i} total={screenshots.length} active={selected === i} />
               </div>
             ))}
           </div>
@@ -310,7 +311,7 @@ const AdCampaignShowcase: React.FC = () => {
 
         {/* Progress dots */}
         <div className="mt-10 flex items-center justify-center gap-2">
-          {adCampaignScreenshots.map((_, i) => (
+          {screenshots.map((_, i) => (
             <button
               key={i}
               onClick={() => embla?.scrollTo(i)}
