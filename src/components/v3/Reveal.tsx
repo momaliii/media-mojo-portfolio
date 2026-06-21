@@ -28,12 +28,11 @@ const Reveal: React.FC<RevealProps> = ({
   const variants: Variants = prefersReduced
     ? { hidden: { opacity: 1 }, show: { opacity: 1 } }
     : {
-        hidden: { opacity: 0, y, filter: "blur(6px)" },
+        hidden: { opacity: 0, y },
         show: {
           opacity: 1,
           y: 0,
-          filter: "blur(0px)",
-          transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1], delay },
+          transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1], delay },
         },
       };
 
