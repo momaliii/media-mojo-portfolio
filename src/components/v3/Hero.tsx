@@ -143,7 +143,7 @@ const Hero = () => {
                   <div className="rounded-3xl bg-[var(--v3-panel-2)] border v3-rule p-5">
                     <p className="v3-eyebrow v3-muted">Spend managed</p>
                     <p className="v3-numeral text-4xl font-bold mt-2">8 fig.</p>
-                    <p className="text-sm v3-soft mt-3">Meta · TikTok · Google</p>
+                    <p className="text-sm v3-soft mt-3">Meta · TikTok · Snapchat · Google</p>
                   </div>
                   <div className="rounded-3xl bg-[var(--v3-panel-2)] border v3-rule p-5">
                     <div className="flex items-center gap-2 text-[var(--v3-lime)] font-bold">
