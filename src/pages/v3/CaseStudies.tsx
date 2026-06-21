@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import Navigation from "@/components/v3/Navigation";
 import Footer from "@/components/v3/Footer";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import MetaTags from "@/components/MetaTags";
 import { caseStudies } from "@/data/caseStudies";
 import { trackPageView } from "@/utils/analytics";
 import "@/styles/v3/v3-theme.css";
@@ -15,9 +16,9 @@ const CaseStudiesV3 = () => {
   const [filter, setFilter] = useState<string>("all");
 
   useEffect(() => {
-    document.title = "Case Studies · Mohamed Ali — v3";
-    trackPageView("/v3/case-studies", document.title);
+    trackPageView("/v3/case-studies", "Case Studies · Mohamed Ali — Editorial Edition");
   }, []);
+
 
   const categories = useMemo(() => {
     const set = new Set(caseStudies.map((c) => c.category));
