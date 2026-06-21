@@ -32,7 +32,6 @@ const ProofCard: React.FC<{
   const baseOpacity = depth === 0 ? 1 : depth < VISIBLE ? 0.55 - depth * 0.1 : 0;
 
   const preventCtx = (e: React.MouseEvent) => e.preventDefault();
-  const preventDrag = (e: React.DragEvent) => e.preventDefault();
 
   return (
     <motion.article
