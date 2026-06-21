@@ -78,16 +78,6 @@ const CaseStudyDetailV3 = () => {
             ))}
           </div>
 
-          {study.screenshot && (
-            <figure className="mb-20">
-              <img
-                src={study.screenshot}
-                alt={study.title}
-                className="w-full h-auto rounded-[1.7rem] border v3-rule shadow-2xl"
-                loading="lazy"
-              />
-            </figure>
-          )}
 
           <div className="grid grid-cols-12 gap-8 md:gap-16">
             <aside className="col-span-12 md:col-span-3 md:sticky md:top-28 self-start space-y-8">
