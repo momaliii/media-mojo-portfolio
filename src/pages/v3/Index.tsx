@@ -11,6 +11,7 @@ import AdCampaignShowcase from "@/components/v3/AdCampaignShowcase";
 import ProofDeck from "@/components/v3/ProofDeck";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Reveal from "@/components/v3/Reveal";
+import MetaTags from "@/components/MetaTags";
 import { useScrollObserver } from "@/hooks/use-scroll-observer";
 import { trackPageView } from "@/utils/analytics";
 import "@/styles/v3/v3-theme.css";
@@ -20,9 +21,9 @@ const ElevenLabsWidget = lazy(() => import("@/components/voice-agent/ElevenLabsW
 const IndexV3 = () => {
   const { activeSection } = useScrollObserver();
   useEffect(() => {
-    document.title = "Mohamed Ali — Senior Media Buyer · v3";
-    trackPageView("/v3", document.title);
+    trackPageView("/v3", "Mohamed Ali — Senior Media Buyer · Editorial Edition");
   }, []);
+
 
   return (
     <div className="v3-theme min-h-screen overflow-x-clip">
