@@ -38,7 +38,7 @@ const Hero = () => {
               transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
               className="v3-display text-[clamp(3.1rem,7vw,7.7rem)] font-bold leading-[0.94] tracking-[-0.055em]"
             >
-              Paid media that <span className="v3-glow-text">prints signal</span>, not noise.
+              I don't pitch numbers. I <span className="v3-glow-text">screenshot</span> them.
             </motion.h1>
 
             <motion.p
