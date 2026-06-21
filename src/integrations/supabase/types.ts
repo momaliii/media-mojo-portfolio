@@ -14,6 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      ad_screenshots: {
+        Row: {
+          blur_regions: Json
+          client: string
+          created_at: string
+          details: string | null
+          id: string
+          image_url: string
+          industry: string
+          original_url: string | null
+          platform: string | null
+          sort_order: number
+          updated_at: string
+          visible: boolean
+        }
+        Insert: {
+          blur_regions?: Json
+          client?: string
+          created_at?: string
+          details?: string | null
+          id?: string
+          image_url: string
+          industry?: string
+          original_url?: string | null
+          platform?: string | null
+          sort_order?: number
+          updated_at?: string
+          visible?: boolean
+        }
+        Update: {
+          blur_regions?: Json
+          client?: string
+          created_at?: string
+          details?: string | null
+          id?: string
+          image_url?: string
+          industry?: string
+          original_url?: string | null
+          platform?: string | null
+          sort_order?: number
+          updated_at?: string
+          visible?: boolean
+        }
+        Relationships: []
+      }
       case_studies: {
         Row: {
           additional_screenshots: string[]
