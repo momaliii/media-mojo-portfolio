@@ -82,7 +82,7 @@ const Hero = () => {
             >
               {[
                 ["7+", "Years"],
-                ["95K+", "Orders"],
+                ["150K+", "Orders"],
                 ["8×", "ROAS"],
               ].map(([value, label]) => (
                 <div key={label} className="v3-shell rounded-2xl p-4">
