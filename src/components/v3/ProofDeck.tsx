@@ -63,7 +63,9 @@ const ProofCard: React.FC<{
           src={s.url}
           alt={`${s.industry} ${s.platform || "ad"} campaign by ${s.client}`}
           draggable={false}
-          loading="lazy"
+          loading={depth === 0 ? "eager" : "lazy"}
+          decoding="async"
+          fetchPriority={depth === 0 ? "high" : "low"}
           className="relative z-0 max-w-full max-h-full w-auto h-auto object-contain rounded-lg shadow-[0_10px_30px_rgba(0,0,0,.45)] pointer-events-none"
         />
         {/* Watermark */}

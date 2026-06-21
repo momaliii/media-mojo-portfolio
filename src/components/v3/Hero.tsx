@@ -115,6 +115,10 @@ const Hero = () => {
                   <img
                     src="/lovable-uploads/900c6176-4030-4244-a97a-62a4c235d53f.png"
                     alt="Mohamed Ali"
+                    width={48}
+                    height={48}
+                    decoding="async"
+                    fetchPriority="high"
                     className="h-12 w-12 rounded-2xl object-cover border border-white/15"
                   />
                   <div>
