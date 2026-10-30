@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, BarChart3, CheckCircle2, Play, TrendingUp } from "lucide-react";
-import { snapchatSpend } from "@/data/portfolioFacts";
+import { snapchatSpend, impressions } from "@/data/portfolioFacts";
 
 const Hero = () => {
   const bars = [72, 88, 64, 96, 79, 91, 68];
@@ -88,15 +88,16 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.42 }}
-              className="mt-10 grid grid-cols-3 gap-3 max-w-2xl"
+              className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl"
             >
               {[
                 ["7+", "Years"],
                 ["150K+", "Orders"],
                 ["8×", "ROAS"],
+                [impressions.display, "Impressions"],
               ].map(([value, label]) => (
                 <div key={label} className="v3-shell rounded-2xl p-4">
-                  <div className="v3-numeral text-3xl md:text-4xl font-bold leading-none">{value}</div>
+                  <div className="v3-numeral text-2xl md:text-3xl font-bold leading-none">{value}</div>
                   <div className="v3-eyebrow v3-muted mt-2">{label}</div>
                 </div>
               ))}
