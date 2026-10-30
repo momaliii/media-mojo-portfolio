@@ -151,7 +151,7 @@ const CaseStudies = () => {
                         <s.icon className="h-6 w-6" aria-hidden="true" />
                       </span>
                     </div>
-                    <h3 className="text-3xl font-bold tracking-tight">{s.value}</h3>
+                    <p className="text-3xl font-bold tracking-tight">{s.value}</p>
                     <p className="text-sm text-muted-foreground mt-1">{s.label}</p>
                   </div>
                 ))}

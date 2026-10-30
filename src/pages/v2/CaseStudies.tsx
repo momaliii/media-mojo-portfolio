@@ -14,7 +14,7 @@ const CaseStudies = () => {
   const { data: caseStudies = [] } = usePublishedCaseStudies();
 
   useEffect(() => {
-    trackPageView("/case-studies", "Selected Work — Mohamed Ali");
+    trackPageView("/v2/case-studies", "Selected Work — Mohamed Ali");
   }, []);
 
   const totalProjects = caseStudies.length;
@@ -33,7 +33,7 @@ const CaseStudies = () => {
         />
         <link
           rel="canonical"
-          href={`${typeof window !== "undefined" ? window.location.origin : ""}/case-studies`}
+          href="https://media-mojo-portfolio.lovable.app/v2/case-studies"
         />
       </Helmet>
 
