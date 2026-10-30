@@ -45,14 +45,14 @@ const Contact = () => {
 
             <div className="mt-10 grid gap-3">
               {[
-                ["Email", "hello@mhmdali.site"],
-                ["WhatsApp", "+20 ··· available on request"],
-                ["LinkedIn", "linkedin.com/in/mhmdali02"],
-              ].map(([k, v]) => (
-                <div key={k} className="rounded-2xl bg-white/5 border v3-rule p-4 flex justify-between items-baseline gap-3 min-w-0">
-                  <span className="v3-eyebrow v3-muted shrink-0">{k}</span>
-                  <span className="font-bold text-right break-all min-w-0">{v}</span>
-                </div>
+                ["Email", "mhmd167ali@gmail.com", "mailto:mhmd167ali@gmail.com"],
+                ["WhatsApp", "+20 106 009 8267", "https://wa.me/201060098267"],
+                ["LinkedIn", "linkedin.com/in/mhmdali02", "https://www.linkedin.com/in/mhmdali02/"],
+              ].map(([k, v, href]) => (
+                <a key={k} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="rounded-2xl bg-white/5 border v3-rule p-4 grid sm:grid-cols-[110px_1fr] gap-1 min-w-0 hover:border-[var(--v3-lime)]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--v3-lime)]">
+                  <span className="v3-eyebrow v3-muted">{k}</span>
+                  <span className="font-bold break-all min-w-0">{v}</span>
+                </a>
               ))}
             </div>
           </div>
