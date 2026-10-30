@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, BarChart3, CheckCircle2, Play, TrendingUp } from "lucide-react";
+import { snapchatSpend } from "@/data/portfolioFacts";
 
 const Hero = () => {
   const bars = [72, 88, 64, 96, 79, 91, 68];
@@ -157,6 +158,7 @@ const Hero = () => {
                     <p className="v3-eyebrow v3-muted">Spend managed</p>
                     <p className="v3-numeral text-4xl font-bold mt-2">8 fig.</p>
                     <p className="text-sm v3-soft mt-3">Meta · TikTok · Snapchat · Google</p>
+                    <p className="text-sm font-bold text-[var(--v3-lime)] mt-2">Snapchat: {snapchatSpend.display} spend</p>
                   </div>
                   <div className="rounded-3xl bg-[var(--v3-panel-2)] border v3-rule p-5">
                     <div className="flex items-center gap-2 text-[var(--v3-lime)] font-bold">

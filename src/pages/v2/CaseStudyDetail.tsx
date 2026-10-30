@@ -99,6 +99,7 @@ const CaseStudyDetail = () => {
         title={`${caseStudy.title} — Case Study`}
         description={caseStudy.description}
         url={`/v2/case-study/${slug}`}
+        type="article"
       />
       <div className="v2-theme dark min-h-screen bg-obsidian text-white selection:bg-gold/30">
         <Navigation />

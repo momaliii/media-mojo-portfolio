@@ -13,13 +13,11 @@ interface MetaTagsProps {
   keywords?: string;
 }
 
-const BASE_URL = typeof window !== 'undefined' 
-  ? window.location.origin 
-  : "https://mediamojomarketing.com";
+const BASE_URL = "https://media-mojo-portfolio.lovable.app";
 
 const MetaTags = ({
   title = "Mohamed Ali | Senior Media Buyer",
-  description = "Senior Media Buyer with 7+ years driving 8x+ ROAS and 95K+ orders across Meta, Google, TikTok and Snapchat in 10+ countries.",
+  description = "Senior Media Buyer with 7+ years scaling Meta, Google, TikTok and Snapchat for MENA brands, including $5M+ Snapchat spend managed.",
   imageUrl = "https://media-mojo-portfolio.lovable.app/lovable-uploads/e7da6e3c-66cf-4166-9955-98eb4097a88f.png",
   url,
   type = "website",

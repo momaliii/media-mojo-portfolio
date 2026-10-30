@@ -13,6 +13,7 @@
   --v3-orange: #ff7a1a;
   --v3-violet: #8b5cf6;
   --v3-danger: #ff4778;
+  --v3-logo-paper: #ffffff;
   background:
     radial-gradient(circle at 18% 12%, rgba(56, 216, 255, 0.18), transparent 26rem),
     radial-gradient(circle at 78% 2%, rgba(182, 255, 77, 0.12), transparent 28rem),
@@ -98,6 +99,7 @@
 /* Friendly CTA microinteractions */
 .v3-theme .v3-cta {
   position: relative;
+  overflow: hidden;
   isolation: isolate;
   transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease, background-color .35s ease;
   will-change: transform;
@@ -123,6 +125,20 @@
 }
 .v3-theme .v3-cta:hover::before { transform: translateX(120%); }
 .v3-theme .v3-cta > * { position: relative; z-index: 2; }
+
+.v3-theme .v3-contact-divider > li { border-color: var(--v3-line); }
+.v3-theme .v3-client-mark { background: var(--v3-logo-paper); }
+.v3-theme .v3-contact-link { color: var(--v3-text); }
+.v3-theme .v3-contact-link:hover { background: var(--v3-panel); color: var(--v3-text); }
+.v3-theme .v3-contact-icon { background: var(--v3-panel-2); color: var(--v3-lime); }
+.v3-theme .v3-contact-form { background: var(--v3-panel); border: 1px solid var(--v3-line); }
+.v3-theme .v3-contact-input { background: var(--v3-bg-2); border-color: var(--v3-line); color: var(--v3-text); }
+.v3-theme .v3-contact-input::placeholder { color: var(--v3-soft); }
+.v3-theme .v3-contact-submit { background: var(--v3-lime); color: var(--v3-bg); }
+.v3-theme .v3-contact-submit:hover { background: var(--v3-lime); color: var(--v3-bg); }
+.v3-theme .v3-contact-link:focus-visible,
+.v3-theme .v3-contact-input:focus-visible,
+.v3-theme .v3-contact-submit:focus-visible { outline: 2px solid var(--v3-lime); outline-offset: 3px; box-shadow: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .v3-theme .v3-cta,

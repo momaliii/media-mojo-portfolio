@@ -3,12 +3,15 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { caseStudies } from "@/data/caseStudies";
+import { useVisibleClientLogos } from "@/hooks/use-client-logos";
 
 const slugify = (s: string) =>
   s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 const Work = () => {
   const items = caseStudies.slice(0, 6);
+  const { data: logos = [] } = useVisibleClientLogos();
+  const laverne = logos.find((logo) => logo.name.toLowerCase().includes("laverne"));
 
   return (
     <section id="work" className="relative py-20 md:py-28">
@@ -27,6 +30,15 @@ const Work = () => {
             All Case Studies <ArrowUpRight size={14} />
           </Link>
         </div>
+
+        <article className="mb-4 v3-shell rounded-[1.7rem] p-6 md:p-8 grid md:grid-cols-[1fr_auto] gap-6 items-center border-[var(--v3-lime)]/40">
+          <div>
+            <p className="v3-eyebrow v3-lime mb-3">Main project · Saudi Arabia</p>
+            <h3 className="v3-display text-3xl md:text-5xl font-bold tracking-[-0.045em]">Laverne KSA</h3>
+            <p className="mt-3 v3-soft max-w-2xl">Paid media growth work for Laverne in the Saudi market.</p>
+          </div>
+          {laverne ? <img src={laverne.logo_url} alt="Laverne" width={160} height={120} loading="lazy" decoding="async" className="v3-client-mark h-24 w-36 md:h-28 md:w-40 object-contain p-4 rounded-lg" /> : <span className="v3-pill rounded-full px-4 py-2 v3-eyebrow">Featured client</span>}
+        </article>
 
         <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           {items.map((cs, i) => {

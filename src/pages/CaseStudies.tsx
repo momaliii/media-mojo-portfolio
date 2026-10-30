@@ -44,14 +44,14 @@ const CaseStudies = () => {
           content={`Explore ${totalProjects} successful digital marketing case studies across e-commerce, F&B, NGO, and branding campaigns. See proven results and strategies.`}
         />
         <meta name="keywords" content="case studies, digital marketing portfolio, campaign results, e-commerce marketing, social media campaigns" />
-        <link rel="canonical" href={`${typeof window !== 'undefined' ? window.location.origin : 'https://mediamojomarketing.com'}/case-studies`} />
+        <link rel="canonical" href={`https://media-mojo-portfolio.lovable.app/case-studies`} />
         
         {/* Open Graph */}
         <meta property="og:title" content="Case Studies - Mohamed Ali | Digital Marketing Portfolio" />
         <meta property="og:description" content={`Explore ${totalProjects} successful digital marketing case studies with proven results`} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${typeof window !== 'undefined' ? window.location.origin : 'https://mediamojomarketing.com'}/case-studies`} />
-        <meta property="og:image" content={`${typeof window !== 'undefined' ? window.location.origin : 'https://mediamojomarketing.com'}/lovable-uploads/e7da6e3c-66cf-4166-9955-98eb4097a88f.png`} />
+        <meta property="og:url" content={`https://media-mojo-portfolio.lovable.app/case-studies`} />
+        <meta property="og:image" content={`https://media-mojo-portfolio.lovable.app/lovable-uploads/e7da6e3c-66cf-4166-9955-98eb4097a88f.png`} />
         
         {/* Structured Data */}
         <script type="application/ld+json">
@@ -151,7 +151,7 @@ const CaseStudies = () => {
                         <s.icon className="h-6 w-6" aria-hidden="true" />
                       </span>
                     </div>
-                    <h3 className="text-3xl font-bold tracking-tight">{s.value}</h3>
+                    <p className="text-3xl font-bold tracking-tight">{s.value}</p>
                     <p className="text-sm text-muted-foreground mt-1">{s.label}</p>
                   </div>
                 ))}

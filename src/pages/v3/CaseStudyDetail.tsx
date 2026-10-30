@@ -57,11 +57,11 @@ const CaseStudyDetailV3 = () => {
     "@type": "Article",
     headline: study.title,
     description: study.description,
-    image: study.screenshot ? `${SITE}${study.screenshot}` : undefined,
     author: { "@type": "Person", name: "Mohamed Ali" },
     publisher: {
       "@type": "Organization",
-      name: "Mohamed Ali Media Buyer",
+      "@id": `${SITE}/#organization`,
+      name: "MDZ Agency",
     },
     mainEntityOfPage: `${SITE}${canonicalPath}`,
     about: study.industry || study.category,

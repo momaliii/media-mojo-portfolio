@@ -2,9 +2,7 @@
 import React from 'react';
 
 const StructuredData = () => {
-  const baseUrl = typeof window !== 'undefined' 
-    ? window.location.origin 
-    : "https://mediamojomarketing.com";
+  const baseUrl = "https://media-mojo-portfolio.lovable.app";
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -14,7 +12,7 @@ const StructuredData = () => {
         "@id": `${baseUrl}/#person`,
         "name": "Mohamed Ali",
         "alternateName": "Mohamed Ali Media Buyer",
-        "description": "Senior Media Buyer with 7+ years of experience driving exceptional results across 10+ countries. Specializing in Meta Ads, Google Ads, TikTok, and Snapchat with proven ROAS of 8x+ and 95K+ orders generated.",
+        "description": "Senior Media Buyer with 7+ years of experience across MENA markets, specializing in Meta, Google, TikTok and Snapchat advertising, with $5M+ Snapchat spend managed.",
         "image": `${baseUrl}/lovable-uploads/e7da6e3c-66cf-4166-9955-98eb4097a88f.png`,
         "url": baseUrl,
         "telephone": "+201060098267",
@@ -37,28 +35,19 @@ const StructuredData = () => {
           "Conversion Optimization",
           "Campaign Management"
         ],
-        "hasCredential": {
-          "@type": "EducationalOccupationalCredential",
-          "name": "7+ Years Media Buying Experience",
-          "description": "Proven track record with 8x+ ROAS and 95K+ orders generated"
-        },
         "jobTitle": "Senior Media Buyer",
-        "worksFor": {
-          "@id": `${baseUrl}/#organization`
-        }
+        "worksFor": { "@id": `${baseUrl}/#organization` }
       },
       {
         "@type": "ProfessionalService",
         "@id": `${baseUrl}/#service`,
         "name": "Mohamed Ali Media Buying Services",
         "description": "Expert media buying and digital marketing services specializing in Meta Ads, Google Ads, TikTok, and Snapchat advertising.",
-        "provider": {
-          "@id": `${baseUrl}/#person`
-        },
-        "areaServed": {
-          "@type": "Country",
-          "name": "Worldwide"
-        },
+        "url": baseUrl,
+        "email": "mhmd167ali@gmail.com",
+        "telephone": "+201060098267",
+        "address": { "@type": "PostalAddress", "addressLocality": "Cairo", "addressCountry": "EG" },
+        "areaServed": ["Egypt", "Saudi Arabia", "Oman", "Jordan"],
         "serviceType": "Digital Marketing",
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
@@ -107,14 +96,6 @@ const StructuredData = () => {
         "description": "Senior Media Buyer portfolio showcasing digital marketing expertise and case studies",
         "publisher": {
           "@id": `${baseUrl}/#person`
-        },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": `${baseUrl}/case-studies?q={search_term_string}`
-          },
-          "query-input": "required name=search_term_string"
         }
       },
       {
@@ -123,7 +104,7 @@ const StructuredData = () => {
         "contactType": "Customer Service",
         "email": "mhmd167ali@gmail.com",
         "availableLanguage": ["English", "Arabic"],
-        "areaServed": "Worldwide"
+        "areaServed": ["EG", "SA", "OM", "JO"]
       }
     ]
   };

@@ -230,11 +230,12 @@ const Contact = () => {
             </Card>
 
             <div className="lg:col-span-2 space-y-6 opacity-0 animate-on-scroll">
-              <Card className="border border-border bg-card/80 backdrop-blur-sm">
+              <Card className="border border-border bg-card/90 shadow-sm">
                 <CardContent className="p-6 md:p-8">
-                  <h3 className="text-xl font-semibold mb-6">Contact information</h3>
-                  <ul className="space-y-5">
-                    <li className="flex items-start gap-4">
+                  <h3 className="text-xl font-semibold">Contact information</h3>
+                  <p className="mt-1 mb-6 text-sm text-muted-foreground">Choose the fastest way to reach me.</p>
+                  <ul className="space-y-3">
+                    <li className="flex items-center gap-4 rounded-2xl border border-border/70 bg-background/60 p-3.5">
                       <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-media-purple/10 text-media-purple flex-shrink-0">
                         <Mail className="h-4 w-4" aria-hidden="true" />
                       </span>
@@ -246,7 +247,7 @@ const Contact = () => {
                         </a>
                       </div>
                     </li>
-                    <li className="flex items-start gap-4">
+                    <li className="flex items-center gap-4 rounded-2xl border border-border/70 bg-background/60 p-3.5">
                       <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-media-purple/10 text-media-purple flex-shrink-0">
                         <Phone className="h-4 w-4" aria-hidden="true" />
                       </span>
@@ -258,13 +259,13 @@ const Contact = () => {
                         </a>
                       </div>
                     </li>
-                    <li className="flex items-start gap-4">
+                    <li className="flex items-center gap-4 rounded-2xl border border-border/70 bg-background/60 p-3.5">
                       <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-media-purple/10 text-media-purple flex-shrink-0">
                         <MapPin className="h-4 w-4" aria-hidden="true" />
                       </span>
                       <div>
                         <p className="text-xs uppercase tracking-wider text-muted-foreground mb-0.5">Location</p>
-                        <p className="text-sm font-medium">Cairo, Egypt</p>
+                        <p className="text-sm font-medium">Cairo, Egypt · Serving MENA</p>
                       </div>
                     </li>
                   </ul>

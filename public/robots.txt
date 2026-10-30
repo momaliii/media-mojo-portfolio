@@ -8,4 +8,5 @@ Sitemap: https://media-mojo-portfolio.lovable.app/sitemap.xml
 Disallow: /auth
 Disallow: /admin
 Disallow: /profile
+Disallow: /reset-password
 Disallow: /api/

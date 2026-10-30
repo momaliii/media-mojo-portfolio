@@ -4,6 +4,7 @@ import Hero from "@/components/v3/Hero";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Reveal from "@/components/v3/Reveal";
 import MetaTags from "@/components/MetaTags";
+import StructuredData from "@/components/StructuredData";
 import { useScrollObserver } from "@/hooks/use-scroll-observer";
 import { trackPageView } from "@/utils/analytics";
 import "@/styles/v3/v3-theme.css";
@@ -37,10 +38,11 @@ const IndexV3 = () => {
     <div className="v3-theme min-h-screen overflow-x-clip">
       <MetaTags
         title="Mohamed Ali — Senior Media Buyer | Editorial Edition"
-        description="I don't pitch numbers. I screenshot them. Senior Media Buyer scaling brands across Meta, Google, TikTok and Snapchat with 8x+ ROAS and 95K+ orders."
+        description="I don't pitch numbers. I screenshot them. Senior Media Buyer for MENA brands, with $5M+ Snapchat spend and work for Laverne KSA."
         url="/v3"
         type="website"
       />
+      <StructuredData />
       <Navigation activeSection={activeSection} />
       <main id="main-content" tabIndex={-1} aria-label="Main content">
         <ErrorBoundary><Hero /></ErrorBoundary>
