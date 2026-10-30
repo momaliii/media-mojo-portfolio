@@ -27,6 +27,10 @@ const CaseStudies = () => {
     <>
       <Helmet>
         <title>Selected Work — Mohamed Ali, Senior Media Buyer</title>
+        <meta property="og:title" content="Selected Work — Mohamed Ali, Senior Media Buyer" />
+        <meta property="og:description" content="Explore media buying case studies across e-commerce, F&B, NGO and B2B." />
+        <meta property="og:url" content="https://media-mojo-portfolio.lovable.app/v2/case-studies" />
+        <meta property="og:type" content="website" />
         <meta
           name="description"
           content={`The complete index of ${totalProjects} campaigns across DTC, F&B, NGO, and B2B.`}

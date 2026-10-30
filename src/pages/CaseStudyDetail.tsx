@@ -117,6 +117,7 @@ const CaseStudyDetail = () => {
         title={`${caseStudy.title} - Case Study | Mohamed Ali`}
         description={caseStudy.description}
         url={`/case-study/${slug}`}
+        type="article"
       />
       <script
         type="application/ld+json"

@@ -13,6 +13,7 @@
   --v3-orange: #ff7a1a;
   --v3-violet: #8b5cf6;
   --v3-danger: #ff4778;
+  --v3-logo-paper: #ffffff;
   background:
     radial-gradient(circle at 18% 12%, rgba(56, 216, 255, 0.18), transparent 26rem),
     radial-gradient(circle at 78% 2%, rgba(182, 255, 77, 0.12), transparent 28rem),
@@ -126,6 +127,7 @@
 .v3-theme .v3-cta > * { position: relative; z-index: 2; }
 
 .v3-theme .v3-contact-divider > li { border-color: var(--v3-line); }
+.v3-theme .v3-client-mark { background: var(--v3-logo-paper); }
 .v3-theme .v3-contact-link { color: var(--v3-text); }
 .v3-theme .v3-contact-link:hover { background: var(--v3-panel); color: var(--v3-text); }
 .v3-theme .v3-contact-icon { background: var(--v3-panel-2); color: var(--v3-lime); }
