@@ -4,6 +4,7 @@ import Hero from "@/components/v3/Hero";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Reveal from "@/components/v3/Reveal";
 import MetaTags from "@/components/MetaTags";
+import StructuredData from "@/components/StructuredData";
 import { useScrollObserver } from "@/hooks/use-scroll-observer";
 import { trackPageView } from "@/utils/analytics";
 import "@/styles/v3/v3-theme.css";
