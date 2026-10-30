@@ -50,7 +50,7 @@ export default function UnderDevelopmentNotice() {
         }
       `}</style>
       <div
-        className="relative overflow-hidden rounded-xl border border-primary/30 bg-background/90 backdrop-blur-xl shadow-2xl shadow-primary/10"
+        className="relative overflow-hidden rounded-xl border border-white/15 bg-slate-950/90 backdrop-blur-xl shadow-2xl shadow-primary/10"
         style={{ animation: 'gentle-bob 4s ease-in-out infinite' }}
       >
         <div className="absolute inset-x-0 top-0 h-0.5 overflow-hidden">
