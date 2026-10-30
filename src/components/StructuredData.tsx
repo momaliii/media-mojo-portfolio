@@ -36,16 +36,17 @@ const StructuredData = () => {
           "Campaign Management"
         ],
         "jobTitle": "Senior Media Buyer",
-        "areaServed": ["Egypt", "Saudi Arabia", "Oman", "Jordan"]
+        "worksFor": { "@id": `${baseUrl}/#organization` }
       },
       {
         "@type": "ProfessionalService",
         "@id": `${baseUrl}/#service`,
         "name": "Mohamed Ali Media Buying Services",
         "description": "Expert media buying and digital marketing services specializing in Meta Ads, Google Ads, TikTok, and Snapchat advertising.",
-        "provider": {
-          "@id": `${baseUrl}/#person`
-        },
+        "url": baseUrl,
+        "email": "mhmd167ali@gmail.com",
+        "telephone": "+201060098267",
+        "address": { "@type": "PostalAddress", "addressLocality": "Cairo", "addressCountry": "EG" },
         "areaServed": ["Egypt", "Saudi Arabia", "Oman", "Jordan"],
         "serviceType": "Digital Marketing",
         "hasOfferCatalog": {
@@ -95,14 +96,6 @@ const StructuredData = () => {
         "description": "Senior Media Buyer portfolio showcasing digital marketing expertise and case studies",
         "publisher": {
           "@id": `${baseUrl}/#person`
-        },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": `${baseUrl}/case-studies?q={search_term_string}`
-          },
-          "query-input": "required name=search_term_string"
         }
       },
       {

@@ -124,6 +124,19 @@
 .v3-theme .v3-cta:hover::before { transform: translateX(120%); }
 .v3-theme .v3-cta > * { position: relative; z-index: 2; }
 
+.v3-theme .v3-contact-divider > li { border-color: var(--v3-line); }
+.v3-theme .v3-contact-link { color: var(--v3-text); }
+.v3-theme .v3-contact-link:hover { background: var(--v3-panel); color: var(--v3-text); }
+.v3-theme .v3-contact-icon { background: var(--v3-panel-2); color: var(--v3-lime); }
+.v3-theme .v3-contact-form { background: var(--v3-panel); border: 1px solid var(--v3-line); }
+.v3-theme .v3-contact-input { background: var(--v3-bg-2); border-color: var(--v3-line); color: var(--v3-text); }
+.v3-theme .v3-contact-input::placeholder { color: var(--v3-soft); }
+.v3-theme .v3-contact-submit { background: var(--v3-lime); color: var(--v3-bg); }
+.v3-theme .v3-contact-submit:hover { background: var(--v3-lime); color: var(--v3-bg); }
+.v3-theme .v3-contact-link:focus-visible,
+.v3-theme .v3-contact-input:focus-visible,
+.v3-theme .v3-contact-submit:focus-visible { outline: 2px solid var(--v3-lime); outline-offset: 3px; box-shadow: none; }
+
 @media (prefers-reduced-motion: reduce) {
   .v3-theme .v3-cta,
   .v3-theme .v3-cta::before { transition: none !important; transform: none !important; }
