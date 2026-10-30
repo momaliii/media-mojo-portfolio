@@ -28,6 +28,15 @@ const Work = () => {
           </Link>
         </div>
 
+        <article className="mb-4 v3-shell rounded-[1.7rem] p-6 md:p-8 grid md:grid-cols-[1fr_auto] gap-6 items-center border-[var(--v3-lime)]/40">
+          <div>
+            <p className="v3-eyebrow v3-lime mb-3">Main project · Saudi Arabia</p>
+            <h3 className="v3-display text-3xl md:text-5xl font-bold tracking-[-0.045em]">Laverne KSA</h3>
+            <p className="mt-3 v3-soft max-w-2xl">Paid media growth work for Laverne in the Saudi market.</p>
+          </div>
+          <span className="v3-pill rounded-full px-4 py-2 v3-eyebrow">Featured client</span>
+        </article>
+
         <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           {items.map((cs, i) => {
             const slug = cs.slug || slugify(cs.title);

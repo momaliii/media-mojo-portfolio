@@ -32,6 +32,17 @@ const Portfolio = () => {
       
       <div className="container mx-auto px-4 md:px-6 relative">
         <PortfolioHeader />
+
+        <article className="mx-auto mb-12 max-w-5xl rounded-3xl border border-media-purple/20 bg-card p-6 md:p-8 shadow-sm">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-media-purple">Main project · Saudi Arabia</p>
+          <div className="mt-3 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <h3 className="text-3xl md:text-4xl font-bold tracking-tight">Laverne KSA</h3>
+              <p className="mt-2 max-w-2xl text-muted-foreground">Paid media growth work for Laverne in the Saudi market.</p>
+            </div>
+            <span className="w-fit rounded-full bg-media-purple/10 px-4 py-2 text-sm font-semibold text-media-purple">Featured client</span>
+          </div>
+        </article>
         
         <EnhancedFilterTabs
           filter={filter}

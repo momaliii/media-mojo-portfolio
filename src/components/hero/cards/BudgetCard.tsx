@@ -21,7 +21,7 @@ const BudgetCard = () => {
               <span className="font-semibold text-[#221F26]">$1.2M</span>
             </div>
             <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
-              <div className="h-full bg-[#7E69AB] rounded-full" style={{width: '75%'}}></div>
+              <div className="h-full bg-[#7E69AB] rounded-full" style={{width: '24%'}}></div>
             </div>
           </div>
           
@@ -58,10 +58,10 @@ const BudgetCard = () => {
           <div>
             <div className="flex justify-between text-sm mb-1.5">
               <span className="text-[#221F26]/80">Snapchat</span>
-              <span className="font-semibold text-[#221F26]">$15K</span>
+              <span className="font-semibold text-[#221F26]">$5M+</span>
             </div>
             <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
-              <div className="h-full bg-yellow-500 rounded-full" style={{width: '22%'}}></div>
+              <div className="h-full bg-yellow-500 rounded-full" style={{width: '100%'}}></div>
             </div>
           </div>
           
