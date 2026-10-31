@@ -26,7 +26,7 @@ const MetaTags = ({
   keywords = "media buying expert, digital marketing specialist, Meta Ads manager, Google Ads expert, TikTok advertising, Snapchat Ads, ROAS optimization, e-commerce marketing, performance marketing, conversion optimization, media buyer Egypt, digital advertising consultant, remote media buyer, campaign management, ad spend optimization, social media advertising"
 }: MetaTagsProps) => {
   const fullUrl = url ? (url.startsWith('http') ? url : `${BASE_URL}${url}`) : BASE_URL;
-  const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${BASE_URL}${imageUrl}`;
+  const fullImageUrl = imageUrl ? (imageUrl.startsWith('http') ? imageUrl : `${BASE_URL}${imageUrl}`) : undefined;
   return (
     <Helmet>
       {/* Basic Meta Tags */}
@@ -42,7 +42,7 @@ const MetaTags = ({
       {/* Open Graph */}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={fullImageUrl} />
+      {fullImageUrl && <meta property="og:image" content={fullImageUrl} />}
       <meta property="og:url" content={fullUrl} />
       <meta property="og:type" content={type} />
       <meta property="og:site_name" content="Mohamed Ali Media Buyer" />
@@ -53,7 +53,7 @@ const MetaTags = ({
       <meta name="twitter:site" content={twitterHandle} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={fullImageUrl} />
+      {fullImageUrl && <meta name="twitter:image" content={fullImageUrl} />}
       <meta name="twitter:creator" content={twitterHandle} />
       
       {/* Additional SEO Tags */}
