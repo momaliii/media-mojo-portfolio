@@ -13,7 +13,7 @@ const StructuredData = () => {
         "name": "Mohamed Ali",
         "alternateName": "Mohamed Ali Media Buyer",
         "description": "Senior Media Buyer with 7+ years of experience across MENA markets, specializing in Meta, Google, TikTok and Snapchat advertising, with $5M+ Snapchat spend managed and 2B+ impressions delivered.",
-        "image": `${baseUrl}/lovable-uploads/e7da6e3c-66cf-4166-9955-98eb4097a88f.png`,
+        "image": `${baseUrl}/lovable-uploads/900c6176-4030-4244-a97a-62a4c235d53f.png`,
         "url": baseUrl,
         "telephone": "+201060098267",
         "email": "mhmd167ali@gmail.com",
