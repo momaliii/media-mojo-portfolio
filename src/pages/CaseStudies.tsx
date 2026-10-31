@@ -51,7 +51,6 @@ const CaseStudies = () => {
         <meta property="og:description" content={`Explore ${totalProjects} successful digital marketing case studies with proven results`} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`https://media-mojo-portfolio.lovable.app/case-studies`} />
-        <meta property="og:image" content={`https://media-mojo-portfolio.lovable.app/lovable-uploads/e7da6e3c-66cf-4166-9955-98eb4097a88f.png`} />
         
         {/* Structured Data */}
         <script type="application/ld+json">
