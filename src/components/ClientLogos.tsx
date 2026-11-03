@@ -154,9 +154,7 @@ const ClientLogos = () => {
 
 interface MarqueeRowProps {
   logos: Array<{ id: string | number; name: string; logo_url: string; website_url: string | null; featured: boolean }>;
-  reverse: boolean;
   durationClass: string;
-  groupName: string;
   delay: number;
 }
 
