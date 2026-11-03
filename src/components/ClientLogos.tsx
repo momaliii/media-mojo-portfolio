@@ -222,7 +222,7 @@ const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`Visit ${logo.name} website (opens in a new tab)`}
-        className="block w-full md:w-auto"
+        className={animateIn ? "block w-full" : "block"}
         {...(animateIn
           ? { variants: tileVariants }
           : {
@@ -240,7 +240,7 @@ const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
     <motion.div
       role="listitem"
       aria-label={logo.name}
-      className="block w-full md:w-auto"
+      className={animateIn ? "block w-full" : "block"}
       {...(animateIn
         ? { variants: tileVariants }
         : {
