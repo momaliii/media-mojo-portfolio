@@ -4,6 +4,15 @@ export interface CaseStudyMetric {
   value: string;
 }
 
+// Per-platform results breakdown
+export interface PlatformResult {
+  platform: string;
+  spend?: string;
+  impressions?: string;
+  return?: string;
+  note?: string;
+}
+
 // Define the type for case studies
 export interface CaseStudy {
   slug?: string;
@@ -11,6 +20,7 @@ export interface CaseStudy {
   category: string;
   client: string;
   metrics: CaseStudyMetric[];
+  platformResults?: PlatformResult[];
   description: string;
   industry?: string;
   screenshot?: string;

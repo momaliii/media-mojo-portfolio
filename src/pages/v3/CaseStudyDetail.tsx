@@ -1,11 +1,12 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import Navigation from "@/components/v3/Navigation";
 import Footer from "@/components/v3/Footer";
 import MetaTags from "@/components/MetaTags";
-import { caseStudies } from "@/data/caseStudies";
+import { useCaseStudyBySlug } from "@/hooks/use-case-studies";
+import PlatformResultsSection from "@/components/case-studies/PlatformResults";
 import { trackPageView } from "@/utils/analytics";
 import "@/styles/v3/v3-theme.css";
 
@@ -17,10 +18,7 @@ const SITE = "https://media-mojo-portfolio.lovable.app";
 const CaseStudyDetailV3 = () => {
   const { slug } = useParams();
 
-  const study = useMemo(
-    () => caseStudies.find((c) => (c.slug || slugify(c.title)) === slug),
-    [slug]
-  );
+  const { data: study } = useCaseStudyBySlug(slug);
 
   useEffect(() => {
     if (study) {
@@ -182,6 +180,7 @@ const CaseStudyDetailV3 = () => {
                   <p>{study.results}</p>
                 </section>
               )}
+              <PlatformResultsSection results={study.platformResults} variant="v3" />
             </article>
           </div>
 

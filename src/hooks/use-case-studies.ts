@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import type { CaseStudy, CaseStudyMetric } from "@/data/caseStudies";
+import type { CaseStudy, CaseStudyMetric, PlatformResult } from "@/data/caseStudies";
 import { caseStudies as localCaseStudies } from "@/data/caseStudies";
 
 function toStringArray(value: unknown): string[] {
@@ -21,6 +21,25 @@ function toMetrics(value: unknown): CaseStudyMetric[] {
     .filter(Boolean) as CaseStudyMetric[];
 }
 
+function toPlatformResults(value: unknown): PlatformResult[] {
+  if (!Array.isArray(value)) return [];
+  return value
+    .map((m) => {
+      if (!m || typeof m !== "object") return null;
+      const platform = (m as any).platform;
+      if (typeof platform !== "string" || !platform.trim()) return null;
+      const optionalString = (v: unknown) => (typeof v === "string" && v.trim() ? v : undefined);
+      return {
+        platform,
+        spend: optionalString((m as any).spend),
+        impressions: optionalString((m as any).impressions),
+        return: optionalString((m as any).return),
+        note: optionalString((m as any).note),
+      } as PlatformResult;
+    })
+    .filter(Boolean) as PlatformResult[];
+}
+
 function mapRowToCaseStudy(row: any): CaseStudy {
   return {
     slug: row.slug,
@@ -38,6 +57,7 @@ function mapRowToCaseStudy(row: any): CaseStudy {
     platforms: toStringArray(row.platforms),
     tools: toStringArray(row.tools),
     metrics: toMetrics(row.metrics),
+    platformResults: toPlatformResults(row.platform_results),
   };
 }
 

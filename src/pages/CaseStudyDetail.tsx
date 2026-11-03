@@ -2,6 +2,7 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Calendar, Globe, Target, TrendingUp, Users, Award, Zap, BarChart3, Share2, ChevronLeft, ChevronRight, Clock } from "lucide-react";
 import { useCaseStudyBySlug, usePublishedCaseStudies } from "@/hooks/use-case-studies";
+import PlatformResultsSection from "@/components/case-studies/PlatformResults";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -444,6 +445,8 @@ const CaseStudyDetail = () => {
                 </CardContent>
               </Card>
             </motion.div>
+
+            <PlatformResultsSection results={caseStudy.platformResults} variant="v1" />
 
             {/* Related Case Studies */}
             {relatedCaseStudies.length > 0 && (

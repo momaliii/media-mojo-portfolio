@@ -71,6 +71,7 @@ export type Database = {
           id: string
           industry: string | null
           metrics: Json
+          platform_results: Json
           platforms: string[]
           published: boolean
           results: string | null
@@ -93,6 +94,7 @@ export type Database = {
           id?: string
           industry?: string | null
           metrics?: Json
+          platform_results?: Json
           platforms?: string[]
           published?: boolean
           results?: string | null
@@ -115,6 +117,7 @@ export type Database = {
           id?: string
           industry?: string | null
           metrics?: Json
+          platform_results?: Json
           platforms?: string[]
           published?: boolean
           results?: string | null
