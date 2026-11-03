@@ -1,6 +1,5 @@
 
 import React from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
 import PerformanceCard from "./cards/PerformanceCard";
 import CPCCard from "./cards/CPCCard";
 import BudgetCard from "./cards/BudgetCard";
@@ -10,7 +9,6 @@ import ChannelsCard from "./cards/ChannelsCard";
 import { motion } from "framer-motion";
 
 const HeroVisualization = () => {
-  const isMobile = useIsMobile();
   
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -31,7 +29,7 @@ const HeroVisualization = () => {
   return (
     <div className="relative h-auto py-6 w-full overflow-hidden">
       <motion.div 
-        className={`grid ${isMobile ? 'grid-cols-1 gap-5' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'} h-full max-w-full`}
+        className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,180px),1fr))] gap-5 h-full max-w-full [&>div]:min-w-0"
         variants={containerVariants}
         initial="hidden"
         animate="show"
