@@ -40,7 +40,7 @@ export const caseStudies: CaseStudy[] = [
     category: "e-commerce",
     client: "Premium Cosmetics Brand",
     metrics: [
-      { label: "Orders", value: "95K+" },
+      { label: "Orders", value: "400K+" },
       { label: "ROAS", value: "8x+" },
       { label: "Duration", value: "2024" }
     ],
@@ -49,7 +49,7 @@ export const caseStudies: CaseStudy[] = [
     screenshot: "/lovable-uploads/e7da6e3c-66cf-4166-9955-98eb4097a88f.png",
     challenge: "Scale e-commerce operations while maintaining profitability and optimizing customer acquisition costs across multiple product lines.",
     strategy: "Implemented advanced funnel optimization with LightFunnel, A/B tested creative messaging, and leveraged dynamic product ads with retargeting strategies.",
-    results: "Achieved 8x+ ROAS with 95K+ orders generated, significantly reducing CPA while scaling ad spend efficiently across Meta and TikTok platforms.",
+    results: "Achieved 8x+ ROAS with 400K+ orders generated, significantly reducing CPA while scaling ad spend efficiently across Meta and TikTok platforms.",
     tools: ["LightFunnel", "Easy Order", "Meta Ads Manager", "TikTok Ads"]
   },
   {

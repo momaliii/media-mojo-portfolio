@@ -141,7 +141,7 @@ const Hero = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-6">
             {[
               { value: "8.4×", label: "Peak ROAS", ctx: "Beauty DTC · Meta" },
-              { value: "95K+", label: "Orders generated", ctx: "Last 24 mo" },
+              { value: "400K+", label: "Orders generated", ctx: "Last 24 mo" },
               { value: "10", label: "Countries served", ctx: "MENA · EU · US" },
               { value: "6yr+", label: "Senior tenure", ctx: "Performance media" },
             ].map((stat) => (
