@@ -7,7 +7,6 @@ const highlights = [
   {
     icon: DollarSign,
     label: "Ad spend managed",
-    note: "Snapchat alone",
     value: snapchatSpend.display,
     accent: "from-[#FFFC00]/25 to-[#FFFC00]/5",
     iconColor: "text-yellow-500",
