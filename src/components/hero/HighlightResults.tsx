@@ -54,6 +54,9 @@ const HighlightResults = () => {
                 {item.value}
               </p>
               <p className="mt-2 text-sm font-medium text-gray-500">{item.label}</p>
+              {"note" in item && (
+                <p className="mt-0.5 text-xs text-gray-400">{item.note}</p>
+              )}
             </div>
           </motion.div>
         ))}
