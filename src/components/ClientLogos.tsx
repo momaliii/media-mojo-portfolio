@@ -160,7 +160,7 @@ interface MarqueeRowProps {
   delay: number;
 }
 
-const MarqueeRow = ({ logos, durationClass, groupName, delay }: MarqueeRowProps) => {
+const MarqueeRow = ({ logos, durationClass, delay }: MarqueeRowProps) => {
   // Duplicate once for seamless -50% loop
   const items = [...logos, ...logos];
 
@@ -170,7 +170,7 @@ const MarqueeRow = ({ logos, durationClass, groupName, delay }: MarqueeRowProps)
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, delay }}
-      className={`relative overflow-hidden group/${groupName}`}
+      className="relative overflow-hidden group/marquee"
       style={{
         maskImage:
           "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
@@ -181,7 +181,10 @@ const MarqueeRow = ({ logos, durationClass, groupName, delay }: MarqueeRowProps)
       <div
         role="list"
         aria-label="Client brands"
-        className={`flex gap-4 md:gap-5 w-max ${durationClass} group-hover/${groupName}:[animation-play-state:paused]`}
+        className={cn(
+          "flex gap-4 md:gap-5 w-max group-hover/marquee:[animation-play-state:paused]",
+          durationClass
+        )}
       >
         {items.map((logo, idx) => (
           <LogoTile key={`${logo.id}-${idx}`} logo={logo} index={idx} animateIn={false} />
