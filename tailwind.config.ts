@@ -162,6 +162,10 @@ export default {
 					'0%': { transform: 'translateX(0)' },
 					'100%': { transform: 'translateX(-50%)' }
 				},
+				'marquee-reverse': {
+					'0%': { transform: 'translateX(-50%)' },
+					'100%': { transform: 'translateX(0)' }
+				},
 				'number-count': {
 					'0%': { 'content': '"0"' },
 					'20%': { 'content': '"1"' },
@@ -189,6 +193,8 @@ export default {
 				'bounce-gentle': 'bounce-gentle 4s infinite ease-in-out',
 				'float': 'float 6s infinite ease-in-out',
 				'marquee': 'marquee 40s linear infinite',
+				'marquee-slow': 'marquee 55s linear infinite',
+				'marquee-reverse': 'marquee-reverse 65s linear infinite',
 				'number-count': 'number-count 2s ease-out forwards',
 				'flip-in': 'flip-in 0.5s ease-out forwards',
 				'flip-out': 'flip-out 0.5s ease-out forwards'
