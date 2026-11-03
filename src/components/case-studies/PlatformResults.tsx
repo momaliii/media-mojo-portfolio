@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { BarChart3 } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { PlatformResult } from "@/data/caseStudies";
 
 interface Props {
