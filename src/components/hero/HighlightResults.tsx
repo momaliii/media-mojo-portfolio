@@ -6,7 +6,8 @@ import { snapchatSpend, impressions } from "@/data/portfolioFacts";
 const highlights = [
   {
     icon: DollarSign,
-    label: "Snapchat spend managed",
+    label: "Ad spend managed",
+    note: "Snapchat alone",
     value: snapchatSpend.display,
     accent: "from-[#FFFC00]/25 to-[#FFFC00]/5",
     iconColor: "text-yellow-500",
@@ -53,6 +54,9 @@ const HighlightResults = () => {
                 {item.value}
               </p>
               <p className="mt-2 text-sm font-medium text-gray-500">{item.label}</p>
+              {"note" in item && (
+                <p className="mt-0.5 text-xs text-gray-400">{item.note}</p>
+              )}
             </div>
           </motion.div>
         ))}
