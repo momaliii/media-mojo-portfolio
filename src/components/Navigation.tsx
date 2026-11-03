@@ -18,6 +18,12 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
   const navigate = useNavigate();
   const isHomePage = location.pathname === '/';
 
+  // v1 stays light at all times: clear any dark choice when a v1 page mounts
+  const { theme, setTheme } = useTheme();
+  useEffect(() => {
+    if (theme !== 'light') setTheme('light');
+  }, [theme, setTheme]);
+
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {

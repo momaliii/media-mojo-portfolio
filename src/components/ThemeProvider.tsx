@@ -30,8 +30,11 @@ export function ThemeProvider({
   storageKey = 'vite-ui-theme',
   ...props
 }: ThemeProviderProps) {
+  // Public portfolio pages are always light; stored/system theme applies only in the admin area.
+  const isAdminArea = () => window.location.pathname.startsWith('/admin');
+
   const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
+    () => (isAdminArea() ? (localStorage.getItem(storageKey) as Theme) || defaultTheme : 'light')
   );
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
@@ -39,13 +42,15 @@ export function ThemeProvider({
     const root = window.document.documentElement;
     root.classList.remove('light', 'dark');
 
-    if (theme === 'system') {
+    const effective = isAdminArea() ? theme : 'light';
+
+    if (effective === 'system') {
       const systemTheme = prefersDarkMode ? 'dark' : 'light';
       root.classList.add(systemTheme);
       return;
     }
 
-    root.classList.add(theme);
+    root.classList.add(effective);
   }, [theme, prefersDarkMode]);
 
   useEffect(() => {
