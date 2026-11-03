@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import type { CaseStudy, CaseStudyMetric } from "@/data/caseStudies";
+import type { CaseStudy, CaseStudyMetric, PlatformResult } from "@/data/caseStudies";
 import { caseStudies as localCaseStudies } from "@/data/caseStudies";
 
 function toStringArray(value: unknown): string[] {
