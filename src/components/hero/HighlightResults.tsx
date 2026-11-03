@@ -85,10 +85,12 @@ const HighlightResults = () => {
           Platforms
         </h2>
         <ul className="grid grid-cols-3 gap-x-3 gap-y-4 sm:grid-cols-6" aria-label="Advertising platforms">
-          {platforms.map(({ name, icon: Icon }) => (
+          {platforms.map(({ name, icon: Icon, color, tile }) => (
             <li key={name} className="flex min-w-0 flex-col items-center gap-2 text-foreground">
-              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted">
-                <Icon size={22} aria-hidden="true" />
+              <span
+                className={`flex h-10 w-10 items-center justify-center rounded-xl shadow-sm ring-1 ring-black/5 ${tile}`}
+              >
+                <Icon size={22} color={color} aria-hidden="true" />
               </span>
               <span className="text-xs font-semibold leading-5">{name}</span>
             </li>
