@@ -11,6 +11,7 @@ import {
   useCaseStudyBySlug,
   usePublishedCaseStudies,
 } from "@/hooks/use-case-studies";
+import PlatformResultsSection from "@/components/case-studies/PlatformResults";
 import { motion } from "framer-motion";
 import Navigation from "@/components/v2/Navigation";
 import Footer from "@/components/v2/Footer";
@@ -207,6 +208,8 @@ const CaseStudyDetail = () => {
             </div>
           </div>
         </section>
+
+        <PlatformResultsSection results={caseStudy.platformResults} variant="v2" />
 
         {/* Brief / Strategy / Result */}
         <section className="py-20 md:py-28 border-b border-white/[0.06]">
