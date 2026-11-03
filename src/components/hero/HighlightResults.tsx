@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { DollarSign, Eye, Target } from "lucide-react";
+import { DollarSign, Eye, Target, Linkedin } from "lucide-react";
+import { SiMeta, SiTiktok, SiSnapchat, SiGoogle, SiX } from "@icons-pack/react-simple-icons";
 import { snapchatSpend, impressions } from "@/data/portfolioFacts";
 
 const highlights = [
@@ -30,7 +31,14 @@ const highlights = [
   },
 ];
 
-const platforms = ["Meta", "TikTok", "Snapchat", "Google", "LinkedIn"];
+const platforms = [
+  { name: "Meta", icon: SiMeta },
+  { name: "TikTok", icon: SiTiktok },
+  { name: "Snapchat", icon: SiSnapchat },
+  { name: "Google", icon: SiGoogle },
+  { name: "LinkedIn", icon: Linkedin },
+  { name: "X", icon: SiX },
+];
 
 const HighlightResults = () => {
   return (
@@ -62,20 +70,22 @@ const HighlightResults = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.65 }}
-        className="flex flex-wrap items-center gap-x-3 gap-y-2 pt-1"
+        className="border-t border-border pt-5"
         aria-label="Advertising platforms I work with"
       >
-        <span className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400">
+        <h2 className="mb-3 text-xs font-semibold text-muted-foreground">
           Platforms
-        </span>
-        {platforms.map((platform) => (
-          <span
-            key={platform}
-            className="rounded-full border border-gray-200 bg-white/70 px-3 py-1 text-xs font-semibold text-gray-700 shadow-sm"
-          >
-            {platform}
-          </span>
-        ))}
+        </h2>
+        <ul className="grid grid-cols-3 gap-x-3 gap-y-4 sm:grid-cols-6" aria-label="Advertising platforms">
+          {platforms.map(({ name, icon: Icon }) => (
+            <li key={name} className="flex min-w-0 flex-col items-center gap-2 text-foreground">
+              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted">
+                <Icon size={22} aria-hidden="true" />
+              </span>
+              <span className="text-xs font-semibold leading-5">{name}</span>
+            </li>
+          ))}
+        </ul>
       </motion.div>
     </div>
   );

@@ -5,3 +5,4 @@
 - Keep confirmed spend metrics in a shared data module and test their numeric meaning so portfolio versions cannot silently diverge.
 - Load the ElevenLabs custom-element script once per document because the element registration persists through route changes.
 - Maintain the existing static public/sitemap.xml alongside public routes and published case-study changes; include only indexable pages and omit lastmod without authoritative page-specific content timestamps.
+- Use individually imported Simple Icons for advertising brand marks, with Lucide as a fallback for unavailable brands, to keep the platform strip recognizable and tree-shakeable.
