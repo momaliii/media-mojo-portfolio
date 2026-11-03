@@ -1,7 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { DollarSign, Eye, Target, Linkedin } from "lucide-react";
-import { SiMeta, SiTiktok, SiSnapchat, SiGoogle, SiX } from "@icons-pack/react-simple-icons";
+import {
+  SiMeta,
+  SiTiktok,
+  SiSnapchat,
+  SiGoogle,
+  SiX,
+} from "@icons-pack/react-simple-icons";
 import { snapchatSpend, impressions } from "@/data/portfolioFacts";
 
 const highlights = [
@@ -31,13 +37,14 @@ const highlights = [
   },
 ];
 
+// Brand-real presentation: each tile mirrors the platform's own identity.
 const platforms = [
-  { name: "Meta", icon: SiMeta },
-  { name: "TikTok", icon: SiTiktok },
-  { name: "Snapchat", icon: SiSnapchat },
-  { name: "Google", icon: SiGoogle },
-  { name: "LinkedIn", icon: Linkedin },
-  { name: "X", icon: SiX },
+  { name: "Meta", icon: SiMeta, color: "#0866FF", tile: "bg-white border border-border/60" },
+  { name: "TikTok", icon: SiTiktok, color: "#000000", tile: "bg-white border border-border/60" },
+  { name: "Snapchat", icon: SiSnapchat, color: "#0F0F0F", tile: "bg-[#FFFC00]" },
+  { name: "Google", icon: SiGoogle, color: "#4285F4", tile: "bg-white border border-border/60" },
+  { name: "LinkedIn", icon: Linkedin, color: "#0A66C2", tile: "bg-white border border-border/60" },
+  { name: "X", icon: SiX, color: "#0F0F0F", tile: "bg-white border border-border/60" },
 ];
 
 const HighlightResults = () => {
@@ -77,10 +84,12 @@ const HighlightResults = () => {
           Platforms
         </h2>
         <ul className="grid grid-cols-3 gap-x-3 gap-y-4 sm:grid-cols-6" aria-label="Advertising platforms">
-          {platforms.map(({ name, icon: Icon }) => (
+          {platforms.map(({ name, icon: Icon, color, tile }) => (
             <li key={name} className="flex min-w-0 flex-col items-center gap-2 text-foreground">
-              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted">
-                <Icon size={22} aria-hidden="true" />
+              <span
+                className={`flex h-10 w-10 items-center justify-center rounded-xl shadow-sm ring-1 ring-black/5 ${tile}`}
+              >
+                <Icon size={22} color={color} aria-hidden="true" />
               </span>
               <span className="text-xs font-semibold leading-5">{name}</span>
             </li>
