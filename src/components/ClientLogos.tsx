@@ -206,7 +206,7 @@ const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
   const inner = (
     <div
       className={cn(
-        "group relative flex flex-col items-center justify-center h-40 md:h-44 shrink-0 px-6 py-5 rounded-2xl border transition-all duration-500 ease-out",
+        "group relative isolate overflow-hidden flex flex-col items-center justify-center h-40 md:h-44 shrink-0 px-6 py-5 rounded-2xl border transition-all duration-500 ease-out",
         animateIn ? "w-full" : "w-full md:w-[250px]",
         isFeatured
           ? "border-gold-400/50 dark:border-gold-400/40 bg-gradient-to-b from-gold-50/60 via-white to-white dark:from-gold-900/15 dark:via-gray-900/60 dark:to-gray-900/50 shadow-[0_2px_10px_rgba(212,175,55,0.10)] hover:shadow-[0_14px_34px_-14px_rgba(212,175,55,0.38)] focus-visible:shadow-[0_14px_34px_-14px_rgba(212,175,55,0.38)] hover:border-gold-400/80 focus-visible:border-gold-400/80 hover:-translate-y-1 focus-visible:-translate-y-1"
@@ -216,7 +216,7 @@ const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
       {/* Shimmer sweep on hover */}
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1100ms] ease-out bg-gradient-to-r from-transparent via-white/60 dark:via-white/10 to-transparent"
+        className="pointer-events-none absolute inset-0 z-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1100ms] ease-out bg-gradient-to-r from-transparent via-white/40 dark:via-white/10 to-transparent"
       />
 
       {/* Featured badge */}
@@ -240,13 +240,13 @@ const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
         src={logo.logo_url}
         alt=""
         loading="lazy"
-        className="max-h-14 md:max-h-16 max-w-[85%] object-contain opacity-90 group-hover:opacity-100 group-hover:scale-[1.06] transition-all duration-500 ease-out"
+        className="relative z-10 max-h-14 md:max-h-16 max-w-[85%] object-contain group-hover:scale-[1.06] transition-transform duration-500 ease-out"
         style={{ filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.06))" }}
       />
 
       {/* Brand name */}
       <p className={cn(
-        "relative w-full text-center mt-4 text-[13px] md:text-sm tracking-tight truncate",
+        "relative z-10 w-full text-center mt-4 text-[13px] md:text-sm tracking-tight truncate",
         isFeatured
           ? "font-semibold text-gray-900 dark:text-gold-100"
           : "font-medium text-gray-700 dark:text-gray-200"
