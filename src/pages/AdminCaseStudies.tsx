@@ -124,6 +124,11 @@ export default function AdminCaseStudies() {
     name: "metrics",
   });
 
+  const platformResultsArray = useFieldArray({
+    control: form.control,
+    name: "platform_results",
+  });
+
   // Live preview values (updates as you type)
   const preview = form.watch();
 
@@ -149,6 +154,7 @@ export default function AdminCaseStudies() {
       platforms_text: (selected.platforms ?? []).join(", "),
       tools_text: (selected.tools ?? []).join(", "),
       metrics: (Array.isArray(selected.metrics) ? selected.metrics : []) as any,
+      platform_results: (Array.isArray(selected.platform_results) ? selected.platform_results : []) as any,
     });
   }, [selectedId]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -173,6 +179,7 @@ export default function AdminCaseStudies() {
         platforms: splitList(values.platforms_text),
         tools: splitList(values.tools_text),
         metrics: values.metrics,
+        platform_results: (values.platform_results ?? []).filter((r) => r.platform.trim()),
       };
 
       const { data, error } = await supabase
@@ -271,6 +278,7 @@ export default function AdminCaseStudies() {
       platforms_text: "",
       tools_text: "",
       metrics: [],
+      platform_results: [],
     });
   };
 
