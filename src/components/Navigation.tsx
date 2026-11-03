@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { trackEvent } from "@/utils/analytics";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import ThemeToggle from "./ThemeToggle";
+import { useTheme } from "./ThemeProvider";
 import ReducedMotionToggle from "./ReducedMotionToggle";
 
 interface NavigationProps {
@@ -17,6 +17,12 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const isHomePage = location.pathname === '/';
+
+  // v1 stays light at all times: clear any dark choice when a v1 page mounts
+  const { theme, setTheme } = useTheme();
+  useEffect(() => {
+    if (theme !== 'light') setTheme('light');
+  }, [theme, setTheme]);
 
   // Handle scroll effect
   useEffect(() => {
@@ -152,7 +158,6 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
               </div>
             )}
             <ReducedMotionToggle />
-            <ThemeToggle />
             <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -188,7 +193,6 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
           {/* Mobile right cluster */}
           <div className="md:hidden flex items-center gap-0.5">
             <ReducedMotionToggle />
-            <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
