@@ -113,18 +113,14 @@ const ClientLogos = () => {
             {rowOne.length > 0 && (
               <MarqueeRow
                 logos={rowOne}
-                reverse={false}
                 durationClass="animate-marquee-slow"
-                groupName="row1"
                 delay={0.3}
               />
             )}
             {rowTwo.length > 0 && (
               <MarqueeRow
                 logos={rowTwo}
-                reverse
                 durationClass="animate-marquee-reverse"
-                groupName="row2"
                 delay={0.45}
               />
             )}
