@@ -221,6 +221,7 @@ const AdCampaignShowcase: React.FC = () => {
   const stats = [
     { value: "EGP 18M+", label: "Tracked revenue" },
     { value: "5", label: "Ad platforms" },
+    { value: "300K+", label: "Gulf orders · 2026" },
     { value: String(screenshots.length), label: "Live screenshots" },
   ];
 
@@ -248,7 +249,7 @@ const AdCampaignShowcase: React.FC = () => {
           </div>
 
           <div className="md:col-span-5 flex flex-col gap-4 sm:gap-5">
-            <div className="grid grid-cols-3 gap-2 sm:gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
               {stats.map((s) => (
                 <div
                   key={s.label}
