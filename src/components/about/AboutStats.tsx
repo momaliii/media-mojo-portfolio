@@ -23,7 +23,7 @@ const AboutStats = () => {
     },
     { 
       icon: <Award className="text-media-pink h-6 w-6" />, 
-      value: "95K+", 
+      value: "400K+", 
       label: "Orders Generated" 
     },
   ];
