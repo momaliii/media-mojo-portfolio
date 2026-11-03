@@ -176,7 +176,7 @@ const MarqueeRow = ({ logos, durationClass, delay }: MarqueeRowProps) => {
         role="list"
         aria-label="Client brands"
         className={cn(
-          "flex gap-4 md:gap-5 w-max group-hover/marquee:[animation-play-state:paused]",
+          "flex gap-4 md:gap-5 w-max hover:[animation-play-state:paused]",
           durationClass
         )}
       >
