@@ -1,4 +1,5 @@
 # Portfolio updates
+- [ ] Verify and configure XML sitemap coverage for every public portfolio page.
 - [x] Update Snapchat spend to $5M+.
 - [x] Feature Laverne KSA without unverified results.
 - [x] Refine contact information on the homepage and v3.
