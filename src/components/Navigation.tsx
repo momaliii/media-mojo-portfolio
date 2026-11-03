@@ -193,7 +193,6 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection = "hero" }) => {
           {/* Mobile right cluster */}
           <div className="md:hidden flex items-center gap-0.5">
             <ReducedMotionToggle />
-            <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
