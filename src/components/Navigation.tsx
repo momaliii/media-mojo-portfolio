@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { trackEvent } from "@/utils/analytics";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import ThemeToggle from "./ThemeToggle";
+import { useTheme } from "./ThemeProvider";
 import ReducedMotionToggle from "./ReducedMotionToggle";
 
 interface NavigationProps {
