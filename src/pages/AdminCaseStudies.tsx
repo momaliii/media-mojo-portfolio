@@ -22,6 +22,14 @@ const metricSchema = z.object({
   value: z.string().min(1, "Metric value required"),
 });
 
+const platformResultSchema = z.object({
+  platform: z.string().min(1, "Platform required"),
+  spend: z.string().optional(),
+  impressions: z.string().optional(),
+  return: z.string().optional(),
+  note: z.string().optional(),
+});
+
 const formSchema = z.object({
   id: z.string().optional(),
   title: z.string().min(2),
@@ -41,6 +49,7 @@ const formSchema = z.object({
   platforms_text: z.string().optional(),
   tools_text: z.string().optional(),
   metrics: z.array(metricSchema).default([]),
+  platform_results: z.array(platformResultSchema).default([]),
 });
 
 type FormValues = z.infer<typeof formSchema>;
