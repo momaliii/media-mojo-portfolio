@@ -863,6 +863,60 @@ export default function AdminCaseStudies() {
                   </div>
                 </div>
 
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <label className="text-sm font-medium">Results by platform</label>
+                      <p className="text-xs text-muted-foreground">Per-channel spend, impressions and return shown on the public case study page.</p>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => platformResultsArray.append({ platform: "", spend: "", impressions: "", return: "", note: "" })}
+                    >
+                      <Plus className="h-4 w-4 mr-2" /> Add platform result
+                    </Button>
+                  </div>
+                  <div className="space-y-3">
+                    {platformResultsArray.fields.map((field, index) => (
+                      <div key={field.id} className="rounded-lg border border-border/60 p-3 space-y-3 bg-muted/20">
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 items-end">
+                          <div className="space-y-1">
+                            <label className="text-xs text-muted-foreground">Platform</label>
+                            <Input placeholder="Snapchat" {...form.register(`platform_results.${index}.platform` as const)} />
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-xs text-muted-foreground">Spend</label>
+                            <Input placeholder="$1.2M" {...form.register(`platform_results.${index}.spend` as const)} />
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-xs text-muted-foreground">Impressions</label>
+                            <Input placeholder="800M+" {...form.register(`platform_results.${index}.impressions` as const)} />
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-xs text-muted-foreground">Return (ROAS / ROI)</label>
+                            <Input placeholder="8x" {...form.register(`platform_results.${index}.return` as const)} />
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-6 gap-3 items-end">
+                          <div className="md:col-span-5 space-y-1">
+                            <label className="text-xs text-muted-foreground">Note (optional)</label>
+                            <Input placeholder="Scaled after creative testing on Stories placements" {...form.register(`platform_results.${index}.note` as const)} />
+                          </div>
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => platformResultsArray.remove(index)}
+                          >
+                            Remove
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+
                 <div className="flex flex-col sm:flex-row gap-3 justify-end">
                   {selected?.id && (
                     <Button
