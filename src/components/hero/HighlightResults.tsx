@@ -1,12 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { DollarSign, Eye, Target } from "lucide-react";
+import { DollarSign, Eye, Target, Linkedin } from "lucide-react";
 import {
   SiMeta,
   SiTiktok,
   SiSnapchat,
   SiGoogle,
-  SiLinkedin,
   SiX,
 } from "@icons-pack/react-simple-icons";
 import { snapchatSpend, impressions } from "@/data/portfolioFacts";
@@ -44,7 +43,7 @@ const platforms = [
   { name: "TikTok", icon: SiTiktok, color: "#000000", tile: "bg-white border border-border/60" },
   { name: "Snapchat", icon: SiSnapchat, color: "#0F0F0F", tile: "bg-[#FFFC00]" },
   { name: "Google", icon: SiGoogle, color: "#4285F4", tile: "bg-white border border-border/60" },
-  { name: "LinkedIn", icon: SiLinkedin, color: "#0A66C2", tile: "bg-white border border-border/60" },
+  { name: "LinkedIn", icon: Linkedin, color: "#0A66C2", tile: "bg-white border border-border/60" },
   { name: "X", icon: SiX, color: "#0F0F0F", tile: "bg-white border border-border/60" },
 ];
 
