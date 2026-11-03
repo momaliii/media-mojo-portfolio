@@ -10,9 +10,13 @@ const ClientLogos = () => {
   if (isLoading || logos.length === 0) return null;
 
   const sorted = [...logos].sort((a, b) => Number(b.featured) - Number(a.featured));
-  const useMarquee = sorted.length >= 5;
-  // Duplicate once for seamless -50% loop
-  const marqueeLogos = useMarquee ? [...sorted, ...sorted] : sorted;
+
+  // Layout mode: two opposing rows when we have enough, else single marquee, else grid
+  const twoRows = sorted.length >= 8;
+  const singleMarquee = !twoRows && sorted.length >= 5;
+  const splitAt = Math.ceil(sorted.length / 2);
+  const rowOne = twoRows ? sorted.slice(0, splitAt) : sorted;
+  const rowTwo = twoRows ? sorted.slice(splitAt) : [];
 
   return (
     <section
@@ -27,6 +31,20 @@ const ClientLogos = () => {
         style={{
           background:
             "radial-gradient(60% 50% at 50% 0%, hsl(var(--primary) / 0.06), transparent 70%)",
+        }}
+      />
+      {/* Fine dot grid for depth */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.35] dark:opacity-[0.15]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 1px 1px, hsl(var(--primary) / 0.14) 1px, transparent 0)",
+          backgroundSize: "26px 26px",
+          maskImage:
+            "radial-gradient(70% 60% at 50% 40%, black, transparent 75%)",
+          WebkitMaskImage:
+            "radial-gradient(70% 60% at 50% 40%, black, transparent 75%)",
         }}
       />
 
@@ -90,30 +108,27 @@ const ClientLogos = () => {
           />
         </motion.div>
 
-        {useMarquee ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative overflow-hidden group/marquee"
-            style={{
-              maskImage:
-                "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
-              WebkitMaskImage:
-                "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
-            }}
-          >
-            <div
-              role="list"
-              aria-label="Client brands"
-              className="flex gap-4 md:gap-5 w-max animate-marquee group-hover/marquee:[animation-play-state:paused]"
-            >
-              {marqueeLogos.map((logo, idx) => (
-                <LogoTile key={`${logo.id}-${idx}`} logo={logo} index={idx} animateIn={false} />
-              ))}
-            </div>
-          </motion.div>
+        {twoRows || singleMarquee ? (
+          <div className="space-y-4 md:space-y-5">
+            {rowOne.length > 0 && (
+              <MarqueeRow
+                logos={rowOne}
+                reverse={false}
+                durationClass="animate-marquee-slow"
+                groupName="row1"
+                delay={0.3}
+              />
+            )}
+            {rowTwo.length > 0 && (
+              <MarqueeRow
+                logos={rowTwo}
+                reverse
+                durationClass="animate-marquee-reverse"
+                groupName="row2"
+                delay={0.45}
+              />
+            )}
+          </div>
         ) : (
           <motion.div
             role="list"
@@ -137,6 +152,45 @@ const ClientLogos = () => {
   );
 };
 
+interface MarqueeRowProps {
+  logos: Array<{ id: string | number; name: string; logo_url: string; website_url: string | null; featured: boolean }>;
+  reverse: boolean;
+  durationClass: string;
+  groupName: string;
+  delay: number;
+}
+
+const MarqueeRow = ({ logos, durationClass, groupName, delay }: MarqueeRowProps) => {
+  // Duplicate once for seamless -50% loop
+  const items = [...logos, ...logos];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay }}
+      className={`relative overflow-hidden group/${groupName}`}
+      style={{
+        maskImage:
+          "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+        WebkitMaskImage:
+          "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+      }}
+    >
+      <div
+        role="list"
+        aria-label="Client brands"
+        className={`flex gap-4 md:gap-5 w-max ${durationClass} group-hover/${groupName}:[animation-play-state:paused]`}
+      >
+        {items.map((logo, idx) => (
+          <LogoTile key={`${logo.id}-${idx}`} logo={logo} index={idx} animateIn={false} />
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+
 interface LogoTileProps {
   logo: { name: string; logo_url: string; website_url: string | null; featured: boolean };
   index: number;
@@ -155,8 +209,8 @@ const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
   const inner = (
     <div
       className={cn(
-        "group relative flex flex-col h-36 md:h-40 shrink-0 p-4 rounded-2xl border transition-all duration-500 ease-out",
-        animateIn ? "w-full" : "w-full md:w-[232px]",
+        "group relative flex flex-col items-center justify-center h-40 md:h-44 shrink-0 px-6 py-5 rounded-2xl border transition-all duration-500 ease-out",
+        animateIn ? "w-full" : "w-full md:w-[250px]",
         isFeatured
           ? "border-gold-400/50 dark:border-gold-400/40 bg-gradient-to-b from-gold-50/60 via-white to-white dark:from-gold-900/15 dark:via-gray-900/60 dark:to-gray-900/50 shadow-[0_2px_10px_rgba(212,175,55,0.10)] hover:shadow-[0_14px_34px_-14px_rgba(212,175,55,0.38)] focus-visible:shadow-[0_14px_34px_-14px_rgba(212,175,55,0.38)] hover:border-gold-400/80 focus-visible:border-gold-400/80 hover:-translate-y-1 focus-visible:-translate-y-1"
           : "border-gray-200/80 dark:border-gray-800/70 bg-white dark:bg-gray-900/50 shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:shadow-[0_14px_34px_-14px_rgba(124,58,237,0.30)] focus-visible:shadow-[0_14px_34px_-14px_rgba(124,58,237,0.30)] hover:border-media-purple/40 focus-visible:border-media-purple/40 hover:-translate-y-1 focus-visible:-translate-y-1"
@@ -184,33 +238,24 @@ const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
         </span>
       )}
 
-      {/* Logo area — fixed height keeps every card aligned */}
-      <div className="relative flex-1 w-full flex items-center justify-center">
-        <img
-          src={logo.logo_url}
-          alt=""
-          loading="lazy"
-          className="max-h-12 md:max-h-14 max-w-[85%] object-contain opacity-90 group-hover:opacity-100 group-hover:scale-[1.06] transition-all duration-500 ease-out"
-          style={{ filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.06))" }}
-        />
-      </div>
+      {/* Logo */}
+      <img
+        src={logo.logo_url}
+        alt=""
+        loading="lazy"
+        className="max-h-14 md:max-h-16 max-w-[85%] object-contain opacity-90 group-hover:opacity-100 group-hover:scale-[1.06] transition-all duration-500 ease-out"
+        style={{ filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.06))" }}
+      />
 
       {/* Brand name */}
-      <div className={cn(
-        "relative w-full pt-2.5 mt-1.5 border-t",
+      <p className={cn(
+        "relative w-full text-center mt-4 text-[13px] md:text-sm tracking-tight truncate",
         isFeatured
-          ? "border-gold-200/60 dark:border-gold-800/40"
-          : "border-gray-100 dark:border-gray-800/60"
+          ? "font-semibold text-gray-900 dark:text-gold-100"
+          : "font-medium text-gray-700 dark:text-gray-200"
       )}>
-        <p className={cn(
-          "text-center text-[13px] md:text-sm tracking-tight truncate",
-          isFeatured
-            ? "font-semibold text-gray-900 dark:text-gold-100"
-            : "font-medium text-gray-700 dark:text-gray-200"
-        )}>
-          {logo.name}
-        </p>
-      </div>
+        {logo.name}
+      </p>
     </div>
   );
 
