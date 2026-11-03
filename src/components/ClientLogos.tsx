@@ -156,7 +156,7 @@ const LogoTile = ({ logo, animateIn }: LogoTileProps) => {
     <div
       className={cn(
         "group relative flex flex-col h-36 md:h-40 shrink-0 p-4 rounded-2xl border transition-all duration-500 ease-out",
-        animateIn ? "w-full" : "w-full md:w-[210px]",
+        animateIn ? "w-full" : "w-full md:w-[232px]",
         isFeatured
           ? "border-gold-400/50 dark:border-gold-400/40 bg-gradient-to-b from-gold-50/60 via-white to-white dark:from-gold-900/15 dark:via-gray-900/60 dark:to-gray-900/50 shadow-[0_2px_10px_rgba(212,175,55,0.10)] hover:shadow-[0_14px_34px_-14px_rgba(212,175,55,0.38)] focus-visible:shadow-[0_14px_34px_-14px_rgba(212,175,55,0.38)] hover:border-gold-400/80 focus-visible:border-gold-400/80 hover:-translate-y-1 focus-visible:-translate-y-1"
           : "border-gray-200/80 dark:border-gray-800/70 bg-white dark:bg-gray-900/50 shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:shadow-[0_14px_34px_-14px_rgba(124,58,237,0.30)] focus-visible:shadow-[0_14px_34px_-14px_rgba(124,58,237,0.30)] hover:border-media-purple/40 focus-visible:border-media-purple/40 hover:-translate-y-1 focus-visible:-translate-y-1"
