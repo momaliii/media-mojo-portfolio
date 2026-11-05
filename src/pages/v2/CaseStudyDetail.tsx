@@ -15,7 +15,6 @@ import PlatformResultsSection from "@/components/case-studies/PlatformResults";
 import { motion } from "framer-motion";
 import Navigation from "@/components/v2/Navigation";
 import Footer from "@/components/v2/Footer";
-import LazyImage from "@/components/ui/lazy-image";
 import MetaTags from "@/components/MetaTags";
 
 const titleToSlug = (title: string) =>
