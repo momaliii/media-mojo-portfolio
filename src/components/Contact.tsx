@@ -290,6 +290,25 @@ const Contact = () => {
                     )}
                   </Button>
                 </form>
+
+                <div className="mt-auto pt-6 mt-6 border-t border-border/60">
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">What happens next</p>
+                  <ol className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
+                    {[
+                      { step: "1", title: "Send your brief", text: "Goals, budget, timeline" },
+                      { step: "2", title: "Get a plan in 24h", text: "Channel mix & budget split" },
+                      { step: "3", title: "Launch & scale", text: "Tracking, creatives, optimization" },
+                    ].map((item) => (
+                      <li key={item.step} className="rounded-2xl border border-border/70 bg-background/60 p-3">
+                        <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-media-purple/10 text-media-purple text-xs font-bold mb-2" aria-hidden="true">
+                          {item.step}
+                        </span>
+                        <p className="font-medium leading-tight">{item.title}</p>
+                        <p className="text-xs text-muted-foreground mt-0.5 leading-snug">{item.text}</p>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
               </CardContent>
             </Card>
 
