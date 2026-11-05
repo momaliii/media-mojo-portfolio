@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { DollarSign, Eye, Target, Linkedin } from "lucide-react";
+import { DollarSign, Eye, Target, ShoppingCart, Linkedin } from "lucide-react";
 import {
   SiMeta,
   SiTiktok,
@@ -8,7 +8,7 @@ import {
   SiGoogle,
   SiX,
 } from "@icons-pack/react-simple-icons";
-import { snapchatSpend, impressions } from "@/data/portfolioFacts";
+import { snapchatSpend, impressions, orders2026 } from "@/data/portfolioFacts";
 
 const highlights = [
   {
@@ -50,7 +50,7 @@ const platforms = [
 const HighlightResults = () => {
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 [&>div]:min-w-0">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 [&>div]:min-w-0">
         {highlights.map((item, index) => (
           <motion.div
             key={item.label}
