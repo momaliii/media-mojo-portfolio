@@ -92,7 +92,7 @@ const Hero = () => {
             >
               {[
                 ["7+", "Years"],
-                ["150K+", "Orders"],
+                ["800K+", "Orders"],
                 ["8×", "ROAS"],
                 [impressions.display, "Impressions"],
               ].map(([value, label]) => (
