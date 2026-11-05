@@ -15,7 +15,6 @@ import PlatformResultsSection from "@/components/case-studies/PlatformResults";
 import { motion } from "framer-motion";
 import Navigation from "@/components/v2/Navigation";
 import Footer from "@/components/v2/Footer";
-import LazyImage from "@/components/ui/lazy-image";
 import MetaTags from "@/components/MetaTags";
 
 const titleToSlug = (title: string) =>
@@ -265,39 +264,6 @@ const CaseStudyDetail = () => {
             </div>
           </div>
         </section>
-
-        {/* Gallery */}
-        {caseStudy.screenshot && (
-          <section className="py-20 md:py-28 border-b border-white/[0.06]">
-            <div className="container mx-auto px-6 lg:px-10">
-              <p className="eyebrow text-gold mb-10">— Gallery</p>
-              <div className="overflow-hidden border border-white/[0.06]">
-                <LazyImage
-                  src={caseStudy.screenshot}
-                  alt={`${caseStudy.title} — primary asset`}
-                  className="w-full h-auto"
-                />
-              </div>
-              {caseStudy.additionalScreenshots &&
-                caseStudy.additionalScreenshots.length > 0 && (
-                  <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {caseStudy.additionalScreenshots.map((s, i) => (
-                      <div
-                        key={i}
-                        className="overflow-hidden border border-white/[0.06] aspect-[4/3] bg-obsidian-900"
-                      >
-                        <LazyImage
-                          src={s}
-                          alt={`${caseStudy.title} — supporting asset ${i + 1}`}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                )}
-            </div>
-          </section>
-        )}
 
         {/* Related */}
         {related.length > 0 && (
