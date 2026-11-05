@@ -131,7 +131,7 @@ const StructuredData = () => {
             "name": "What services does Mohamed Ali offer?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Meta Ads management, Google Ads optimization, TikTok and Snapchat advertising, and performance marketing consulting — including campaign strategy, optimization and performance analysis for e-commerce and growing brands."
+              "text": "Meta Ads management, Google Ads optimization, TikTok, Snapchat, LinkedIn and X (Twitter) advertising, and performance marketing consulting — including campaign strategy, optimization and performance analysis for e-commerce and growing brands."
             }
           },
           {
