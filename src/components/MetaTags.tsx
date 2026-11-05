@@ -34,9 +34,7 @@ const MetaTags = ({
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
       <meta name="author" content={author} />
-      <meta name="robots" content="index, follow" />
-      <meta name="language" content="English" />
-      <meta name="revisit-after" content="7 days" />
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
       <link rel="canonical" href={fullUrl} />
 
       {/* Open Graph */}
@@ -68,14 +66,11 @@ const MetaTags = ({
       <meta name="geo.placename" content="Cairo" />
       <meta name="geo.position" content="30.0444;31.2357" />
       <meta name="ICBM" content="30.0444, 31.2357" />
-      <meta name="rating" content="General" />
       <meta name="referrer" content="no-referrer-when-downgrade" />
-      
+
       {/* Business & Contact Information */}
       <meta name="contact" content="mhmd167ali@gmail.com" />
-      <meta name="copyright" content="© 2024 Mohamed Ali Media Buyer" />
-      <meta name="distribution" content="global" />
-      <meta name="target" content="all" />
+      <meta name="copyright" content="© 2026 Mohamed Ali Media Buyer" />
       
       {/* Performance & Technical SEO */}
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />

@@ -105,6 +105,44 @@ const StructuredData = () => {
         "email": "mhmd167ali@gmail.com",
         "availableLanguage": ["English", "Arabic"],
         "areaServed": ["EG", "SA", "OM", "JO"]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${baseUrl}/#faq`,
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Who is Mohamed Ali?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mohamed Ali is a Senior Media Buyer with 7+ years of experience running performance marketing campaigns across Meta, Google, TikTok and Snapchat for MENA brands, with $5M+ Snapchat spend managed and 2B+ impressions delivered."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What services does Mohamed Ali offer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Meta Ads management, Google Ads optimization, TikTok and Snapchat advertising, and performance marketing consulting — including campaign strategy, optimization and performance analysis for e-commerce and growing brands."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which markets does Mohamed Ali work in?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Egypt, Saudi Arabia, Oman and Jordan, with a main project for Laverne in Saudi Arabia (KSA)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I contact Mohamed Ali?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "By email at mhmd167ali@gmail.com, by phone at +201060098267, or via LinkedIn at https://www.linkedin.com/in/mhmdali02/."
+            }
+          }
+        ]
       }
     ]
   };
