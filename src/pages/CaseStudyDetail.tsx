@@ -318,54 +318,6 @@ const CaseStudyDetail = () => {
               </Card>
             </motion.div>
 
-            {/* Screenshots Gallery */}
-            {caseStudy.screenshot && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="mb-12"
-              >
-                <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-                  <Globe className="w-6 h-6 text-media-purple" />
-                  Campaign Gallery
-                </h2>
-                
-                {/* Main Screenshot */}
-                <div className="rounded-2xl overflow-hidden shadow-2xl mb-8">
-                  <LazyImage
-                    src={caseStudy.screenshot}
-                    alt={`${caseStudy.title} main campaign screenshot`}
-                    className="w-full h-auto"
-                  />
-                </div>
-                
-                {/* Additional Screenshots */}
-                {caseStudy.additionalScreenshots && caseStudy.additionalScreenshots.length > 0 && (
-                  <div>
-                    <h3 className="text-lg font-semibold text-foreground mb-4">Additional Campaign Materials</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {caseStudy.additionalScreenshots.map((screenshot, index) => (
-                        <motion.div 
-                          key={index} 
-                          className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.3 + index * 0.1 }}
-                        >
-                          <LazyImage
-                            src={screenshot}
-                            alt={`${caseStudy.title} additional material ${index + 1}`}
-                            className="w-full h-48 object-cover hover:scale-105 transition-transform duration-300"
-                          />
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </motion.div>
-            )}
-
             {/* Success Factors */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
