@@ -81,6 +81,14 @@ const StructuredData = () => {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
+                "name": "LinkedIn & X Advertising",
+                "description": "B2B and audience-targeted campaigns on LinkedIn and X (Twitter)"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
                 "name": "Performance Marketing Consulting",
                 "description": "Complete campaign strategy, optimization, and performance analysis"
               }
