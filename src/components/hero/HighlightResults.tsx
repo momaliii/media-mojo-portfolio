@@ -35,6 +35,14 @@ const highlights = [
     iconColor: "text-media-purple",
     iconBg: "bg-media-purple/10",
   },
+  {
+    icon: ShoppingCart,
+    label: "Orders in 2026",
+    value: orders2026.display,
+    accent: "from-media-pink/25 to-media-pink/5",
+    iconColor: "text-media-pink",
+    iconBg: "bg-media-pink/10",
+  },
 ];
 
 // Brand-real presentation: each tile mirrors the platform's own identity.
