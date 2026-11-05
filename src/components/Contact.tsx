@@ -202,7 +202,7 @@ const Contact = () => {
             {/* Form card */}
             <Card className="lg:col-span-3 h-full rounded-3xl border border-border/70 bg-card/80 backdrop-blur-sm shadow-[0_24px_60px_-32px_rgba(126,105,171,0.35)] hover:shadow-[0_28px_70px_-30px_rgba(126,105,171,0.45)] transition-shadow duration-300 opacity-0 animate-on-scroll">
               <div aria-hidden className="h-1 w-full rounded-t-3xl bg-gradient-to-r from-media-purple via-media-vibrantpurple to-media-oceanblue opacity-80" />
-              <CardContent className="p-6 md:p-8">
+              <CardContent className="p-6 md:p-8 flex flex-col h-full">
                 <div className="flex items-start gap-3 mb-6">
                   <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-media-purple/10 text-media-purple flex-shrink-0" aria-hidden="true">
                     <Send className="h-4 w-4" />
